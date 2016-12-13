@@ -91,9 +91,25 @@ public extension UIDevice {
 }
 
 // Launch images
-// LaunchImage-568h@2x
-// LaunchImage-700-568h@2x
-// 
+// LaunchImage-568h@2x                  640x1136
+// LaunchImage-700-568h@2x              640x1136
+// LaunchImage-700-Landscape@2x~ipad    2048x1536
+// LaunchImage-700-Landscape~ipad       1024x768
+// LaunchImage-700-Portrait@2x~ipad     1536x2048
+// LaunchImage-700-Portrait~ipad        768x1024
+// LaunchImage-700@2x                   640x960
+// LaunchImage-800-667h@2x              750x1334
+// LaunchImage-800-Landscape-736h@3x    2208x1242
+// LaunchImage-800-Portrait-736h@3x     1242x2208
+// LaunchImage-Portrait@2x~ipad         1536x2048
+// LaunchImage-Portrait~ipad            768x1024
+// LaunchImage                          320x480
+// LaunchImage@2x                       640x960
+
+
+
+
+
 
 
 
