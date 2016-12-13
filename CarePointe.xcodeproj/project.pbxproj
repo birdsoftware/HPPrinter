@@ -14,6 +14,7 @@
 		BB57C2DC1DFF41DE00731AC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB57C2DA1DFF41DE00731AC4 /* LaunchScreen.storyboard */; };
 		BB57C2E71DFF41DE00731AC4 /* CarePointeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB57C2E61DFF41DE00731AC4 /* CarePointeTests.swift */; };
 		BB57C2F21DFF41DE00731AC4 /* CarePointeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB57C2F11DFF41DE00731AC4 /* CarePointeUITests.swift */; };
+		BBA3D8F31DFF733000E39385 /* device.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA3D8F21DFF733000E39385 /* device.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		BB57C2ED1DFF41DE00731AC4 /* CarePointeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarePointeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB57C2F11DFF41DE00731AC4 /* CarePointeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarePointeUITests.swift; sourceTree = "<group>"; };
 		BB57C2F31DFF41DE00731AC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBA3D8F21DFF733000E39385 /* device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = device.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		BB57C2D01DFF41DE00731AC4 /* CarePointe */ = {
 			isa = PBXGroup;
 			children = (
+				BBA3D8F21DFF733000E39385 /* device.swift */,
 				BB57C2D11DFF41DE00731AC4 /* AppDelegate.swift */,
 				BB57C2D31DFF41DE00731AC4 /* ViewController.swift */,
 				BB57C2D51DFF41DE00731AC4 /* Main.storyboard */,
@@ -193,7 +196,7 @@
 				TargetAttributes = {
 					BB57C2CD1DFF41DC00731AC4 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = ZCTW2DW524;
+						DevelopmentTeam = GT6Y6PT5JQ;
 						ProvisioningStyle = Automatic;
 					};
 					BB57C2E11DFF41DE00731AC4 = {
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB57C2D41DFF41DE00731AC4 /* ViewController.swift in Sources */,
+				BBA3D8F31DFF733000E39385 /* device.swift in Sources */,
 				BB57C2D21DFF41DE00731AC4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,10 +419,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZCTW2DW524;
+				DEVELOPMENT_TEAM = GT6Y6PT5JQ;
 				INFOPLIST_FILE = CarePointe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = MogulProMedia.CarePointe;
+				PRODUCT_BUNDLE_IDENTIFIER = media.pro.mogul.CarePointe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -428,10 +432,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZCTW2DW524;
+				DEVELOPMENT_TEAM = GT6Y6PT5JQ;
 				INFOPLIST_FILE = CarePointe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = MogulProMedia.CarePointe;
+				PRODUCT_BUNDLE_IDENTIFIER = media.pro.mogul.CarePointe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -514,6 +518,7 @@
 				BB57C2F81DFF41DE00731AC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BB57C2F91DFF41DE00731AC4 /* Build configuration list for PBXNativeTarget "CarePointeTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +527,7 @@
 				BB57C2FB1DFF41DE00731AC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BB57C2FC1DFF41DE00731AC4 /* Build configuration list for PBXNativeTarget "CarePointeUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +536,7 @@
 				BB57C2FE1DFF41DE00731AC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

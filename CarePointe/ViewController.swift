@@ -2,13 +2,15 @@
 //  ViewController.swift
 //  CarePointe
 //
-//  Created by Brent Allen on 12/12/16.
+//  Created by Brian Bird  on 12/12/16.
 //  Copyright © 2016 Mogul Pro Media. All rights reserved.
 //
 
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let model = UIDevice.current.modelSize
 
     override func viewDidLoad() {
         super.viewDidLoad()
