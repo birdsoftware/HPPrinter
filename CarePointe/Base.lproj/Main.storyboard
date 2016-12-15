@@ -64,7 +64,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="showWeb:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G3O-nc-Di7"/>
+                                    <action selector="signInBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HB1-VH-TZE"/>
+                                    <action selector="signInButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wg3-Di-tcN"/>
+                                    <segue destination="O8Z-gh-pfg" kind="presentation" identifier="ShowFirstView" animates="NO" id="BmA-yO-hsA"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7EQ-YM-Ek3">
@@ -73,6 +75,9 @@
                                 <state key="normal" title="Forgot your details?">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="forgotDetailsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="11w-pl-Bey"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XX-WG-1XS">
                                 <rect key="frame" x="130" y="510" width="60" height="28"/>
@@ -80,6 +85,9 @@
                                 <state key="normal" title="Support">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="supportButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q3w-SF-uMu"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -106,12 +114,39 @@
                     <connections>
                         <outlet property="email" destination="upy-lB-jZ5" id="RAp-4i-f0R"/>
                         <outlet property="password" destination="8n6-ZD-EFj" id="FFG-y3-eFN"/>
-                        <outlet property="signIn" destination="f9y-kv-tTA" id="aOF-Wc-aWs"/>
+                        <outlet property="signIn" destination="f9y-kv-tTA" id="EPG-BW-U6s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="116.25" y="123.59154929577466"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="jIo-Km-hgi">
+            <objects>
+                <viewController id="O8Z-gh-pfg" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LIE-iK-gz2"/>
+                        <viewControllerLayoutGuide type="bottom" id="JOG-qL-Qtu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0Lm-Z1-njd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SECOND VIEW CONTROLLER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9X-v3-8To">
+                                <rect key="frame" x="42" y="168" width="237" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gWx-gG-9wg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="861" y="124"/>
         </scene>
     </scenes>
     <resources>

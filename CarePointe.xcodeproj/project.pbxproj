@@ -18,6 +18,7 @@
 		BB57C2DC1DFF41DE00731AC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB57C2DA1DFF41DE00731AC4 /* LaunchScreen.storyboard */; };
 		BB57C2E71DFF41DE00731AC4 /* CarePointeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB57C2E61DFF41DE00731AC4 /* CarePointeTests.swift */; };
 		BB57C2F21DFF41DE00731AC4 /* CarePointeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB57C2F11DFF41DE00731AC4 /* CarePointeUITests.swift */; };
+		BB7567AE1E0211DB00B7734A /* SegueHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7567AD1E0211DB00B7734A /* SegueHandlerType.swift */; };
 		BBA3D8F31DFF733000E39385 /* device.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA3D8F21DFF733000E39385 /* device.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		BB57C2ED1DFF41DE00731AC4 /* CarePointeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarePointeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB57C2F11DFF41DE00731AC4 /* CarePointeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarePointeUITests.swift; sourceTree = "<group>"; };
 		BB57C2F31DFF41DE00731AC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB7567AD1E0211DB00B7734A /* SegueHandlerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueHandlerType.swift; sourceTree = "<group>"; };
 		BBA3D8F21DFF733000E39385 /* device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = device.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 				BB51F7C21E009AA4008A5EA8 /* BlackandWhite.png */,
 				BB4181201E01E710004CE885 /* key.png */,
 				BB4181221E01E71E004CE885 /* envelope.png */,
+				BB7567AD1E0211DB00B7734A /* SegueHandlerType.swift */,
 				BB51F7C41E009E53008A5EA8 /* gradient.swift */,
 				BBA3D8F21DFF733000E39385 /* device.swift */,
 				BB57C2D11DFF41DE00731AC4 /* AppDelegate.swift */,
@@ -283,6 +286,7 @@
 				BB57C2D41DFF41DE00731AC4 /* ViewController.swift in Sources */,
 				BBA3D8F31DFF733000E39385 /* device.swift in Sources */,
 				BB57C2D21DFF41DE00731AC4 /* AppDelegate.swift in Sources */,
+				BB7567AE1E0211DB00B7734A /* SegueHandlerType.swift in Sources */,
 				BB51F7C51E009E53008A5EA8 /* gradient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
