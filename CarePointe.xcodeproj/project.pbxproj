@@ -11,6 +11,11 @@
 		BB3275451E046CED00699280 /* disposition.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3275411E046CED00699280 /* disposition.png */; };
 		BB3275461E046CED00699280 /* patientUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3275421E046CED00699280 /* patientUpdate.png */; };
 		BB3275471E046CED00699280 /* telemed.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3275431E046CED00699280 /* telemed.png */; };
+		BB3275491E0478A800699280 /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3275481E0478A800699280 /* hamburger.png */; };
+		BB32754B1E048AD100699280 /* TaskCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB32754A1E048AD100699280 /* TaskCustomCell.swift */; };
+		BB32754D1E04908D00699280 /* referral.png in Resources */ = {isa = PBXBuildFile; fileRef = BB32754C1E04908D00699280 /* referral.png */; };
+		BB3275501E04B9CC00699280 /* gray.circle.png in Resources */ = {isa = PBXBuildFile; fileRef = BB32754E1E04B9CC00699280 /* gray.circle.png */; };
+		BB3275511E04B9CC00699280 /* orange.circle.png in Resources */ = {isa = PBXBuildFile; fileRef = BB32754F1E04B9CC00699280 /* orange.circle.png */; };
 		BB4181211E01E710004CE885 /* key.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4181201E01E710004CE885 /* key.png */; };
 		BB4181231E01E71E004CE885 /* envelope.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4181221E01E71E004CE885 /* envelope.png */; };
 		BB51F7C31E009AA4008A5EA8 /* BlackandWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = BB51F7C21E009AA4008A5EA8 /* BlackandWhite.png */; };
@@ -50,6 +55,11 @@
 		BB3275411E046CED00699280 /* disposition.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = disposition.png; path = ../../../../Downloads/disposition.png; sourceTree = "<group>"; };
 		BB3275421E046CED00699280 /* patientUpdate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = patientUpdate.png; path = ../../../../Downloads/patientUpdate.png; sourceTree = "<group>"; };
 		BB3275431E046CED00699280 /* telemed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = telemed.png; path = ../../../../Downloads/telemed.png; sourceTree = "<group>"; };
+		BB3275481E0478A800699280 /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hamburger.png; path = ../../../../Downloads/hamburger.png; sourceTree = "<group>"; };
+		BB32754A1E048AD100699280 /* TaskCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCustomCell.swift; sourceTree = "<group>"; };
+		BB32754C1E04908D00699280 /* referral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = referral.png; path = ../../../../Downloads/referral.png; sourceTree = "<group>"; };
+		BB32754E1E04B9CC00699280 /* gray.circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gray.circle.png; path = ../../../../Downloads/gray.circle.png; sourceTree = "<group>"; };
+		BB32754F1E04B9CC00699280 /* orange.circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orange.circle.png; path = ../../../../Downloads/orange.circle.png; sourceTree = "<group>"; };
 		BB4181201E01E710004CE885 /* key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = key.png; path = ../../../../Downloads/key.png; sourceTree = "<group>"; };
 		BB4181221E01E71E004CE885 /* envelope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = envelope.png; path = ../../../../Downloads/envelope.png; sourceTree = "<group>"; };
 		BB51F7C21E009AA4008A5EA8 /* BlackandWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlackandWhite.png; path = ../../../../Desktop/carePoint/BlackandWhite.png; sourceTree = "<group>"; };
@@ -101,6 +111,10 @@
 		BB32753F1E046C7A00699280 /* TaskView images */ = {
 			isa = PBXGroup;
 			children = (
+				BB3275481E0478A800699280 /* hamburger.png */,
+				BB32754E1E04B9CC00699280 /* gray.circle.png */,
+				BB32754F1E04B9CC00699280 /* orange.circle.png */,
+				BB32754C1E04908D00699280 /* referral.png */,
 				BB3275401E046CED00699280 /* screening.png */,
 				BB3275411E046CED00699280 /* disposition.png */,
 				BB3275421E046CED00699280 /* patientUpdate.png */,
@@ -137,6 +151,7 @@
 				BB93EA9B1E034397000C15D3 /* greenAPPSignIn.gif */,
 				BB4181201E01E710004CE885 /* key.png */,
 				BB4181221E01E71E004CE885 /* envelope.png */,
+				BB32754A1E048AD100699280 /* TaskCustomCell.swift */,
 				BB93EA9D1E0349F8000C15D3 /* RegisterViewController.swift */,
 				BB93EA971E033314000C15D3 /* SignInViewController.swift */,
 				BB51F7C41E009E53008A5EA8 /* gradient.swift */,
@@ -280,7 +295,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB57C2DC1DFF41DE00731AC4 /* LaunchScreen.storyboard in Resources */,
+				BB3275501E04B9CC00699280 /* gray.circle.png in Resources */,
+				BB3275491E0478A800699280 /* hamburger.png in Resources */,
 				BB3275471E046CED00699280 /* telemed.png in Resources */,
+				BB32754D1E04908D00699280 /* referral.png in Resources */,
+				BB3275511E04B9CC00699280 /* orange.circle.png in Resources */,
 				BB51F7C31E009AA4008A5EA8 /* BlackandWhite.png in Resources */,
 				BB3275461E046CED00699280 /* patientUpdate.png in Resources */,
 				BB3275451E046CED00699280 /* disposition.png in Resources */,
@@ -319,6 +338,7 @@
 				BB57C2D21DFF41DE00731AC4 /* AppDelegate.swift in Sources */,
 				BB93EA9E1E0349F8000C15D3 /* RegisterViewController.swift in Sources */,
 				BB93EA981E033314000C15D3 /* SignInViewController.swift in Sources */,
+				BB32754B1E048AD100699280 /* TaskCustomCell.swift in Sources */,
 				BB51F7C51E009E53008A5EA8 /* gradient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
