@@ -41,7 +41,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kRM-uC-HFL" id="0Bw-c6-U7V">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04:44AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfb-Pm-V55">
@@ -312,11 +312,11 @@
                                     <segue destination="yyR-vD-B7J" kind="presentation" identifier="ShowRegisterView" animates="NO" id="3xb-Mc-tcJ"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greenAPPSignIn.gif" translatesAutoresizingMaskIntoConstraints="NO" id="EXC-0E-fH2">
-                                <rect key="frame" x="152.5" y="70" width="70" height="70"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="care.png" translatesAutoresizingMaskIntoConstraints="NO" id="EXC-0E-fH2">
+                                <rect key="frame" x="12.5" y="70" width="350" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="hBh-s3-JT1"/>
-                                    <constraint firstAttribute="width" constant="70" id="vnC-45-xTe"/>
+                                    <constraint firstAttribute="width" constant="350" id="vnC-45-xTe"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="WaG-Yv-SaG">
@@ -480,7 +480,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="greenAPPSignIn.gif" width="78" height="71"/>
+        <image name="care.png" width="1106" height="208"/>
         <image name="hamburger.png" width="64" height="64"/>
         <image name="orange.circle.png" width="64" height="64"/>
     </resources>
