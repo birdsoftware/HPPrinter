@@ -15,10 +15,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var pendingReferralsButton: UIButton!
     @IBOutlet weak var scheduledEncountersButton: UIButton!
     @IBOutlet weak var unreadMessagesButton: UIButton!
+    @IBOutlet weak var hamburgerView: UIView!
+    @IBOutlet weak var hemburgerViewImage: UIImageView!
 
     @IBOutlet weak var tasksTableView: UITableView!
     
     @IBOutlet weak var hamburger: UIBarButtonItem!
+    
+    @IBOutlet weak var leadingConstraintHamburgerView: NSLayoutConstraint!
+    
+    var hamburgerMenuShowing = false
     
     var times = ["12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM","09:43PM"]
     var patients = ["Ruth Quinones", "Barrie Thomson", "Victor Owen", "Bill Summers", "Alice Njavro", "Michael Levi", "Elida Martinez", "John Banks","Brian Bird", "Cindy Lopper"]
@@ -28,10 +34,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        AddTaskButton.layer.cornerRadius = 5;
+        AddTaskButton.layer.cornerRadius = 5
         pendingReferralsButton.layer.borderWidth = 1.0
         scheduledEncountersButton.layer.borderWidth = 1.0
         unreadMessagesButton.layer.borderWidth = 1.0
+        
+        leadingConstraintHamburgerView.constant = -270
+        hamburgerView.layer.shadowOpacity = 1
+        
+        hemburgerViewImage.layer.cornerRadius = hemburgerViewImage.frame.size.width / 2
+        hemburgerViewImage.clipsToBounds = true
+        hemburgerViewImage.layer.borderWidth = 2.0
+        let newColor = UIColor.black
+        hemburgerViewImage.layer.borderColor = newColor.cgColor
+        //hemburgerViewImage.layer.cornerRadius = 10
+        
     }
     
     
@@ -61,13 +78,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.performSegue(withIdentifier: "ShowAddTaskView", sender: self)
     }
     
-    
     @IBAction func logOutButtonTapped(_ sender: Any) {
         UserDefaults.standard.set(false, forKey: "isUserSignedIn")
         UserDefaults.standard.synchronize()
         
         self.performSegue(withIdentifier: "ShowLogInView", sender: self)
     }
+    
+    @IBAction func hamburgerBarButtonTapped(_ sender: Any) {
+        
+        if(hamburgerMenuShowing) {//if showing hide menu
+            leadingConstraintHamburgerView.constant = -270
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+        else {
+            leadingConstraintHamburgerView.constant = 0
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+        
+        hamburgerMenuShowing = !hamburgerMenuShowing
+    }
+    
     
     //
     // #MARK: - Table View

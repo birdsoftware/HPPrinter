@@ -15,6 +15,9 @@
 		58254B5B1E0855FF00933B60 /* orange.circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 58254B591E0855FF00933B60 /* orange.circle.png */; };
 		5828065F1E098FBC00421815 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5828065E1E098FBC00421815 /* DatePickerDialog.swift */; };
 		582806611E0991F400421815 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 582806601E0991F400421815 /* calendar.png */; };
+		582806631E09AB0C00421815 /* side_menu_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 582806621E09AB0C00421815 /* side_menu_bg.jpg */; };
+		582806651E09AC4100421815 /* care.white.png in Resources */ = {isa = PBXBuildFile; fileRef = 582806641E09AC4100421815 /* care.white.png */; };
+		582806671E09B5AF00421815 /* jennifer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 582806661E09B5AF00421815 /* jennifer.jpg */; };
 		583646911E0890FC003C2E60 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646901E0890FC003C2E60 /* menu.png */; };
 		583646931E08A1CE003C2E60 /* menu_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646921E08A1CE003C2E60 /* menu_large.png */; };
 		583646951E08A7BC003C2E60 /* bell.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646941E08A7BC003C2E60 /* bell.png */; };
@@ -59,6 +62,9 @@
 		58254B591E0855FF00933B60 /* orange.circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orange.circle.png; path = ../../imageFiles/orange.circle.png; sourceTree = "<group>"; };
 		5828065E1E098FBC00421815 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		582806601E0991F400421815 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = calendar.png; path = ../../imageFiles/calendar.png; sourceTree = "<group>"; };
+		582806621E09AB0C00421815 /* side_menu_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = side_menu_bg.jpg; path = ../../imageFiles/side_menu_bg.jpg; sourceTree = "<group>"; };
+		582806641E09AC4100421815 /* care.white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = care.white.png; path = ../../imageFiles/care.white.png; sourceTree = "<group>"; };
+		582806661E09B5AF00421815 /* jennifer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = jennifer.jpg; path = ../../imageFiles/jennifer.jpg; sourceTree = "<group>"; };
 		583646901E0890FC003C2E60 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu.png; path = ../../imageFiles/menu.png; sourceTree = "<group>"; };
 		583646921E08A1CE003C2E60 /* menu_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_large.png; path = ../../../menu_large.png; sourceTree = "<group>"; };
 		583646941E08A7BC003C2E60 /* bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bell.png; path = ../../imageFiles/bell.png; sourceTree = "<group>"; };
@@ -112,11 +118,13 @@
 			isa = PBXGroup;
 			children = (
 				583646901E0890FC003C2E60 /* menu.png */,
+				582806661E09B5AF00421815 /* jennifer.jpg */,
 				583646941E08A7BC003C2E60 /* bell.png */,
 				582806601E0991F400421815 /* calendar.png */,
 				583646921E08A1CE003C2E60 /* menu_large.png */,
 				58254B4F1E0850EA00933B60 /* hamburger.png */,
 				58254B581E0855FF00933B60 /* gray.circle.png */,
+				582806621E09AB0C00421815 /* side_menu_bg.jpg */,
 				58254B591E0855FF00933B60 /* orange.circle.png */,
 				5828065E1E098FBC00421815 /* DatePickerDialog.swift */,
 			);
@@ -148,6 +156,7 @@
 			children = (
 				BB32753F1E046C7A00699280 /* TaskView images */,
 				58254B4C1E084FEA00933B60 /* care.png */,
+				582806641E09AC4100421815 /* care.white.png */,
 				58254B541E0855D000933B60 /* envelope.png */,
 				58254B551E0855D000933B60 /* key.png */,
 				BB32754A1E048AD100699280 /* TaskCustomCell.swift */,
@@ -296,6 +305,7 @@
 			files = (
 				BB57C2DC1DFF41DE00731AC4 /* LaunchScreen.storyboard in Resources */,
 				58254B561E0855D000933B60 /* envelope.png in Resources */,
+				582806631E09AB0C00421815 /* side_menu_bg.jpg in Resources */,
 				583646951E08A7BC003C2E60 /* bell.png in Resources */,
 				58254B571E0855D000933B60 /* key.png in Resources */,
 				58254B521E0850EA00933B60 /* hamburger.png in Resources */,
@@ -305,6 +315,8 @@
 				583646911E0890FC003C2E60 /* menu.png in Resources */,
 				58254B5B1E0855FF00933B60 /* orange.circle.png in Resources */,
 				583646931E08A1CE003C2E60 /* menu_large.png in Resources */,
+				582806671E09B5AF00421815 /* jennifer.jpg in Resources */,
+				582806651E09AC4100421815 /* care.white.png in Resources */,
 				BB57C2D91DFF41DE00731AC4 /* Assets.xcassets in Resources */,
 				BB57C2D71DFF41DE00731AC4 /* Main.storyboard in Resources */,
 			);
