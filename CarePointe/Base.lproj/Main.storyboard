@@ -36,20 +36,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Mm-yY-YCU">
-                                <rect key="frame" x="31" y="586" width="312" height="50"/>
-                                <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pi4-eq-OzR">
+                                <rect key="frame" x="194" y="586" width="165" height="50"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="312" id="4yf-aZ-t5I"/>
-                                    <constraint firstAttribute="height" constant="50" id="rE1-MG-1Wy"/>
+                                    <constraint firstAttribute="height" constant="50" id="Udc-9B-FHy"/>
+                                    <constraint firstAttribute="width" constant="165" id="iW1-bw-TSO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Add Task">
+                                <state key="normal" title="Cancel">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="addTasksButtonTapped:" destination="G5o-RS-Lb1" eventType="touchUpInside" id="OcM-cP-Dwe"/>
-                                    <action selector="signInButtonTapped:" destination="x7H-vq-tG1" eventType="touchUpInside" id="Pfp-l1-ByK"/>
+                                    <action selector="addTasksButtonTapped:" destination="G5o-RS-Lb1" eventType="touchUpInside" id="5ay-6o-6fy"/>
+                                    <action selector="cancelButtonTapped:" destination="G5o-RS-Lb1" eventType="touchUpInside" id="3Qq-c7-CAa"/>
+                                    <action selector="signInButtonTapped:" destination="x7H-vq-tG1" eventType="touchUpInside" id="zNS-aB-xEu"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="29d-Sa-IzX">
@@ -74,43 +75,30 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GU8-UP-EW4">
-                                <rect key="frame" x="16" y="233" width="110" height="21"/>
+                                <rect key="frame" x="16" y="244" width="110" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="pMt-qZ-Zzs">
-                                <rect key="frame" x="0.0" y="248" width="375" height="150"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <date key="date" timeIntervalSinceReferenceDate="503886776.21028602">
-                                    <!--2016-12-20 00:32:56 +0000-->
-                                </date>
-                                <date key="minimumDate" timeIntervalSinceReferenceDate="473338800">
-                                    <!--2016-01-01 11:00:00 +0000-->
-                                </date>
-                            </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose A Care Team:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gh8-V9-8HB">
-                                <rect key="frame" x="12" y="402" width="173" height="21"/>
+                                <rect key="frame" x="12" y="341" width="173" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose A Care Team:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJu-Fg-HYy">
-                                <rect key="frame" x="180" y="402" width="182" height="21"/>
+                                <rect key="frame" x="180" y="341" width="182" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <pickerView contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ua6-aE-vaC">
-                                <rect key="frame" x="0.0" y="406" width="375" height="139"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </pickerView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IOy-PC-tbx">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="IOy-PC-tbx">
                                 <rect key="frame" x="294" y="539" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create Tokbox Session" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXS-UY-aSZ">
                                 <rect key="frame" x="12" y="544" width="173" height="21"/>
@@ -119,18 +107,58 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="01/01/2017" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uVA-Qa-DEq">
+                                <rect key="frame" x="16" y="274" width="262" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Mm-yY-YCU">
+                                <rect key="frame" x="12" y="586" width="165" height="50"/>
+                                <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="165" id="4yf-aZ-t5I"/>
+                                    <constraint firstAttribute="height" constant="50" id="rE1-MG-1Wy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Add Task">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addTasksButtonTapped:" destination="G5o-RS-Lb1" eventType="touchUpInside" id="OcM-cP-Dwe"/>
+                                    <action selector="signInButtonTapped:" destination="x7H-vq-tG1" eventType="touchUpInside" id="Pfp-l1-ByK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUH-sO-Ssf">
+                                <rect key="frame" x="294" y="244" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="calendar.png"/>
+                                <connections>
+                                    <action selector="datePickerTapped:" destination="G5o-RS-Lb1" eventType="touchUpInside" id="E5M-oj-IlN"/>
+                                </connections>
+                            </button>
+                            <pickerView tag="2" contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ua6-aE-vaC">
+                                <rect key="frame" x="0.0" y="370" width="375" height="150"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="XIG-Jf-MVt" firstAttribute="top" secondItem="Pi4-eq-OzR" secondAttribute="bottom" constant="31" id="FUv-SK-gT5"/>
                             <constraint firstItem="CMC-bH-w2w" firstAttribute="top" secondItem="q1l-Ix-6N8" secondAttribute="bottom" constant="8" id="Fh2-k1-nvv"/>
-                            <constraint firstItem="5Mm-yY-YCU" firstAttribute="centerX" secondItem="moX-oK-VY2" secondAttribute="centerX" id="HeO-93-RBS"/>
                             <constraint firstItem="XIG-Jf-MVt" firstAttribute="top" secondItem="5Mm-yY-YCU" secondAttribute="bottom" constant="31" id="JJk-Ps-xO7"/>
                             <constraint firstItem="CMC-bH-w2w" firstAttribute="centerX" secondItem="moX-oK-VY2" secondAttribute="centerX" id="JVx-wU-uQd"/>
+                            <constraint firstItem="Pi4-eq-OzR" firstAttribute="leading" secondItem="5Mm-yY-YCU" secondAttribute="trailing" constant="17" id="jsR-nU-F7N"/>
+                            <constraint firstItem="5Mm-yY-YCU" firstAttribute="leading" secondItem="moX-oK-VY2" secondAttribute="leadingMargin" constant="-4" id="rv8-Qk-xQo"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="CareTeamPicker" destination="ua6-aE-vaC" id="XF2-xU-iey"/>
                         <outlet property="careTeamLabel" destination="eJu-Fg-HYy" id="4of-Z5-uwJ"/>
+                        <outlet property="newTaskDateText" destination="uVA-Qa-DEq" id="hHm-in-gS3"/>
+                        <outlet property="newTaskDescription" destination="29d-Sa-IzX" id="Edz-Yp-e3W"/>
+                        <outlet property="newTaskNote" destination="IhS-dE-eHL" id="ohc-Rd-p5f"/>
                         <segue destination="eRj-E0-29K" kind="presentation" identifier="ShowDashboardView" animates="NO" id="Y9y-Kl-Igq"/>
                     </connections>
                 </viewController>
@@ -169,7 +197,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kRM-uC-HFL" id="0Bw-c6-U7V">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04:44AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfb-Pm-V55">
@@ -503,13 +531,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register Page" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vIm-jQ-W5n">
-                                <rect key="frame" x="97" y="58" width="181" height="21"/>
+                                <rect key="frame" x="97" y="78" width="181" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="AJK-Ev-nQr">
-                                <rect key="frame" x="16" y="119" width="343" height="50"/>
+                                <rect key="frame" x="16" y="139" width="343" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="oUZ-Yu-g10"/>
                                 </constraints>
@@ -518,7 +546,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="B1F-DZ-eHl">
-                                <rect key="frame" x="16" y="168" width="343" height="50"/>
+                                <rect key="frame" x="16" y="188" width="343" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="jAt-et-JMU"/>
                                 </constraints>
@@ -527,7 +555,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="9Rl-Xc-3Bt">
-                                <rect key="frame" x="16" y="228" width="343" height="50"/>
+                                <rect key="frame" x="16" y="248" width="343" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="HLr-LM-Ple"/>
                                 </constraints>
@@ -588,7 +616,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eRj-E0-29K" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="frv-Gy-sB3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="frv-Gy-sB3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -604,6 +632,7 @@
     </scenes>
     <resources>
         <image name="bell.png" width="64" height="64"/>
+        <image name="calendar.png" width="128" height="128"/>
         <image name="care.png" width="1106" height="208"/>
         <image name="menu.png" width="64" height="64"/>
         <image name="orange.circle.png" width="64" height="64"/>

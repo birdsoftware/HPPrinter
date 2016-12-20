@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import Foundation
 
 class TasksViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var CareTeamPicker: UIPickerView!
     @IBOutlet weak var careTeamLabel: UILabel!
+    @IBOutlet weak var newTaskDescription: UITextField!
+    @IBOutlet weak var newTaskNote: UITextField!
+    @IBOutlet weak var newTaskDateText: UITextField!
 
     
     var careTeamList = ["Global CSC", "Jannifer Johnson", "Admin", "Dr Gary", "Doctor on Wheels Inc"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +38,34 @@ class TasksViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         view.endEditing(true)
     }
     
-    //****** Care Team Picker *****//
+    @IBAction func datePickerTapped(_ sender: Any) {
+        // UIDatePickerMode? .date or .dateAndTime
+        // https://developer.apple.com/reference/uikit/uidatepickermode
+        DatePickerDialog().show("Task Date", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .dateAndTime) {
+            (dateAndTime) -> Void in
+            if dateAndTime != nil { 
+                
+                let dateFormat = DateFormatter()
+                dateFormat.dateStyle = DateFormatter.Style.short
+                dateFormat.timeStyle = DateFormatter.Style.short
+                
+                let strDate = dateFormat.string(for: dateAndTime!)
+                
+                self.newTaskDateText.text = "\(strDate!)"
+            }
+        }
+    }
+    
+    
+    //
+    // #MARK: - Picker View
+    //
+    
     // returns the number of 'columns' to display.
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    // returns the # of rows in each component..
+    // returns the number of rows in each component..
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
         return careTeamList.count
     }
@@ -46,20 +73,25 @@ class TasksViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return careTeamList[row]
     }
+    // picker value selected
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         careTeamLabel.text = careTeamList[row]
         //pickerBizCat.hidden = true;
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
+    //
+    // #MARK: - Button Actions
+    //
     
     @IBAction func addTasksButtonTapped(_ sender: Any) {
         self.performSegue(withIdentifier: "ShowDashboardView", sender: self)
     }
+    
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        self.performSegue(withIdentifier: "ShowDashboardView", sender: self)
+    }
+    
 
     /*
     // MARK: - Navigation

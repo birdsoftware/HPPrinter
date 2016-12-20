@@ -13,6 +13,8 @@
 		58254B571E0855D000933B60 /* key.png in Resources */ = {isa = PBXBuildFile; fileRef = 58254B551E0855D000933B60 /* key.png */; };
 		58254B5A1E0855FF00933B60 /* gray.circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 58254B581E0855FF00933B60 /* gray.circle.png */; };
 		58254B5B1E0855FF00933B60 /* orange.circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 58254B591E0855FF00933B60 /* orange.circle.png */; };
+		5828065F1E098FBC00421815 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5828065E1E098FBC00421815 /* DatePickerDialog.swift */; };
+		582806611E0991F400421815 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 582806601E0991F400421815 /* calendar.png */; };
 		583646911E0890FC003C2E60 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646901E0890FC003C2E60 /* menu.png */; };
 		583646931E08A1CE003C2E60 /* menu_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646921E08A1CE003C2E60 /* menu_large.png */; };
 		583646951E08A7BC003C2E60 /* bell.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646941E08A7BC003C2E60 /* bell.png */; };
@@ -55,6 +57,8 @@
 		58254B551E0855D000933B60 /* key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = key.png; path = ../../imageFiles/key.png; sourceTree = "<group>"; };
 		58254B581E0855FF00933B60 /* gray.circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gray.circle.png; path = ../../imageFiles/gray.circle.png; sourceTree = "<group>"; };
 		58254B591E0855FF00933B60 /* orange.circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orange.circle.png; path = ../../imageFiles/orange.circle.png; sourceTree = "<group>"; };
+		5828065E1E098FBC00421815 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
+		582806601E0991F400421815 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = calendar.png; path = ../../imageFiles/calendar.png; sourceTree = "<group>"; };
 		583646901E0890FC003C2E60 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu.png; path = ../../imageFiles/menu.png; sourceTree = "<group>"; };
 		583646921E08A1CE003C2E60 /* menu_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_large.png; path = ../../../menu_large.png; sourceTree = "<group>"; };
 		583646941E08A7BC003C2E60 /* bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bell.png; path = ../../imageFiles/bell.png; sourceTree = "<group>"; };
@@ -109,10 +113,12 @@
 			children = (
 				583646901E0890FC003C2E60 /* menu.png */,
 				583646941E08A7BC003C2E60 /* bell.png */,
+				582806601E0991F400421815 /* calendar.png */,
 				583646921E08A1CE003C2E60 /* menu_large.png */,
 				58254B4F1E0850EA00933B60 /* hamburger.png */,
 				58254B581E0855FF00933B60 /* gray.circle.png */,
 				58254B591E0855FF00933B60 /* orange.circle.png */,
+				5828065E1E098FBC00421815 /* DatePickerDialog.swift */,
 			);
 			name = "TaskView images";
 			sourceTree = "<group>";
@@ -293,6 +299,7 @@
 				583646951E08A7BC003C2E60 /* bell.png in Resources */,
 				58254B571E0855D000933B60 /* key.png in Resources */,
 				58254B521E0850EA00933B60 /* hamburger.png in Resources */,
+				582806611E0991F400421815 /* calendar.png in Resources */,
 				58254B4D1E084FEA00933B60 /* care.png in Resources */,
 				58254B5A1E0855FF00933B60 /* gray.circle.png in Resources */,
 				583646911E0890FC003C2E60 /* menu.png in Resources */,
@@ -326,6 +333,7 @@
 			files = (
 				BB57C2D41DFF41DE00731AC4 /* ViewController.swift in Sources */,
 				583646971E08AE2F003C2E60 /* TasksViewController.swift in Sources */,
+				5828065F1E098FBC00421815 /* DatePickerDialog.swift in Sources */,
 				BBA3D8F31DFF733000E39385 /* device.swift in Sources */,
 				BB57C2D21DFF41DE00731AC4 /* AppDelegate.swift in Sources */,
 				BB93EA9E1E0349F8000C15D3 /* RegisterViewController.swift in Sources */,
