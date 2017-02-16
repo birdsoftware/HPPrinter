@@ -1,5 +1,5 @@
 //
-//  TaskCustomCell.swift
+//  AppointmentCell.swift
 //  CarePointe
 //
 //  Created by Brian Bird on 12/16/16.
@@ -8,16 +8,13 @@
 
 import UIKit
 
-class TaskCustomCell: UITableViewCell {
+class AppointmentCell: UITableViewCell {
 
-    
     @IBOutlet var time: UILabel!
     @IBOutlet var photo: UIImageView!
     @IBOutlet var task: UILabel!
     @IBOutlet var patient: UILabel!
    
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
