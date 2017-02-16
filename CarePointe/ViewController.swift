@@ -37,6 +37,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var orangeLine1: UILabel!
     @IBOutlet weak var orangeLine2: UILabel!
     @IBOutlet weak var orangeLine3: UILabel!
+    @IBOutlet weak var noAppointmentsTodayLabel: UILabel!
     
     // tabel views
     @IBOutlet weak var tasksTableView: UITableView!
@@ -105,7 +106,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         
         // UI Elements Set Up
-
+            noAppointmentsTodayLabel.isHidden = true
             phoneButtonHeight.constant = 60
             phoneButton.layer.cornerRadius = phoneButton.bounds.height / 2 //frame.size.width
             phoneButton.clipsToBounds = true
@@ -148,7 +149,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("setUpAppointmentData there is no key onlyDoOnce")
         }
         
-        
+        // check if section one 0[1]2 scheduled appointments is empty from updated stored data
+        let numberOfAppointments = appPat[1].count
+        if numberOfAppointments == 0 {
+            noAppointmentsTodayLabel.isHidden = false
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -173,6 +178,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         pendingPatientsLabel.text = "\(numberNewPatients)"
         scheduledAppointLabel.text = "\(numberScheduledPatients)"
+        
     }
     
 //    override func viewDidAppear( _ animated: Bool) {
@@ -440,6 +446,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     //
+    // #MARK: - UNWIND SEGUE
+    //
+    
+    //https://www.andrewcbancroft.com/2015/12/18/working-with-unwind-segues-programmatically-in-swift/
+    @IBAction func unwindToMainDashboard(segue: UIStoryboardSegue) {}
+    
+    
+    //
     // #MARK: - Table View
     //
     
@@ -451,6 +465,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     //[3] RETURN actual CELL to be displayed
+    
+    // SHOW SEGUE ->
+    // " 1. click cell drag to second view. select the “show” segue in the “Selection Segue” section. "
+    //http://www.codingexplorer.com/segue-uitableviewcell-taps-swift/
     func tableView(_ tableView: UITableView, cellForRowAt IndexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "apptCell")! as! AppointmentCell
@@ -464,6 +482,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "addNoteCompletePatient" {
+            
+            let selectedRow = ((tasksTableView.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
+            let sectionOfSelectedRow = 1 //Accepted Patients
+            let patientName = appPat[sectionOfSelectedRow][selectedRow]// + "'s Information" as String
+            UserDefaults.standard.set(patientName, forKey: "patientNameMainDashBoard")
+            UserDefaults.standard.set(selectedRow, forKey: "selectedRowMainDashBoard")
+            //UserDefaults.standard.set(sectionOfSelectedRow, forKey: "sectionOfSelectedRowMainDashBoard")
+            
+        }
+        
+    }
+    
+    
     
 }
 

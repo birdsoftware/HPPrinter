@@ -170,7 +170,7 @@
         <!--View Controller-->
         <scene sceneID="IYg-2W-hhZ">
             <objects>
-                <viewController id="lTa-wH-ROz" customClass="ViewController" customModule="CarePointe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainDashboard" id="lTa-wH-ROz" customClass="ViewController" customModule="CarePointe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hOY-Kb-Ed6"/>
                         <viewControllerLayoutGuide type="bottom" id="95W-zf-KjL"/>
@@ -205,7 +205,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kRM-uC-HFL" id="0Bw-c6-U7V">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04:44AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfb-Pm-V55">
@@ -255,6 +255,7 @@
                                             <outlet property="photo" destination="K9D-lr-879" id="p5B-cN-9Fh"/>
                                             <outlet property="task" destination="Z5P-dT-x52" id="dhX-Kv-pCg"/>
                                             <outlet property="time" destination="kfb-Pm-V55" id="n30-RH-Okk"/>
+                                            <segue destination="uJM-6f-Dbx" kind="show" identifier="addNoteCompletePatient" id="bIh-7f-2Wt"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -420,6 +421,16 @@
                                     <action selector="alertOutsideButtonTapped:" destination="lTa-wH-ROz" eventType="touchUpInside" id="Jjs-7I-FMt"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Appointments for this Day" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KWK-12-V3m">
+                                <rect key="frame" x="91" y="243" width="194" height="117"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="117" id="FjE-Fr-mxW"/>
+                                    <constraint firstAttribute="width" constant="194" id="G23-XN-jg8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.66964131589999998" green="0.88000124690000003" blue="0.97614747290000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -472,6 +483,7 @@
                             <constraint firstAttribute="trailing" secondItem="kUk-rT-t3f" secondAttribute="trailing" id="nsW-Hd-50N"/>
                             <constraint firstItem="6SI-Fi-uJV" firstAttribute="top" secondItem="hOY-Kb-Ed6" secondAttribute="bottom" constant="55" id="oAp-12-r6H"/>
                             <constraint firstItem="Fel-JT-UVR" firstAttribute="centerX" secondItem="sfQ-xd-RgG" secondAttribute="centerX" constant="1.5" id="oMK-tG-LgG"/>
+                            <constraint firstItem="KWK-12-V3m" firstAttribute="centerX" secondItem="NTx-LI-Awf" secondAttribute="centerX" id="oSX-Da-6wg"/>
                             <constraint firstItem="dT4-Um-Mqh" firstAttribute="top" secondItem="hOY-Kb-Ed6" secondAttribute="bottom" constant="55" id="plq-zV-j4n"/>
                             <constraint firstItem="6SI-Fi-uJV" firstAttribute="centerX" secondItem="sfQ-xd-RgG" secondAttribute="centerX" id="rag-Ht-uIi"/>
                             <constraint firstItem="dTx-nA-Nof" firstAttribute="top" secondItem="hOY-Kb-Ed6" secondAttribute="bottom" constant="15" id="sai-uU-IfM"/>
@@ -483,6 +495,7 @@
                             <constraint firstAttribute="trailing" secondItem="3mC-HM-cAb" secondAttribute="trailing" id="wMd-pp-pb7"/>
                             <constraint firstItem="kUk-rT-t3f" firstAttribute="leading" secondItem="NTx-LI-Awf" secondAttribute="leading" id="x1g-MP-Lg1"/>
                             <constraint firstItem="OUc-cU-zWk" firstAttribute="top" secondItem="hOY-Kb-Ed6" secondAttribute="bottom" id="xcc-yi-qME"/>
+                            <constraint firstItem="KWK-12-V3m" firstAttribute="centerY" secondItem="NTx-LI-Awf" secondAttribute="centerY" id="xpS-Uj-s9b"/>
                             <constraint firstItem="3mC-HM-cAb" firstAttribute="leading" secondItem="QN6-kw-fvG" secondAttribute="trailing" id="yZ8-hJ-3q1"/>
                             <constraint firstItem="Fel-JT-UVR" firstAttribute="top" secondItem="hOY-Kb-Ed6" secondAttribute="bottom" constant="30" id="zOq-Uq-NlH"/>
                         </constraints>
@@ -515,6 +528,7 @@
                         <outlet property="hamburgerOutsideButton" destination="QgE-TO-jfm" id="Gh0-Wh-jFi"/>
                         <outlet property="leadingConstraintContainerView" destination="bEb-Zb-caC" id="LcN-lB-bmf"/>
                         <outlet property="leadingConstraintContainerView2" destination="kzg-I8-j5Q" id="rws-h1-qQp"/>
+                        <outlet property="noAppointmentsTodayLabel" destination="KWK-12-V3m" id="SB4-3G-viu"/>
                         <outlet property="orangeLine1" destination="Fel-JT-UVR" id="AVZ-5K-cfx"/>
                         <outlet property="orangeLine2" destination="eX7-3N-foC" id="Y2E-Qd-Ajq"/>
                         <outlet property="orangeLine3" destination="dbn-6c-GuE" id="9Dk-NH-0gF"/>
@@ -534,7 +548,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLw-Vb-0sP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="991" y="-539"/>
+            <point key="canvasLocation" x="989.60000000000002" y="-539.28035982008998"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="y0k-M5-ca6">
@@ -1027,7 +1041,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
         <!--Navigation Controller-->
         <scene sceneID="2ig-q5-QlE">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eRj-E0-29K" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavControllerMainDB" automaticallyAdjustsScrollViewInsets="NO" id="eRj-E0-29K" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="frv-Gy-sB3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -3047,7 +3061,88 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="APh-mN-Pmr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2695" y="-491"/>
+            <point key="canvasLocation" x="3522" y="-434"/>
+        </scene>
+        <!--Add Note and Complete Patient-->
+        <scene sceneID="WVd-BG-aFl">
+            <objects>
+                <viewController title="Add Note and Complete Patient" id="uJM-6f-Dbx" customClass="AddNoteCompletePatientViewController" customModule="CarePointe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="o6e-QF-VEX"/>
+                        <viewControllerLayoutGuide type="bottom" id="XOR-HX-T2b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dp7-7t-28v">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patient: Bill Summers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jW-B7-SQA">
+                                <rect key="frame" x="108.5" y="20" width="159" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="gN1-wE-LqM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sK-gl-43N">
+                                <rect key="frame" x="16" y="72" width="343" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="MrH-Tv-6Pf"/>
+                                    <constraint firstAttribute="width" constant="343" id="Q2Y-rw-khH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fz2-gU-vc9">
+                                <rect key="frame" x="16" y="101" width="343" height="324"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="61X-v3-VjC"/>
+                                    <constraint firstAttribute="height" constant="324" id="g97-2a-Prr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUe-hg-XPH">
+                                <rect key="frame" x="102" y="548" width="170" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="0R7-2z-Q8Z"/>
+                                    <constraint firstAttribute="height" constant="40" id="dcb-WL-BDr"/>
+                                </constraints>
+                                <state key="normal" title="Complete this Patient">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="completPatientButtonTapped:" destination="uJM-6f-Dbx" eventType="touchUpInside" id="fvy-TG-rjy"/>
+                                    <action selector="completedPatientButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="BFV-FB-tSt"/>
+                                    <action selector="sendButtonTapped:" destination="n1s-gh-Bg8" eventType="touchUpInside" id="wjx-Vl-nnS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7sK-gl-43N" firstAttribute="top" secondItem="7jW-B7-SQA" secondAttribute="bottom" constant="31" id="36F-F2-X8Z"/>
+                            <constraint firstItem="7jW-B7-SQA" firstAttribute="centerX" secondItem="Dp7-7t-28v" secondAttribute="centerX" id="3f6-sn-jSz"/>
+                            <constraint firstItem="Fz2-gU-vc9" firstAttribute="centerX" secondItem="Dp7-7t-28v" secondAttribute="centerX" id="4n9-C8-ivz"/>
+                            <constraint firstItem="7sK-gl-43N" firstAttribute="centerX" secondItem="Dp7-7t-28v" secondAttribute="centerX" id="Mav-Ai-pen"/>
+                            <constraint firstItem="XOR-HX-T2b" firstAttribute="top" secondItem="sUe-hg-XPH" secondAttribute="bottom" constant="15" id="NFW-At-y0B"/>
+                            <constraint firstItem="7jW-B7-SQA" firstAttribute="top" secondItem="o6e-QF-VEX" secondAttribute="bottom" constant="20" id="QDx-GA-Ygq"/>
+                            <constraint firstItem="Fz2-gU-vc9" firstAttribute="top" secondItem="7sK-gl-43N" secondAttribute="bottom" constant="8" id="YyE-3m-HJc"/>
+                            <constraint firstItem="sUe-hg-XPH" firstAttribute="centerX" secondItem="Dp7-7t-28v" secondAttribute="centerX" id="nVX-UE-5tn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="messageTextBox" destination="Fz2-gU-vc9" id="bpd-Li-tkI"/>
+                        <outlet property="patientName" destination="7jW-B7-SQA" id="O0d-RW-IaC"/>
+                        <segue destination="Q79-Em-tgP" kind="unwind" identifier="unwindToMainDB" unwindAction="unwindToMainDashboardWithSegue:" id="9Oh-fp-hoj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rCl-Qf-Tcx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Q79-Em-tgP" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="687" y="-1370"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1ZM-Vb-KDG">
@@ -4108,7 +4203,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
     <inferredMetricsTieBreakers>
         <segue reference="zWG-cM-x3M"/>
         <segue reference="nHS-Rj-NYJ"/>
-        <segue reference="m40-6T-KfX"/>
+        <segue reference="PE3-yw-IFQ"/>
         <segue reference="N4B-Lg-DlY"/>
     </inferredMetricsTieBreakers>
 </document>

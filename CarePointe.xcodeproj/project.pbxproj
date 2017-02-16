@@ -60,6 +60,7 @@
 		586BFDE31E3C09AB00DC6770 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE21E3C09AB00DC6770 /* AlertViewController.swift */; };
 		586BFDE51E3C0C4800DC6770 /* AlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE41E3C0C4800DC6770 /* AlertCell.swift */; };
 		586BFDE71E3C17D700DC6770 /* hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE61E3C17D700DC6770 /* hexColor.swift */; };
+		58A8DC851E562CBE008711D1 /* AddNoteCompletePatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */; };
 		58CBC0071E4D4233001A9698 /* PatientUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */; };
 		58CBC0091E4D42D1001A9698 /* toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0081E4D42D1001A9698 /* toast.swift */; };
 		58CBC00B1E4D4432001A9698 /* EMRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC00A1E4D4432001A9698 /* EMRViewController.swift */; };
@@ -173,6 +174,7 @@
 		586BFDE21E3C09AB00DC6770 /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		586BFDE41E3C0C4800DC6770 /* AlertCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertCell.swift; sourceTree = "<group>"; };
 		586BFDE61E3C17D700DC6770 /* hexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hexColor.swift; sourceTree = "<group>"; };
+		58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteCompletePatientViewController.swift; sourceTree = "<group>"; };
 		58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientUpdateViewController.swift; sourceTree = "<group>"; };
 		58CBC0081E4D42D1001A9698 /* toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = toast.swift; sourceTree = "<group>"; };
 		58CBC00A1E4D4432001A9698 /* EMRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMRViewController.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 			children = (
 				586BFDDC1E3BE40C00DC6770 /* calendar2.png */,
 				586BFDDF1E3BFBCD00DC6770 /* phoneCircle.png */,
+				58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */,
 				BB32754A1E048AD100699280 /* AppointmentCell.swift */,
 				BB57C2D31DFF41DE00731AC4 /* ViewController.swift */,
 			);
@@ -662,6 +665,7 @@
 				58458ABA1E43C49D005DFEDA /* PasswordChangeViewController.swift in Sources */,
 				58CBC0071E4D4233001A9698 /* PatientUpdateViewController.swift in Sources */,
 				58458ACA1E45403F005DFEDA /* RangeSliderThumbLayer.swift in Sources */,
+				58A8DC851E562CBE008711D1 /* AddNoteCompletePatientViewController.swift in Sources */,
 				58CBC01D1E4E49A9001A9698 /* ScreeningsCell.swift in Sources */,
 				BB57C2D21DFF41DE00731AC4 /* AppDelegate.swift in Sources */,
 				58CBC0091E4D42D1001A9698 /* toast.swift in Sources */,
