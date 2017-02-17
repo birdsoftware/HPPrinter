@@ -60,7 +60,6 @@ class PatientUpdateViewController: UIViewController {
             
             self.performSegue(withIdentifier: "unwindToPatientFeed", sender: self)
             
-            
         })
     }
 

@@ -2151,11 +2151,12 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         <outlet property="declinePatientButton" destination="9xX-i2-nlQ" id="9vw-jV-tci"/>
                         <outlet property="patientInfoDataTable" destination="zOv-x2-bUt" id="DJc-vi-0Ar"/>
                         <outlet property="patientNameLabel" destination="fFp-uf-zIM" id="Iy9-eX-EPK"/>
+                        <segue destination="NGQ-Px-5G7" kind="presentation" identifier="newPatientAppointment" id="Gva-bH-0f0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZJ-MS-VgL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5228" y="-641.82908545727139"/>
+            <point key="canvasLocation" x="5228" y="-643"/>
         </scene>
         <!--Patient Care Team View Controller-->
         <scene sceneID="j2K-In-Yq2">
@@ -2338,6 +2339,168 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                 <exit id="oqR-nt-REK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="6069.6000000000004" y="-642.72863568215894"/>
+        </scene>
+        <!--Schedule New Appointment-->
+        <scene sceneID="Lmm-hb-P6R">
+            <objects>
+                <viewController title="Schedule New Appointment" id="NGQ-Px-5G7" customClass="SheduleNewAppointmentViewController" customModule="CarePointe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Lc-9O-Vg2"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mkm-lR-CM9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VzU-IK-x1N">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu_blue.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="kAB-cN-BtW">
+                                <rect key="frame" x="0.0" y="69" width="375" height="598"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uzn-ro-pTW">
+                                <rect key="frame" x="0.0" y="69" width="375" height="80"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patient: Barrie Thomson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJH-Ia-18Y">
+                                        <rect key="frame" x="50" y="15" width="292" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="292" id="919-Wv-ie5"/>
+                                            <constraint firstAttribute="height" constant="21" id="cjw-2k-fj3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="green.circle.png" translatesAutoresizingMaskIntoConstraints="NO" id="qFJ-Pf-rjv">
+                                        <rect key="frame" x="12" y="25" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="7uh-St-QLg"/>
+                                            <constraint firstAttribute="width" constant="30" id="AgZ-tK-WBH"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Order blood pressure plate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xU-AQ-Mrs">
+                                        <rect key="frame" x="50" y="42" width="292" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="292" id="8GJ-L3-52n"/>
+                                            <constraint firstAttribute="height" constant="21" id="aZH-Yz-Dyq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.32969617839999998" green="0.66176503900000005" blue="0.81706231829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="8RC-s2-x6Q"/>
+                                    <constraint firstAttribute="bottom" secondItem="6xU-AQ-Mrs" secondAttribute="bottom" constant="15" id="9pp-ym-0fq"/>
+                                    <constraint firstItem="PJH-Ia-18Y" firstAttribute="leading" secondItem="qFJ-Pf-rjv" secondAttribute="trailing" constant="8" id="ED1-UQ-ghc"/>
+                                    <constraint firstItem="qFJ-Pf-rjv" firstAttribute="leading" secondItem="Uzn-ro-pTW" secondAttribute="leading" constant="12" id="VQN-CP-cLp"/>
+                                    <constraint firstItem="PJH-Ia-18Y" firstAttribute="top" secondItem="Uzn-ro-pTW" secondAttribute="top" constant="15" id="mRl-tn-eKb"/>
+                                    <constraint firstItem="qFJ-Pf-rjv" firstAttribute="centerY" secondItem="Uzn-ro-pTW" secondAttribute="centerY" id="qyI-Mb-iJV"/>
+                                    <constraint firstItem="6xU-AQ-Mrs" firstAttribute="leading" secondItem="qFJ-Pf-rjv" secondAttribute="trailing" constant="8" id="wk3-js-7RU"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hal-9G-MoN">
+                                <rect key="frame" x="112" y="607" width="150" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Oc8-37-z0W"/>
+                                    <constraint firstAttribute="width" constant="150" id="jQ6-gN-45T"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="p8f-2w-JJa"/>
+                                </constraints>
+                                <state key="normal" title="Send Appointment">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="completedPatientButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="7m1-Cf-3IQ"/>
+                                    <action selector="sendAppointmentButtonTapped:" destination="NGQ-Px-5G7" eventType="touchUpInside" id="m4N-n3-lM1"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TSY-vS-ZBy">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule New Appointment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1F1-Ko-cAr">
+                                        <rect key="frame" x="60" y="31" width="265" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="LFC-BQ-3Ot"/>
+                                            <constraint firstAttribute="width" constant="265" id="e4Q-QR-int"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="1F1-Ko-cAr" firstAttribute="centerX" secondItem="TSY-vS-ZBy" secondAttribute="centerX" constant="5" id="Kpg-Jt-uJk"/>
+                                    <constraint firstAttribute="height" constant="70" id="SgB-YI-NOR"/>
+                                    <constraint firstItem="1F1-Ko-cAr" firstAttribute="top" secondItem="TSY-vS-ZBy" secondAttribute="top" constant="31" id="WhN-4p-QQt"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  AppointmentID: 09871" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auR-qk-Qun">
+                                <rect key="frame" x="0.0" y="149" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.66964131589999998" green="0.88000124690000003" blue="0.97614747290000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="eDg-kB-LFg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Appointment Date, Time: 2/17/17, 3:30 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19a-qF-dwY">
+                                <rect key="frame" x="0.0" y="194" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.66964131589999998" green="0.88000124690000003" blue="0.97614747290000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="4gY-au-LIz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njW-Wz-6hF">
+                                <rect key="frame" x="90" y="270" width="194" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="TYR-VZ-EpK"/>
+                                    <constraint firstAttribute="width" constant="194" id="tr5-iC-lL9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <inset key="titleEdgeInsets" minX="-24" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="5" minY="5" maxX="155" maxY="5"/>
+                                <state key="normal" title="Change Date, Time" image="calendar2.png"/>
+                                <connections>
+                                    <action selector="selectDateAndTimeButtonTapped:" destination="NGQ-Px-5G7" eventType="touchUpInside" id="nno-VV-A09"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kAB-cN-BtW" firstAttribute="top" secondItem="1Lc-9O-Vg2" secondAttribute="bottom" constant="49" id="1UW-1d-XRr"/>
+                            <constraint firstAttribute="trailing" secondItem="TSY-vS-ZBy" secondAttribute="trailing" id="2Ge-g1-1zv"/>
+                            <constraint firstAttribute="trailing" secondItem="kAB-cN-BtW" secondAttribute="trailing" id="AeN-P2-U7u"/>
+                            <constraint firstItem="Mkm-lR-CM9" firstAttribute="top" secondItem="hal-9G-MoN" secondAttribute="bottom" constant="20" id="BHD-oC-DYv"/>
+                            <constraint firstItem="TSY-vS-ZBy" firstAttribute="leading" secondItem="VzU-IK-x1N" secondAttribute="leading" id="IQB-Tx-gUM"/>
+                            <constraint firstItem="auR-qk-Qun" firstAttribute="top" secondItem="Uzn-ro-pTW" secondAttribute="bottom" id="OOZ-0O-bjp"/>
+                            <constraint firstAttribute="trailing" secondItem="Uzn-ro-pTW" secondAttribute="trailing" id="OXf-2M-e1x"/>
+                            <constraint firstItem="Uzn-ro-pTW" firstAttribute="leading" secondItem="VzU-IK-x1N" secondAttribute="leading" id="Tpl-pr-ZQw"/>
+                            <constraint firstItem="hal-9G-MoN" firstAttribute="centerX" secondItem="VzU-IK-x1N" secondAttribute="centerX" id="W8O-Jh-2Xc"/>
+                            <constraint firstItem="19a-qF-dwY" firstAttribute="top" secondItem="auR-qk-Qun" secondAttribute="bottom" id="Znh-DD-EEh"/>
+                            <constraint firstItem="19a-qF-dwY" firstAttribute="leading" secondItem="VzU-IK-x1N" secondAttribute="leading" id="as5-do-uxK"/>
+                            <constraint firstItem="njW-Wz-6hF" firstAttribute="centerX" secondItem="VzU-IK-x1N" secondAttribute="centerX" id="cQL-tw-SWO"/>
+                            <constraint firstItem="Uzn-ro-pTW" firstAttribute="top" secondItem="TSY-vS-ZBy" secondAttribute="bottom" constant="-1" id="j1l-Hd-l13"/>
+                            <constraint firstItem="Mkm-lR-CM9" firstAttribute="top" secondItem="kAB-cN-BtW" secondAttribute="bottom" id="kbW-XA-RSJ"/>
+                            <constraint firstItem="auR-qk-Qun" firstAttribute="leading" secondItem="VzU-IK-x1N" secondAttribute="leading" id="l4X-zM-xNr"/>
+                            <constraint firstAttribute="trailing" secondItem="auR-qk-Qun" secondAttribute="trailing" id="mf0-0E-VMk"/>
+                            <constraint firstAttribute="trailing" secondItem="19a-qF-dwY" secondAttribute="trailing" id="npR-OF-lnI"/>
+                            <constraint firstItem="kAB-cN-BtW" firstAttribute="leading" secondItem="VzU-IK-x1N" secondAttribute="leading" id="qML-Fb-S5b"/>
+                            <constraint firstItem="njW-Wz-6hF" firstAttribute="top" secondItem="19a-qF-dwY" secondAttribute="bottom" constant="31" id="qXe-ZS-VyQ"/>
+                            <constraint firstItem="TSY-vS-ZBy" firstAttribute="top" secondItem="VzU-IK-x1N" secondAttribute="top" id="rx6-i6-9hu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="appointmentDateTime" destination="19a-qF-dwY" id="MsS-ub-ca7"/>
+                        <outlet property="changeDateButton" destination="njW-Wz-6hF" id="yng-Al-upI"/>
+                        <outlet property="sendAppointment" destination="hal-9G-MoN" id="RtU-mT-5hu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cPY-qY-6s1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6836" y="-644.52773613193403"/>
         </scene>
         <!--Screenings-->
         <scene sceneID="Gw1-qM-84c">
@@ -4187,6 +4350,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
         <image name="closed-envelope-circle.png" width="64" height="64"/>
         <image name="exitandgoback.png" width="170" height="128"/>
         <image name="gears.png" width="64" height="64"/>
+        <image name="green.circle.png" width="64" height="64"/>
         <image name="jennifer.jpg" width="224" height="224"/>
         <image name="menu.png" width="64" height="64"/>
         <image name="orange.circle.png" width="64" height="64"/>
@@ -4202,7 +4366,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="zWG-cM-x3M"/>
-        <segue reference="nHS-Rj-NYJ"/>
+        <segue reference="OQI-Pt-Vnr"/>
         <segue reference="PE3-yw-IFQ"/>
         <segue reference="N4B-Lg-DlY"/>
     </inferredMetricsTieBreakers>

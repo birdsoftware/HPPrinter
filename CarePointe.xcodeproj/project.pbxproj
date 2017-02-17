@@ -61,6 +61,7 @@
 		586BFDE51E3C0C4800DC6770 /* AlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE41E3C0C4800DC6770 /* AlertCell.swift */; };
 		586BFDE71E3C17D700DC6770 /* hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE61E3C17D700DC6770 /* hexColor.swift */; };
 		58A8DC851E562CBE008711D1 /* AddNoteCompletePatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */; };
+		58A8DC881E56671D008711D1 /* SheduleNewAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC871E56671D008711D1 /* SheduleNewAppointmentViewController.swift */; };
 		58CBC0071E4D4233001A9698 /* PatientUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */; };
 		58CBC0091E4D42D1001A9698 /* toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0081E4D42D1001A9698 /* toast.swift */; };
 		58CBC00B1E4D4432001A9698 /* EMRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC00A1E4D4432001A9698 /* EMRViewController.swift */; };
@@ -175,6 +176,7 @@
 		586BFDE41E3C0C4800DC6770 /* AlertCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertCell.swift; sourceTree = "<group>"; };
 		586BFDE61E3C17D700DC6770 /* hexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hexColor.swift; sourceTree = "<group>"; };
 		58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteCompletePatientViewController.swift; sourceTree = "<group>"; };
+		58A8DC871E56671D008711D1 /* SheduleNewAppointmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheduleNewAppointmentViewController.swift; sourceTree = "<group>"; };
 		58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientUpdateViewController.swift; sourceTree = "<group>"; };
 		58CBC0081E4D42D1001A9698 /* toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = toast.swift; sourceTree = "<group>"; };
 		58CBC00A1E4D4432001A9698 /* EMRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMRViewController.swift; sourceTree = "<group>"; };
@@ -271,9 +273,7 @@
 			children = (
 				58CBC0191E4E42D5001A9698 /* patient images */,
 				58272AF11E3FFD1E00E779CF /* PTVTableViewController.swift */,
-				58272AFB1E4120B900E779CF /* PTVDetailViewController.swift */,
-				58D6335F1E4D1FF900DC3EB9 /* PatientCareTeamViewController.swift */,
-				58D633611E4D25AE00DC3EB9 /* PatientCareTeamCell.swift */,
+				58A8DC861E5666D6008711D1 /* Patient Tab */,
 				58D6336B1E4D316A00DC3EB9 /* PatientFeedViewController.swift */,
 				58D633771E4D360400DC3EB9 /* PatientFeedViewCell.swift */,
 				58CBC01A1E4E43DA001A9698 /* PatientScreeningsViewController.swift */,
@@ -359,6 +359,17 @@
 				586BFDE41E3C0C4800DC6770 /* AlertCell.swift */,
 			);
 			name = "Alert View";
+			sourceTree = "<group>";
+		};
+		58A8DC861E5666D6008711D1 /* Patient Tab */ = {
+			isa = PBXGroup;
+			children = (
+				58272AFB1E4120B900E779CF /* PTVDetailViewController.swift */,
+				58D6335F1E4D1FF900DC3EB9 /* PatientCareTeamViewController.swift */,
+				58D633611E4D25AE00DC3EB9 /* PatientCareTeamCell.swift */,
+				58A8DC871E56671D008711D1 /* SheduleNewAppointmentViewController.swift */,
+			);
+			name = "Patient Tab";
 			sourceTree = "<group>";
 		};
 		58CBC00E1E4D495F001A9698 /* Rx Containers */ = {
@@ -657,6 +668,7 @@
 				BB57C2D41DFF41DE00731AC4 /* ViewController.swift in Sources */,
 				58D633781E4D360400DC3EB9 /* PatientFeedViewCell.swift in Sources */,
 				583646971E08AE2F003C2E60 /* TasksViewController.swift in Sources */,
+				58A8DC881E56671D008711D1 /* SheduleNewAppointmentViewController.swift in Sources */,
 				58496C101E526E1700DF103A /* SignatureViewController.swift in Sources */,
 				586BFDE51E3C0C4800DC6770 /* AlertCell.swift in Sources */,
 				58458AC61E452474005DFEDA /* AddContainerViewController.swift in Sources */,

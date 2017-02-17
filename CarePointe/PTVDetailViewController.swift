@@ -223,8 +223,15 @@ class PTVDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func acceptPatientButtonTapped(_ sender: Any) {
         
+        
+        // Move this New patient to Accepted
         let accepted = 1
         self.movePatientToSection(SectionNumber: accepted)
+        
+        
+        //show segue modally identifier: newPatientAppointment
+        self.performSegue(withIdentifier: "newPatientAppointment", sender: self)
+        
         
         // Instantiate a view controller from Storyboard and present it
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -239,10 +246,6 @@ class PTVDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         let completed = 2
         self.movePatientToSection(SectionNumber: completed)
         
-        // Instantiate a view controller from Storyboard and present it
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
-        self.present(vc, animated: false, completion: nil)
     }
     
     //
