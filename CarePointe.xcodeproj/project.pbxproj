@@ -13,7 +13,6 @@
 		58254B571E0855D000933B60 /* key.png in Resources */ = {isa = PBXBuildFile; fileRef = 58254B551E0855D000933B60 /* key.png */; };
 		58254B5A1E0855FF00933B60 /* gray.circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 58254B581E0855FF00933B60 /* gray.circle.png */; };
 		58254B5B1E0855FF00933B60 /* orange.circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 58254B591E0855FF00933B60 /* orange.circle.png */; };
-		58272AEB1E3FE80200E779CF /* side_menu_blue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 58272AEA1E3FE80200E779CF /* side_menu_blue.jpg */; };
 		58272AED1E3FE93C00E779CF /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 58272AEC1E3FE93C00E779CF /* user.png */; };
 		58272AEF1E3FEFD800E779CF /* UpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58272AEE1E3FEFD800E779CF /* UpdateProfileViewController.swift */; };
 		58272AF21E3FFD1E00E779CF /* PTVTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58272AF11E3FFD1E00E779CF /* PTVTableViewController.swift */; };
@@ -62,6 +61,13 @@
 		586BFDE71E3C17D700DC6770 /* hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE61E3C17D700DC6770 /* hexColor.swift */; };
 		58A8DC851E562CBE008711D1 /* AddNoteCompletePatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */; };
 		58A8DC881E56671D008711D1 /* SheduleNewAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC871E56671D008711D1 /* SheduleNewAppointmentViewController.swift */; };
+		58A8DC8B1E576BA4008711D1 /* Bordered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC8A1E576BA4008711D1 /* Bordered.swift */; };
+		58A8DC8D1E576BC3008711D1 /* Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC8C1E576BC3008711D1 /* Rounded.swift */; };
+		58A8DCCB1E578E44008711D1 /* movePatientToSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DCCA1E578E44008711D1 /* movePatientToSection.swift */; };
+		58A8DCCF1E57A717008711D1 /* blueback.png in Resources */ = {isa = PBXBuildFile; fileRef = 58A8DCCD1E57A716008711D1 /* blueback.png */; };
+		58A8DCD01E57A717008711D1 /* greenback.png in Resources */ = {isa = PBXBuildFile; fileRef = 58A8DCCE1E57A716008711D1 /* greenback.png */; };
+		58A8DCD21E57ABC6008711D1 /* setUpPatientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DCD11E57ABC6008711D1 /* setUpPatientData.swift */; };
+		58A8DCD41E57B2BB008711D1 /* setCurrentDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DCD31E57B2BB008711D1 /* setCurrentDate.swift */; };
 		58CBC0071E4D4233001A9698 /* PatientUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */; };
 		58CBC0091E4D42D1001A9698 /* toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0081E4D42D1001A9698 /* toast.swift */; };
 		58CBC00B1E4D4432001A9698 /* EMRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC00A1E4D4432001A9698 /* EMRViewController.swift */; };
@@ -128,7 +134,6 @@
 		58254B551E0855D000933B60 /* key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = key.png; path = ../../imageFiles/key.png; sourceTree = "<group>"; };
 		58254B581E0855FF00933B60 /* gray.circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gray.circle.png; path = ../../imageFiles/gray.circle.png; sourceTree = "<group>"; };
 		58254B591E0855FF00933B60 /* orange.circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orange.circle.png; path = ../../imageFiles/orange.circle.png; sourceTree = "<group>"; };
-		58272AEA1E3FE80200E779CF /* side_menu_blue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = side_menu_blue.jpg; path = ../../imageFiles/side_menu_blue.jpg; sourceTree = "<group>"; };
 		58272AEC1E3FE93C00E779CF /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = user.png; path = ../../imageFiles/user.png; sourceTree = "<group>"; };
 		58272AEE1E3FEFD800E779CF /* UpdateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewController.swift; sourceTree = "<group>"; };
 		58272AF11E3FFD1E00E779CF /* PTVTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTVTableViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +182,13 @@
 		586BFDE61E3C17D700DC6770 /* hexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hexColor.swift; sourceTree = "<group>"; };
 		58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteCompletePatientViewController.swift; sourceTree = "<group>"; };
 		58A8DC871E56671D008711D1 /* SheduleNewAppointmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheduleNewAppointmentViewController.swift; sourceTree = "<group>"; };
+		58A8DC8A1E576BA4008711D1 /* Bordered.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bordered.swift; sourceTree = "<group>"; };
+		58A8DC8C1E576BC3008711D1 /* Rounded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rounded.swift; sourceTree = "<group>"; };
+		58A8DCCA1E578E44008711D1 /* movePatientToSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = movePatientToSection.swift; sourceTree = "<group>"; };
+		58A8DCCD1E57A716008711D1 /* blueback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueback.png; path = ../../imageFiles/blueback.png; sourceTree = "<group>"; };
+		58A8DCCE1E57A716008711D1 /* greenback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenback.png; path = ../../imageFiles/greenback.png; sourceTree = "<group>"; };
+		58A8DCD11E57ABC6008711D1 /* setUpPatientData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setUpPatientData.swift; sourceTree = "<group>"; };
+		58A8DCD31E57B2BB008711D1 /* setCurrentDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setCurrentDate.swift; sourceTree = "<group>"; };
 		58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientUpdateViewController.swift; sourceTree = "<group>"; };
 		58CBC0081E4D42D1001A9698 /* toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = toast.swift; sourceTree = "<group>"; };
 		58CBC00A1E4D4432001A9698 /* EMRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMRViewController.swift; sourceTree = "<group>"; };
@@ -253,9 +265,10 @@
 		58272AE91E3FE7EB00E779CF /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
+				58A8DCCD1E57A716008711D1 /* blueback.png */,
+				58A8DCCE1E57A716008711D1 /* greenback.png */,
 				58272AEC1E3FE93C00E779CF /* user.png */,
 				58272B011E42495800E779CF /* calendarGreen.png */,
-				58272AEA1E3FE80200E779CF /* side_menu_blue.jpg */,
 				58458ABF1E43F77F005DFEDA /* checked.png */,
 				58458ABB1E43DD1C005DFEDA /* attention.png */,
 				58D633581E4A73F600DC3EB9 /* exitandgoback.png */,
@@ -372,6 +385,25 @@
 			name = "Patient Tab";
 			sourceTree = "<group>";
 		};
+		58A8DC891E576B75008711D1 /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				58A8DC8A1E576BA4008711D1 /* Bordered.swift */,
+				58A8DC8C1E576BC3008711D1 /* Rounded.swift */,
+			);
+			name = Commons;
+			sourceTree = "<group>";
+		};
+		58A8DCCC1E5793D4008711D1 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				58A8DCCA1E578E44008711D1 /* movePatientToSection.swift */,
+				58A8DCD11E57ABC6008711D1 /* setUpPatientData.swift */,
+				58A8DCD31E57B2BB008711D1 /* setCurrentDate.swift */,
+			);
+			name = helpers;
+			sourceTree = "<group>";
+		};
 		58CBC00E1E4D495F001A9698 /* Rx Containers */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,6 +481,8 @@
 		BB57C2D01DFF41DE00731AC4 /* CarePointe */ = {
 			isa = PBXGroup;
 			children = (
+				58A8DC891E576B75008711D1 /* Commons */,
+				58A8DCCC1E5793D4008711D1 /* helpers */,
 				586BFDD31E3BB4B300DC6770 /* Customize Classes */,
 				BB32753F1E046C7A00699280 /* TaskView */,
 				586BFDD61E3BCAD700DC6770 /* Hamburger View */,
@@ -611,13 +645,14 @@
 				583646951E08A7BC003C2E60 /* bell.png in Resources */,
 				586BFDE01E3BFBCD00DC6770 /* phoneCircle.png in Resources */,
 				58254B571E0855D000933B60 /* key.png in Resources */,
+				58A8DCD01E57A717008711D1 /* greenback.png in Resources */,
 				58254B521E0850EA00933B60 /* hamburger.png in Resources */,
 				582806611E0991F400421815 /* calendar.png in Resources */,
+				58A8DCCF1E57A717008711D1 /* blueback.png in Resources */,
 				58254B4D1E084FEA00933B60 /* care.png in Resources */,
 				58D633661E4D26AB00DC3EB9 /* closed-envelope-circle.png in Resources */,
 				58496C0E1E526D2D00DF103A /* x_sign340x40_360.png in Resources */,
 				58254B5A1E0855FF00933B60 /* gray.circle.png in Resources */,
-				58272AEB1E3FE80200E779CF /* side_menu_blue.jpg in Resources */,
 				58D633741E4D34CB00DC3EB9 /* doctor.png in Resources */,
 				58496C191E527FD900DF103A /* box.png in Resources */,
 				58D633591E4A73F600DC3EB9 /* exitandgoback.png in Resources */,
@@ -663,10 +698,13 @@
 				58D6335E1E4B858000DC3EB9 /* Availability.swift in Sources */,
 				586BFDD51E3BC57B00DC6770 /* addCustomBorder.swift in Sources */,
 				586BFDE71E3C17D700DC6770 /* hexColor.swift in Sources */,
+				58A8DC8D1E576BC3008711D1 /* Rounded.swift in Sources */,
 				58458AC41E450F4D005DFEDA /* AvailabilityCell.swift in Sources */,
 				58CBC0161E4E20CD001A9698 /* RxContainer3Cell.swift in Sources */,
 				BB57C2D41DFF41DE00731AC4 /* ViewController.swift in Sources */,
+				58A8DCD41E57B2BB008711D1 /* setCurrentDate.swift in Sources */,
 				58D633781E4D360400DC3EB9 /* PatientFeedViewCell.swift in Sources */,
+				58A8DCCB1E578E44008711D1 /* movePatientToSection.swift in Sources */,
 				583646971E08AE2F003C2E60 /* TasksViewController.swift in Sources */,
 				58A8DC881E56671D008711D1 /* SheduleNewAppointmentViewController.swift in Sources */,
 				58496C101E526E1700DF103A /* SignatureViewController.swift in Sources */,
@@ -679,6 +717,7 @@
 				58458ACA1E45403F005DFEDA /* RangeSliderThumbLayer.swift in Sources */,
 				58A8DC851E562CBE008711D1 /* AddNoteCompletePatientViewController.swift in Sources */,
 				58CBC01D1E4E49A9001A9698 /* ScreeningsCell.swift in Sources */,
+				58A8DCD21E57ABC6008711D1 /* setUpPatientData.swift in Sources */,
 				BB57C2D21DFF41DE00731AC4 /* AppDelegate.swift in Sources */,
 				58CBC0091E4D42D1001A9698 /* toast.swift in Sources */,
 				58272AFE1E412DFE00E779CF /* PatientInformationCell.swift in Sources */,
@@ -703,6 +742,7 @@
 				58496C161E52756E00DF103A /* YPDrawSignatureView.swift in Sources */,
 				58CBC0141E4E20B0001A9698 /* RxContainer2Cell.swift in Sources */,
 				58272AF41E40051900E779CF /* PatientCell.swift in Sources */,
+				58A8DC8B1E576BA4008711D1 /* Bordered.swift in Sources */,
 				58CBC00D1E4D463D001A9698 /* PatientRXViewController.swift in Sources */,
 				58272AEF1E3FEFD800E779CF /* UpdateProfileViewController.swift in Sources */,
 				58CBC0101E4D4A39001A9698 /* Container1ViewController.swift in Sources */,

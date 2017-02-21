@@ -3,7 +3,7 @@
 //  CarePointe
 //
 //  Created by Brian Bird on 1/27/17.
-//  Copyright © 2017 Mogul Pro Media. All rights reserved.
+//  Copyright © 2017
 //
 
 import Foundation
@@ -27,3 +27,11 @@ public extension UIColor {
     }
     
 }
+
+//0xD7D7D7 Iron
+
+//0x4A9FCA Celestial Blue   -Secondary Title Bar
+//0xA1DCF8 Columbia Blue    -Third Title Bar
+//0x468401 Fern             -Top and bottum Bar
+//0x028401 Green            -Buttons
+

@@ -47,6 +47,21 @@ extension UIColor {
     static func candyGreen() -> UIColor {
         return UIColor(red: 67.0/255.0, green: 205.0/255.0, blue: 135.0/255.0, alpha: 1.0)
     }
+    static func Iron() -> UIColor {
+        return UIColor(hex:0xD7D7D7)
+    }
+    static func celestialBlue() -> UIColor {//-Secondary Title Bar
+        return UIColor(hex:0x4A9FCA)
+    }
+    static func columbiaBlue() -> UIColor {//-Third Title Bar
+        return UIColor(hex:0xA1DCF8)
+    }
+    static func Fern() -> UIColor {//-Top and bottum Bar
+        return UIColor(hex:0x468401)
+    }
+    static func Green() -> UIColor {//-Buttons
+        return UIColor(hex:0x028401)
+    }
 }
 
 

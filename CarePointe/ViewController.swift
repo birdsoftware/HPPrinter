@@ -66,41 +66,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Class Public Data
     //
     
-    let appointmentIDs = [["90933","52718","12543","36221","160336","12718","68958","51500","27496"],
-                          ["7498","47598","46233","78543"],
-                          ["42321","36221","99699","25818","72021","372","86930","17498","23412","8975","76231"]]
+//    let appointmentIDs = [["90933","52718","12543","36221","160336","12718","68958","51500","27496"],
+//                          ["7498","47598","46233","78543"],
+//                          ["42321","36221","99699","25818","72021","372","86930","17498","23412","8975","76231"]]
+//    
+//    let patients = [["Ruth Quinones", "Barrie Thomson", "Victor Owen", "Bill Summers", "Alice Njavro", "Michael Levi", "Elida Martinez", "John Banks","Rrian Nird"],
+//                    [ "Cindy Lopper","Marx Ehrlich", "Alicia Watanabe", "Josh Brown"],
+//                    [ "Desire Aller", "Paulita Wix", "Jenny Binkley", "Lawanda Arno", "Jackqueline Naumann", "Regine Kohnke","Brad Birdsong", "Dallas Remy", "Noel Devitt","Mike Brown","Sev Donada"]]
+//    
+//    var times = [["12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM"],
+//                 ["12:32AM","01:56PM","03:22PM","11:12AM"],
+//                 ["12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM","09:43PM","10:52AM"]]
+//    
+//    var dates = [["2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17"],
+//                 ["2/14/17","2/14/17","2/14/17","2/14/17"],
+//                 ["2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17"]]
+//    
+//    var appointmentMessage = [["Careflows update 1", "DISPOSITION Patient profile IDT Update",
+//                               "order blood pressure plate", "Dr D. Webb Telemed update",
+//                               "Patient profile Screening update", "Referrals details update",
+//                               "syn patient card data", "Patient medication",
+//                               "new nutrition levels"],
+//                              ["new nutrition levels", "interface IDT Update",
+//                               "Monitor infusion plasma", "DISPOSITION Patient profile IDT Update"],
+//                              ["Patient profile Update", "Telemed update",
+//                               "Patient profile Screening update", "Referrals details update",
+//                               "monitor profile update 2", "Patient medication calculation",
+//                               "patient Lunch Update", "hearing aid configuration","Dr D. Webb Telemed update",
+//                               "Patient profile Screening update", "Referrals details update"]]
     
-    let patients = [["Ruth Quinones", "Barrie Thomson", "Victor Owen", "Bill Summers", "Alice Njavro", "Michael Levi", "Elida Martinez", "John Banks","Rrian Nird"],
-                    [ "Cindy Lopper","Marx Ehrlich", "Alicia Watanabe", "Josh Brown"],
-                    [ "Desire Aller", "Paulita Wix", "Jenny Binkley", "Lawanda Arno", "Jackqueline Naumann", "Regine Kohnke","Brad Birdsong", "Dallas Remy", "Noel Devitt","Mike Brown","Sev Donada"]]
     
-    var times = [["12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM"],
-                 ["12:32AM","01:56PM","03:22PM","11:12AM"],
-                 ["12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM","09:43PM","10:52AM"]]
-    
-    var dates = [["2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17"],
-                 ["2/14/17","2/14/17","2/14/17","2/14/17"],
-                 ["2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17"]]
-    
-    var appointmentMessage = [["Careflows update 1", "DISPOSITION Patient profile IDT Update",
-                               "order blood pressure plate", "Dr D. Webb Telemed update",
-                               "Patient profile Screening update", "Referrals details update",
-                               "syn patient card data", "Patient medication",
-                               "new nutrition levels"],
-                              ["new nutrition levels", "interface IDT Update",
-                               "Monitor infusion plasma", "DISPOSITION Patient profile IDT Update"],
-                              ["Patient profile Update", "Telemed update",
-                               "Patient profile Screening update", "Referrals details update",
-                               "monitor profile update 2", "Patient medication calculation",
-                               "patient Lunch Update", "hearing aid configuration","Dr D. Webb Telemed update",
-                               "Patient profile Screening update", "Referrals details update"]]
-    
-    
-    var appID = [[String]]()
-    var appPat = [[String]]()
-    var appTime = [[String]]()
+    //var appID = [[String]]()
+    var appPat = [[String]]()       //Displayed in Table called tasksTableView
+    var appTime = [[String]]()        //Displayed in Table
     var appDate = [[String]]()
-    var appMessage = [[String]]()
+    var appMessage = [[String]]()   //Displayed in Table
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,6 +122,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             //3. Cast shadow along slide out menu edge for 3D effect
             hamburgerContainerView.layer.shadowOpacity = 1
             alertContainerView.layer.shadowOpacity = 1
+        //set date display text to current date. dateDisplayButton
+            self.setCurrentDateInDefaults()
+            let currentDateFromDefaults = UserDefaults.standard.string(forKey: "currentDate")
+            self.dateDisplayButton.setTitle(currentDateFromDefaults, for: .normal)
         
         // White thin line [] | [] | [] between buttons
             pendingReferralsButton.layer.addBorder(edge: UIRectEdge.right, color: .white, thickness: 0.5)
@@ -307,7 +311,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //    }
     
     func showCalendarAlert(){
-        DatePickerDialog().show("Task Date", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .date) {
+        var searchText = "2/14/17"
+        
+        DatePickerDialog().show("Appointment Date", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .date) {
             (date) -> Void in
             if date != nil {
                 let dateFormat = DateFormatter()
@@ -317,12 +323,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 //self.dateLabel.text = "\(strDate)"
                 self.dateDisplayButton.setTitle(strDate, for: .normal)
                 UserDefaults.standard.setValue(strDate ,forKey: "newDate")
+                
+                //----- UPDATE TABLE BY DATE SELECTED
+                searchText = strDate //This contains date selected "2/17/17"
+                
+                var integerArray:[Int] = []
+                var filteredDates:[String] = []
+                
+                filteredDates = self.appDate[1].filter({ (text) -> Bool in
+                    let tmp: NSString = text as NSString
+                    let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+                    
+                    //filteredAlertImages = alertImageNames.filter({text -> Bool in range.location != NSNotFound})
+                    
+                    integerArray.append(range.location)
+                    return range.location != NSNotFound //NSNotFound is NSIntegerMax range.location if item not found returns 2^63 or 9223372036854775807
+                })
+                
+                print(filteredDates)
+               
             }
         }
         //Save new date to user defaults
         UserDefaults.standard.set(true, forKey: "didUpdateCalendarDate") //need check to display a date if no date selected
         
         //UPDATE TABLE FROM SQL DB      DBtime, DBpatient, DBtasks for a given DB date
+        
+            //check if appoints is empty appPat[1].count == 0
+            //if not empty then filter appTime, appMessage and appPat by the given date
+        
     }
     
     func moveSlideMenu(Menu: String) {
@@ -376,7 +405,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func getUpdateAppointmentData(){
         //Get up to date array
         //let appSecT = UserDefaults.standard.object(forKey: "appSec")
-        let appIDT = UserDefaults.standard.object(forKey: "appID")
+        //let appIDT = UserDefaults.standard.object(forKey: "appID")
         let appPatT = UserDefaults.standard.object(forKey: "appPat")
         let appTimeT = UserDefaults.standard.object(forKey: "appTime")
         let appDateT = UserDefaults.standard.object(forKey: "appDate")
@@ -387,9 +416,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //    appSec = appSecT as! [String]
         //}
         
-        if let appIDT = appIDT {
-            appID = appIDT as! [[String]]
-        }
+//        if let appIDT = appIDT {
+//            appID = appIDT as! [[String]]
+//        }
         
         if let appPatT = appPatT {
             appPat = appPatT as! [[String]]
@@ -411,31 +440,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func setUpAppointmentData(){
         
-        appID = appointmentIDs
-        appPat = patients
-        appTime = times
-        appDate = dates
-        appMessage = appointmentMessage
+//        appID = appointmentIDs
+//        appPat = patients
+//        appTime = times
+//        appDate = dates
+//        appMessage = appointmentMessage
+//        
+//        //UserDefaults.standard.set(appSec, forKey: "appSec")
+//        UserDefaults.standard.set(appID, forKey: "appID")
+//        UserDefaults.standard.set(appPat, forKey: "appPat")
+//        UserDefaults.standard.set(appTime, forKey: "appTime")
+//        UserDefaults.standard.set(appDate, forKey: "appDate")
+//        UserDefaults.standard.set(appMessage, forKey: "appMessage")
         
-        //UserDefaults.standard.set(appSec, forKey: "appSec")
-        UserDefaults.standard.set(appID, forKey: "appID")
-        UserDefaults.standard.set(appPat, forKey: "appPat")
-        UserDefaults.standard.set(appTime, forKey: "appTime")
-        UserDefaults.standard.set(appPat, forKey: "appDate")
-        UserDefaults.standard.set(appMessage, forKey: "appMessage")
-        
+        self.setUpPatientDataInDefaults()
+        getUpdateAppointmentData()
         //get whats in defaults
-        var onlyDoOnceHere = UserDefaults.standard.integer(forKey: "onlyDoOnce")
+        let onlyDoOnceHere = 1//UserDefaults.standard.integer(forKey: "onlyDoOnce")
         
-        if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does exist? in defaults [yes]
-            
-            onlyDoOnceHere += 1
-            
-        } else {// [no]
-            
-            onlyDoOnceHere = 1
-            
-        }
+//        if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does exist? in defaults [yes]
+//            
+//            onlyDoOnceHere += 1
+//            
+//        } else {// [no]
+//            
+//            onlyDoOnceHere = 1
+//            
+//        }
         
         //update defaults with new integer
         UserDefaults.standard.set(onlyDoOnceHere, forKey: "onlyDoOnce")
@@ -490,8 +521,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let selectedRow = ((tasksTableView.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
             let sectionOfSelectedRow = 1 //Accepted Patients
             let patientName = appPat[sectionOfSelectedRow][selectedRow]// + "'s Information" as String
+            
+            let accepted = 1
+            
             UserDefaults.standard.set(patientName, forKey: "patientNameMainDashBoard")
-            UserDefaults.standard.set(selectedRow, forKey: "selectedRowMainDashBoard")
+            //UserDefaults.standard.set(selectedRow, forKey: "selectedRowMainDashBoard")
+            
+            UserDefaults.standard.set(selectedRow, forKey: "selectedRow")
+            UserDefaults.standard.set(accepted, forKey: "sectionForSelectedRow")
+            
             //UserDefaults.standard.set(sectionOfSelectedRow, forKey: "sectionOfSelectedRowMainDashBoard")
             
         }

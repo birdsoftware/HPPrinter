@@ -23,7 +23,7 @@ class PatientUpdateViewController: UIViewController {
         
         //set update UI
         messageTextBox.layer.borderWidth = 1.0
-        messageTextBox.layer.borderColor = UIColor(hex: 0xD7D7D7).cgColor//uses custom Class in hexColor.swift
+        messageTextBox.layer.borderColor = UIColor(hex: 0xD7D7D7).cgColor// Iron
         messageTextBox.layer.cornerRadius = 5
         patientImage.layer.cornerRadius = patientImage.frame.size.width / 2
         patientImage.clipsToBounds = true

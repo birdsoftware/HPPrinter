@@ -21,8 +21,6 @@ class SheduleNewAppointmentViewController: UIViewController {
         super.viewDidLoad()
 
         //UI setup
-        sendAppointment.layer.cornerRadius = 5
-        changeDateButton.layer.cornerRadius = 5
     }
 
     
@@ -33,12 +31,16 @@ class SheduleNewAppointmentViewController: UIViewController {
     @IBAction func sendAppointmentButtonTapped(_ sender: Any) {
         
         //save time and day for this patient
+        // Move this New patient to Accepted
+        let accepted = 1
+        //self.movePatientToSection(SectionNumber: accepted)
+        self.moveAppointmentToSection(SectionNumber: accepted)
         
         //SHOW TOAST
         UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
             
             //if you perform segue here if will perform with animation
-            self.view.makeToast("Appointment Sent", duration: 1.1, position: .center)
+            self.view.makeToast("Appointment Set", duration: 1.1, position: .center)
         }, completion: { finished in
             
             // Instantiate a view controller from Storyboard and present it
@@ -66,7 +68,7 @@ class SheduleNewAppointmentViewController: UIViewController {
                 
                 let strDate = dateFormat.string(for: dateAndTime!)
                 
-                self.appointmentDateTime.text = "Appointment Date, Time: \(strDate!)"
+                self.appointmentDateTime.text = "  Appointment Date, Time: \(strDate!)"
             }
         }
 
