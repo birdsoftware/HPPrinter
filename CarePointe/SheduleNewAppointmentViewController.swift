@@ -13,14 +13,57 @@ class SheduleNewAppointmentViewController: UIViewController {
     @IBOutlet weak var sendAppointment: UIButton!
     @IBOutlet weak var changeDateButton: UIButton!
 
+    // Labels
+    @IBOutlet weak var patientName: UILabel!
+    @IBOutlet weak var patientMessage: UILabel!
+    @IBOutlet weak var appointmentID: UILabel!  //  AppointmentID: 09871
     
     @IBOutlet weak var appointmentDateTime: UILabel!
     
+    var appTime = [[String]]()
+    var appDate = [[String]]()
+    var appMessage = [[String]]()
+    var selectedRow = Int()
+    
+    var strTime = String()
+    var strDate = String()
+    var didChangeDateAndTime =  false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let appTimeT = UserDefaults.standard.object(forKey: "appTime")
+        let appDateT = UserDefaults.standard.object(forKey: "appDate")
+        let appMessageT = UserDefaults.standard.object(forKey: "appMessage")
+        
+        if let appTimeT = appTimeT {
+            appTime = appTimeT as! [[String]]
+        }
+        
+        if let appDateT = appDateT {
+            appDate = appDateT as! [[String]]
+        }
+        
+        if let appMessageT = appMessageT {
+            appMessage = appMessageT as! [[String]]
+        }
+        
         //UI setup
+        selectedRow = UserDefaults.standard.integer(forKey:"selectedRow")
+        //let sectionForSelectedRow = UserDefaults.standard.string(forKey:"sectionForSelectedRow")
+
+        
+        let patient = UserDefaults.standard.string(forKey: "patientName")!
+        let message = appMessage[0][selectedRow] //0 = new
+        let appointment = UserDefaults.standard.string(forKey: "appointmentID")!
+        let date = appDate[0][selectedRow]      //0 = new
+        let time = appTime[0][selectedRow]      //0 = new about to send to 1 = accepted
+        let strDateTime = date + ", " + time
+        
+        patientName.text = "Patient: " + patient
+        patientMessage.text = message
+        appointmentID.text = "  Appointment ID: " + appointment
+        appointmentDateTime.text = "  Appointment Date, Time: \(strDateTime)"
     }
 
     
@@ -30,11 +73,18 @@ class SheduleNewAppointmentViewController: UIViewController {
     
     @IBAction func sendAppointmentButtonTapped(_ sender: Any) {
         
+        //Update Date and time local data for new section
+        if didChangeDateAndTime {
+            self.changeDateTimeForThisAppointment(newTime: strTime, newDate: strDate, sectionNumber: 0)
+            print("\(strDate) \(strTime)")
+        }
+        
         //save time and day for this patient
-        // Move this New patient to Accepted
-        let accepted = 1
-        //self.movePatientToSection(SectionNumber: accepted)
-        self.moveAppointmentToSection(SectionNumber: accepted)
+        // Move this New patient to Accepted (Move data from section 0 to section 1)
+            let accepted = 1
+            self.moveAppointmentToSection(SectionNumber: accepted)
+        
+        
         
         //SHOW TOAST
         UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
@@ -62,19 +112,44 @@ class SheduleNewAppointmentViewController: UIViewController {
             (dateAndTime) -> Void in
             if dateAndTime != nil {
                 
-                let dateFormat = DateFormatter()
-                dateFormat.dateStyle = DateFormatter.Style.short
-                dateFormat.timeStyle = DateFormatter.Style.short
+                //SHOW Appointment date and Time in View UI
+                    let dateTimeFormat = DateFormatter()
+                    dateTimeFormat.dateStyle = DateFormatter.Style.short
+                    dateTimeFormat.timeStyle = DateFormatter.Style.short
+                    let stringTimeDate = dateTimeFormat.string(for: dateAndTime!)!
+                    self.appointmentDateTime.text = "  Appointment Date, Time: \(stringTimeDate)"
                 
-                let strDate = dateFormat.string(for: dateAndTime!)
+                //Save Appointment Date and Time locally
+                    let timeFormat = DateFormatter()
+                    timeFormat.timeStyle = DateFormatter.Style.short
+                    self.strTime = timeFormat.string(for: dateAndTime!)!
                 
-                self.appointmentDateTime.text = "  Appointment Date, Time: \(strDate!)"
+                print("\(self.strTime)")
+                
+                    let dateFormat = DateFormatter()
+                    dateFormat.dateStyle = DateFormatter.Style.short
+                    self.strDate = dateFormat.string(from: dateAndTime!)
+                
+                print("\(self.strDate)")
+                
+                self.didChangeDateAndTime = true
             }
         }
 
         
     }
     
+    
+    func changeDateTimeForThisAppointment(newTime: String, newDate: String, sectionNumber: Int) {
+        
+        appDate[sectionNumber][selectedRow] = newDate
+        appTime[sectionNumber][selectedRow] = newTime
+        
+        UserDefaults.standard.set(appTime, forKey: "appTime")
+        UserDefaults.standard.set(appDate, forKey: "appDate")
+        UserDefaults.standard.synchronize()
+        
+    }
     
 
     /*

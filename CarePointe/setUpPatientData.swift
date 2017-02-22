@@ -22,9 +22,9 @@ extension UIViewController {
                         [ "Cindy Lopper","Marx Ehrlich", "Alicia Watanabe", "Josh Brown"],
                         [ "Desire Aller", "Paulita Wix", "Jenny Binkley", "Lawanda Arno", "Jackqueline Naumann", "Regine Kohnke","Brad Birdsong", "Dallas Remy", "Noel Devitt","Mike Brown","Sev Donada"]]
         
-        let times = [["12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM"],
-                     ["12:32AM","01:56PM","03:22PM","11:12AM"],
-                     ["12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM","09:43PM","10:52AM"]]
+        let times = [["12:32 AM","01:56 PM","03:22 PM","11:12 AM","10:52 AM","12:01 PM","07:02 AM","05:05 PM","07:25 PM"],
+                     ["12:32 AM","01:56 PM","03:22 PM","11:12 AM"],
+                     ["12:32 AM","01:56 PM","03:22 PM","11:12 AM","10:52 AM","12:01 PM","07:02 AM","05:05 PM","07:25 PM","09:43 PM","10:52 AM"]]
         
         let dates = [["2/15/17","2/16/17","2/15/17","3/14/17","3/14/17","2/14/16","3/15/16","2/13/17","2/14/17"],
                      ["2/14/17","2/14/17","2/14/17","2/14/17"],
@@ -43,6 +43,7 @@ extension UIViewController {
                                    "patient Lunch Update", "hearing aid configuration","Dr D. Webb Telemed update",
                                    "Patient profile Screening update", "Referrals details update"]]
         
+        UserDefaults.standard.set(9, forKey: "inboxCount")
         UserDefaults.standard.set(appointmentIDs, forKey: "appID")
         UserDefaults.standard.set(patients, forKey: "appPat")
         UserDefaults.standard.set(times, forKey: "appTime")

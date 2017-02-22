@@ -49,6 +49,9 @@
 		58496C191E527FD900DF103A /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = 58496C171E527FD900DF103A /* box.png */; };
 		58496C1A1E527FD900DF103A /* checkBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 58496C181E527FD900DF103A /* checkBox.png */; };
 		58496C1C1E52843D00DF103A /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58496C1B1E52843D00DF103A /* TermsViewController.swift */; };
+		585A4D2D1E5CF9A300A16118 /* moveAppointmentFromAcceptedToCompleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585A4D2C1E5CF9A300A16118 /* moveAppointmentFromAcceptedToCompleted.swift */; };
+		585A4D2F1E5D175C00A16118 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585A4D2E1E5D175C00A16118 /* InboxViewController.swift */; };
+		585A4D311E5E008100A16118 /* InboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585A4D301E5E008100A16118 /* InboxCell.swift */; };
 		585DA8B71E53AC6900006183 /* Appointments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585DA8B61E53AC6900006183 /* Appointments.swift */; };
 		586BFDD21E3BB27000DC6770 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 586BFDD11E3BB27000DC6770 /* LaunchImage.png */; };
 		586BFDD51E3BC57B00DC6770 /* addCustomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDD41E3BC57B00DC6770 /* addCustomBorder.swift */; };
@@ -170,6 +173,9 @@
 		58496C171E527FD900DF103A /* box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = box.png; path = ../../imageFiles/box.png; sourceTree = "<group>"; };
 		58496C181E527FD900DF103A /* checkBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkBox.png; path = ../../imageFiles/checkBox.png; sourceTree = "<group>"; };
 		58496C1B1E52843D00DF103A /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		585A4D2C1E5CF9A300A16118 /* moveAppointmentFromAcceptedToCompleted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = moveAppointmentFromAcceptedToCompleted.swift; sourceTree = "<group>"; };
+		585A4D2E1E5D175C00A16118 /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
+		585A4D301E5E008100A16118 /* InboxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxCell.swift; sourceTree = "<group>"; };
 		585DA8B61E53AC6900006183 /* Appointments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appointments.swift; sourceTree = "<group>"; };
 		586BFDD11E3BB27000DC6770 /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchImage.png; path = ../../imageFiles/LaunchImage.png; sourceTree = "<group>"; };
 		586BFDD41E3BC57B00DC6770 /* addCustomBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addCustomBorder.swift; sourceTree = "<group>"; };
@@ -342,6 +348,8 @@
 				586BFDDF1E3BFBCD00DC6770 /* phoneCircle.png */,
 				58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */,
 				BB32754A1E048AD100699280 /* AppointmentCell.swift */,
+				585A4D2E1E5D175C00A16118 /* InboxViewController.swift */,
+				585A4D301E5E008100A16118 /* InboxCell.swift */,
 				BB57C2D31DFF41DE00731AC4 /* ViewController.swift */,
 			);
 			name = "Main Dashboard";
@@ -398,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				58A8DCCA1E578E44008711D1 /* movePatientToSection.swift */,
+				585A4D2C1E5CF9A300A16118 /* moveAppointmentFromAcceptedToCompleted.swift */,
 				58A8DCD11E57ABC6008711D1 /* setUpPatientData.swift */,
 				58A8DCD31E57B2BB008711D1 /* setCurrentDate.swift */,
 			);
@@ -697,6 +706,7 @@
 				58D6336C1E4D316A00DC3EB9 /* PatientFeedViewController.swift in Sources */,
 				58D6335E1E4B858000DC3EB9 /* Availability.swift in Sources */,
 				586BFDD51E3BC57B00DC6770 /* addCustomBorder.swift in Sources */,
+				585A4D2D1E5CF9A300A16118 /* moveAppointmentFromAcceptedToCompleted.swift in Sources */,
 				586BFDE71E3C17D700DC6770 /* hexColor.swift in Sources */,
 				58A8DC8D1E576BC3008711D1 /* Rounded.swift in Sources */,
 				58458AC41E450F4D005DFEDA /* AvailabilityCell.swift in Sources */,
@@ -717,6 +727,7 @@
 				58458ACA1E45403F005DFEDA /* RangeSliderThumbLayer.swift in Sources */,
 				58A8DC851E562CBE008711D1 /* AddNoteCompletePatientViewController.swift in Sources */,
 				58CBC01D1E4E49A9001A9698 /* ScreeningsCell.swift in Sources */,
+				585A4D311E5E008100A16118 /* InboxCell.swift in Sources */,
 				58A8DCD21E57ABC6008711D1 /* setUpPatientData.swift in Sources */,
 				BB57C2D21DFF41DE00731AC4 /* AppDelegate.swift in Sources */,
 				58CBC0091E4D42D1001A9698 /* toast.swift in Sources */,
@@ -748,6 +759,7 @@
 				58CBC0101E4D4A39001A9698 /* Container1ViewController.swift in Sources */,
 				586BFDD81E3BCB2200DC6770 /* HamburgerViewController.swift in Sources */,
 				BB51F7C51E009E53008A5EA8 /* gradient.swift in Sources */,
+				585A4D2F1E5D175C00A16118 /* InboxViewController.swift in Sources */,
 				58CBC0181E4E4007001A9698 /* Container3ViewController.swift in Sources */,
 				58272AF61E400C2F00E779CF /* addBadge.swift in Sources */,
 				58CBC0211E4E75D8001A9698 /* AScreeningViewController.swift in Sources */,

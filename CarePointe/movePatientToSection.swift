@@ -6,6 +6,7 @@
 //  Copyright © 2017 Mogul Pro Media. All rights reserved.
 //
 
+
 import Foundation
 import UIKit
 
@@ -93,6 +94,6 @@ extension UIViewController {
         UserDefaults.standard.set(appTime, forKey: "appTime")
         UserDefaults.standard.set(appDate, forKey: "appDate")
         UserDefaults.standard.set(appMessage, forKey: "appMessage")
-    
+        UserDefaults.standard.synchronize()
     }
 }

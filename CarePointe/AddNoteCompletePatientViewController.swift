@@ -131,9 +131,14 @@ class AddNoteCompletePatientViewController: UIViewController {
     
     @IBAction func completPatientButtonTapped(_ sender: Any) {
         
-        let completed = 2
+        //let completed = 2
         //self.movePatientToSection(SectionNumber: completed)
-        self.moveAppointmentToSection(SectionNumber: completed)
+        //search for  "filterAppointmentID" from user defaults in appID[1] and move to appID[2]
+        let filterAppointmentID = UserDefaults.standard.string(forKey: "filterAppointmentID")
+        self.moveFromAcceptedToCompletedFor(AppointmentID: filterAppointmentID!)
+        //self.moveAppointmentToSection(SectionNumber: completed)
+        
+        
         
         // ANIMATE "Patient Complete" TOAST then unwind segue back to MAIN dashboard
         UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in

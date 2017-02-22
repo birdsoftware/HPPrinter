@@ -66,41 +66,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Class Public Data
     //
     
-//    let appointmentIDs = [["90933","52718","12543","36221","160336","12718","68958","51500","27496"],
-//                          ["7498","47598","46233","78543"],
-//                          ["42321","36221","99699","25818","72021","372","86930","17498","23412","8975","76231"]]
-//    
-//    let patients = [["Ruth Quinones", "Barrie Thomson", "Victor Owen", "Bill Summers", "Alice Njavro", "Michael Levi", "Elida Martinez", "John Banks","Rrian Nird"],
-//                    [ "Cindy Lopper","Marx Ehrlich", "Alicia Watanabe", "Josh Brown"],
-//                    [ "Desire Aller", "Paulita Wix", "Jenny Binkley", "Lawanda Arno", "Jackqueline Naumann", "Regine Kohnke","Brad Birdsong", "Dallas Remy", "Noel Devitt","Mike Brown","Sev Donada"]]
-//    
-//    var times = [["12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM"],
-//                 ["12:32AM","01:56PM","03:22PM","11:12AM"],
-//                 ["12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM","09:43PM","10:52AM"]]
-//    
-//    var dates = [["2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17"],
-//                 ["2/14/17","2/14/17","2/14/17","2/14/17"],
-//                 ["2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17"]]
-//    
-//    var appointmentMessage = [["Careflows update 1", "DISPOSITION Patient profile IDT Update",
-//                               "order blood pressure plate", "Dr D. Webb Telemed update",
-//                               "Patient profile Screening update", "Referrals details update",
-//                               "syn patient card data", "Patient medication",
-//                               "new nutrition levels"],
-//                              ["new nutrition levels", "interface IDT Update",
-//                               "Monitor infusion plasma", "DISPOSITION Patient profile IDT Update"],
-//                              ["Patient profile Update", "Telemed update",
-//                               "Patient profile Screening update", "Referrals details update",
-//                               "monitor profile update 2", "Patient medication calculation",
-//                               "patient Lunch Update", "hearing aid configuration","Dr D. Webb Telemed update",
-//                               "Patient profile Screening update", "Referrals details update"]]
     
-    
-    //var appID = [[String]]()
+    var appID = [[String]]()
     var appPat = [[String]]()       //Displayed in Table called tasksTableView
     var appTime = [[String]]()        //Displayed in Table
     var appDate = [[String]]()
     var appMessage = [[String]]()   //Displayed in Table
+    
+    // Date Picker -> reload table using:
+    var filteredAppID:[String] = []
+    var filteredDates:[String] = []
+    var filteredTime:[String] = []
+    var filteredPatient:[String] = []
+    var filteredMessage:[String] = []
+    
+    var filterActive : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,6 +94,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             phoneButton.layer.borderColor = UIColor.red.cgColor
             AddTaskButton.isHidden = true
             AddTaskButton.layer.cornerRadius = 5
+        
             //1. Determine device Type and set alert & hamburger view offsets
             setHideAndShowOffsetFromDeviceType()
             //2. Move slide menues off screen
@@ -153,11 +134,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("setUpAppointmentData there is no key onlyDoOnce")
         }
         
+        let inboxCount = UserDefaults.standard.integer(forKey: "inboxCount")
+        unreadMessagesLabel.text = String(inboxCount)
+        
         // check if section one 0[1]2 scheduled appointments is empty from updated stored data
         let numberOfAppointments = appPat[1].count
         if numberOfAppointments == 0 {
             noAppointmentsTodayLabel.isHidden = false
         }
+        
+        //reload table based on current date if a date was not selected from PICKER
+        updateTableByDate(searchText: currentDateFromDefaults!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -311,7 +298,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //    }
     
     func showCalendarAlert(){
-        var searchText = "2/14/17"
+        //var searchText = "2/14/17"
         
         DatePickerDialog().show("Appointment Date", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .date) {
             (date) -> Void in
@@ -325,23 +312,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 UserDefaults.standard.setValue(strDate ,forKey: "newDate")
                 
                 //----- UPDATE TABLE BY DATE SELECTED
-                searchText = strDate //This contains date selected "2/17/17"
                 
-                var integerArray:[Int] = []
-                var filteredDates:[String] = []
+                self.updateTableByDate(searchText: strDate)
                 
-                filteredDates = self.appDate[1].filter({ (text) -> Bool in
-                    let tmp: NSString = text as NSString
-                    let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-                    
-                    //filteredAlertImages = alertImageNames.filter({text -> Bool in range.location != NSNotFound})
-                    
-                    integerArray.append(range.location)
-                    return range.location != NSNotFound //NSNotFound is NSIntegerMax range.location if item not found returns 2^63 or 9223372036854775807
-                })
                 
-                print(filteredDates)
-               
+                
+                // IF table empty self.filteredDates.count == 0 DISPLAY No Appointments for this Day
+                
             }
         }
         //Save new date to user defaults
@@ -354,10 +331,64 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    func updateTableByDate(searchText: String) {
+    
+        //searchText = strDate //This contains date selected "2/17/17"
+        
+        var integerArray:[Int] = []
+    
+        self.filteredDates = self.appDate[1].filter({ (text) -> Bool in
+        let tmp: NSString = text as NSString
+        let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+        
+        //filteredAlertImages = alertImageNames.filter({text -> Bool in range.location != NSNotFound})
+        
+        integerArray.append(range.location)
+        return range.location != NSNotFound //NSNotFound is NSIntegerMax range.location if item not found returns 2^63 or 9223372036854775807
+        })
+        
+        
+        var index = 1
+        self.filteredTime.removeAll()
+        self.filteredPatient.removeAll()
+        self.filteredMessage.removeAll()
+        self.filteredAppID.removeAll()
+        for i in integerArray {
+            if i != NSNotFound {
+                //TEST print("match \(i),\(index)") //testing
+                //add
+                self.filteredTime.append(self.appTime[1][index-1])
+                self.filteredPatient.append(self.appPat[1][index-1])
+                self.filteredMessage.append(self.appMessage[1][index-1])
+                self.filteredAppID.append(self.appID[1][index-1])
+                if(index < integerArray.count) {
+                    index += 1
+                }
+            }
+            else {
+                //remove
+                //TEST print("not match \(i),\(index)") //testing
+                if(index < integerArray.count) {
+                    index += 1
+                }
+            }
+        }
+        
+        print(self.filteredDates)
+        
+//        if(self.filteredDates.count == 0){
+//            self.filterActive = false;
+//        } else {
+            self.filterActive = true;
+        //}
+        
+        self.tasksTableView.reloadData()
+    }
+    
     func moveSlideMenu(Menu: String) {
         let alertMenuConstraint:CGFloat = alertOffset //710//358
         let hamburgerMenuConstraint:CGFloat = hambuOffset //670//310
-        
+    
         switch Menu {
         case "showHamburgerView":
             leadingConstraintContainerView.constant = 0
@@ -405,7 +436,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func getUpdateAppointmentData(){
         //Get up to date array
         //let appSecT = UserDefaults.standard.object(forKey: "appSec")
-        //let appIDT = UserDefaults.standard.object(forKey: "appID")
+        let appIDT = UserDefaults.standard.object(forKey: "appID")
         let appPatT = UserDefaults.standard.object(forKey: "appPat")
         let appTimeT = UserDefaults.standard.object(forKey: "appTime")
         let appDateT = UserDefaults.standard.object(forKey: "appDate")
@@ -416,9 +447,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //    appSec = appSecT as! [String]
         //}
         
-//        if let appIDT = appIDT {
-//            appID = appIDT as! [[String]]
-//        }
+        if let appIDT = appIDT {
+            appID = appIDT as! [[String]]
+        }
         
         if let appPatT = appPatT {
             appPat = appPatT as! [[String]]
@@ -491,6 +522,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //[2] RETURN number of ROWS in each section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        if(filterActive) {
+            return filteredDates.count
+        }
+        
         return appPat[1].count//patients.count
         
     }
@@ -503,12 +538,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt IndexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "apptCell")! as! AppointmentCell
-        
         cell.photo.image = UIImage(named: "green.circle.png")//photos[IndexPath.row]
+        
+        if(filterActive){
+            //var filteredTime:[String] = []
+            //var filteredPatient:[String] = []
+            //var filteredMessage:[String] = []
+            cell.task.text = filteredMessage[IndexPath.row]
+            cell.patient.text = filteredPatient[IndexPath.row]
+            cell.time.text = filteredTime[IndexPath.row]
+        } else {
+        
         cell.task.text = appMessage[1][IndexPath.row]//appointments[IndexPath.row]
         cell.patient.text = appPat[1][IndexPath.row]//patients[IndexPath.row]
         cell.time.text = appTime[1][IndexPath.row]//times[IndexPath.row]
-        
+            
+        }
         cell.accessoryType = .disclosureIndicator // add arrow > to cell
         
         return cell
@@ -519,8 +564,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "addNoteCompletePatient" {
             
             let selectedRow = ((tasksTableView.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
-            let sectionOfSelectedRow = 1 //Accepted Patients
-            let patientName = appPat[sectionOfSelectedRow][selectedRow]// + "'s Information" as String
+            //let sectionOfSelectedRow = 1 //Accepted Patients
+            let patientName = filteredPatient[selectedRow] //appPat[sectionOfSelectedRow][selectedRow]
+            
+            let filterAppointmentID = filteredAppID[selectedRow]
+            UserDefaults.standard.set(filterAppointmentID, forKey: "filterAppointmentID")
             
             let accepted = 1
             

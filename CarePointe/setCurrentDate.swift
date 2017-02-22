@@ -16,7 +16,7 @@ extension UIViewController {
         let date = Date()
         let formatter = DateFormatter()
         
-        formatter.dateFormat = "M/dd/yyyy"
+        formatter.dateFormat = "M/dd/yy"
         
         let result = formatter.string(from: date) //"2/14/2017"
         UserDefaults.standard.set(result, forKey: "currentDate")

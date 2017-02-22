@@ -58,6 +58,9 @@ class HamburgerViewController: UIViewController {
         dashboardCount.text = "\(numberScheduledPatients)" //# of appointments
         let numberNewPatients: Int = UserDefaults.standard.integer(forKey: "numberNewPatients")
         patientsCount.text = "\(numberNewPatients)"
+        
+        let inboxNumberMessages = UserDefaults.standard.integer(forKey: "inboxCount")
+        inboxCount.text = String(inboxNumberMessages)
     }
     
     /*

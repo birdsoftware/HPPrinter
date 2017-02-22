@@ -41,6 +41,13 @@
     let didUpdateCalendarDate = UserDefaults.standard.bool(forKey: "didUpdateCalendarDate")
     UserDefaults.standard.setValue(strDate ,forKey: "newDate")
  
+    IN override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+        UserDefaults.standard.set(filterAppointmentID, forKey: "filterAppointmentID")
+     
+        UserDefaults.standard.set(patientName, forKey: "patientNameMainDashBoard")
+        UserDefaults.standard.set(selectedRow, forKey: "selectedRow")
+        UserDefaults.standard.set(accepted, forKey: "sectionForSelectedRow")
+ 
  PTVTableViewController
  
     IN override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -104,6 +111,17 @@
  
     let userDidESign = UserDefaults.standard.bool(forKey: "didESign")
  
+ 
+ setUpPatientData
+ 
+    UserDefaults.standard.set(appointmentIDs, forKey: "appID")
+    UserDefaults.standard.set(patients, forKey: "appPat")
+    UserDefaults.standard.set(times, forKey: "appTime")
+    UserDefaults.standard.set(dates, forKey: "appDate")
+    UserDefaults.standard.set(appointmentMessage, forKey: "appMessage")
+    UserDefaults.standard.synchronize()
+ 
+ inboxViewController
  
  /*
  * Check if value Already Exists in user defaults
