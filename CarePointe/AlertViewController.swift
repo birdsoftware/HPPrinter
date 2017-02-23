@@ -8,18 +8,25 @@
 
 import UIKit
 
-class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+
+    // table
     @IBOutlet weak var alertTableView: UITableView!
+    
+    //search bar
+    @IBOutlet weak var alertSearchBar: UISearchBar!
     
     
     // class vars
         var searchActive : Bool = false
         var filteredAlerts:[String] = []
+        var filteredAlertNames:[String] = []
+        var filteredDateTimes:[String] = []
         var searchBar = UISearchBar()
     
     //class data
-    var alertData = [
+    var alertData = [[String]]()/*[
         ["Ruth Quinones","01/22/17 12:32AM","Careflows update 1 some more descrption text would go here"],
         ["Ruth Quinones","01/23/17 01:56PM","DISPOSITION Patient profile IDT Update some more descrption text would go here"],
         ["Barrie Thomson","01/23/17 03:22PM","Patient profile Update some more descrption text would go here"],
@@ -42,14 +49,14 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
         ["Jan Andrews","01/30/17 09:43PM","patient Lunch Update some more descrption text would go here"],
         ["Mike Devitt","01/31/17 10:23PM","DISPOSITION Patient profile IDT Update some more descrption text would go here"],
         ["Anita Cintash","02/01/17 09:11PM","musical IDT Update some more descrption text would go here"]
-    ]
-    
+    ] */
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //delegation
-        //alertSearchBar.delegate = self
+        alertSearchBar.delegate = self
         
         alertTableView.dataSource = self
         alertTableView.delegate = self
@@ -57,6 +64,15 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //Table ROW Height set to auto layout - row height grows with content
         alertTableView.rowHeight = UITableViewAutomaticDimension
         alertTableView.estimatedRowHeight = 150
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        alertData = UserDefaults.standard.object(forKey: "alertData") as? [[String]] ?? [[String]]()
+        //Note - The nil coalescing operator (??) allows you to return the saved array or an empty array without
+        // crashing. It means that if the object returns nil, then the value following the ?? operator will be 
+        // used instead.
         
     }
 
@@ -74,20 +90,36 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
+        searchActive = false
+        alertSearchBar.text = ""
+        alertSearchBar.endEditing(true)
     }
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
+        //alertSearchBar.endEditing(true)
     }
+    
+//    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+//        // Stop doing the search stuff
+//        // and clear the text in the search bar
+//        searchBar.text = ""
+//        // Hide the cancel button
+//        searchBar.showsCancelButton = false
+//        // You could also change the position, frame etc of the searchBar
+//        searchActive = false;
+//        // Remove focus from the search bar.
+//        searchBar.endEditing(true)
+//    }
     
     var integerArray:[Int] = []
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         integerArray.removeAll()
+        let alertMessageColumn = alertData.getColumn(column: 2)
         // filter loop
-        filteredAlerts = alertData[2].filter({ (text) -> Bool in
+        filteredAlerts = alertMessageColumn.filter({ (text) -> Bool in //alertData[2]
             let tmp: NSString = text as NSString
             let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
             
@@ -99,23 +131,25 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         //works but ugly
-//        var index = 1
-//        filteredAlertImages.removeAll()
-//        for i in integerArray {
-//            if i != NSNotFound {
-//                //TEST print("match \(i),\(index)") //testing
-//                //add
-//                filteredAlertImages.append(alertImageNames[index-1])
-//                if(index < integerArray.count) {
-//                    index += 1 }
-//            }
-//            else {
-//                //remove
-//                //TEST print("not match \(i),\(index)") //testing
-//                if(index < integerArray.count) {
-//                    index += 1 }
-//            }
-//        }
+        var index = 1
+        filteredAlertNames.removeAll()
+        filteredDateTimes.removeAll()
+        for i in integerArray {
+            if i != NSNotFound {
+                //TEST print("match \(i),\(index)") //testing
+                //add
+                filteredAlertNames.append(alertData[index-1][0])
+                filteredDateTimes.append(alertData[index-1][1])
+                if(index < integerArray.count) {
+                    index += 1 }
+            }
+            else {
+                //remove
+                //TEST print("not match \(i),\(index)") //testing
+                if(index < integerArray.count) {
+                    index += 1 }
+            }
+        }
         //      for i in 1...integerArray.count {
         //          if integerArray[i] != NSNotFound {
         //             filteredAlertImages.append(alertImageNames[i])
@@ -154,8 +188,9 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let cell = tableView.dequeueReusableCell(withIdentifier: "alertcell") as! AlertTabelCell
             if(searchActive) {
 //                cell.alertImage.image = UIImage(named: filteredAlertImages[IndexPath.row])
-                cell.message.text = filteredAlerts[IndexPath.row]//12 spaces in front of alert: don't cover image
-//                //change cell text color and cell background color
+                cell.patientName.text = filteredAlertNames[IndexPath.row]
+                cell.date.text = filteredDateTimes[IndexPath.row]
+                cell.message.text = filteredAlerts[IndexPath.row]
 //                let textColor = returnAlertTextColor(alertImageName: filteredAlertImages[IndexPath.row])
 //                cell.alertMessage.textColor = textColor
 //                cell.backgroundColor = returnAlertBackGroundColor(alertImageName: filteredAlertImages[IndexPath.row])
@@ -180,9 +215,12 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 //line of code above is the same as 2 lines below:
                 //alertData[0].remove(at: (indexPath as NSIndexPath).row)
                 //alertData[1].remove(at: (indexPath as NSIndexPath).row)
+            UserDefaults.standard.set(alertData.count, forKey: "alertCount")
+            UserDefaults.standard.set(alertData, forKey: "alertData")
+            UserDefaults.standard.synchronize()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateAlert"), object: nil)
             alertTableView.reloadData()
-            //update alert badge number
-            //rightBarButtonAlert.addBadge(number: alertData.count)
+            
         }
     }
     

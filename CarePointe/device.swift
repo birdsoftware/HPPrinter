@@ -84,7 +84,7 @@ public extension UIDevice {
         case "iPad5,1", "iPad5,2":                      return 320.0 //"iPad Mini 4"    //320
         case "iPad6,3", "iPad6,4", "iPad6,7", "iPad6,8":return 768.0 //"iPad Pro"
         case "AppleTV5,3":                              return 768.0 //"Apple TV"
-        case "i386", "x86_64":                          return 375.0 //"Simulator"
+        case "i386", "x86_64":                          return 414.0 //"Simulator"
         default:                                        return 414.0 //identifier
         }
     }

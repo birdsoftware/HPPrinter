@@ -138,21 +138,21 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     }
     //times dates messageCreator message
     //DELETE row (the event) method
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        //if (tableView == self.alertTableView)
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            //remove from local array
-            times.remove(at: (indexPath as NSIndexPath).row)
-            dates.remove(at: (indexPath as NSIndexPath).row)
-            messageCreator.remove(at: (indexPath as NSIndexPath).row)
-            message.remove(at: (indexPath as NSIndexPath).row)
-            //line of code above is the same as 2 lines below:
-            //alertData[0].remove(at: (indexPath as NSIndexPath).row)
-            //alertData[1].remove(at: (indexPath as NSIndexPath).row)
-            patientFeedTableView.reloadData()
-            //update alert badge number
-            //rightBarButtonAlert.addBadge(number: alertData.count)
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        //if (tableView == self.alertTableView)
+//        if (editingStyle == UITableViewCellEditingStyle.delete) {
+//            //remove from local array
+//            times.remove(at: (indexPath as NSIndexPath).row)
+//            dates.remove(at: (indexPath as NSIndexPath).row)
+//            messageCreator.remove(at: (indexPath as NSIndexPath).row)
+//            message.remove(at: (indexPath as NSIndexPath).row)
+//            //line of code above is the same as 2 lines below:
+//            //alertData[0].remove(at: (indexPath as NSIndexPath).row)
+//            //alertData[1].remove(at: (indexPath as NSIndexPath).row)
+//            patientFeedTableView.reloadData()
+//            //update alert badge number
+//            //rightBarButtonAlert.addBadge(number: alertData.count)
+//        }
+//    }
     
 }

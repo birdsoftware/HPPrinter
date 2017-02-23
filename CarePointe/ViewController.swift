@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
     
     //
     // Outlets
@@ -82,10 +82,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var filterActive : Bool = false
     
+    // Search Bar (top nav controller title view)
+    lazy var searchBar:UISearchBar = UISearchBar(frame: CGRect(x:0,y:0,width:200,height:200))
+    var searchActive : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        NotificationCenter.default.addObserver(self,
+                selector:#selector(updateAlertBadgeNumber),
+                name: NSNotification.Name(rawValue: "updateAlert"),
+                object: nil)
+        
         // UI Elements Set Up
+            //set up search bar
+            // Initialize and set up the search controller
+            // http://swift.attojs.com/index.php/2016/03/21/how-to-make-uisearchbar-programmatically/
+                searchBar.delegate = self
+                searchBar.placeholder = "Start Communication"
+                //definesPresentationContext = true
+        
+                //var titleNavBarButton = UIBarButtonItem(customview: searchBar)
+                self.navigationItem.titleView = searchBar
+        
+        // set Default bar status.
+        searchBar.searchBarStyle = UISearchBarStyle.default
+        
+                // change the color of cursol and cancel button.
+                searchBar.tintColor = .black
+        
             noAppointmentsTodayLabel.isHidden = true
             phoneButtonHeight.constant = 60
             phoneButton.layer.cornerRadius = phoneButton.bounds.height / 2 //frame.size.width
@@ -121,7 +147,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             //leadingConstraintContainerView.constant = -270
         
         //Add BADGE to right bar button item in nav controller
-        rightBarButtonAlert.addBadge(number: 22)//alertImageNames.count)
+            var alertCount = 0
+            if isKeyPresentInUserDefaults(key: "alertCount") {
+                alertCount = UserDefaults.standard.integer(forKey: "alertCount")
+            }
+            rightBarButtonAlert.addBadge(number: alertCount)//alertImageNames.count)
+        
+        //rightBarButtonAlert.updateBadge(number: 20) rightBarButtonAlert: UIBarButtonItem!
         
         // Get stored data
         if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does this exist? [yes]
@@ -145,7 +177,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //reload table based on current date if a date was not selected from PICKER
         updateTableByDate(searchText: currentDateFromDefaults!)
+        
+        //Tap to Dismiss KEYBOARD
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignInViewController.dismissKeyboard))
+//        view.addGestureRecognizer(tap)
+        
     }
+    
+    // This will hide keyboard when click off field or finished editing text field
+//    func dismissKeyboard(){
+//        view.endEditing(true)
+//    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -267,6 +310,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //
     // #MARK: - Supporting Functions
     //
+    
+    @objc func updateAlertBadgeNumber(){//newNumber: Int) {
+        let alertCount = UserDefaults.standard.integer(forKey: "alertCount")
+        rightBarButtonAlert.updateBadge(number: alertCount)//newNumber) //rightBarButtonAlert: UIBarButtonItem!
+        
+    }
     
     func setHideAndShowOffsetFromDeviceType() {
         let model = UIDevice.current.modelSize //return device model size
@@ -505,6 +554,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
 
+    
+    
+    //
+    // #MARK: - Search Functions
+    //
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true
+        searchBar.showsCancelButton = true
+        searchBar.placeholder = ""
+        
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false
+        searchBar.showsCancelButton = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+        searchBar.text = ""
+        searchBar.endEditing(true)
+        searchBar.showsCancelButton = false
+        searchBar.placeholder = "Start Communication"
+    }
+    
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+        //alertSearchBar.endEditing(true)
+    }
+    
     
     
     //

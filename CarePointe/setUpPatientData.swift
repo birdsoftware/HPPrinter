@@ -43,6 +43,8 @@ extension UIViewController {
                                    "patient Lunch Update", "hearing aid configuration","Dr D. Webb Telemed update",
                                    "Patient profile Screening update", "Referrals details update"]]
         
+        self.setUpAlertDataInDefaults()
+        
         UserDefaults.standard.set(9, forKey: "inboxCount")
         UserDefaults.standard.set(appointmentIDs, forKey: "appID")
         UserDefaults.standard.set(patients, forKey: "appPat")

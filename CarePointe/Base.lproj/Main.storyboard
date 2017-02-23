@@ -397,14 +397,14 @@
                                     <segue destination="FbE-IY-ra2" kind="embed" id="NyZ-3Q-Sap"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEa-f8-up4">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEa-f8-up4" customClass="RoundedButton" customModule="CarePointe" customModuleProvider="target">
                                 <rect key="frame" x="310" y="540" width="50" height="50"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4Wz-DF-PER"/>
                                     <constraint firstAttribute="width" secondItem="KEa-f8-up4" secondAttribute="height" multiplier="1:1" id="k6c-su-vFg"/>
                                 </constraints>
-                                <state key="normal" image="phoneCircle.png"/>
+                                <state key="normal" image="letterC.png"/>
                                 <connections>
                                     <action selector="callButtonTapped:" destination="lTa-wH-ROz" eventType="touchUpInside" id="NUh-hb-xoc"/>
                                 </connections>
@@ -502,14 +502,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ffq-4S-Lv4">
                         <barButtonItem key="leftBarButtonItem" image="menu.png" style="done" id="3OX-93-fRM">
-                            <inset key="imageInsets" minX="10" minY="10" maxX="25" maxY="20"/>
+                            <inset key="imageInsets" minX="10" minY="14" maxX="25" maxY="12"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="hamburgerBarButtonTapped:" destination="lTa-wH-ROz" id="z1W-L5-cJc"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="bell.png" style="done" id="YZw-T8-Xoc">
-                            <inset key="imageInsets" minX="25" minY="15" maxX="0.0" maxY="20"/>
+                            <inset key="imageInsets" minX="25" minY="15" maxX="0.0" maxY="17"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="alertButtonTapped:" destination="lTa-wH-ROz" id="RuR-wE-vPk"/>
@@ -1158,7 +1158,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     <constraint firstAttribute="width" constant="240" id="uQT-2t-vk2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                <state key="normal" title="Inbox">
+                                <state key="normal" title="Messages">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1229,7 +1229,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     <action selector="logOutButtonTapped:" destination="FbE-IY-ra2" eventType="touchUpInside" id="yQE-jP-7gq"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS 1.1 Build 8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MX-Qt-vcT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS 1.1 Build 9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MX-Qt-vcT">
                                 <rect key="frame" x="81" y="305" width="108" height="21"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1385,7 +1385,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                         <rect key="frame" x="0.0" y="28" width="375" height="105"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kVy-lQ-VdV" id="WbX-H5-EOz">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/12/2017" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mX5-62-kjg">
@@ -3310,7 +3310,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hk4-by-NcI">
-                                <rect key="frame" x="0.0" y="0.0" width="299" height="603"/>
+                                <rect key="frame" x="0.0" y="45" width="299" height="558"/>
                                 <color key="backgroundColor" red="0.97254901960784312" green="0.8666666666666667" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.50196081400000003" green="0.0" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -3318,7 +3318,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                         <rect key="frame" x="0.0" y="28" width="299" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="peq-x3-2P7" id="y02-5o-2Oh">
-                                            <rect key="frame" x="0.0" y="0.0" width="299" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="299" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ruth Quinonez" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="j6Q-8I-bBW">
@@ -3372,22 +3372,38 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" placeholder="Search Alert Message" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hfJ-Vj-59d">
+                                <rect key="frame" x="0.0" y="0.0" width="299" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="lrA-eY-R3M"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.66964131589999998" green="0.88000124690000003" blue="0.97614747290000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="hk4-by-NcI" secondAttribute="bottom" id="0Hg-A7-V2S"/>
+                            <constraint firstAttribute="trailing" secondItem="hfJ-Vj-59d" secondAttribute="trailing" id="ec0-AR-GlP"/>
+                            <constraint firstItem="hfJ-Vj-59d" firstAttribute="leading" secondItem="2kr-pv-zLb" secondAttribute="leading" id="gbJ-S5-Z7p"/>
+                            <constraint firstItem="hfJ-Vj-59d" firstAttribute="top" secondItem="2kr-pv-zLb" secondAttribute="top" id="hhu-1F-FMX"/>
+                            <constraint firstItem="hk4-by-NcI" firstAttribute="top" secondItem="hfJ-Vj-59d" secondAttribute="bottom" id="lUY-v5-HUX"/>
                             <constraint firstItem="hk4-by-NcI" firstAttribute="leading" secondItem="2kr-pv-zLb" secondAttribute="leading" id="pfe-a3-54R"/>
-                            <constraint firstItem="hk4-by-NcI" firstAttribute="top" secondItem="2kr-pv-zLb" secondAttribute="top" id="qs2-bO-h1Q"/>
                             <constraint firstAttribute="trailing" secondItem="hk4-by-NcI" secondAttribute="trailing" id="vZp-GX-0kr"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alertSearchBar" destination="hfJ-Vj-59d" id="UlF-mH-MPj"/>
                         <outlet property="alertTableView" destination="hk4-by-NcI" id="dvj-ko-2ad"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jnv-cY-g3Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1393" y="128"/>
+            <point key="canvasLocation" x="1382" y="193"/>
         </scene>
         <!--Patient Tab Bar Controller-->
         <scene sceneID="W0i-Pf-yGi">
@@ -4628,9 +4644,9 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
         <image name="green.circle.png" width="64" height="64"/>
         <image name="greenback.png" width="375" height="667"/>
         <image name="jennifer.jpg" width="224" height="224"/>
+        <image name="letterC.png" width="128" height="128"/>
         <image name="menu.png" width="64" height="64"/>
         <image name="orange.circle.png" width="64" height="64"/>
-        <image name="phoneCircle.png" width="128" height="128"/>
         <image name="quillPen.png" width="64" height="64"/>
         <image name="smartphone.png" width="64" height="64"/>
         <image name="telephone.png" width="64" height="64"/>
