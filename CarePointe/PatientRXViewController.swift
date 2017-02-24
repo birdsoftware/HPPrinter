@@ -12,10 +12,25 @@ class PatientRXViewController: UIViewController {
     
     @IBOutlet weak var updateMedRecButton: UIButton!
     @IBOutlet weak var medicationSegmentor: UISegmentedControl!
+    
+    //views
     @IBOutlet weak var containerView1: UIView!
     @IBOutlet weak var containerView2: UIView!
     @IBOutlet weak var containerView3: UIView!
+    
+    @IBOutlet weak var drugToDrugView: UIView!
+    @IBOutlet weak var topDrugToDrug: NSLayoutConstraint!
+    
+    //labels
     @IBOutlet weak var patientTitle: UILabel!
+    
+    //@IBOutlet weak var drugToDrugHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var drugToDrugUIView: UIView!
+    var verticalConstraint:NSLayoutConstraint!
+    var horizontalConstraint:NSLayoutConstraint!
+    var offSet1:CGFloat = 0.0
+    var offSet2:CGFloat = 0.0
+    let bottomHeight:CGFloat = 467.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +44,42 @@ class PatientRXViewController: UIViewController {
         containerView1.isHidden = false
         containerView2.isHidden = true
         containerView3.isHidden = true
+        
+        let drags = UIPanGestureRecognizer(target: self, action: #selector(drag))
+        
+        
+        drugToDrugUIView.addGestureRecognizer(drags)
+        topDrugToDrug.constant = bottomHeight
+    }
+    
+    @objc func drag(gest:UIPanGestureRecognizer) {
+        view.layoutIfNeeded()
+        
+        let translation = gest.translation(in: self.view)
+        switch (gest.state) {
+        case .began:
+            offSet1 = topDrugToDrug.constant //offSet = CGPoint(x: horizontalConstraint.constant, y: verticalConstraint.constant)
+            break;
+            
+        case .changed:
+            offSet2 = offSet1 - translation.y
+            if(offSet1 < offSet2){
+            topDrugToDrug.constant = 0//offSet - translation.y
+            } else {
+                topDrugToDrug.constant = bottomHeight
+            }
+            //print(topDrugToDrug.constant)
+            view.layoutIfNeeded()
+            break;
+            
+            
+        case .ended:
+            break;
+            
+        default:
+            break;
+        }
+        
     }
     
     // UI Segment Control

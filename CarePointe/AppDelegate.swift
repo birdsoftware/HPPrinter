@@ -62,6 +62,13 @@ extension UIColor {
     static func Green() -> UIColor {//-Buttons
         return UIColor(hex:0x028401)
     }
+    static func peachCream() -> UIColor {
+        return UIColor(hex:0xFFF2DD)
+    }
+    static func seaBuckthorn() -> UIColor {
+        return UIColor(hex:0xFCAB29)
+    }
+
 }
 
 

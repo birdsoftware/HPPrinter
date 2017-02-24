@@ -29,17 +29,18 @@ class PTVDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var patientTitles = ["  Patient and Contact Information", "  Insurance Information", "  Appointment Details", " Appointment History"]
     
-    var patientDescription = ["\nName: Ruth Quinones \nGender: Female \nEthnicity: Hispanic/Latino \nSSN#: 343-14-3434 \nDOB: 07/10/1947 \nPrimary Language: English \n\nHome Address: 8225 Benson Dr \nCity: Phoenix \nState: AZ \nZip: 89123 \nPhone: (816) 679-4482 \nCell: (702) 688-9673 \nAdditional Contact: Marie Smith \nContact Relationship: Sister",
+    var patientDescription = ["\n  Name: Ruth Quinones \n  Gender: Female \n  Ethnicity: Hispanic/Latino \n  SSN#: 343-14-3434 \n  DOB: 07/10/1947 \n  Facility: General Hospital in Room: 112 \n  Admittance Date: 2/24/17   \n  Discharge Date: 2/26/17 \n  City: Phoenix \nState: AZ \nZip: 89123 \nPhone: (816) 679-4482 \nCell: (702) 688-9673 \nAdditional Contact: Marie Smith \nContact Relationship: Sister",
                               "\nPrimary Source: Medicare \nAccount#123344324: \nMedicaid: \nPrimary Commercial: \nInsurance: 21 ST Century & Health Benefits, 3P Administrators",
                               "\nVestibulum consectetur ultricies elit, eu luctus nunc interdum eu. Phasellus elementum leo non lorem ornare rutrum id in tortor. Quisque mollis dui a mi efficitur ultricies. Aenean a porttitor enim. Quisque vel felis leo. Aenean mi erat, sollicitudin at iaculis id, convallis rutrum purus.",
                               "\n Date            Name                       Status\n 1/3/2017     Jennifer Johnson    Accepted\n 1/5/2017     Jeff Johnson           Declined\n 1/6/2017     Jennifer Johnson    Accepted\n 1/7/2017     Jennifer Johnson    Accepted\n 1/9/2017     Jennifer Johnson    Accepted"]
 
-//    var appSec = [String]()
-//    var appID = [[String]]() //empty array of arrays of type string
-//    var appPat = [[String]]()
-//    var appTime = [[String]]()
-//    var appDate = [[String]]()
-//    var appMessage = [[String]]()
+
+//    var patientDescription = ["\nName: Ruth Quinones \nGender: Female \nEthnicity: Hispanic/Latino \nSSN#: 343-14-3434 \nDOB: 07/10/1947 \nPrimary Language: English \n\nHome Address: 8225 Benson Dr \nCity: Phoenix \nState: AZ \nZip: 89123 \nPhone: (816) 679-4482 \nCell: (702) 688-9673 \nAdditional Contact: Marie Smith \nContact Relationship: Sister",
+//                              "\nPrimary Source: Medicare \nAccount#123344324: \nMedicaid: \nPrimary Commercial: \nInsurance: 21 ST Century & Health Benefits, 3P Administrators",
+//                              "\nVestibulum consectetur ultricies elit, eu luctus nunc interdum eu. Phasellus elementum leo non lorem ornare rutrum id in tortor. Quisque mollis dui a mi efficitur ultricies. Aenean a porttitor enim. Quisque vel felis leo. Aenean mi erat, sollicitudin at iaculis id, convallis rutrum purus.",
+//                              "\n Date            Name                       Status\n 1/3/2017     Jennifer Johnson    Accepted\n 1/5/2017     Jeff Johnson           Declined\n 1/6/2017     Jennifer Johnson    Accepted\n 1/7/2017     Jennifer Johnson    Accepted\n 1/9/2017     Jennifer Johnson    Accepted"]
+    
+    
     var patientName = "test"
 //    var appointmentID = "0123"
     

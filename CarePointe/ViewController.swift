@@ -15,6 +15,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Outlets
     //
     
+    @IBOutlet weak var demoAlertButton: UIButton!
+    
     // buttons
     @IBOutlet weak var AddTaskButton: UIButton!
     @IBOutlet weak var pendingReferralsButton: UIButton!
@@ -51,7 +53,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var leadingConstraintContainerView2: NSLayoutConstraint!
     @IBOutlet weak var phoneButtonHeight: NSLayoutConstraint!
     
-    
     //
     // Class Variables
     //
@@ -65,7 +66,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //
     // Class Public Data
     //
-    
     
     var appID = [[String]]()
     var appPat = [[String]]()       //Displayed in Table called tasksTableView
@@ -82,23 +82,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var filterActive : Bool = false
     
-    // Search Bar (top nav controller title view)
+    
+    // Search Bar (top nav controller title view) ------------------------
     lazy var searchBar:UISearchBar = UISearchBar(frame: CGRect(x:0,y:0,width:200,height:200))
     var searchActive : Bool = false
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        // Update Badge # HERE if DELETE occurred in Alert Table ----------------
         NotificationCenter.default.addObserver(self,
                 selector:#selector(updateAlertBadgeNumber),
                 name: NSNotification.Name(rawValue: "updateAlert"),
                 object: nil)
         
-        // UI Elements Set Up
-            //set up search bar
-            // Initialize and set up the search controller
-            // http://swift.attojs.com/index.php/2016/03/21/how-to-make-uisearchbar-programmatically/
+        // UI Set Up
+        
+            // TOP SEARCH BAR Set up -------------------------------------------
+                // Initialize and set up the search controller
+                // http://swift.attojs.com/index.php/2016/03/21/how-to-make-uisearchbar-programmatically/
                 searchBar.delegate = self
                 searchBar.placeholder = "Start Communication"
                 //definesPresentationContext = true
@@ -106,11 +110,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 //var titleNavBarButton = UIBarButtonItem(customview: searchBar)
                 self.navigationItem.titleView = searchBar
         
-        // set Default bar status.
-        searchBar.searchBarStyle = UISearchBarStyle.default
+                // set Default bar status.
+                searchBar.searchBarStyle = UISearchBarStyle.default
         
                 // change the color of cursol and cancel button.
                 searchBar.tintColor = .black
+        
         
             noAppointmentsTodayLabel.isHidden = true
             phoneButtonHeight.constant = 60
@@ -121,6 +126,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             AddTaskButton.isHidden = true
             AddTaskButton.layer.cornerRadius = 5
         
+        // HAMBURGER MENU --------------------------------------------------------
             //1. Determine device Type and set alert & hamburger view offsets
             setHideAndShowOffsetFromDeviceType()
             //2. Move slide menues off screen
@@ -129,26 +135,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             //3. Cast shadow along slide out menu edge for 3D effect
             hamburgerContainerView.layer.shadowOpacity = 1
             alertContainerView.layer.shadowOpacity = 1
-        //set date display text to current date. dateDisplayButton
+        
+        // SET CURRENT DATE TIME & dateDisplayButton UI ---------------------------
             self.setCurrentDateInDefaults()
             let currentDateFromDefaults = UserDefaults.standard.string(forKey: "currentDate")
             self.dateDisplayButton.setTitle(currentDateFromDefaults, for: .normal)
+            dateDisplayButton.layer.cornerRadius = 5
         
-        // White thin line [] | [] | [] between buttons
+        // DRAW White thin line [] | [] | [] between buttons ----------------------------
             pendingReferralsButton.layer.addBorder(edge: UIRectEdge.right, color: .white, thickness: 0.5)
             unreadMessagesButton.layer.addBorder(edge: UIRectEdge.left, color: .white, thickness: 0.5)
-        // Orange line below number labels
+        // DRAW Orange line below number labels
             orangeLine1.layer.addBorder(edge: UIRectEdge.bottom, color: .orange, thickness: 2)
             orangeLine2.layer.addBorder(edge: UIRectEdge.bottom, color: .orange, thickness: 2)
             orangeLine3.layer.addBorder(edge: UIRectEdge.bottom, color: .orange, thickness: 2)
         
-            dateDisplayButton.layer.cornerRadius = 5
+
         
-            //leadingConstraintContainerView.constant = -270
-        
-        //rightBarButtonAlert.updateBadge(number: 20) rightBarButtonAlert: UIBarButtonItem!
-        
-        // Get stored data
+        // GET DATA FROM DEFAULTS --------------------------------------------------
         if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does this exist? [yes]
             
             getUpdateAppointmentData()
@@ -162,25 +166,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let inboxCount = UserDefaults.standard.integer(forKey: "inboxCount")
         unreadMessagesLabel.text = String(inboxCount)
         
-        // check if section one 0[1]2 scheduled appointments is empty from updated stored data
-        let numberOfAppointments = appPat[1].count
-        if numberOfAppointments == 0 {
-            noAppointmentsTodayLabel.isHidden = false
-        }
         
-        //reload table based on current date if a date was not selected from PICKER
+        // RELOAD table based on current date if date not selected from PICKER -----
         updateTableByDate(searchText: currentDateFromDefaults!)
         
-        //Add BADGE to right bar button item in nav controller
+        // ADD BADGE to Right Bar Button Item in nav controller --------------------
         var alertCount = 0
         if isKeyPresentInUserDefaults(key: "alertCount") {
             alertCount = UserDefaults.standard.integer(forKey: "alertCount")
         }
         rightBarButtonAlert.addBadge(number: alertCount)//alertImageNames.count)
         
+        // DISPLAY "No Appointments for this Day -----------------------------------
+        showAlertIfTasksTableEmpty()
+ 
     }
     
-
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -227,6 +228,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // #MARK: - Button Actions
     //
 
+    
+    @IBAction func demoAlertButtonTapped(_ sender: Any) {
+        
+        demoAlertButton.isHidden = true
+        
+        let myAlert = UIAlertController(title: "Review New Alert Information", message: "Ruth Quinones has been admitted to hospital", preferredStyle: .alert)
+        
+        myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            //Action when OK pressed
+            // Instantiate a view controller from Storyboard and present it
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
+            self.present(vc, animated: false, completion: nil)
+        }))
+        
+        present(myAlert, animated: true){}
+        
+        
+    }
+    
     
     @IBAction func unreadMessagesButtonTapped(_ sender: Any) {
         
@@ -385,13 +406,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.dateDisplayButton.setTitle(strDate, for: .normal)
                 UserDefaults.standard.setValue(strDate ,forKey: "newDate")
                 
-                //----- UPDATE TABLE BY DATE SELECTED
-                
+                //----- UPDATE TABLE BY DATE SELECTED ---------
                 self.updateTableByDate(searchText: strDate)
-                
-                
-                
-                // IF table empty self.filteredDates.count == 0 DISPLAY No Appointments for this Day
                 
             }
         }
@@ -399,9 +415,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         UserDefaults.standard.set(true, forKey: "didUpdateCalendarDate") //need check to display a date if no date selected
         
         //UPDATE TABLE FROM SQL DB      DBtime, DBpatient, DBtasks for a given DB date
-        
-            //check if appoints is empty appPat[1].count == 0
-            //if not empty then filter appTime, appMessage and appPat by the given date
         
     }
     
@@ -450,11 +463,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         print(self.filteredDates)
         
-//        if(self.filteredDates.count == 0){
-//            self.filterActive = false;
-//        } else {
-            self.filterActive = true;
-        //}
+        self.filterActive = true;
+
+        showAlertIfTasksTableEmpty()
         
         self.tasksTableView.reloadData()
     }
@@ -545,40 +556,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func setUpAppointmentData(){
         
-//        appID = appointmentIDs
-//        appPat = patients
-//        appTime = times
-//        appDate = dates
-//        appMessage = appointmentMessage
-//        
-//        //UserDefaults.standard.set(appSec, forKey: "appSec")
-//        UserDefaults.standard.set(appID, forKey: "appID")
-//        UserDefaults.standard.set(appPat, forKey: "appPat")
-//        UserDefaults.standard.set(appTime, forKey: "appTime")
-//        UserDefaults.standard.set(appDate, forKey: "appDate")
-//        UserDefaults.standard.set(appMessage, forKey: "appMessage")
-        
         self.setUpPatientDataInDefaults()
         getUpdateAppointmentData()
         //get whats in defaults
         let onlyDoOnceHere = 1//UserDefaults.standard.integer(forKey: "onlyDoOnce")
         
-//        if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does exist? in defaults [yes]
-//            
-//            onlyDoOnceHere += 1
-//            
-//        } else {// [no]
-//            
-//            onlyDoOnceHere = 1
-//            
-//        }
-        
-        //update defaults with new integer
         UserDefaults.standard.set(onlyDoOnceHere, forKey: "onlyDoOnce")
         UserDefaults.standard.synchronize()
         
     }
 
+    func showAlertIfTasksTableEmpty() {
+    
+        if(filterActive && filteredMessage.isEmpty){
+                
+                noAppointmentsTodayLabel.isHidden = false
+            
+        } else if(appPat.isEmpty) {
+                
+                noAppointmentsTodayLabel.isHidden = false
+ 
+            }
+        
+        else {
+            
+            noAppointmentsTodayLabel.isHidden = true
+        }
+    
+    }
     
     
     //

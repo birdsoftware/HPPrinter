@@ -13,5 +13,7 @@ class PatientCell: UITableViewCell {
     @IBOutlet weak var appointmentID: UILabel!
     @IBOutlet weak var statusImage: UIImageView!
     @IBOutlet weak var patientName: UILabel!
+    @IBOutlet weak var AppointmentDate: UILabel!
+    @IBOutlet weak var patientNameTopConstraint: NSLayoutConstraint!
 
 }

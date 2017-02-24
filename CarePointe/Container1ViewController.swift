@@ -61,14 +61,14 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
     
-    //DELETE row
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            
-            medicationData.remove(at: (indexPath as NSIndexPath).row)
-            medicationTableView.reloadData()
-        }
-    }
+//    //DELETE row
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        
+//        if (editingStyle == UITableViewCellEditingStyle.delete) {
+//            
+//            medicationData.remove(at: (indexPath as NSIndexPath).row)
+//            medicationTableView.reloadData()
+//        }
+//    }
     
 }

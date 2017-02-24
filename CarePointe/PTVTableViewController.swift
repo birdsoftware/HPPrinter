@@ -12,40 +12,9 @@ class PTVTableViewController: UITableViewController {
 
     @IBOutlet var PTVTableViewController: UITableView!
     
+ 
     
     let section = ["New/Pending", "Scheduled", "Completed/Archived"]
-    
-    
-//    let appointmentIDs = [["90933","52718","12543","36221","160336","12718","68958","51500","27496"],
-//                      ["7498","47598","46233","78543"],
-//                      ["42321","36221","99699","25818","72021","372","86930","17498","23412","8975","76231"]]
-    
-//    let patients = [["Ruth Quinones", "Barrie Thomson", "Victor Owen", "Bill Summers", "Alice Njavro", "Michael Levi", "Elida Martinez", "John Banks","Rrian Nird"],
-//                    [ "Cindy Lopper","Marx Ehrlich", "Alicia Watanabe", "Josh Brown"],
-//                    [ "Desire Aller", "Paulita Wix", "Jenny Binkley", "Lawanda Arno", "Jackqueline Naumann", "Regine Kohnke","Brad Birdsong", "Dallas Remy", "Noel Devitt","Mike Brown","Sev Donada"]]
-    
-//    var times = [["12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM"],
-//                 ["12:32AM","01:56PM","03:22PM","11:12AM"],
-//                 ["12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM","09:43PM","10:52AM"]]
-    
-//    var dates = [["2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17"],
-//                ["2/14/17","2/14/17","2/14/17","2/14/17"],
-//                ["2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17"]]
-//    
-//    var appointmentMessage = [["Careflows update 1", "DISPOSITION Patient profile IDT Update",
-//                         "order blood pressure plate", "Dr D. Webb Telemed update",
-//                         "Patient profile Screening update", "Referrals details update",
-//                         "syn patient card data", "Patient medication",
-//                         "new nutrition levels"],
-//                        ["new nutrition levels", "interface IDT Update",
-//                        "Monitor infusion plasma", "DISPOSITION Patient profile IDT Update"],
-//                        ["Patient profile Update", "Telemed update",
-//                         "Patient profile Screening update", "Referrals details update",
-//                         "monitor profile update 2", "Patient medication calculation",
-//                         "patient Lunch Update", "hearing aid configuration","Dr D. Webb Telemed update",
-//                         "Patient profile Screening update", "Referrals details update"]]
-    
-//    var addAppointment: [AnyObject] = Array()
     
     var appSec = [String]()
     var appID = [[String]]() //empty array of arrays of type string
@@ -101,40 +70,6 @@ class PTVTableViewController: UITableViewController {
     // MARK: - Supporting functions
     //
     
-//    func setUpAppointmentData(){
-//        
-//            appID = appointmentIDs
-//            appPat = patients
-//            appTime = times
-//            appDate = dates
-//            appMessage = appointmentMessage
-//        
-//            //UserDefaults.standard.set(appSec, forKey: "appSec")
-//            UserDefaults.standard.set(appID, forKey: "appID")
-//            UserDefaults.standard.set(appPat, forKey: "appPat")
-//            UserDefaults.standard.set(appTime, forKey: "appTime")
-//            UserDefaults.standard.set(appPat, forKey: "appDate")
-//            UserDefaults.standard.set(appMessage, forKey: "appMessage")
-//        
-//        //get whats in defaults
-//            var onlyDoOnceHere = UserDefaults.standard.integer(forKey: "onlyDoOnce")
-//        
-//            if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does exist? in defaults [yes]
-//                
-//                onlyDoOnceHere += 1
-//                
-//            } else {// [no]
-//                
-//                onlyDoOnceHere = 1
-//                
-//            }
-//        
-//        //update defaults with new integer
-//            UserDefaults.standard.set(onlyDoOnceHere, forKey: "onlyDoOnce")
-//            UserDefaults.standard.synchronize()
-//        
-//    }
-    
     func getUpdateAppointmentData(){
         //Get up to date array
         //let appSecT = UserDefaults.standard.object(forKey: "appSec")
@@ -170,56 +105,8 @@ class PTVTableViewController: UITableViewController {
         }
         
     }
-    
-//    func appendAppointment(appointmentID: String, section: Int) {
-//        //Get up to date array of arrays to append to
-//        let arrayAppointment = UserDefaults.standard.object(forKey: "appointmentID")
-//        
-//        //check arrayAvailability !nil
-//        if let arrayAppointment = arrayAppointment {
-//            appID = arrayAppointment as! [[String]]
-//        }
-//        
-//        appID[section].append(appointmentID) //add value to first section
-//        //save entire array for this new availability to defaults
-//        UserDefaults.standard.set(appID, forKey: "appointmentID")
-//        UserDefaults.standard.synchronize()
-//    }
-    
-    
-    
-//    func appendAppointmentObject(appointmentID: String, AppDay: String, AppTime: String, AppPatient: String, AppMessage: String, AppStatus: String)
-//    {
-//        //Get up to date array to append to
-//        let arrayAppointment = UserDefaults.standard.object(forKey: "appointmentArray")
-//        
-//        //check arrayAvailability !nil
-//        if let arrayAppointment = arrayAppointment {
-//            addAppointment = arrayAppointment as! [AnyObject]
-//        }
-//        
-//        let newAvailability = Appointments(withID: appointmentID, andDay: AppDay, andTime: AppTime, andPatient: AppPatient, andMessage: AppMessage, andStatus: AppStatus)
-//        
-//        let encodeNewAvail = NSKeyedArchiver.archivedData(withRootObject: newAvailability)
-//        addAppointment.append(encodeNewAvail as AnyObject)
-//        
-//        //save entire array for this new availability to defaults
-//        UserDefaults.standard.set(addAppointment, forKey: "availabilityArray")
-//        UserDefaults.standard.synchronize()
-//    }
-//    
-//    func fillAppointmentDate(){
-//        appendAppointmentObject(appointmentID: appointmentIDs[0][0], AppDay: "2/14/17", AppTime: "2:30 AM", AppPatient: patients[0][0], AppMessage: "Careflow update 1", AppStatus: "New/Pending")
-//        appendAppointmentObject(appointmentID: appointmentIDs[0][1], AppDay: "2/14/17", AppTime: "2:30 AM", AppPatient: patients[0][1], AppMessage: "Careflow update 1", AppStatus: "New/Pending")
-//        
-//        appendAppointmentObject(appointmentID: appointmentIDs[1][0], AppDay: "2/14/17", AppTime: "2:30 AM", AppPatient: patients[1][0], AppMessage: "Careflow update 1", AppStatus: "Scheduled")
-//        appendAppointmentObject(appointmentID: appointmentIDs[1][1], AppDay: "2/14/17", AppTime: "2:30 AM", AppPatient: patients[1][1], AppMessage: "Careflow update 1", AppStatus: "Scheduled")
-//        
-//        appendAppointmentObject(appointmentID: appointmentIDs[2][0], AppDay: "2/14/17", AppTime: "2:30 AM", AppPatient: patients[2][0], AppMessage: "Careflow update 1", AppStatus: "Completed/Archived")
-//        appendAppointmentObject(appointmentID: appointmentIDs[2][1], AppDay: "2/14/17", AppTime: "2:30 AM", AppPatient: patients[2][1], AppMessage: "Careflow update 1", AppStatus: "Completed/Archived")
-//    }
-    
-    
+
+
     
     //
     // MARK: - Table view data source
@@ -263,11 +150,22 @@ class PTVTableViewController: UITableViewController {
         cell.patientName?.text = self.appPat[indexPath.section][indexPath.row]//self.patients[indexPath.section][indexPath.row]
         
         if(indexPath.section == 0) {
-            cell.statusImage?.image = UIImage(named: "orange.circle.png")}
+            cell.statusImage?.image = UIImage(named: "orange.circle.png")
+            cell.AppointmentDate.text = self.appDate[indexPath.section][indexPath.row]
+            cell.patientNameTopConstraint.constant = 2
+        }
+        
         if(indexPath.section == 1) {
-            cell.statusImage?.image = UIImage(named: "green.circle.png")}
+            cell.statusImage?.image = UIImage(named: "green.circle.png")
+            cell.AppointmentDate.text = self.appDate[indexPath.section][indexPath.row]
+            cell.patientNameTopConstraint.constant = 2
+        }
+        
         if(indexPath.section == 2) {
-            cell.statusImage?.image = UIImage(named: "gray.circle.png")}
+            cell.statusImage?.image = UIImage(named: "gray.circle.png")
+            cell.AppointmentDate.text = ""
+            cell.patientNameTopConstraint.constant = 10
+        }
         
            cell.accessoryType = .disclosureIndicator // add arrow > to cell
         
