@@ -16,6 +16,13 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     //table view
     @IBOutlet weak var patientFeedTableView: UITableView!
     
+    
+    var times = [String]()
+    var dates = [String]()
+    var messageCreator = [String]()
+    var message = [String]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,41 +44,23 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         //scale button down
         leaveAnUpdate.imageEdgeInsets = UIEdgeInsetsMake(10,10,10,10)
         
+        
     }
     
-    //patient Update Feed data
     
-    var times = ["12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM","09:43PM",
-                 "12:32AM","01:56PM","03:22PM","11:12AM","10:52AM","12:01PM","07:02AM","05:05PM","07:25PM","09:43PM"]
-    
-    var dates = ["01/03/2017","01/05/2017","01/05/2017","01/05/2017","01/05/2017","01/05/2017","01/05/2017","01/05/2017","01/05/2017","01/05/2017",
-                 "01/03/2017","01/05/2017","01/05/2017","01/05/2017","01/05/2017","01/05/2017","01/05/2017","01/05/2017","01/05/2017","01/05/2017"]
-    
-    var messageCreator =
-        ["Steph Smith", "Barrie Thomson", "Victor Owen", "Bill Summers", "Alice Njavro", "Michael Levi", "Elida Martinez", "John Banks","Leonora Hand", "Cindy Lopper",
-         "Ruth Quinones", "Barrie Thomson", "Victor Owen", "Bill Summers", "Alice Njavro", "Michael Levi", "Elida Martinez", "John Banks","Rrian Nird", "Cindy Lopper"]
-    
-    var message = ["Careflows update 1 some more descrption text would go here",
-                   "DISPOSITION Patient profile IDT Update some more descrption text would go here",
-                   "Patient profile Update some more descrption text would go here",
-                   "Telemed update some more descrption text would go here",
-                   "Patient profile Screening update some more descrption text would go here",
-                   "Referrals details update some more descrption text would go here",
-                   "patient profile update 2 some more descrption text would go here",
-                   "Patient medication some more descrption text would go here about medications and possible complications or interactions with dosage and medication type",
-                   "patient Lunch Update some more descrption text would go here",
-                   "DISPOSITION Patient profile IDT Update some more descrption text would go here",
-                   "musical IDT Update some more descrption text would go here",
-                   "Careflows update 1 some more descrption text would go here",
-                   "DISPOSITION Patient profile IDT Update some more descrption text would go here",
-                   "Patient profile Update some more descrption text would go here",
-                   "Telemed update some more descrption text would go here",
-                   "Patient profile Screening update some more descrption text would go here",
-                   "Referrals details update some more descrption text would go here",
-                   "patient profile update 2 some more descrption text would go here",
-                   "Patient medication some more descrption text would go here about medications and possible complications or interactions with dosage and medication type",
-                   "patient Lunch Update some more descrption text would go here"]
-    //PatientFeedCell, PatientFeedViewCell
+    //This was added for REWIND segue called from PatientUpDateViewController function sendButtonTapped
+    //Have to rewind segue back, get new data and reload table for changes to be seen
+    override func viewWillAppear(_ animated: Bool) {
+        
+        let feedData = UserDefaults.standard.object(forKey: "feedData") as! [[String]] //?? [[String]]()
+        times = feedData.getColumn(column: 0)
+        dates = feedData.getColumn(column: 1)
+        messageCreator = feedData.getColumn(column: 2)
+        message = feedData.getColumn(column: 3)
+        
+        patientFeedTableView.reloadData()
+        
+    }
     
     //
     // #MARK: - UNWIND SEGUE

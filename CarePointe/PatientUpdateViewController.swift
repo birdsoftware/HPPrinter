@@ -10,9 +10,18 @@ import UIKit
 
 class PatientUpdateViewController: UIViewController {
 
+    //@IBOutlet weak var patientNameTitle: UILabel!
     @IBOutlet weak var patientNameTitle: UILabel!
+    
     @IBOutlet weak var messageTextBox: UITextView!
     @IBOutlet weak var patientImage: UIImageView!
+    
+    
+//    var times = [String]()
+//    var dates = [String]()
+//    var messageCreator = [String]()
+//    var message = [String]()
+    var feedData = [[String]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +37,14 @@ class PatientUpdateViewController: UIViewController {
         patientImage.layer.cornerRadius = patientImage.frame.size.width / 2
         patientImage.clipsToBounds = true
         
+        
+        feedData = UserDefaults.standard.object(forKey: "feedData") as! [[String]] //?? [[String]]()
+//        times = feedData.getColumn(column: 0)
+//        dates = feedData.getColumn(column: 1)
+//        messageCreator = feedData.getColumn(column: 2)
+//        message = feedData.getColumn(column: 3)
+        
+        
         //Tap to Dismiss KEYBOARD
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignInViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -37,6 +54,53 @@ class PatientUpdateViewController: UIViewController {
     // This will hide keyboard when click off field or finished editing text field
     func dismissKeyboard(){
         view.endEditing(true)
+    }
+    
+    func isKeyPresentInUserDefaults(key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
+    }
+    
+    func appendNewMessageToDefaults(){
+        //let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short)
+        let date = Date()
+        let formatter = DateFormatter()
+        let formatterTime = DateFormatter()
+        formatter.dateStyle = .short // = "M/dd/yy"
+        formatterTime.timeStyle = .short
+        let currentTime = formatterTime.string(from: date)
+        let todaysDate = formatter.string(from: date) //"2/14/2017"
+        
+            var name = "Jennifer Johnson"
+            //if value does not exists don't update placehold text, O.W. display locally saved text
+            if isKeyPresentInUserDefaults(key: "profileName") {
+                name =  UserDefaults.standard.string(forKey: "profileName")!
+            }
+            if isKeyPresentInUserDefaults(key: "profileLastName") {
+                name += UserDefaults.standard.string(forKey: "profileLastName")!
+            }
+        
+        let messageCreatedBy = name
+        
+        let newUpdateMessage = self.messageTextBox.text
+        
+        
+        print("From: " + messageCreatedBy)
+        print("Date: " + todaysDate)
+        print("Time: " + currentTime)
+        print("Update: " + newUpdateMessage!)
+        
+        let newUpdate = [currentTime,todaysDate,messageCreatedBy,newUpdateMessage!]
+        
+        // APPEND
+        
+        //feedData.append(newUpdate)
+        
+        //INSERT AT BEGINING
+        
+        feedData.insert(newUpdate, at: 0)
+        
+        UserDefaults.standard.set(feedData, forKey: "feedData")
+        UserDefaults.standard.synchronize()
     }
     
     @IBAction func goBackButtonTapped(_ sender: Any) {
@@ -56,9 +120,13 @@ class PatientUpdateViewController: UIViewController {
             self.view.makeToast("Update Sent", duration: 1.1, position: .center)
         }, completion: { finished in
             
-            //if you perform segue it will perform after it finish animating.
+            //Do this... after it finished animating.
+            
+            self.appendNewMessageToDefaults()
             
             self.performSegue(withIdentifier: "unwindToPatientFeed", sender: self)
+            
+            // reload table
             
         })
     }

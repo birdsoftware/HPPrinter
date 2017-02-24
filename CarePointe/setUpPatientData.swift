@@ -44,6 +44,7 @@ extension UIViewController {
                                    "Patient profile Screening update", "Referrals details update"]]
         
         self.setUpAlertDataInDefaults()
+        self.setUpFeedDataInDefaults()
         
         UserDefaults.standard.set(9, forKey: "inboxCount")
         UserDefaults.standard.set(appointmentIDs, forKey: "appID")

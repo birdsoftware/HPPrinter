@@ -146,13 +146,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
             //leadingConstraintContainerView.constant = -270
         
-        //Add BADGE to right bar button item in nav controller
-            var alertCount = 0
-            if isKeyPresentInUserDefaults(key: "alertCount") {
-                alertCount = UserDefaults.standard.integer(forKey: "alertCount")
-            }
-            rightBarButtonAlert.addBadge(number: alertCount)//alertImageNames.count)
-        
         //rightBarButtonAlert.updateBadge(number: 20) rightBarButtonAlert: UIBarButtonItem!
         
         // Get stored data
@@ -178,16 +171,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //reload table based on current date if a date was not selected from PICKER
         updateTableByDate(searchText: currentDateFromDefaults!)
         
-        //Tap to Dismiss KEYBOARD
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignInViewController.dismissKeyboard))
-//        view.addGestureRecognizer(tap)
+        //Add BADGE to right bar button item in nav controller
+        var alertCount = 0
+        if isKeyPresentInUserDefaults(key: "alertCount") {
+            alertCount = UserDefaults.standard.integer(forKey: "alertCount")
+        }
+        rightBarButtonAlert.addBadge(number: alertCount)//alertImageNames.count)
         
     }
     
-    // This will hide keyboard when click off field or finished editing text field
-//    func dismissKeyboard(){
-//        view.endEditing(true)
-//    }
+
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -233,6 +226,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //
     // #MARK: - Button Actions
     //
+
+    
+    @IBAction func unreadMessagesButtonTapped(_ sender: Any) {
+        
+        // Instantiate messages view controller from Storyboard and present it
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "messages") as UIViewController
+        self.present(vc, animated: false, completion: nil)
+        
+    }
+    
+    
+    @IBAction func pendingReferralsButtonTapped(_ sender: Any) {
+        
+        // Instantiate a view controller from Storyboard and present it
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
+        self.present(vc, animated: false, completion: nil)
+        
+    }
+    
+    
+    @IBAction func scheduledEncountersButtonTapped(_ sender: Any) {
+        
+        // Instantiate a view controller from Storyboard and present it
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
+        self.present(vc, animated: false, completion: nil)
+        
+    }
+    
+    
     
     @IBAction func AddTaskButtonTapped(_ sender: Any) {
         
