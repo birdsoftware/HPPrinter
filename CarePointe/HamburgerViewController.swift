@@ -38,18 +38,6 @@ class HamburgerViewController: UIViewController {
             countWhiteMid.layer.cornerRadius = 5
             countWhiteBottum.layer.cornerRadius = 5
         
-        // show counts in labels
-        //let numberNewPatients = 9
-        //let numberScheduledPatients = 4
-        //var appPat = [[String]]()
-        //if isKeyPresentInUserDefaults(key: "appPat") {
-        //    appPat = UserDefaults.standard.object(forKey: "appPat") as! [[String]]
-        
-        //    let numberNewPatients = (appPat[0].count)
-        //    let numberScheduledPatients = (appPat[1].count)
-        //}
-        
-        
         updateProfileFromDefaults()
     }
     
@@ -93,6 +81,26 @@ class HamburgerViewController: UIViewController {
             userTitle.text = UserDefaults.standard.string(forKey: "title")!
         }
 
+        // UPDATE User Photo
+        if isKeyPresentInUserDefaults(key: "imageNeedsUpdate") {
+            
+            if isKeyPresentInUserDefaults(key: "imagePathKey") {
+                // 4 --get encoded image saved above to user defaults
+                let imagePather = UserDefaults.standard.value(forKey: "imagePathKey")as! String
+                // 5 --get UIImage from imagePath
+                let dataer = FileManager.default.contents(atPath: imagePather)
+                
+                if dataer != nil {
+                    let imageer = UIImage(data: dataer!)//unexpectedly found nil while unwrapping an Optional value
+
+                    userPhoto.image = imageer
+                    // 8 --rotate image by 90 degrees M_PI_2 "if image is taken from camera"
+                    let angle =  CGFloat(M_PI_2)
+                    let tr = CGAffineTransform.identity.rotated(by: angle)
+                    userPhoto.transform = tr
+                } else { print("found nil while unwrapping dataer in HamburgerViewController") }
+            }
+        }
         
     }
     

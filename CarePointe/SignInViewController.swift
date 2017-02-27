@@ -40,22 +40,7 @@ class SignInViewController: UIViewController {
             view.addGestureRecognizer(tap)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        if isKeyPresentInUserDefaults(key: "didESign") {
-        
-            //check if user did eSign
-            let userDidESign = UserDefaults.standard.bool(forKey: "didESign")
-        
-            if(!userDidESign)
-            {
-            self.performSegue(withIdentifier: "showTermsView", sender: self)
-            }
-        } else { //no eSign defaults key present so show the terms and condtions page
-            self.performSegue(withIdentifier: "showTermsView", sender: self)
-        }
-        
-    }
+    
     
     //This will hide keyboard when click off field or finished editing text field
     func dismissKeyboard(){

@@ -8,79 +8,109 @@
 
 import UIKit
 
-class EMRViewController: UIViewController, UIWebViewDelegate {
+class EMRViewController: UIViewController, UITableViewDelegate, UITableViewDataSource { //, UIWebViewDelegate {
     
-    @IBOutlet weak var EMRWebView: UIWebView!
-    @IBOutlet weak var patientTitleLabel: UILabel!
+//    @IBOutlet weak var EMRWebView: UIWebView!
+//    @IBOutlet weak var patientTitleLabel: UILabel!
+//    
+//    @IBOutlet weak var activityIndicatorView: UIView!
     
-    @IBOutlet weak var activityIndicatorView: UIView!
+    
+    @IBOutlet weak var emrTable: UITableView!
+    
+    let emrTitles = ["EMR Data 1","EMR Data 2","EMR Data 3"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        //delegation
+        emrTable.dataSource = self
+        emrTable.delegate = self
+        
         // show patient Name in title
-        let patientName = UserDefaults.standard.string(forKey: "patientName")
-        patientTitleLabel.text = patientName! + "'s Updates"
+//        let patientName = UserDefaults.standard.string(forKey: "patientName")
+//        patientTitleLabel.text = patientName! + "'s Updates"
         
         //add EMR XML to web view
         //let aWebView = UIWebView()
-        let myUrl = NSURL(string: "http://carepointe.cloud/capella_data_xml/Encounter_3.xml")
-        let urlRequest = NSURLRequest(url: myUrl! as URL)
-        EMRWebView.loadRequest(urlRequest as URLRequest)
+//        let myUrl = NSURL(string: "http://carepointe.cloud/capella_data_xml/Encounter_3.xml")
+//        let urlRequest = NSURLRequest(url: myUrl! as URL)
+//        EMRWebView.loadRequest(urlRequest as URLRequest)
         
         // Have to allow arbitrary loads
         //http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http
-        self.view.addSubview(EMRWebView)
+        //self.view.addSubview(EMRWebView)
         
         //Activity indicator
-        addSavingPhotoView()
+        //addSavingPhotoView()
     }
     
-    func addSavingPhotoView() {
-        // You only need to adjust this frame to move it anywhere you want
-        //activityIndicatorView = UIView(frame: CGRect(x: view.frame.midX - 90, y: view.frame.midY - 25, width: 180, height: 50))
-        activityIndicatorView.backgroundColor = UIColor.white
-        activityIndicatorView.alpha = 0.8
-        activityIndicatorView.layer.cornerRadius = 10
+//    func addSavingPhotoView() {
+//        // You only need to adjust this frame to move it anywhere you want
+//        //activityIndicatorView = UIView(frame: CGRect(x: view.frame.midX - 90, y: view.frame.midY - 25, width: 180, height: 50))
+//        activityIndicatorView.backgroundColor = UIColor.white
+//        activityIndicatorView.alpha = 0.8
+//        activityIndicatorView.layer.cornerRadius = 10
+//        
+//        //Here the spinnier is initialized
+//        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+//        activityView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+//        activityView.startAnimating()
+//        
+//        let textLabel = UILabel(frame: CGRect(x: 60, y: 0, width: 210, height: 50))
+//        textLabel.textColor = UIColor.gray
+//        textLabel.text = "Getting EMR report ready..."
+//        
+//        activityIndicatorView.addSubview(activityView)
+//        activityIndicatorView.addSubview(textLabel)
+//        
+//        view.addSubview(activityIndicatorView)
+//        //activityIndicatorView.removeFromSuperview()
+//        
+//        EMRWebView.delegate = self
+//    }
+    
+//    func webViewDidFinishLoad(_ webView: UIWebView) {
+//        //web activity indicator: http://stackoverflow.com/questions/38390352/how-to-detect-when-a-uiwebview-has-completely-finished-loading-in-swift
+//        if webView.isLoading {
+//            // still loading
+//            return
+//        }
+//        
+//        print("finished")
+//        // finish and do something here
+//        activityIndicatorView.removeFromSuperview()
+//    }
+    
+    
+    //
+    // #MARK: - Table View
+    //
+    
+    //[2] RETURN number of ROWS in each section
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        //Here the spinnier is initialized
-        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        activityView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        activityView.startAnimating()
+        return emrTitles.count
         
-        let textLabel = UILabel(frame: CGRect(x: 60, y: 0, width: 210, height: 50))
-        textLabel.textColor = UIColor.gray
-        textLabel.text = "Getting EMR report ready..."
-        
-        activityIndicatorView.addSubview(activityView)
-        activityIndicatorView.addSubview(textLabel)
-        
-        view.addSubview(activityIndicatorView)
-        //activityIndicatorView.removeFromSuperview()
-        
-        EMRWebView.delegate = self
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        //web activity indicator: http://stackoverflow.com/questions/38390352/how-to-detect-when-a-uiwebview-has-completely-finished-loading-in-swift
-        if webView.isLoading {
-            // still loading
-            return
-        }
+    //[3] RETURN actual CELL to be displayed
+    // SHOW SEGUE ->
+    // " 1. click cell drag to second view. select the “show” segue in the “Selection Segue” section. "
+    //http://www.codingexplorer.com/segue-uitableviewcell-taps-swift/
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt IndexPath: IndexPath) -> UITableViewCell {
         
-        print("finished")
-        // finish and do something here
-        activityIndicatorView.removeFromSuperview()
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "emrcell") as! EMRCell
+
+        cell.EMRTitle.text = emrTitles[IndexPath.row]
+        
+        cell.accessoryType = .disclosureIndicator // add arrow > to cell
+        
+        return cell
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

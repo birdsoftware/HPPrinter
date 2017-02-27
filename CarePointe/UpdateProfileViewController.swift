@@ -22,7 +22,7 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
     
     
     //textFields
-    @IBOutlet weak var updatePhoto: UIButton!
+    @IBOutlet weak var updatePhoto: UIButton!       //This Button Shows the photo
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var titleField: UITextField!
@@ -127,22 +127,33 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         if !success { print("could not create file for image") }
         
         // 3 --store imagePath to user defaults
-        let imagePathText = imagePath
-        let imagePathDefault = UserDefaults.standard
-        imagePathDefault.setValue(imagePathText, forKey: "imagePathKey")
-        imagePathDefault.synchronize()
-        print("image path is " + imagePath)
+        //let imagePathText = imagePath
+        UserDefaults.standard.setValue(imagePath, forKey: "imagePathKeyTemp")
+        UserDefaults.standard.synchronize()
         
         // 4 --get encoded image saved above to user defaults
-        let imagePathDefaults = UserDefaults.standard
-        let imagePather = imagePathDefaults.value(forKey: "imagePathKey")as! String
+        let imagePather = UserDefaults.standard.value(forKey: "imagePathKeyTemp")as! String
         
         // 5 --get UIImage from imagePath
         let dataer = FileManager.default.contents(atPath: imagePather)
         let imageer = UIImage(data: dataer!)
         
+        //Resize Image newWidth = 200
+        //let newImage = resizeImage(image: imageer!, newWidth: 200)
+        //let width = (imageer?.size.width)!
+        //let height = (imageer?.size.height)!
+        //let scale = width! / (imageer?.size.width)!
+        //let newHeight = (imageer?.size.height)! * scale
+        //let origin = CGPoint(x: (width - width/2)/2, y: (height - height/2)/2 )
+        //let size = CGSize(width: width ,height: height)
+        //let newImage = imageer?.crop(rect: CGRect(x: 0, y: 0, width: 200, height: 200))
+        //let newImage = imageer?.crop(rect: CGRect(origin: origin, size: size))
+        
+        //fix orientation
+        let newImage = imageer?.fixedOrientation()
+        
         // 6 --set button image from UIImage
-        updatePhoto.setImage(imageer, for: UIControlState.normal)
+        updatePhoto.setImage(newImage, for: UIControlState.normal)
         
         // 7 --round image corners and add a black outline
         updatePhoto.layer.cornerRadius = updatePhoto.frame.size.width / 2
@@ -151,12 +162,13 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         let newColor = UIColor.black
         updatePhoto.layer.borderColor = newColor.cgColor
         
-        // 8 --rotate image by 90 degrees M_PI_2 "if image is taken as square from camera"
-        //let angle =  CGFloat(M_PI_2)
-        //let tr = CGAffineTransform.identity.rotated(by: angle)
-        //updatePhoto.transform = tr
+        // 8 --rotate image by 90 degrees M_PI_2 "if image is taken from camera"
+        let angle =  CGFloat(M_PI_2)
+        let tr = CGAffineTransform.identity.rotated(by: angle)
+        updatePhoto.transform = tr
         
         // 9 --crop image to square
+        
         
         UserDefaults.standard.set(true, forKey: "newPhotoWasSelected")
         UserDefaults.standard.synchronize()
@@ -167,12 +179,19 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
     // #MARK: - Supporting Functions
     //
     
-    func displayAlertMessage(userMessage:String){
-        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: .alert)
-        myAlert.addAction(UIAlertAction(title: "OK", style: .default) { _ in })
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
         
-        present(myAlert, animated: true){}
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
+    
     
     //
     // #MARK: - Button Actions
@@ -288,6 +307,14 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         let firstNamePlacementText = firstNameField.placeholder!
         print("\(firstNamePlacementText)")
         
+        if isKeyPresentInUserDefaults(key: "newPhotoWasSelected") {
+            // 4 --get encoded image saved above to user defaults
+            let imagePather = UserDefaults.standard.value(forKey: "imagePathKeyTemp")as! String
+            
+            UserDefaults.standard.setValue(imagePather, forKey: "imagePathKey")
+            UserDefaults.standard.set(true, forKey: "imageNeedsUpdate")
+            UserDefaults.standard.synchronize()
+        }
         //let wasNewPhotoChosen = UserDefaults.standard.bool(forKey: "newPhotoWasSelected")
         
         //check for new photo

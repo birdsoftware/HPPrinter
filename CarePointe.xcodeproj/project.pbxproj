@@ -64,6 +64,7 @@
 		586BFDE31E3C09AB00DC6770 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE21E3C09AB00DC6770 /* AlertViewController.swift */; };
 		586BFDE51E3C0C4800DC6770 /* AlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE41E3C0C4800DC6770 /* AlertCell.swift */; };
 		586BFDE71E3C17D700DC6770 /* hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE61E3C17D700DC6770 /* hexColor.swift */; };
+		587FFECF1E64A8C800078EFC /* UIImageFixOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587FFECE1E64A8C800078EFC /* UIImageFixOrientation.swift */; };
 		58A8DC851E562CBE008711D1 /* AddNoteCompletePatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */; };
 		58A8DC881E56671D008711D1 /* SheduleNewAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC871E56671D008711D1 /* SheduleNewAppointmentViewController.swift */; };
 		58A8DC8B1E576BA4008711D1 /* Bordered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC8A1E576BA4008711D1 /* Bordered.swift */; };
@@ -73,6 +74,8 @@
 		58A8DCD01E57A717008711D1 /* greenback.png in Resources */ = {isa = PBXBuildFile; fileRef = 58A8DCCE1E57A716008711D1 /* greenback.png */; };
 		58A8DCD21E57ABC6008711D1 /* setUpPatientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DCD11E57ABC6008711D1 /* setUpPatientData.swift */; };
 		58A8DCD41E57B2BB008711D1 /* setCurrentDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DCD31E57B2BB008711D1 /* setCurrentDate.swift */; };
+		58BEC4341E610DE800363FAD /* Landing_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 58BEC4331E610DE800363FAD /* Landing_screen.png */; };
+		58BEC4361E6112FD00363FAD /* newMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BEC4351E6112FD00363FAD /* newMessageViewController.swift */; };
 		58CBC0071E4D4233001A9698 /* PatientUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */; };
 		58CBC0091E4D42D1001A9698 /* toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0081E4D42D1001A9698 /* toast.swift */; };
 		58CBC00B1E4D4432001A9698 /* EMRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC00A1E4D4432001A9698 /* EMRViewController.swift */; };
@@ -197,6 +200,7 @@
 		586BFDE21E3C09AB00DC6770 /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		586BFDE41E3C0C4800DC6770 /* AlertCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertCell.swift; sourceTree = "<group>"; };
 		586BFDE61E3C17D700DC6770 /* hexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hexColor.swift; sourceTree = "<group>"; };
+		587FFECE1E64A8C800078EFC /* UIImageFixOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageFixOrientation.swift; sourceTree = "<group>"; };
 		58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteCompletePatientViewController.swift; sourceTree = "<group>"; };
 		58A8DC871E56671D008711D1 /* SheduleNewAppointmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheduleNewAppointmentViewController.swift; sourceTree = "<group>"; };
 		58A8DC8A1E576BA4008711D1 /* Bordered.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bordered.swift; sourceTree = "<group>"; };
@@ -206,6 +210,8 @@
 		58A8DCCE1E57A716008711D1 /* greenback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenback.png; path = ../../imageFiles/greenback.png; sourceTree = "<group>"; };
 		58A8DCD11E57ABC6008711D1 /* setUpPatientData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setUpPatientData.swift; sourceTree = "<group>"; };
 		58A8DCD31E57B2BB008711D1 /* setCurrentDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setCurrentDate.swift; sourceTree = "<group>"; };
+		58BEC4331E610DE800363FAD /* Landing_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Landing_screen.png; path = ../../../../Downloads/Landing_screen.png; sourceTree = "<group>"; };
+		58BEC4351E6112FD00363FAD /* newMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newMessageViewController.swift; sourceTree = "<group>"; };
 		58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientUpdateViewController.swift; sourceTree = "<group>"; };
 		58CBC0081E4D42D1001A9698 /* toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = toast.swift; sourceTree = "<group>"; };
 		58CBC00A1E4D4432001A9698 /* EMRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMRViewController.swift; sourceTree = "<group>"; };
@@ -335,6 +341,7 @@
 				58D6335C1E4B852700DC3EB9 /* Local Data Classes */,
 				BB51F7C41E009E53008A5EA8 /* gradient.swift */,
 				58458ABD1E43EB2E005DFEDA /* defualtsComments.swift */,
+				587FFECE1E64A8C800078EFC /* UIImageFixOrientation.swift */,
 				586BFDE61E3C17D700DC6770 /* hexColor.swift */,
 				58CBC0081E4D42D1001A9698 /* toast.swift */,
 				BBA3D8F21DFF733000E39385 /* device.swift */,
@@ -370,6 +377,7 @@
 				586BFDDF1E3BFBCD00DC6770 /* phoneCircle.png */,
 				58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */,
 				BB32754A1E048AD100699280 /* AppointmentCell.swift */,
+				58BEC4351E6112FD00363FAD /* newMessageViewController.swift */,
 				585A4D2E1E5D175C00A16118 /* InboxViewController.swift */,
 				585A4D301E5E008100A16118 /* InboxCell.swift */,
 				BB57C2D31DFF41DE00731AC4 /* ViewController.swift */,
@@ -528,6 +536,7 @@
 				586BFDDE1E3BE48500DC6770 /* Sign IN */,
 				58272AF01E3FFCEF00E779CF /* Patient */,
 				BB57C2D11DFF41DE00731AC4 /* AppDelegate.swift */,
+				58BEC4331E610DE800363FAD /* Landing_screen.png */,
 				586BFDD11E3BB27000DC6770 /* LaunchImage.png */,
 				BB57C2D51DFF41DE00731AC4 /* Main.storyboard */,
 				BB57C2D81DFF41DE00731AC4 /* Assets.xcassets */,
@@ -706,6 +715,7 @@
 				582806651E09AC4100421815 /* care.white.png in Resources */,
 				58272AFA1E411F8A00E779CF /* green.circle.png in Resources */,
 				58FDD47A1E60A6CD00F97D86 /* dangerOrange.png in Resources */,
+				58BEC4341E610DE800363FAD /* Landing_screen.png in Resources */,
 				BB57C2D91DFF41DE00731AC4 /* Assets.xcassets in Resources */,
 				BB57C2D71DFF41DE00731AC4 /* Main.storyboard in Resources */,
 				58272B021E42495800E779CF /* calendarGreen.png in Resources */,
@@ -784,6 +794,8 @@
 				BB32754B1E048AD100699280 /* AppointmentCell.swift in Sources */,
 				58496C161E52756E00DF103A /* YPDrawSignatureView.swift in Sources */,
 				58CBC0141E4E20B0001A9698 /* RxContainer2Cell.swift in Sources */,
+				587FFECF1E64A8C800078EFC /* UIImageFixOrientation.swift in Sources */,
+				58BEC4361E6112FD00363FAD /* newMessageViewController.swift in Sources */,
 				58272AF41E40051900E779CF /* PatientCell.swift in Sources */,
 				58A8DC8B1E576BA4008711D1 /* Bordered.swift in Sources */,
 				58CBC00D1E4D463D001A9698 /* PatientRXViewController.swift in Sources */,

@@ -207,6 +207,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         pendingPatientsLabel.text = "\(numberNewPatients)"
         scheduledAppointLabel.text = "\(numberScheduledPatients)"
         
+        if isKeyPresentInUserDefaults(key: "didESign") {
+            
+            //check if user did eSign
+            let userDidESign = UserDefaults.standard.bool(forKey: "didESign")
+            
+            if(!userDidESign)
+            {
+                self.performSegue(withIdentifier: "showTermsView", sender: self)
+            }
+        } else { //no eSign defaults key present so show the terms and condtions page
+            self.performSegue(withIdentifier: "showTermsView", sender: self)
+        }
+        
     }
     
 //    override func viewDidAppear( _ animated: Bool) {
