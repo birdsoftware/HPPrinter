@@ -167,6 +167,10 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 cell.patientName.text = filteredAlertNames[IndexPath.row]
                 cell.date.text = filteredDateTimes[IndexPath.row]
                 cell.message.text = filteredAlerts[IndexPath.row]
+                cell.date.textColor = UIColor(hex: 0x960C1E) //Pohutukawa
+                cell.patientName.textColor = UIColor(hex: 0x960C1E) //Pohutukawa
+                //cell.message.textColor = UIColor(hex: 0x960C1E) //Pohutukawa
+                cell.backgroundColor = UIColor(hex: 0xF5CCCD) //Coral Candy
 //                let textColor = returnAlertTextColor(alertImageName: filteredAlertImages[IndexPath.row])
 //                cell.alertMessage.textColor = textColor
 //                cell.backgroundColor = returnAlertBackGroundColor(alertImageName: filteredAlertImages[IndexPath.row])

@@ -29,6 +29,8 @@
 		582806631E09AB0C00421815 /* side_menu_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 582806621E09AB0C00421815 /* side_menu_bg.jpg */; };
 		582806651E09AC4100421815 /* care.white.png in Resources */ = {isa = PBXBuildFile; fileRef = 582806641E09AC4100421815 /* care.white.png */; };
 		582806671E09B5AF00421815 /* jennifer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 582806661E09B5AF00421815 /* jennifer.jpg */; };
+		58327A6D1E64DE40006F4FB4 /* setUserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58327A6C1E64DE40006F4FB4 /* setUserImage.swift */; };
+		58327A6F1E64F49F006F4FB4 /* AddUsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58327A6E1E64F49F006F4FB4 /* AddUsersCell.swift */; };
 		583646911E0890FC003C2E60 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646901E0890FC003C2E60 /* menu.png */; };
 		583646931E08A1CE003C2E60 /* menu_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646921E08A1CE003C2E60 /* menu_large.png */; };
 		583646951E08A7BC003C2E60 /* bell.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646941E08A7BC003C2E60 /* bell.png */; };
@@ -88,6 +90,11 @@
 		58CBC01B1E4E43DA001A9698 /* PatientScreeningsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC01A1E4E43DA001A9698 /* PatientScreeningsViewController.swift */; };
 		58CBC01D1E4E49A9001A9698 /* ScreeningsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC01C1E4E49A9001A9698 /* ScreeningsCell.swift */; };
 		58CBC0211E4E75D8001A9698 /* AScreeningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0201E4E75D8001A9698 /* AScreeningViewController.swift */; };
+		58CEEB491E65EF8200104057 /* tammie.png in Resources */ = {isa = PBXBuildFile; fileRef = 58CEEB481E65EF8200104057 /* tammie.png */; };
+		58CEEB4B1E65EFB400104057 /* brad.png in Resources */ = {isa = PBXBuildFile; fileRef = 58CEEB4A1E65EFB400104057 /* brad.png */; };
+		58CEEB4D1E65F07200104057 /* Alice.png in Resources */ = {isa = PBXBuildFile; fileRef = 58CEEB4C1E65F07200104057 /* Alice.png */; };
+		58CEEB501E65FC4600104057 /* CloseKeyboardButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 58CEEB4F1E65FC4600104057 /* CloseKeyboardButton.png */; };
+		58CEEB521E663D4200104057 /* paper-clip.png in Resources */ = {isa = PBXBuildFile; fileRef = 58CEEB511E663D4200104057 /* paper-clip.png */; };
 		58D633591E4A73F600DC3EB9 /* exitandgoback.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D633581E4A73F600DC3EB9 /* exitandgoback.png */; };
 		58D6335B1E4A78C400DC3EB9 /* RangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D6335A1E4A78C400DC3EB9 /* RangeSliderTrackLayer.swift */; };
 		58D6335E1E4B858000DC3EB9 /* Availability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D6335D1E4B858000DC3EB9 /* Availability.swift */; };
@@ -165,6 +172,8 @@
 		582806621E09AB0C00421815 /* side_menu_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = side_menu_bg.jpg; path = ../../imageFiles/side_menu_bg.jpg; sourceTree = "<group>"; };
 		582806641E09AC4100421815 /* care.white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = care.white.png; path = ../../imageFiles/care.white.png; sourceTree = "<group>"; };
 		582806661E09B5AF00421815 /* jennifer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = jennifer.jpg; path = ../../imageFiles/jennifer.jpg; sourceTree = "<group>"; };
+		58327A6C1E64DE40006F4FB4 /* setUserImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setUserImage.swift; sourceTree = "<group>"; };
+		58327A6E1E64F49F006F4FB4 /* AddUsersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUsersCell.swift; sourceTree = "<group>"; };
 		583646901E0890FC003C2E60 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu.png; path = ../../imageFiles/menu.png; sourceTree = "<group>"; };
 		583646921E08A1CE003C2E60 /* menu_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_large.png; path = ../../../menu_large.png; sourceTree = "<group>"; };
 		583646941E08A7BC003C2E60 /* bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bell.png; path = ../../imageFiles/bell.png; sourceTree = "<group>"; };
@@ -224,6 +233,11 @@
 		58CBC01A1E4E43DA001A9698 /* PatientScreeningsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientScreeningsViewController.swift; sourceTree = "<group>"; };
 		58CBC01C1E4E49A9001A9698 /* ScreeningsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreeningsCell.swift; sourceTree = "<group>"; };
 		58CBC0201E4E75D8001A9698 /* AScreeningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AScreeningViewController.swift; sourceTree = "<group>"; };
+		58CEEB481E65EF8200104057 /* tammie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tammie.png; path = ../../imageFiles/tammie.png; sourceTree = "<group>"; };
+		58CEEB4A1E65EFB400104057 /* brad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brad.png; path = ../../imageFiles/brad.png; sourceTree = "<group>"; };
+		58CEEB4C1E65F07200104057 /* Alice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Alice.png; path = ../../imageFiles/Alice.png; sourceTree = "<group>"; };
+		58CEEB4F1E65FC4600104057 /* CloseKeyboardButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseKeyboardButton.png; path = ../../imageFiles/CloseKeyboardButton.png; sourceTree = "<group>"; };
+		58CEEB511E663D4200104057 /* paper-clip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "paper-clip.png"; path = "../../imageFiles/paper-clip.png"; sourceTree = "<group>"; };
 		58D633581E4A73F600DC3EB9 /* exitandgoback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = exitandgoback.png; path = ../../imageFiles/exitandgoback.png; sourceTree = "<group>"; };
 		58D6335A1E4A78C400DC3EB9 /* RangeSliderTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderTrackLayer.swift; sourceTree = "<group>"; };
 		58D6335D1E4B858000DC3EB9 /* Availability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Availability.swift; sourceTree = "<group>"; };
@@ -362,6 +376,9 @@
 			children = (
 				582806641E09AC4100421815 /* care.white.png */,
 				586BFDD91E3BE28C00DC6770 /* gears.png */,
+				58CEEB4A1E65EFB400104057 /* brad.png */,
+				58CEEB4C1E65F07200104057 /* Alice.png */,
+				58CEEB481E65EF8200104057 /* tammie.png */,
 				582806661E09B5AF00421815 /* jennifer.jpg */,
 				586BFDD71E3BCB2200DC6770 /* HamburgerViewController.swift */,
 			);
@@ -377,10 +394,8 @@
 				586BFDDF1E3BFBCD00DC6770 /* phoneCircle.png */,
 				58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */,
 				BB32754A1E048AD100699280 /* AppointmentCell.swift */,
-				58BEC4351E6112FD00363FAD /* newMessageViewController.swift */,
-				585A4D2E1E5D175C00A16118 /* InboxViewController.swift */,
-				585A4D301E5E008100A16118 /* InboxCell.swift */,
 				BB57C2D31DFF41DE00731AC4 /* ViewController.swift */,
+				58CEEB4E1E65FBEC00104057 /* messages */,
 			);
 			name = "Main Dashboard";
 			sourceTree = "<group>";
@@ -438,6 +453,7 @@
 				58A8DCCA1E578E44008711D1 /* movePatientToSection.swift */,
 				58FDD47B1E60B42300F97D86 /* dragableImageView.swift */,
 				58FDD4711E5F6B7600F97D86 /* getColumnInArray.swift */,
+				58327A6C1E64DE40006F4FB4 /* setUserImage.swift */,
 				585A4D2C1E5CF9A300A16118 /* moveAppointmentFromAcceptedToCompleted.swift */,
 				58A8DCD11E57ABC6008711D1 /* setUpPatientData.swift */,
 				58FDD46F1E5F4CFC00F97D86 /* setupAlertData.swift */,
@@ -474,6 +490,19 @@
 				58D633631E4D26AB00DC3EB9 /* closed-envelope-circle.png */,
 			);
 			name = "patient images";
+			sourceTree = "<group>";
+		};
+		58CEEB4E1E65FBEC00104057 /* messages */ = {
+			isa = PBXGroup;
+			children = (
+				58CEEB511E663D4200104057 /* paper-clip.png */,
+				585A4D2E1E5D175C00A16118 /* InboxViewController.swift */,
+				585A4D301E5E008100A16118 /* InboxCell.swift */,
+				58CEEB4F1E65FC4600104057 /* CloseKeyboardButton.png */,
+				58BEC4351E6112FD00363FAD /* newMessageViewController.swift */,
+				58327A6E1E64F49F006F4FB4 /* AddUsersCell.swift */,
+			);
+			name = messages;
 			sourceTree = "<group>";
 		};
 		58D6335C1E4B852700DC3EB9 /* Local Data Classes */ = {
@@ -686,10 +715,12 @@
 				58D633671E4D26AB00DC3EB9 /* smartphone.png in Resources */,
 				58D633731E4D34CB00DC3EB9 /* bullets.png in Resources */,
 				582806631E09AB0C00421815 /* side_menu_bg.jpg in Resources */,
+				58CEEB491E65EF8200104057 /* tammie.png in Resources */,
 				586BFDDD1E3BE40C00DC6770 /* calendar2.png in Resources */,
 				58D633681E4D26AB00DC3EB9 /* Untitled.png in Resources */,
 				583646951E08A7BC003C2E60 /* bell.png in Resources */,
 				586BFDE01E3BFBCD00DC6770 /* phoneCircle.png in Resources */,
+				58CEEB4B1E65EFB400104057 /* brad.png in Resources */,
 				58254B571E0855D000933B60 /* key.png in Resources */,
 				58A8DCD01E57A717008711D1 /* greenback.png in Resources */,
 				58254B521E0850EA00933B60 /* hamburger.png in Resources */,
@@ -704,7 +735,9 @@
 				58496C191E527FD900DF103A /* box.png in Resources */,
 				58D633591E4A73F600DC3EB9 /* exitandgoback.png in Resources */,
 				586BFDDA1E3BE28C00DC6770 /* gears.png in Resources */,
+				58CEEB521E663D4200104057 /* paper-clip.png in Resources */,
 				58272AED1E3FE93C00E779CF /* user.png in Resources */,
+				58CEEB501E65FC4600104057 /* CloseKeyboardButton.png in Resources */,
 				58D6336E1E4D347D00DC3EB9 /* attention.png in Resources */,
 				583646911E0890FC003C2E60 /* menu.png in Resources */,
 				58496C1A1E527FD900DF103A /* checkBox.png in Resources */,
@@ -714,6 +747,7 @@
 				582806671E09B5AF00421815 /* jennifer.jpg in Resources */,
 				582806651E09AC4100421815 /* care.white.png in Resources */,
 				58272AFA1E411F8A00E779CF /* green.circle.png in Resources */,
+				58CEEB4D1E65F07200104057 /* Alice.png in Resources */,
 				58FDD47A1E60A6CD00F97D86 /* dangerOrange.png in Resources */,
 				58BEC4341E610DE800363FAD /* Landing_screen.png in Resources */,
 				BB57C2D91DFF41DE00731AC4 /* Assets.xcassets in Resources */,
@@ -760,6 +794,7 @@
 				58496C101E526E1700DF103A /* SignatureViewController.swift in Sources */,
 				586BFDE51E3C0C4800DC6770 /* AlertCell.swift in Sources */,
 				58458AC61E452474005DFEDA /* AddContainerViewController.swift in Sources */,
+				58327A6D1E64DE40006F4FB4 /* setUserImage.swift in Sources */,
 				5828065F1E098FBC00421815 /* DatePickerDialog.swift in Sources */,
 				BBA3D8F31DFF733000E39385 /* device.swift in Sources */,
 				58458ABA1E43C49D005DFEDA /* PasswordChangeViewController.swift in Sources */,
@@ -799,6 +834,7 @@
 				58272AF41E40051900E779CF /* PatientCell.swift in Sources */,
 				58A8DC8B1E576BA4008711D1 /* Bordered.swift in Sources */,
 				58CBC00D1E4D463D001A9698 /* PatientRXViewController.swift in Sources */,
+				58327A6F1E64F49F006F4FB4 /* AddUsersCell.swift in Sources */,
 				58FDD4761E5FB24E00F97D86 /* SingleEMRViewController.swift in Sources */,
 				58FDD4781E5FB40400F97D86 /* EMRCell.swift in Sources */,
 				58272AEF1E3FEFD800E779CF /* UpdateProfileViewController.swift in Sources */,

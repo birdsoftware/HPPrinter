@@ -16,12 +16,8 @@ class PatientUpdateViewController: UIViewController {
     @IBOutlet weak var messageTextBox: UITextView!
     @IBOutlet weak var patientImage: UIImageView!
     
-    
-//    var times = [String]()
-//    var dates = [String]()
-//    var messageCreator = [String]()
-//    var message = [String]()
     var feedData = [[String]]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +30,10 @@ class PatientUpdateViewController: UIViewController {
         messageTextBox.layer.borderWidth = 1.0
         messageTextBox.layer.borderColor = UIColor(hex: 0xD7D7D7).cgColor// Iron
         messageTextBox.layer.cornerRadius = 5
+        // Round userImage
         patientImage.layer.cornerRadius = patientImage.frame.size.width / 2
         patientImage.clipsToBounds = true
+        updateToSavedImage(Userimage: patientImage)
         
         
         feedData = UserDefaults.standard.object(forKey: "feedData") as! [[String]] //?? [[String]]()
@@ -56,9 +54,9 @@ class PatientUpdateViewController: UIViewController {
         view.endEditing(true)
     }
     
-    func isKeyPresentInUserDefaults(key: String) -> Bool {
-        return UserDefaults.standard.object(forKey: key) != nil
-    }
+//    func isKeyPresentInUserDefaults(key: String) -> Bool {
+//        return UserDefaults.standard.object(forKey: key) != nil
+//    }
     
     func appendNewMessageToDefaults(){
         //let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short)

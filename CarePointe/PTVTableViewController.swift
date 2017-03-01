@@ -46,9 +46,9 @@ class PTVTableViewController: UITableViewController {
         
     }
 
-    func isKeyPresentInUserDefaults(key: String) -> Bool {
-        return UserDefaults.standard.object(forKey: key) != nil
-    }
+//    func isKeyPresentInUserDefaults(key: String) -> Bool {
+//        return UserDefaults.standard.object(forKey: key) != nil
+//    }
     
 
 //    override func viewWillAppear(_ animated: Bool) {

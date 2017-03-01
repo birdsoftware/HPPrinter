@@ -52,14 +52,13 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     //Have to rewind segue back, get new data and reload table for changes to be seen
     override func viewWillAppear(_ animated: Bool) {
         
-        let feedData = UserDefaults.standard.object(forKey: "feedData") as! [[String]] //?? [[String]]()
-        times = feedData.getColumn(column: 0)
-        dates = feedData.getColumn(column: 1)
-        messageCreator = feedData.getColumn(column: 2)
-        message = feedData.getColumn(column: 3)
-        
-        patientFeedTableView.reloadData()
-        
+        let feedData = UserDefaults.standard.object(forKey: "feedData") as? [[String]] ?? [[String]]()
+            times = feedData.getColumn(column: 0)
+            dates = feedData.getColumn(column: 1)
+            messageCreator = feedData.getColumn(column: 2)
+            message = feedData.getColumn(column: 3)
+            
+            patientFeedTableView.reloadData()
     }
     
     //

@@ -244,9 +244,9 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
       * Check if value Already Exists in user defaults
       *
       */
-    func isKeyPresentInUserDefaults(key: String) -> Bool {
-        return UserDefaults.standard.object(forKey: key) != nil
-    }
+//    func isKeyPresentInUserDefaults(key: String) -> Bool {
+//        return UserDefaults.standard.object(forKey: key) != nil
+//    }
     
     func displayLocallySavedTextInPlaceholders() { //Array<String>
         

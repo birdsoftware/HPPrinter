@@ -527,9 +527,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    func isKeyPresentInUserDefaults(key: String) -> Bool {
-        return UserDefaults.standard.object(forKey: key) != nil
-    }
+//    func isKeyPresentInUserDefaults(key: String) -> Bool {
+//        return UserDefaults.standard.object(forKey: key) != nil
+//    }
     
     func getUpdateAppointmentData(){
         //Get up to date array

@@ -28,6 +28,7 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
         //round careTeam button
         careProviderImage.layer.cornerRadius = 0.5 * careProviderImage.bounds.size.width
         careProviderImage.clipsToBounds = true
+        updateToSavedImage(Userimage: careProviderImage)
         
         //scale back '<' button down
         backButton.imageEdgeInsets = UIEdgeInsetsMake(8,8,8,8)
