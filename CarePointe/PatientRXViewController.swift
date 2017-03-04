@@ -30,11 +30,15 @@ class PatientRXViewController: UIViewController {
     var horizontalConstraint:NSLayoutConstraint!
     var offSet1:CGFloat = 0.0
     var offSet2:CGFloat = 0.0
-    let bottomHeight:CGFloat = 467.0
+    var bottomHeight:CGFloat = 467.0
+    var topHeight:CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // show patient Name in title
+        bottomHeight = setBottumHeightBasedOnDeviceType() //bottumHeigh used in drags
+        
+        
         let patientName = UserDefaults.standard.string(forKey: "patientName")
         patientTitle.text = patientName! + "'s Rx"
         
@@ -64,7 +68,7 @@ class PatientRXViewController: UIViewController {
         case .changed:
             offSet2 = offSet1 - translation.y
             if(offSet1 < offSet2){
-            topDrugToDrug.constant = 0//offSet - translation.y
+            topDrugToDrug.constant = topHeight//offSet - translation.y
             } else {
                 topDrugToDrug.constant = bottomHeight
             }
@@ -80,6 +84,25 @@ class PatientRXViewController: UIViewController {
             break;
         }
         
+    }
+    
+    func setBottumHeightBasedOnDeviceType() -> CGFloat{
+        let model = UIDevice.current.modelSize //return device model size
+        
+        var heightBottum:CGFloat = 0
+        
+        switch model {
+        case 375:  /*  iPhone  */          heightBottum = 400.0
+                                        topHeight = -100.0
+        case 414:  /* iPhone + */          heightBottum = 467.0
+        
+        case 320:  /*   iPad   */          heightBottum = 467.0
+
+        default: print("UIDevice current model not 375 'iPhone', 414 'iPhone+' or 320 'ipad mini'")
+        heightBottum = 467.0
+        }
+        
+        return heightBottum
     }
     
     // UI Segment Control

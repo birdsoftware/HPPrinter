@@ -28,6 +28,7 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //class data
     var alertData = [[String]]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

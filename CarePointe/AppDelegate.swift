@@ -68,6 +68,9 @@ extension UIColor {
     static func seaBuckthorn() -> UIColor {
         return UIColor(hex:0xFCAB29)
     }
+    static func polar() -> UIColor {
+        return UIColor(hex:0xE8F8F8)
+    }
 
 }
 

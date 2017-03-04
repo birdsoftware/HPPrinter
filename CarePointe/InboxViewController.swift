@@ -8,70 +8,122 @@
 
 import UIKit
 
-class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var newEmailButton: RoundedButton!
     
+    //search bar
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var inBoxSent: UISegmentedControl!
+    // table
     @IBOutlet weak var inboxTable: UITableView!
     
+    // class vars
+    var searchActive : Bool = false
+    var inBoxData:Array<Dictionary<String,String>> = []
+    var sentBoxData:Array<Dictionary<String,String>> = []
+    var SearchData:Array<Dictionary<String,String>> = []
+    var selectedSegmentIndexValue:Int = 0
     
-    var fromName = [["Dr Quinones", "Dr B. Thomson", "Victor Owen", "Bill Summers", "Alice Njavro", "Michael Levi", "Elida Martinez", "John Banks","Rrian Nird"],
-                    [ "Cindy Lopper","Marx Ehrlich", "Alicia Watanabe", "Josh Brown"],
-                    [ "Desire Aller", "Paulita Wix", "Jenny Binkley", "Lawanda Arno", "Jackqueline Naumann", "Regine Kohnke","Brad Birdsong", "Dallas Remy", "Noel Devitt","Mike Brown","Sev Donada"]]
-    
-    var inTime = [["12:32 AM","01:56 PM","03:22 PM","11:12 AM","10:52 AM","12:01 PM","07:02 AM","05:05 PM","07:25 PM"],
-                 ["12:32 AM","01:56 PM","03:22 PM","11:12 AM"],
-                 ["12:32 AM","01:56 PM","03:22 PM","11:12 AM","10:52 AM","12:01 PM","07:02 AM","05:05 PM","07:25 PM","09:43 PM","10:52 AM"]]
-    
-    var inDate = [["2/15/17","2/16/17","2/15/17","3/14/17","3/14/17","2/14/16","3/15/16","2/13/17","2/14/17"],
-                 ["2/14/17","2/14/17","2/14/17","2/14/17"],
-                 ["2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17","2/14/17"]]
-    
-    var inMessage = [["Careflows update 1", "DISPOSITION Patient profile IDT Update",
-                               "order blood pressure plate", "Dr D. Webb Telemed update",
-                               "Patient profile Screening update", "Referrals details update",
-                               "syn patient card data", "Patient medication",
-                               "new nutrition levels"],
-                              ["new nutrition levels", "interface IDT Update",
-                               "Monitor infusion plasma", "DISPOSITION Patient profile IDT Update"],
-                              ["Patient profile Update", "Telemed update",
-                               "Patient profile Screening update", "Referrals details update",
-                               "monitor profile update 2", "Patient medication calculation",
-                               "patient Lunch Update", "hearing aid configuration","Dr D. Webb Telemed update",
-                               "Patient profile Screening update", "Referrals details update"]]
-    var inFromTitle = [["Physician Phy2","Physician Phy1","Case Manager","Care Provider 1","Physician Phy2","Physician Phy1","Case Manager","Care Provider 1","Case Manager"],
-                       ["Physician Phy2","Physician Phy1","Case Manager","Care Provider 1"],
-                       ["Physician Phy2","Physician Phy1","Case Manager","Care Provider 1","Physician Phy2","Physician Phy1","Case Manager","Care Provider 1","Physician Phy2","Physician Phy1","Case Manager"]]
-    var inSubject = [["Patient update 1", "Patient IDT Update",
-                      "order blood pressure plate", "Dr D. Webb Telemed update",
-                      "Patient profile Screening update", "Referrals details update",
-                      "syn patient card data", "Patient medication",
-                      "new nutrition levels"],
-                     ["Patient update 1", "interface IDT Update",
-                      "Monitor infusion plasma", "DISPOSITION Patient profile IDT Update"],
-                     ["Patient update 1", "Patient update 2",
-                      "Patient profile Screening update", "Referrals details update",
-                      "monitor profile update 2", "Patient medication calculation",
-                      "patient Lunch Update", "hearing aid configuration","Dr D. Webb Telemed update",
-                      "Patient profile Screening update", "Referrals details update"]]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // default segment displayed is inbox, save that to defaults
+        UserDefaults.standard.set("Inbox", forKey: "boxSegment")
+        UserDefaults.standard.synchronize()
+        
+        if isKeyPresentInUserDefaults(key: "inBoxData"){
+            inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
+        }
+        if isKeyPresentInUserDefaults(key: "sentData"){
+            sentBoxData = UserDefaults.standard.value(forKey: "sentData") as! Array<Dictionary<String, String>>
+        }
+        
+        SearchData = inBoxData//need this to start off tableView with all data and not blank table
 
         // Setup UI/UX
             //round careTeam button
                 newEmailButton.layer.cornerRadius = 0.5 * newEmailButton.bounds.size.width
                 newEmailButton.clipsToBounds = true
-            //scale button down
+                //newEmailButton.layer.borderWidth = 1.0
+                //newEmailButton.layer.borderColor = UIColor.white.cgColor
+                //scale button down
                 newEmailButton.imageEdgeInsets = UIEdgeInsetsMake(10,10,10,10)
+        
+            //searchBar.layer.borderWidth = 1
+            //searchBar.layer.borderColor = UIColor(white: 1.0, alpha: 0.1).cgColor// UIColor.Fern().cgColor
+        //searchBar.backgroundImage = UIImage(named: "jennifer.png")
+        
         
         //delegates
             inboxTable.delegate = self
             inboxTable.dataSource = self
-        
+            searchBar.delegate = self
     }
 
     
+    // UI Segment Control
+    
+    @IBAction func inBoxSentSegmentSelected(_ sender: Any) {
+        switch inBoxSent.selectedSegmentIndex
+        {
+        case 0:
+            UserDefaults.standard.set("Inbox", forKey: "boxSegment")
+            UserDefaults.standard.synchronize()
+            searchBar.placeholder = "Search Inbox"
+            selectedSegmentIndexValue = 0
+            inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
+            SearchData = inBoxData
+            inboxTable.reloadData()
+        case 1:
+            UserDefaults.standard.set("Sent", forKey: "boxSegment")
+            UserDefaults.standard.synchronize()
+            searchBar.placeholder = "Search Sent"
+            selectedSegmentIndexValue = 1
+            sentBoxData = UserDefaults.standard.value(forKey: "sentData") as! Array<Dictionary<String, String>>
+            SearchData = sentBoxData
+            inboxTable.reloadData()
+        default:
+            break;
+        }
+    }
+    
+    
+    
+    
+    // helper functions
+    
+    func returnFirstRecipientNamePlusCountOfRemainingRecipients(RecipientLine: String) -> String{
+        
+        var fromString = RecipientLine //Return Recipient if there is just ONE
+        
+        //count number of ","'s "bob, cindy, sam"
+        let occurrenciesOfComma = RecipientLine.characters.filter { $0 == "," }.count
+        if (occurrenciesOfComma > 0) {
+            var pos: Int = 0
+            var str = RecipientLine//"Hello.World"
+            
+            let needle: Character = ","
+            
+            if let idx = str.characters.index(of: needle) {
+                pos = str.characters.distance(from: str.startIndex, to: idx)
+                print("Found \(needle) at position \(pos)")
+            }
+            else {
+                print("Not found")
+            }
+            
+            let index = str.index(str.startIndex, offsetBy: pos)
+            fromString = str.substring(to: index) + ", +\(occurrenciesOfComma) more"
+                //sub.remove(at: sub.startIndex) //remove 1st char
+            
+        }
+        
+        return fromString
+    }
+
     
     //
     // MARK: - Button Actions
@@ -87,54 +139,139 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.performSegue(withIdentifier: "unwindToMainDB", sender: self)
     }
 
+    
+    //
+    // #MARK: - Search Functions
+    //
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true
+        searchBar.showsCancelButton = true
+        searchBar.placeholder = ""
+        
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false
+        searchBar.showsCancelButton = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+        searchBar.text = ""
+        searchBar.endEditing(true)
+        searchBar.showsCancelButton = false
+        
+        if(inBoxSent.selectedSegmentIndex == 0){
+            searchBar.placeholder = "Search Inbox"
+        } else {
+            searchBar.placeholder = "Search Sent"
+        }
+    }
+    
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+        //alertSearchBar.endEditing(true)
+    }
+
+    
 
     //
     // MARK: - Table View
     //
- 
+    
+    //[3] RETURN actual CELL to be displayed
+    // SHOW SEGUE ->
+    // " 1. click cell drag to second view. select the “show” segue in the “Selection Segue” section. "
+    //http://www.codingexplorer.com/segue-uitableviewcell-taps-swift/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fromName[0].count
+        return SearchData.count//fromName[0].count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt IndexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         let cell = tableView.dequeueReusableCell(withIdentifier: "inboxCell") as! InboxCell
         
+        var Data:Dictionary<String,String> = SearchData[indexPath.row]
+        
+        cell.backgroundColor = UIColor.polar()
+        // Set text from the data model
         cell.inboxStatusImage.image = UIImage(named: "orange.circle.png")
-        cell.inboxFromTitle.text = inFromTitle[0][IndexPath.row]
-        cell.inboxFromName.text = fromName[0][IndexPath.row]
-        cell.inboxSubject.text = inSubject[0][IndexPath.row]
-        cell.inboxMessageShort.text = inMessage[0][IndexPath.row]
-        cell.inboxDate.text = inDate[0][IndexPath.row]
-        cell.inboxTime.text = inTime[0][IndexPath.row]
+        cell.inboxFromTitle.text = Data["title"]
+        //if recipients > 1 show first recipients plus number of remaining recipients
+        
+        cell.inboxFromName.text = returnFirstRecipientNamePlusCountOfRemainingRecipients(RecipientLine: Data["recipient"]!)//= Data["recipient"]
+        cell.inboxSubject.text = Data["subject"]
+        cell.inboxMessageShort.text = Data["message"]
+        cell.inboxDate.text = Data["date"]
+        cell.inboxTime.text = Data["time"]
+        
+         cell.accessoryType = .disclosureIndicator // add arrow > to cell
         
         return cell
     
     }
     
+    
     //DELETE row (the event) method
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         //if (tableView == self.alertTableView)
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            //remove from local array
-            inFromTitle[0].remove(at: (indexPath as NSIndexPath).row)
-            fromName[0].remove(at: (indexPath as NSIndexPath).row)
-            inSubject[0].remove(at: (indexPath as NSIndexPath).row)
-            inMessage[0].remove(at: (indexPath as NSIndexPath).row)
-            inDate[0].remove(at: (indexPath as NSIndexPath).row)
-            inTime[0].remove(at: (indexPath as NSIndexPath).row)
             
-            //let inboxCount = fromName[0].count
-            //let inboxCount = UserDefaults.standard.integer(forKey: "inboxCount")
-            //UserDefaults.standard.set(inboxCount, forKey: "inboxCount")
-            //UserDefaults.standard.synchronize()
+            //remove entire row
+            SearchData.remove(at: (indexPath as NSIndexPath).row)
+
+            
+            
+            // set Inbox and Sent Badge Numbers
+            //let boxCount = SearchData.count
+            //UserDefaults.standard.integer(forKey: "boxCount")
+            
+            // NOTE SearchData = inBoxData if SEGMENT=0, =sentBoxData if SEG=1
+            if( selectedSegmentIndexValue == 0 )
+            {
+                UserDefaults.standard.set(SearchData, forKey: "inBoxData")
+            }
+            if( selectedSegmentIndexValue == 1 )
+            {
+                UserDefaults.standard.set(SearchData, forKey: "sentData")
+            }
+            
+            UserDefaults.standard.synchronize()
             
             
             inboxTable.reloadData()
         }
     }
     
-}
+    //inBoxSent.selectedSegmentIndex segment 0 (Inbox) or 1 (Sent)
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "aMessageSegue" {
+            
+            let selectedRow = ((inboxTable.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
+            var Data:Dictionary<String,String> = SearchData[selectedRow]
+            
+            
+            if let toViewController = segue.destination as? /*1 sendTo ViewController*/ AMessageViewController {
+                /*maker sure .segueFromList is a var delaired in sendTo ViewController*/
+                toViewController.segueFromList = Data["recipient"]//"Dr. Gary Webb"
+                toViewController.segueDate = Data["date"]! + " " + Data["time"]! //"3/2/17 11:32 AM"
+                toViewController.segueSubject = Data["subject"] //"Subject: Patient Update"
+                toViewController.segueMessage =  Data["message"] //"The Incredible Human Body: The human body is defined as the entire structure of a human being and comprises a head, neck, trunk (which includes the thorax and abdomen), arms and hands, legs and feet.  Every part of the body is composed of various types of cells, the fundamental unit of life. The study of the human body involves both anatomy and physiology.  Human anatomy is defined as the primarily scientific study of the morphology of the human body. Human physiology is defined as the science of the mechanical, physical, bio-electrical, and biochemical functions of humans in good health, their organs, and the cells of which they are composed."
+            }
+            
+        }
+    }
+
+    
+    
+    
+    }
 
 
 

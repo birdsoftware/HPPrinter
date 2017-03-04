@@ -10,6 +10,7 @@ import UIKit
 
 class newMessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate {
 
+    @IBOutlet weak var alertMessageLabel: UILabel!
     
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var userImage: UIImageView!
@@ -29,17 +30,16 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
     var SearchData:Array<Dictionary<String,String>> = []
     var search:String=""
     
-    //Drop down list 
-    //http://www.iosinsight.com/uitextfield-drop-down-list-in-swift/
-    // The sample values
-    var values = [["Alice Smith","Nurse","Alice.png"],
-                  ["Brad Smith MD","Primary Doctor","brad.png"],
-                  ["Dr. Quam","Immunologist","user.png"],
-                  ["Jennifer Johnson","Case Manager","jennifer.jpg"],
-                  ["John Banks MD","Cardiologist","user.png"],
-                  ["Tammie Summers","Case Manager","tammie.png"],
-                  ]
+    var sentBoxData:Array<Dictionary<String,String>> = []
+    var sendToList:[String] = []
+    var recipientCount:Int = 0
     
+    // Drop down list resources:
+    //  http://www.iosinsight.com/uitextfield-drop-down-list-in-swift/
+    // Getting/Setting Cursor Position:
+    //  http://stackoverflow.com/questions/34922331/getting-and-setting-cursor-position-of-uitextfield-and-uitextview-in-swift
+
+    let blueColor = [NSForegroundColorAttributeName: UIColor.blue] as [String : Any]
     let cellReuseIdentifier = "cell"
     
     // If user changes text, hide the tableView
@@ -49,6 +49,10 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if isKeyPresentInUserDefaults(key: "sentData"){
+            sentBoxData = UserDefaults.standard.value(forKey: "sentData") as! Array<Dictionary<String, String>>
+        }
 
         AllData = [["pic":"Alice.png","name":"Alice Smith","position":"Nurse"],
                    ["pic":"brad.png","name":"Brad Smith MD","position":"Primary Doctor"],
@@ -66,16 +70,10 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         usersTableView.isHidden = true
         closeKeyboardButton.isHidden = true
         
+        //delegates
         addUsersTextField.delegate = self
         subjectTextField.delegate = self
         messageBox.delegate = self
-        
-//        // handle swipe
-//        let hideKeyBoard = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-//        view.addGestureRecognizer(hideKeyBoard)
-        // Manage tableView visibility via TouchDown in textField
-        //addUsersTextField.addTarget(self, action: #selector(addUsersTextFieldActive), for: UIControlEvents.touchDown)
-        //subjectTextField.addTarget(self, action: #selector(subjectTextFieldActive), for: UIControlEvents.touchDown)
         
         // Round userImage
         userImage.layer.cornerRadius = 0.5 * userImage.bounds.size.width
@@ -88,6 +86,11 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         messageBox.layer.borderColor = UIColor.Iron().cgColor
         messageBox.layer.cornerRadius = 5
         
+        alertMessageLabel.layer.masksToBounds = true
+        alertMessageLabel.layer.cornerRadius = 5
+        alertMessageLabel.text = ""
+        
+        //keyboard notification
         let center = NotificationCenter.default
         center.addObserver(self,
                            selector: #selector(keyboardWillShow),
@@ -101,12 +104,14 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
+    
     @objc func keyboardWillShow(){
         closeKeyboardButton.isHidden = false
     }
     @objc func keyboardWillHide(){
         closeKeyboardButton.isHidden = true
     }
+    
     
     // Manage keyboard and tableView visibility
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
@@ -130,21 +135,23 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         if(touch == addUsersTextField){
             usersTableView.isHidden = !usersTableView.isHidden
         }
-//        if (touch.tapCount == 2) {
-//            usersTableView.isHidden = !usersTableView.isHidden
-//        }
         
     }
     
     // Toggle the tableView visibility when click on textField
-//    func addUsersTextFieldActive() {
-//            usersTableView.isHidden = !usersTableView.isHidden
-//    }
-//    func subjectTextFieldActive(){
-//        usersTableView.isHidden = true
-//    }
+        //    func addUsersTextFieldActive() {
+        //            usersTableView.isHidden = !usersTableView.isHidden
+        //    }
+        //    func subjectTextFieldActive(){
+        //        usersTableView.isHidden = true
+        //    }
     
-    //search
+    
+    
+    //
+    //#MARK: - Search Recipients
+    //
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
         if string.isEmpty
@@ -168,13 +175,63 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         else
         {
             SearchData=AllData
+            recipientCount=0//
         }
         usersTableView.reloadData()
         return true
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) { //Handle the text changes here
-            usersTableView.isHidden = true
+    
+    //
+    // MARK: UITextFieldDelegate
+    //
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // TODO: Your app can do something when textField finishes editing
+        print("The textField ended editing. Do something based on app requirements.")
+        
+        //remove crap from addUsersTextField.text ONLY DO if !addUsersTextField.text?.isEmpty
+        let recipientLine = addUsersTextField.text!
+        //let availableRecipients = AllData["name"]! //"name"
+        
+        let occurrenciesOfComma = recipientLine.characters.filter { $0 == "," }.count
+        
+        if (occurrenciesOfComma > 0) {//bob,...
+            
+            var position: Int = 0
+            let needle: Character = ","
+            
+            if let idx = recipientLine.characters.index(of: needle) {
+                
+                position = recipientLine.characters.distance(from: recipientLine.startIndex, to: idx)
+                print("Found \(needle) at position \(position)")
+                let index = recipientLine.index(recipientLine.startIndex, offsetBy: position)
+                let posibleRecipient = recipientLine.substring(to: index)
+                                                //CONTAINS[cd]
+                let predicate=NSPredicate(format: "SELF.name = %@", posibleRecipient)
+                let arr=(AllData as NSArray).filtered(using: predicate) // arr only returns AllData["name"] == posibleRecipient
+                print("posibleRecipient:\(posibleRecipient)")
+                print("arr:\(arr)")
+                // Remove what has been typed already
+             //   let typedSubstring = addUsersTextField.text! //search
+            //    let selectedName = selectedData["name"]!
+                
+                // IF typedSubstring contains Selected, ignore
+             //   if typedSubstring.range(of:selectedName) != nil {
+             //       print("\(selectedName) already exists!")
+             //   }
+            }
+            else {
+                print("Not found")
+            }
+            
+        }
+        
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -185,6 +242,12 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
             usersTableView.isHidden = false
         }
     }
+    
+    
+    //
+    //#MARK: Helper functions
+    //
+    
     func isUsersAdded() -> Bool {
         
         if (addUsersTextField.text?.isEmpty)! {
@@ -193,14 +256,9 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
             return true
     }
     
-//    func handleSwipes(sender:UISwipeGestureRecognizer) {
-//        if (sender.direction == .down) {
-//            view.endEditing(true)
-//        }
-//        
-//    }
     
     func displayAlertMessage(userMessage:String){
+        
         let spacer = "\r\n"
         let alert = UIAlertController(title: userMessage, message: spacer, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in })
@@ -211,13 +269,31 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         present(alert, animated: true){}
     }
+    
     func displayNoUserAlert(userMessage:String){
+        
         let spacer = "\r\n"
         let alert = UIAlertController(title: userMessage, message: spacer, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in self.addUsersTextField.becomeFirstResponder()})
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in self.addUsersTextField.becomeFirstResponder()})//by setting first responder user is directed emediately to TextField after clicking OK button
         
         present(alert, animated: true){}
     }
+    
+    func appendNewMessageToSentBoxData(){
+
+        let recipient = addUsersTextField.text!
+        let subject = subjectTextField.text!
+        let message = messageBox.text!
+        
+        let currentTime = returnCurrentDateOrCurrentTime(timeOnly: true)//4:41 PM
+        let todaysDate = returnCurrentDateOrCurrentTime(timeOnly: false)//"2/14/2017"
+        
+        sentBoxData.append(["recipient":recipient,"title":"Position","subject":subject,"message":message,"date":todaysDate,"time":currentTime])
+        UserDefaults.standard.set(sentBoxData, forKey: "sentData")
+        UserDefaults.standard.synchronize()
+    }
+
+    
     //
     //#MARK: - Button Action
     //
@@ -241,6 +317,7 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
                 
             }, completion: { finished in
                 
+                self.appendNewMessageToSentBoxData()
                 
                 // Instantiate a view controller from Storyboard and present it
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -257,28 +334,22 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
 
     }
 
-    //
-    // MARK: UITextFieldDelegate
-    //
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        // TODO: Your app can do something when textField finishes editing
-        print("The textField ended editing. Do something based on app requirements.")
+    @IBAction func attachButtonTapped(_ sender: Any) {
+//        let fileURL = Bundle.main.path(forResource: "Quotes", ofType: "png")
+//        let documentController = UIDocumentInteractionController.init(URL: URL.init,
+//            (fileURLWithPath: fileURL!))
+//        documentController.presentOptionsMenuFromRect(self.button.frame, inView: self.view, animated: true)
+        
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
     
     //
     // MARK: UITableViewDataSource
     //
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SearchData.count//values.count;
+        return SearchData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -287,28 +358,59 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         var Data:Dictionary<String,String> = SearchData[indexPath.row]
         
         // Set text from the data model
-        cell.userImage.image = UIImage(named: Data["pic"]!) //values[indexPath.row][2])
-        cell.userName.text = Data["name"]//values[indexPath.row][0]
+        cell.userImage.image = UIImage(named: Data["pic"]!)
+        cell.userName.text = Data["name"]
         cell.userName?.font = addUsersTextField.font
-        cell.userPosition.text = Data["position"]//values[indexPath.row][1]
+        cell.userPosition.text = Data["position"]
         
         return cell
     }
     
     // MARK: UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //make "name" blue
+        //    let attributedName = NSMutableAttributedString(string: Data["name"]!)
+        //    let length = Data["name"]?.characters.count
+        //    attributedName.addAttributes(blueColor, range: NSRange(location:0,length:length!))
         
-        var Data:Dictionary<String,String> = SearchData[indexPath.row]
+        var selectedData:Dictionary<String,String> = SearchData[indexPath.row]
         
-        // Row selected, so set textField to relevant value, hide tableView
-        // endEditing can trigger some other action according to requirements
+        // Row selected, so set textField to relevant value, hide tableView, endEditing can trigger some other action according to requirements
         if(addUsersTextField.text?.isEmpty)! {
-            addUsersTextField.text = Data["name"] //values[indexPath.row][0]
+            
+            addUsersTextField.text = selectedData["name"]!
+            //SearchData.remove(at: indexPath.row)
+            recipientCount = 1
         } else {
-            addUsersTextField.text = addUsersTextField.text! + ", " + Data["name"]! //values[indexPath.row][0]
-            usersTableView.isHidden = true
-            addUsersTextField.endEditing(true)
+            
+            // Remove what has been typed already
+            let typedSubstring = addUsersTextField.text! //search
+            let selectedName = selectedData["name"]!
+            
+            // IF typedSubstring contains Selected, ignore
+            if typedSubstring.range(of:selectedName) != nil {
+                print("\(selectedName) already exists!")
+                //alertMessageLabel.text = "\(selectedName) already exists!"
+            }
+            else //typedSubstring !contains Selected, add Selected and remove anything !recipient
+            {
+                //SearchData.remove(at: indexPath.row)
+                
+                //remove typed substring if less than 1 recipient exists (selectedData)
+                if (recipientCount < 1) {
+                    addUsersTextField.text = selectedData["name"]! //there is a bug here if 1.type char, 2. select user, 3. type comma, 4. select user this user replaces recipient line
+                }
+                else {
+                    addUsersTextField.text = addUsersTextField.text!  + ", " + selectedData["name"]!
+                }
+                recipientCount += 1
+            }
         }
+            SearchData=AllData
+            addUsersTextField.endEditing(true)
+            usersTableView.reloadData()
+        usersTableView.isHidden = true
         
     }
     

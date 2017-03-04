@@ -205,7 +205,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kRM-uC-HFL" id="0Bw-c6-U7V">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04:44 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfb-Pm-V55">
@@ -1185,7 +1185,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Rp3-HT-3nC" kind="presentation" id="H80-YW-0aC"/>
+                                    <segue destination="Rp3-HT-3nC" kind="presentation" animates="NO" id="H80-YW-0aC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TyO-nI-Bmo">
@@ -1321,6 +1321,199 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
             </objects>
             <point key="canvasLocation" x="712" y="193"/>
         </scene>
+        <!--A Message-->
+        <scene sceneID="eLM-ps-Thd">
+            <objects>
+                <viewController title="A Message" id="S02-Tg-SCf" customClass="AMessageViewController" customModule="CarePointe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Hsd-zW-8h9"/>
+                        <viewControllerLayoutGuide type="bottom" id="CA9-Vs-fxL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eaJ-Y3-xlZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wxd-xW-4pn">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mph-mN-0OR">
+                                        <rect key="frame" x="15" y="26" width="120" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="RTt-hb-iqV"/>
+                                            <constraint firstAttribute="height" constant="30" id="TRV-nz-RNp"/>
+                                        </constraints>
+                                        <inset key="titleEdgeInsets" minX="-33" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="5" maxX="91" maxY="5"/>
+                                        <state key="normal" title="Inbox (5)" image="backArrow.png">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backBoxButtonTapped:" destination="S02-Tg-SCf" eventType="touchUpInside" id="lVA-7r-tbh"/>
+                                            <action selector="backButtonTapped:" destination="yNN-IX-n7n" eventType="touchUpInside" id="v8d-Z3-Jz5"/>
+                                            <action selector="unwindToPatientDashboardButtonTapped:" destination="DAs-nX-wPj" eventType="touchUpInside" id="PPJ-yF-SEE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="CZs-V0-9JI"/>
+                                    <constraint firstItem="Mph-mN-0OR" firstAttribute="leading" secondItem="wxd-xW-4pn" secondAttribute="leading" constant="15" id="GWd-3i-oMZ"/>
+                                    <constraint firstItem="Mph-mN-0OR" firstAttribute="top" secondItem="wxd-xW-4pn" secondAttribute="top" constant="26" id="PEU-do-pCH"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvO-t5-Csv">
+                                <rect key="frame" x="16" y="91" width="54" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="54" id="3k1-4k-TL8"/>
+                                    <constraint firstAttribute="height" constant="21" id="UhO-FJ-Ekk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject: Patient Update" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="giH-C1-I9U">
+                                <rect key="frame" x="16" y="162" width="343" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="VfR-R7-bhU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dr. Gary Webb" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bO-qL-HO7">
+                                <rect key="frame" x="78" y="91" width="281" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="kKp-X3-2vA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqx-6T-exp">
+                                <rect key="frame" x="16" y="120" width="54" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="54" id="9aS-KA-Ayt"/>
+                                    <constraint firstAttribute="height" constant="21" id="Hhp-fY-36h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/1/17 11:32 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2R6-Xz-MRh">
+                                <rect key="frame" x="78" y="120" width="281" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Chx-hy-bmR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wM1-So-g61">
+                                <rect key="frame" x="16" y="194" width="343" height="402"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Pr-NH-Pqo" customClass="RoundedButton" customModule="CarePointe" customModuleProvider="target">
+                                <rect key="frame" x="16" y="612" width="162" height="35"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="tke-4m-uYD"/>
+                                    <constraint firstAttribute="width" constant="162" id="uW9-aC-waY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                <state key="normal" title="Reply">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="radiusMultiplier">
+                                        <real key="value" value="0.050000000000000003"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="replyButtonTapped:" destination="S02-Tg-SCf" eventType="touchUpInside" id="kjJ-K8-IfU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtW-V2-csQ" customClass="RoundedButton" customModule="CarePointe" customModuleProvider="target">
+                                <rect key="frame" x="197" y="611" width="162" height="35"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="S65-Zo-2h5"/>
+                                    <constraint firstAttribute="width" constant="162" id="dB0-bC-IGr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="radiusMultiplier">
+                                        <real key="value" value="0.050000000000000003"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="deleteButtonTapped:" destination="S02-Tg-SCf" eventType="touchUpInside" id="Cmz-Pq-1Nj"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reply.png" translatesAutoresizingMaskIntoConstraints="NO" id="4MQ-bh-Gwd">
+                                <rect key="frame" x="29" y="614" width="32" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="BhX-QU-NZE"/>
+                                    <constraint firstAttribute="width" constant="32" id="QAm-W5-n0W"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delete.png" translatesAutoresizingMaskIntoConstraints="NO" id="m7w-Xa-qyW">
+                                <rect key="frame" x="213" y="616" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="Qzf-zv-Tjk"/>
+                                    <constraint firstAttribute="height" constant="25" id="dsa-RS-2Y4"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vtW-V2-csQ" firstAttribute="leading" secondItem="m7w-Xa-qyW" secondAttribute="trailing" constant="-41" id="2Vb-UM-Pip"/>
+                            <constraint firstItem="IvO-t5-Csv" firstAttribute="top" secondItem="wxd-xW-4pn" secondAttribute="bottom" constant="21" id="5WX-s0-bYi"/>
+                            <constraint firstItem="7bO-qL-HO7" firstAttribute="top" secondItem="wxd-xW-4pn" secondAttribute="bottom" constant="21" id="62K-jI-B3Q"/>
+                            <constraint firstItem="6Pr-NH-Pqo" firstAttribute="leading" secondItem="4MQ-bh-Gwd" secondAttribute="trailing" constant="-45" id="8QV-p2-x3v"/>
+                            <constraint firstItem="giH-C1-I9U" firstAttribute="leading" secondItem="eaJ-Y3-xlZ" secondAttribute="leadingMargin" id="9Nn-p3-BkV"/>
+                            <constraint firstItem="wxd-xW-4pn" firstAttribute="leading" secondItem="eaJ-Y3-xlZ" secondAttribute="leading" id="AWt-4A-BEK"/>
+                            <constraint firstItem="wM1-So-g61" firstAttribute="trailing" secondItem="eaJ-Y3-xlZ" secondAttribute="trailingMargin" id="Cna-Ux-ob6"/>
+                            <constraint firstItem="wM1-So-g61" firstAttribute="top" secondItem="giH-C1-I9U" secondAttribute="bottom" constant="11" id="DjR-fI-JKx"/>
+                            <constraint firstItem="hqx-6T-exp" firstAttribute="leading" secondItem="eaJ-Y3-xlZ" secondAttribute="leadingMargin" id="Gds-lH-JdX"/>
+                            <constraint firstItem="2R6-Xz-MRh" firstAttribute="trailing" secondItem="eaJ-Y3-xlZ" secondAttribute="trailingMargin" id="Gr0-L6-Wvy"/>
+                            <constraint firstItem="CA9-Vs-fxL" firstAttribute="top" secondItem="vtW-V2-csQ" secondAttribute="bottom" constant="21" id="Nfb-Dj-dHL"/>
+                            <constraint firstItem="giH-C1-I9U" firstAttribute="trailing" secondItem="eaJ-Y3-xlZ" secondAttribute="trailingMargin" id="PjF-BM-MqX"/>
+                            <constraint firstItem="wxd-xW-4pn" firstAttribute="top" secondItem="Hsd-zW-8h9" secondAttribute="bottom" id="RFY-8u-of0"/>
+                            <constraint firstItem="7bO-qL-HO7" firstAttribute="trailing" secondItem="eaJ-Y3-xlZ" secondAttribute="trailingMargin" id="T2H-Sb-vIg"/>
+                            <constraint firstItem="m7w-Xa-qyW" firstAttribute="centerY" secondItem="vtW-V2-csQ" secondAttribute="centerY" id="ULv-N3-KwX"/>
+                            <constraint firstItem="wM1-So-g61" firstAttribute="leading" secondItem="eaJ-Y3-xlZ" secondAttribute="leadingMargin" id="WFQ-J6-8lb"/>
+                            <constraint firstItem="CA9-Vs-fxL" firstAttribute="top" secondItem="6Pr-NH-Pqo" secondAttribute="bottom" constant="20" id="aeU-Qv-x9O"/>
+                            <constraint firstItem="6Pr-NH-Pqo" firstAttribute="leading" secondItem="eaJ-Y3-xlZ" secondAttribute="leadingMargin" id="cHe-dg-M0r"/>
+                            <constraint firstItem="vtW-V2-csQ" firstAttribute="trailing" secondItem="eaJ-Y3-xlZ" secondAttribute="trailingMargin" id="dHk-B3-VR2"/>
+                            <constraint firstItem="vtW-V2-csQ" firstAttribute="top" secondItem="wM1-So-g61" secondAttribute="bottom" constant="15" id="hxj-YN-lq1"/>
+                            <constraint firstItem="7bO-qL-HO7" firstAttribute="leading" secondItem="IvO-t5-Csv" secondAttribute="trailing" constant="8" id="jN3-T2-l3l"/>
+                            <constraint firstItem="4MQ-bh-Gwd" firstAttribute="centerY" secondItem="6Pr-NH-Pqo" secondAttribute="centerY" id="keG-J6-Edn"/>
+                            <constraint firstItem="2R6-Xz-MRh" firstAttribute="top" secondItem="7bO-qL-HO7" secondAttribute="bottom" constant="8" id="mzl-iM-gDe"/>
+                            <constraint firstItem="IvO-t5-Csv" firstAttribute="leading" secondItem="eaJ-Y3-xlZ" secondAttribute="leadingMargin" id="n2L-IL-x40"/>
+                            <constraint firstItem="2R6-Xz-MRh" firstAttribute="leading" secondItem="hqx-6T-exp" secondAttribute="trailing" constant="8" id="ofy-8s-Fc6"/>
+                            <constraint firstAttribute="trailing" secondItem="wxd-xW-4pn" secondAttribute="trailing" id="peV-JV-Kij"/>
+                            <constraint firstItem="hqx-6T-exp" firstAttribute="top" secondItem="IvO-t5-Csv" secondAttribute="bottom" constant="8" id="r7F-LM-u5M"/>
+                            <constraint firstItem="giH-C1-I9U" firstAttribute="top" secondItem="2R6-Xz-MRh" secondAttribute="bottom" constant="21" id="z97-KO-s1O"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="boxLabelButton" destination="Mph-mN-0OR" id="UB2-5k-TQ2"/>
+                        <outlet property="dateLabel" destination="2R6-Xz-MRh" id="zkI-3G-XG6"/>
+                        <outlet property="fromListLabel" destination="7bO-qL-HO7" id="LwM-aV-gmC"/>
+                        <outlet property="message" destination="wM1-So-g61" id="HdV-G7-Zfu"/>
+                        <outlet property="subjectLabel" destination="giH-C1-I9U" id="hjZ-LH-GBM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="50j-re-hzz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-706.39999999999998" y="1101.4992503748126"/>
+        </scene>
         <!--New Message View Controller-->
         <scene sceneID="58a-V0-ny1">
             <objects>
@@ -1337,9 +1530,9 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRA-PJ-0MR">
-                                        <rect key="frame" x="60" y="31" width="265" height="21"/>
+                                        <rect key="frame" x="60" y="23.5" width="265" height="23"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="6bc-es-Bmy"/>
+                                            <constraint firstAttribute="height" constant="23" id="6bc-es-Bmy"/>
                                             <constraint firstAttribute="width" constant="265" id="jPr-1R-WMj"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
@@ -1385,7 +1578,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     <constraint firstAttribute="trailing" secondItem="KWz-L8-Toh" secondAttribute="trailing" constant="8" id="Vc0-Li-wou"/>
                                     <constraint firstItem="KWz-L8-Toh" firstAttribute="top" secondItem="gpy-fV-jfv" secondAttribute="top" constant="19" id="bgR-8k-ZTh"/>
                                     <constraint firstItem="LfK-Wc-8VL" firstAttribute="leading" secondItem="gpy-fV-jfv" secondAttribute="leading" constant="6" id="duh-56-wcE"/>
-                                    <constraint firstItem="CRA-PJ-0MR" firstAttribute="top" secondItem="gpy-fV-jfv" secondAttribute="top" constant="31" id="l5e-pI-CmB"/>
+                                    <constraint firstItem="CRA-PJ-0MR" firstAttribute="centerY" secondItem="gpy-fV-jfv" secondAttribute="centerY" id="j2t-hP-gg3"/>
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recipients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eet-YW-Ty7">
@@ -1456,9 +1649,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="acceptButtonTapped:" destination="7xq-sK-3MN" eventType="touchUpInside" id="9z2-1I-VdX"/>
-                                    <action selector="acceptChangesButtonTapped:" destination="NcL-RN-a90" eventType="touchUpInside" id="e81-bm-Ei3"/>
-                                    <action selector="sendButtonTapped:" destination="yNN-IX-n7n" eventType="touchUpInside" id="A56-Nh-fLW"/>
+                                    <action selector="attachButtonTapped:" destination="yNN-IX-n7n" eventType="touchUpInside" id="0L3-jB-qTg"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yd0-co-uAU">
@@ -1539,12 +1730,20 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     <constraint firstAttribute="height" constant="60" id="yDD-wJ-McZ"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alice Smith" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6D-fp-7LS">
+                                <rect key="frame" x="30" y="88" width="86" height="21"/>
+                                <color key="backgroundColor" red="0.90980392156862744" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yd0-co-uAU" firstAttribute="top" secondItem="XIj-sZ-Ebh" secondAttribute="bottom" constant="25" id="4yk-Uq-f1L"/>
                             <constraint firstItem="eet-YW-Ty7" firstAttribute="top" secondItem="gpy-fV-jfv" secondAttribute="bottom" constant="30" id="EXc-dK-ucy"/>
                             <constraint firstItem="XIj-sZ-Ebh" firstAttribute="trailing" secondItem="g06-dJ-sS2" secondAttribute="trailingMargin" id="FG4-jG-lKH"/>
+                            <constraint firstItem="r6D-fp-7LS" firstAttribute="top" secondItem="gpy-fV-jfv" secondAttribute="bottom" constant="18" id="IZn-4A-RFq"/>
                             <constraint firstItem="M5O-DT-AhQ" firstAttribute="top" secondItem="Nxj-X2-jCe" secondAttribute="bottom" constant="25" id="JBT-1i-m20"/>
                             <constraint firstItem="gpy-fV-jfv" firstAttribute="top" secondItem="g06-dJ-sS2" secondAttribute="top" id="OVi-lO-qQV"/>
                             <constraint firstItem="Ia0-LT-wPv" firstAttribute="top" secondItem="eet-YW-Ty7" secondAttribute="bottom" constant="42" id="REp-Rv-55c"/>
@@ -1563,6 +1762,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                             <constraint firstAttribute="trailing" secondItem="gpy-fV-jfv" secondAttribute="trailing" id="qmu-nR-Ddy"/>
                             <constraint firstItem="ZVf-kO-PMH" firstAttribute="top" secondItem="eet-YW-Ty7" secondAttribute="bottom" constant="5" id="t8Z-gT-crr"/>
                             <constraint firstAttribute="trailing" secondItem="Ia0-LT-wPv" secondAttribute="trailing" id="t98-Nt-i4E"/>
+                            <constraint firstItem="r6D-fp-7LS" firstAttribute="leading" secondItem="g06-dJ-sS2" secondAttribute="leadingMargin" constant="14" id="u0i-If-B3s"/>
                             <constraint firstItem="eet-YW-Ty7" firstAttribute="leading" secondItem="g06-dJ-sS2" secondAttribute="leadingMargin" id="vDs-eB-Hxf"/>
                             <constraint firstItem="Nxj-X2-jCe" firstAttribute="top" secondItem="XIj-sZ-Ebh" secondAttribute="bottom" constant="48" id="wYb-MO-RPR"/>
                             <constraint firstItem="Nxj-X2-jCe" firstAttribute="trailing" secondItem="g06-dJ-sS2" secondAttribute="trailingMargin" id="wus-ul-icY"/>
@@ -1571,6 +1771,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                     <navigationItem key="navigationItem" id="8iu-os-bCk"/>
                     <connections>
                         <outlet property="addUsersTextField" destination="eet-YW-Ty7" id="yG0-V5-G77"/>
+                        <outlet property="alertMessageLabel" destination="r6D-fp-7LS" id="l9Y-eV-UaU"/>
                         <outlet property="attachFilesButton" destination="M5O-DT-AhQ" id="Jea-GV-an8"/>
                         <outlet property="closeKeyboardButton" destination="Ia0-LT-wPv" id="FOt-eI-ui9"/>
                         <outlet property="messageBox" destination="Nxj-X2-jCe" id="xVh-Jh-hFq"/>
@@ -1584,7 +1785,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c59-UC-oxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-385" y="1102"/>
+            <point key="canvasLocation" x="377" y="1898"/>
         </scene>
         <!--Inbox-->
         <scene sceneID="cv1-mg-m22">
@@ -1599,11 +1800,10 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0y4-KP-x2i">
-                                <rect key="frame" x="0.0" y="20" width="375" height="70"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqt-7r-VRJ">
                                         <rect key="frame" x="322" y="13" width="45" height="45"/>
-                                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="VN5-hJ-rwq"/>
                                             <constraint firstAttribute="height" constant="45" id="g9G-3l-eC7"/>
@@ -1618,14 +1818,16 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="yNN-IX-n7n" kind="presentation" id="5z8-i9-OWi"/>
+                                            <segue destination="yNN-IX-n7n" kind="presentation" animates="NO" id="5z8-i9-OWi"/>
                                         </connections>
                                     </button>
-                                    <searchBar contentMode="redraw" placeholder="Search Inbox" translatesAutoresizingMaskIntoConstraints="NO" id="Dhf-tQ-akE">
+                                    <searchBar contentMode="redraw" placeholder="Search Inbox" showsCancelButton="YES" backgroundImage="searchBackGround.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Dhf-tQ-akE">
                                         <rect key="frame" x="62" y="19" width="251" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="251" id="rbm-tW-C9Z"/>
                                         </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="barTintColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FkC-UR-aNS">
@@ -1643,7 +1845,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.32969617839999998" green="0.66176503900000005" blue="0.81706231829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="nqt-7r-VRJ" secondAttribute="trailing" constant="8" id="BeF-wb-W9y"/>
                                     <constraint firstItem="nqt-7r-VRJ" firstAttribute="centerY" secondItem="0y4-KP-x2i" secondAttribute="centerY" id="NBh-g4-YF8"/>
@@ -1656,8 +1858,8 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3Lw-Jf-6v5">
-                                <rect key="frame" x="0.0" y="90" width="375" height="47"/>
-                                <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="47"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="8bf-eX-7jh"/>
                                 </constraints>
@@ -1665,17 +1867,20 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     <segment title="Inbox"/>
                                     <segment title="Sent"/>
                                 </segments>
-                                <color key="tintColor" red="0.66964131589999998" green="0.88000124690000003" blue="0.97614747290000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.32969617839999998" green="0.66176503900000005" blue="0.81706231829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="inBoxSentSegmentSelected:" destination="Rp3-HT-3nC" eventType="valueChanged" id="L6p-WE-EwZ"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="105" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jOE-nr-Q22">
-                                <rect key="frame" x="0.0" y="135" width="375" height="532"/>
+                                <rect key="frame" x="0.0" y="115" width="375" height="552"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="inboxCell" rowHeight="105" id="kVy-lQ-VdV" customClass="InboxCell" customModule="CarePointe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="105"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kVy-lQ-VdV" id="WbX-H5-EOz">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/12/2017" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mX5-62-kjg">
@@ -1771,6 +1976,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                             <outlet property="inboxStatusImage" destination="FMz-EO-KuD" id="ujY-PS-88W"/>
                                             <outlet property="inboxSubject" destination="4QL-W9-Fxb" id="Qay-cw-RkI"/>
                                             <outlet property="inboxTime" destination="rCq-1R-6f1" id="kOm-Ih-LsT"/>
+                                            <segue destination="S02-Tg-SCf" kind="show" identifier="aMessageSegue" animates="NO" id="PFo-Mp-Qac"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1791,8 +1997,10 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="inBoxSent" destination="3Lw-Jf-6v5" id="NZn-ZZ-UcF"/>
                         <outlet property="inboxTable" destination="jOE-nr-Q22" id="L5M-GQ-gVE"/>
                         <outlet property="newEmailButton" destination="nqt-7r-VRJ" id="IjT-3T-UEB"/>
+                        <outlet property="searchBar" destination="Dhf-tQ-akE" id="nTd-oe-h48"/>
                         <segue destination="63H-gp-9mK" kind="unwind" identifier="unwindToMainDB" unwindAction="unwindToMainDashboardWithSegue:" id="fqg-VL-rTH"/>
                     </connections>
                 </viewController>
@@ -1814,7 +2022,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blueback.png" translatesAutoresizingMaskIntoConstraints="NO" id="EbS-U9-8Lp">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Sl-8F-Fb0" userLabel="keyboard View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="575"/>
@@ -1822,7 +2030,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b0c-hH-2d5" userLabel="background 3 View">
-                                <rect key="frame" x="16" y="310" width="343" height="280"/>
+                                <rect key="frame" x="16" y="290" width="343" height="280"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2o-3Z-h0w">
                                         <rect key="frame" x="127" y="8" width="97" height="21"/>
@@ -1947,7 +2155,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0p5-hk-tTi" userLabel="background 1View">
-                                <rect key="frame" x="16" y="20" width="343" height="40"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update Your Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohs-5M-Q4p">
                                         <rect key="frame" x="73" y="10" width="196" height="21"/>
@@ -2011,7 +2219,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ly-dm-xFH">
-                                <rect key="frame" x="107" y="70" width="160" height="160"/>
+                                <rect key="frame" x="107" y="50" width="160" height="160"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="YzQ-10-5B7"/>
                                     <constraint firstAttribute="height" constant="160" id="qdC-XJ-kkD"/>
@@ -2022,7 +2230,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcj-TK-XpT" userLabel="background 2 View">
-                                <rect key="frame" x="16" y="242" width="343" height="55"/>
+                                <rect key="frame" x="16" y="222" width="343" height="55"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gu-so-1mz">
                                         <rect key="frame" x="12" y="10" width="150" height="35"/>
@@ -2068,13 +2276,13 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jz3-vX-SRL">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="7xq-sK-3MN" kind="embed" id="3xX-hL-ibu"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUR-c8-n5I">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="cPh-ve-LgC" kind="embed" id="k8U-bK-6DJ"/>
                                 </connections>
@@ -2188,7 +2396,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mPB-wJ-Akt" id="lqo-VZ-c7S">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="telephone.png" translatesAutoresizingMaskIntoConstraints="NO" id="kyN-gV-bk4">
@@ -2440,7 +2648,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sAs-BE-sfL" id="zoC-Tg-qQm">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMR Data 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xeh-WB-l2d">
@@ -2629,7 +2837,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eSn-qy-Tb5" id="bua-Ba-WOA">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patient Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Olv-Rl-wof">
@@ -2779,7 +2987,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                         <rect key="frame" x="0.0" y="28" width="375" height="57"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Z7-Xd-O78" id="yh8-rw-bcK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orange.circle.png" translatesAutoresizingMaskIntoConstraints="NO" id="JNF-My-zOV">
@@ -3179,7 +3387,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aTJ-Q8-bFW" id="uL7-Yh-6RN">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12/31/2017" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77q-oa-ysq">
@@ -3708,7 +3916,7 @@ Performance: 13</string>
                                         <rect key="frame" x="0.0" y="28" width="299" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="peq-x3-2P7" id="y02-5o-2Oh">
-                                            <rect key="frame" x="0.0" y="0.0" width="299" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="299" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ruth Quinonez" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="j6Q-8I-bBW">
@@ -3832,7 +4040,7 @@ Performance: 13</string>
                                 <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yGr-r3-SOH" id="py3-Wu-7kp">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ruth Quinones" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWm-Df-DN2">
@@ -4046,11 +4254,11 @@ Performance: 13</string>
                         <viewControllerLayoutGuide type="bottom" id="2TL-fY-ANk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HEB-Zz-APQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxn-0X-TiQ">
-                                <rect key="frame" x="23" y="205" width="329" height="237"/>
+                                <rect key="frame" x="23" y="215" width="329" height="237"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cy0-YE-Pq9">
                                         <rect key="frame" x="39" y="8" width="250" height="30"/>
@@ -4169,7 +4377,7 @@ Performance: 13</string>
                         <viewControllerLayoutGuide type="bottom" id="VtS-oi-daU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="K3y-XO-sia">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OhY-ka-cVo" userLabel="lightblue top View">
@@ -4236,7 +4444,7 @@ Performance: 13</string>
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lWw-Gg-Y60" id="0hC-5h-t9L">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thursday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N78-Ve-dRs">
@@ -4376,11 +4584,11 @@ Performance: 13</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZr-8l-6bE" userLabel="Add View background">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="639"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="659"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WS2-7v-MFq">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="JFA-bx-1j2" kind="embed" identifier="AddAvailability" id="clx-bc-qs0"/>
                                 </connections>
@@ -4544,11 +4752,11 @@ Performance: 13</string>
                         <viewControllerLayoutGuide type="bottom" id="IWt-nb-lP2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XaD-cw-DT2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JoR-IN-hbt" userLabel="back View">
-                                <rect key="frame" x="16" y="149.5" width="343" height="348"/>
+                                <rect key="frame" x="16" y="159.5" width="343" height="348"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Availability" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tI1-PJ-asm">
                                         <rect key="frame" x="25.5" y="10" width="292" height="24"/>
@@ -4688,11 +4896,11 @@ Performance: 13</string>
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RlI-H6-BJS" id="5YJ-NV-thp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OXYCODONE 1" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vb7-2R-4dK">
-                                                    <rect key="frame" x="8" y="13" width="359" height="18"/>
+                                                    <rect key="frame" x="8" y="13" width="359" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="359" id="gxY-6e-se5"/>
                                                     </constraints>
@@ -4701,36 +4909,36 @@ Performance: 13</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dosage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="806-bJ-Xmh">
-                                                    <rect key="frame" x="28" y="36" width="57" height="18.5"/>
+                                                    <rect key="frame" x="28" y="35" width="57" height="19"/>
                                                     <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Frequency" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zS-rG-1YX">
-                                                    <rect key="frame" x="148" y="36" width="78" height="18.5"/>
+                                                    <rect key="frame" x="148" y="35" width="78" height="19"/>
                                                     <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Route" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7T-vN-M08">
-                                                    <rect key="frame" x="289" y="36" width="51" height="19"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Route" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7T-vN-M08">
+                                                    <rect key="frame" x="289" y="35" width="51" height="19"/>
                                                     <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVb-ny-2zn">
-                                                    <rect key="frame" x="52" y="56.5" width="9" height="18.5"/>
+                                                    <rect key="frame" x="52" y="56" width="9" height="19"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="once a day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ny-Ap-0aM">
-                                                    <rect key="frame" x="151.5" y="56.5" width="72.5" height="18.5"/>
+                                                    <rect key="frame" x="151" y="56" width="73" height="19"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="oral" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6I-zD-In9">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="oral" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6I-zD-In9" userLabel="RouteO">
                                                     <rect key="frame" x="302" y="56.5" width="25.5" height="18.5"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -4951,7 +5159,7 @@ Performance: 13</string>
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Hr-UU-7td" id="1fv-1p-qAi">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OXYCODONE 1" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzV-vR-y9J">
@@ -5053,6 +5261,7 @@ Performance: 13</string>
         <image name="SurveyWhite" width="30" height="30"/>
         <image name="TeamWhite" width="30" height="30"/>
         <image name="Untitled.png" width="104" height="104"/>
+        <image name="backArrow.png" width="64" height="64"/>
         <image name="bell.png" width="64" height="64"/>
         <image name="blueback.png" width="375" height="667"/>
         <image name="box.png" width="224" height="224"/>
@@ -5063,6 +5272,7 @@ Performance: 13</string>
         <image name="care.white.png" width="1056" height="208"/>
         <image name="closed-envelope-circle.png" width="64" height="64"/>
         <image name="dangerOrange.png" width="64" height="64"/>
+        <image name="delete.png" width="64" height="64"/>
         <image name="exitandgoback.png" width="170" height="128"/>
         <image name="gears.png" width="64" height="64"/>
         <image name="green.circle.png" width="64" height="64"/>
@@ -5073,6 +5283,8 @@ Performance: 13</string>
         <image name="orange.circle.png" width="64" height="64"/>
         <image name="paper-clip.png" width="64" height="64"/>
         <image name="quillPen.png" width="64" height="64"/>
+        <image name="reply.png" width="64" height="64"/>
+        <image name="searchBackGround.jpg" width="64" height="64"/>
         <image name="smartphone.png" width="64" height="64"/>
         <image name="telephone.png" width="64" height="64"/>
         <image name="user.png" width="256" height="256"/>
@@ -5081,7 +5293,7 @@ Performance: 13</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="zWG-cM-x3M"/>
-        <segue reference="OQI-Pt-Vnr"/>
+        <segue reference="45i-eQ-EHR"/>
         <segue reference="PtL-n1-eqT"/>
     </inferredMetricsTieBreakers>
 </document>

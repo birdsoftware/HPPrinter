@@ -45,6 +45,8 @@ extension UIViewController {
         
         self.setUpAlertDataInDefaults()
         self.setUpFeedDataInDefaults()
+        self.setUpInBoxDataInDefaults()
+        self.setUpSentBoxDataInDefaults()
         
         UserDefaults.standard.set(9, forKey: "inboxCount")
         UserDefaults.standard.set(appointmentIDs, forKey: "appID")

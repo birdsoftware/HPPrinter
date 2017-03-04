@@ -23,22 +23,43 @@ extension UIViewController {
         UserDefaults.standard.synchronize()
     }
     
+    func returnCurrentDateOrCurrentTime(timeOnly: Bool) -> String{
+        
+        let date = Date()
+        
+        if(timeOnly) {
+        
+            let formatterTime = DateFormatter()
+            formatterTime.timeStyle = .short
+            return formatterTime.string(from: date) //4:41 PM
+            
+        } else {
+            
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short // = "M/dd/yy"
+            return formatter.string(from: date) //"2/14/2017"
+            
+        }
+        
+    }
+    
 }
+
 
 
 //let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short)
 
-//http://stackoverflow.com/questions/39310729/problems-with-cropping-a-uiimage-in-swift
-extension UIImage {
-    func crop( rect: CGRect) -> UIImage {
-        var rect = rect
-        rect.origin.x*=self.scale
-        rect.origin.y*=self.scale
-        rect.size.width*=self.scale
-        rect.size.height*=self.scale
-        
-        let imageRef = self.cgImage!.cropping(to: rect)
-        let image = UIImage(cgImage: imageRef!, scale: self.scale, orientation: self.imageOrientation)
-        return image
-    }
-}
+////http://stackoverflow.com/questions/39310729/problems-with-cropping-a-uiimage-in-swift
+//extension UIImage {
+//    func crop( rect: CGRect) -> UIImage {
+//        var rect = rect
+//        rect.origin.x*=self.scale
+//        rect.origin.y*=self.scale
+//        rect.size.width*=self.scale
+//        rect.size.height*=self.scale
+//        
+//        let imageRef = self.cgImage!.cropping(to: rect)
+//        let image = UIImage(cgImage: imageRef!, scale: self.scale, orientation: self.imageOrientation)
+//        return image
+//    }
+//}
