@@ -100,7 +100,7 @@
 		58BEC4361E6112FD00363FAD /* newMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BEC4351E6112FD00363FAD /* newMessageViewController.swift */; };
 		58CBC0071E4D4233001A9698 /* PatientUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */; };
 		58CBC0091E4D42D1001A9698 /* toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0081E4D42D1001A9698 /* toast.swift */; };
-		58CBC00B1E4D4432001A9698 /* EMRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC00A1E4D4432001A9698 /* EMRViewController.swift */; };
+		58CBC00B1E4D4432001A9698 /* CaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC00A1E4D4432001A9698 /* CaseViewController.swift */; };
 		58CBC00D1E4D463D001A9698 /* PatientRXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC00C1E4D463D001A9698 /* PatientRXViewController.swift */; };
 		58CBC0101E4D4A39001A9698 /* Container1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC00F1E4D4A39001A9698 /* Container1ViewController.swift */; };
 		58CBC0121E4E2066001A9698 /* RxContainer1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0111E4E2066001A9698 /* RxContainer1Cell.swift */; };
@@ -131,6 +131,9 @@
 		58D633751E4D34CB00DC3EB9 /* pills.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D633711E4D34CB00DC3EB9 /* pills.png */; };
 		58D633761E4D34CB00DC3EB9 /* telephone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D633721E4D34CB00DC3EB9 /* telephone.png */; };
 		58D633781E4D360400DC3EB9 /* PatientFeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D633771E4D360400DC3EB9 /* PatientFeedViewCell.swift */; };
+		58EB0DC81E732DC40009FD57 /* caseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB0DC71E732DC40009FD57 /* caseCell.swift */; };
+		58EB0DCC1E734D200009FD57 /* ServicesC1ViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB0DCB1E734D200009FD57 /* ServicesC1ViewC.swift */; };
+		58EB0DCE1E73614A0009FD57 /* locationsViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB0DCD1E73614A0009FD57 /* locationsViewC.swift */; };
 		58FDD4701E5F4CFC00F97D86 /* setupAlertData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FDD46F1E5F4CFC00F97D86 /* setupAlertData.swift */; };
 		58FDD4721E5F6B7600F97D86 /* getColumnInArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FDD4711E5F6B7600F97D86 /* getColumnInArray.swift */; };
 		58FDD4741E5F971600F97D86 /* setUpFeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FDD4731E5F971600F97D86 /* setUpFeedData.swift */; };
@@ -263,7 +266,7 @@
 		58BEC4351E6112FD00363FAD /* newMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newMessageViewController.swift; sourceTree = "<group>"; };
 		58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientUpdateViewController.swift; sourceTree = "<group>"; };
 		58CBC0081E4D42D1001A9698 /* toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = toast.swift; sourceTree = "<group>"; };
-		58CBC00A1E4D4432001A9698 /* EMRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMRViewController.swift; sourceTree = "<group>"; };
+		58CBC00A1E4D4432001A9698 /* CaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseViewController.swift; sourceTree = "<group>"; };
 		58CBC00C1E4D463D001A9698 /* PatientRXViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientRXViewController.swift; sourceTree = "<group>"; };
 		58CBC00F1E4D4A39001A9698 /* Container1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container1ViewController.swift; sourceTree = "<group>"; };
 		58CBC0111E4E2066001A9698 /* RxContainer1Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxContainer1Cell.swift; sourceTree = "<group>"; };
@@ -294,6 +297,9 @@
 		58D633711E4D34CB00DC3EB9 /* pills.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pills.png; path = ../../imageFiles/pills.png; sourceTree = "<group>"; };
 		58D633721E4D34CB00DC3EB9 /* telephone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = telephone.png; path = ../../imageFiles/telephone.png; sourceTree = "<group>"; };
 		58D633771E4D360400DC3EB9 /* PatientFeedViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientFeedViewCell.swift; sourceTree = "<group>"; };
+		58EB0DC71E732DC40009FD57 /* caseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = caseCell.swift; sourceTree = "<group>"; };
+		58EB0DCB1E734D200009FD57 /* ServicesC1ViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesC1ViewC.swift; sourceTree = "<group>"; };
+		58EB0DCD1E73614A0009FD57 /* locationsViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = locationsViewC.swift; sourceTree = "<group>"; };
 		58FDD46F1E5F4CFC00F97D86 /* setupAlertData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setupAlertData.swift; sourceTree = "<group>"; };
 		58FDD4711E5F6B7600F97D86 /* getColumnInArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getColumnInArray.swift; sourceTree = "<group>"; };
 		58FDD4731E5F971600F97D86 /* setUpFeedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setUpFeedData.swift; sourceTree = "<group>"; };
@@ -346,16 +352,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		58174CF81E7219C500023003 /* Patient Feed Tab */ = {
+		58174CF81E7219C500023003 /* Feeds Tab */ = {
 			isa = PBXGroup;
 			children = (
 				58D633771E4D360400DC3EB9 /* PatientFeedViewCell.swift */,
 				58D6336B1E4D316A00DC3EB9 /* PatientFeedViewController.swift */,
 				58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */,
 				58174CF91E72209C00023003 /* EMRViewC.swift */,
+				58FDD4751E5FB24E00F97D86 /* SingleEMRViewController.swift */,
+				58FDD4771E5FB40400F97D86 /* EMRCell.swift */,
 				58174CFB1E72253900023003 /* AlertsEventsViewController.swift */,
 			);
-			name = "Patient Feed Tab";
+			name = "Feeds Tab";
 			sourceTree = "<group>";
 		};
 		58272AE91E3FE7EB00E779CF /* User Profile */ = {
@@ -381,17 +389,12 @@
 			isa = PBXGroup;
 			children = (
 				58CBC0191E4E42D5001A9698 /* patient images */,
-				58272AF11E3FFD1E00E779CF /* PTVTableViewController.swift */,
 				58A8DC861E5666D6008711D1 /* Patient Tab */,
-				58174CF81E7219C500023003 /* Patient Feed Tab */,
-				58CBC01A1E4E43DA001A9698 /* PatientScreeningsViewController.swift */,
-				58CBC0201E4E75D8001A9698 /* AScreeningViewController.swift */,
-				58CBC01C1E4E49A9001A9698 /* ScreeningsCell.swift */,
-				58CBC00C1E4D463D001A9698 /* PatientRXViewController.swift */,
-				58CBC00E1E4D495F001A9698 /* Rx Containers */,
-				58CBC00A1E4D4432001A9698 /* EMRViewController.swift */,
-				58FDD4751E5FB24E00F97D86 /* SingleEMRViewController.swift */,
-				58FDD4771E5FB40400F97D86 /* EMRCell.swift */,
+				58EB0DCA1E734C040009FD57 /* Case Tab */,
+				58174CF81E7219C500023003 /* Feeds Tab */,
+				58CBC00E1E4D495F001A9698 /* Rx Tab */,
+				58EB0DC91E734BAE0009FD57 /* Screening Tab */,
+				58272AF11E3FFD1E00E779CF /* PTVTableViewController.swift */,
 				58272AF31E40051900E779CF /* PatientCell.swift */,
 				58272AF71E4105DE00E779CF /* PatientTabBarController.swift */,
 				58272AFD1E412DFE00E779CF /* PatientInformationCell.swift */,
@@ -525,9 +528,10 @@
 			name = helpers;
 			sourceTree = "<group>";
 		};
-		58CBC00E1E4D495F001A9698 /* Rx Containers */ = {
+		58CBC00E1E4D495F001A9698 /* Rx Tab */ = {
 			isa = PBXGroup;
 			children = (
+				58CBC00C1E4D463D001A9698 /* PatientRXViewController.swift */,
 				58FDD4791E60A6CD00F97D86 /* dangerOrange.png */,
 				58CBC00F1E4D4A39001A9698 /* Container1ViewController.swift */,
 				58CBC0171E4E4007001A9698 /* Container3ViewController.swift */,
@@ -535,7 +539,7 @@
 				58CBC0131E4E20B0001A9698 /* RxContainer2Cell.swift */,
 				58CBC0151E4E20CD001A9698 /* RxContainer3Cell.swift */,
 			);
-			name = "Rx Containers";
+			name = "Rx Tab";
 			sourceTree = "<group>";
 		};
 		58CBC0191E4E42D5001A9698 /* patient images */ = {
@@ -580,6 +584,27 @@
 				585DA8B61E53AC6900006183 /* Appointments.swift */,
 			);
 			name = "Local Data Classes";
+			sourceTree = "<group>";
+		};
+		58EB0DC91E734BAE0009FD57 /* Screening Tab */ = {
+			isa = PBXGroup;
+			children = (
+				58CBC01A1E4E43DA001A9698 /* PatientScreeningsViewController.swift */,
+				58CBC0201E4E75D8001A9698 /* AScreeningViewController.swift */,
+				58CBC01C1E4E49A9001A9698 /* ScreeningsCell.swift */,
+			);
+			name = "Screening Tab";
+			sourceTree = "<group>";
+		};
+		58EB0DCA1E734C040009FD57 /* Case Tab */ = {
+			isa = PBXGroup;
+			children = (
+				58CBC00A1E4D4432001A9698 /* CaseViewController.swift */,
+				58EB0DC71E732DC40009FD57 /* caseCell.swift */,
+				58EB0DCB1E734D200009FD57 /* ServicesC1ViewC.swift */,
+				58EB0DCD1E73614A0009FD57 /* locationsViewC.swift */,
+			);
+			name = "Case Tab";
 			sourceTree = "<group>";
 		};
 		BB32753F1E046C7A00699280 /* TaskView */ = {
@@ -887,10 +912,12 @@
 				58A8DCD21E57ABC6008711D1 /* setUpPatientData.swift in Sources */,
 				BB57C2D21DFF41DE00731AC4 /* AppDelegate.swift in Sources */,
 				58CBC0091E4D42D1001A9698 /* toast.swift in Sources */,
+				58EB0DCC1E734D200009FD57 /* ServicesC1ViewC.swift in Sources */,
 				58272AFE1E412DFE00E779CF /* PatientInformationCell.swift in Sources */,
 				58458AC81E45365B005DFEDA /* RangeSlider.swift in Sources */,
 				58272AF21E3FFD1E00E779CF /* PTVTableViewController.swift in Sources */,
 				BB93EA9E1E0349F8000C15D3 /* RegisterViewController.swift in Sources */,
+				58EB0DCE1E73614A0009FD57 /* locationsViewC.swift in Sources */,
 				58D6335B1E4A78C400DC3EB9 /* RangeSliderTrackLayer.swift in Sources */,
 				580790411E6777CA0038FC61 /* setUpInBoxData.swift in Sources */,
 				586BFDE31E3C09AB00DC6770 /* AlertViewController.swift in Sources */,
@@ -899,7 +926,7 @@
 				58272B041E424FC400E779CF /* KeyboardLayoutConstraint.swift in Sources */,
 				58CBC0121E4E2066001A9698 /* RxContainer1Cell.swift in Sources */,
 				58458ABE1E43EB2E005DFEDA /* defualtsComments.swift in Sources */,
-				58CBC00B1E4D4432001A9698 /* EMRViewController.swift in Sources */,
+				58CBC00B1E4D4432001A9698 /* CaseViewController.swift in Sources */,
 				58272AFC1E4120B900E779CF /* PTVDetailViewController.swift in Sources */,
 				58CBC01B1E4E43DA001A9698 /* PatientScreeningsViewController.swift in Sources */,
 				58496C1C1E52843D00DF103A /* TermsViewController.swift in Sources */,
@@ -930,6 +957,7 @@
 				BB51F7C51E009E53008A5EA8 /* gradient.swift in Sources */,
 				585A4D2F1E5D175C00A16118 /* InboxViewController.swift in Sources */,
 				58CBC0181E4E4007001A9698 /* Container3ViewController.swift in Sources */,
+				58EB0DC81E732DC40009FD57 /* caseCell.swift in Sources */,
 				58272AF61E400C2F00E779CF /* addBadge.swift in Sources */,
 				58CBC0211E4E75D8001A9698 /* AScreeningViewController.swift in Sources */,
 				58FDD4701E5F4CFC00F97D86 /* setupAlertData.swift in Sources */,

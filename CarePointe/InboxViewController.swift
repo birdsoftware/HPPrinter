@@ -58,6 +58,7 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 //scale button down
                 newEmailButton.imageEdgeInsets = UIEdgeInsetsMake(10,10,10,10)
         
+        // Setup sement control font and font size
                 let attr = NSDictionary(object: UIFont(name: "Futura", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
                 UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject] , for: .normal)
         

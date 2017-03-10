@@ -54,6 +54,11 @@ class Container3ViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.severity.text = allergyData[indexPath.row][2]
         cell.dateRecognized.text = allergyData[indexPath.row][3]
         
+        if(indexPath.row % 2 == 0){
+            cell.backgroundColor = UIColor.polar()  }
+        else{
+            cell.backgroundColor = UIColor.white  }
+        
         return cell
     }
     

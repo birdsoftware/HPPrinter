@@ -8,14 +8,6 @@
 
 import UIKit
 
-class EMRCell: UITableViewCell {
-
-    
-    @IBOutlet weak var EMRTitle: UILabel!
-    
-
-}
-
 
 class EMRUpdateCell: UITableViewCell {
     

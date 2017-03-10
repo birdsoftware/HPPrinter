@@ -94,9 +94,9 @@ class PatientRXViewController: UIViewController {
         switch model {
         case 375:  /*  iPhone  */          heightBottum = 400.0
                                         topHeight = -100.0
-        case 414:  /* iPhone + */          heightBottum = 467.0
+        case 414:  /* iPhone + */          heightBottum = 477.0
         
-        case 320:  /*   iPad   */          heightBottum = 467.0
+        case 320:  /*   iPad   */          heightBottum = 477.0
 
         default: print("UIDevice current model not 375 'iPhone', 414 'iPhone+' or 320 'ipad mini'")
         heightBottum = 467.0

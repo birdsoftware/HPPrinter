@@ -61,6 +61,11 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.frequency.text = medicationData[indexPath.row][2]
         cell.route.text = medicationData[indexPath.row][3]
         
+        if(indexPath.row % 2 == 0){
+            cell.backgroundColor = UIColor.polar()  }
+        else{
+            cell.backgroundColor = UIColor.white  }
+        
         return cell
     }
     

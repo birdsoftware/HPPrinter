@@ -55,6 +55,11 @@ class PTVDetailViewController: UIViewController {
         // show/hide accept/decline/complete buttons based on status
         let patientStatus = UserDefaults.standard.string(forKey: "patientStatus")
         updatePatientView(status: patientStatus!)
+        
+        // Setup sement control font and font size
+        let attr = NSDictionary(object: UIFont(name: "Futura", size: 15.0)!, forKey: NSFontAttributeName as NSCopying)
+        UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject] , for: .normal)
+        
 
     }
     
