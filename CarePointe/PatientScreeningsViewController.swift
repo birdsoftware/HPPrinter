@@ -55,7 +55,12 @@ class PatientScreeningsViewController: UIViewController, UITableViewDelegate, UI
     }
     //2 return number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         if(screeningsData.isEmpty == false){
         return screeningsData.count
+        }
+         else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

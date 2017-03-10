@@ -22,6 +22,7 @@ class PTVTableViewController: UITableViewController {
     var appTime = [[String]]()
     var appDate = [[String]]()
     var appMessage = [[String]]()
+    var appPatImage = [[String]]()
 
 
     override func viewDidLoad() {
@@ -39,6 +40,7 @@ class PTVTableViewController: UITableViewController {
                 getUpdateAppointmentData()
                 print("getUpdateAppointmentData")
 
+                appPatImage = UserDefaults.standard.object(forKey: "appPatImage") as! [[String]]
         //} else {//[no] does not exist
             //setUpAppointmentData()
             //print("setUpAppointmentData there is no key onlyDoOnce")
@@ -63,6 +65,7 @@ class PTVTableViewController: UITableViewController {
         self.title = "Patients by Referral Status"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.navigationBar.tintColor = .white // "< Back" is white color in nav controler
+        
     }
     
     
@@ -137,8 +140,12 @@ class PTVTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #return the number of rows
-        return self.appPat[section].count//patients[section].count
-
+        if (appPat.isEmpty == false) {
+            return self.appPat[section].count//patients[section].count
+        }
+        else {
+            return 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -186,10 +193,12 @@ class PTVTableViewController: UITableViewController {
             let patientName = appPat[sectionOfSelectedRow][selectedRow]// + "'s Information" as String
             let appointmentID = appID[sectionOfSelectedRow][selectedRow] as String
             let patientStatus = section[sectionOfSelectedRow]
+            let patientImage = appPatImage[sectionOfSelectedRow][selectedRow]
             
             // Store data locally change to mySQL? server later
             let defaults = UserDefaults.standard
             defaults.set(patientName, forKey: "patientName")
+            defaults.set(patientImage, forKey: "patientPic")
             defaults.set(appointmentID, forKey: "appointmentID")
             defaults.set(patientStatus, forKey: "patientStatus") //need this to hide the accept and decline buttons in completed view
             defaults.set(selectedRow, forKey: "selectedRow")

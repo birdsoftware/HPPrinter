@@ -40,7 +40,12 @@ extension UIViewController {
             ["Anita Cintash","02/01/17 09:11PM","musical IDT Update some more descrption text would go here"]
         ]
 
-        UserDefaults.standard.set(alertData.count, forKey: "alertCount")
+        var alertDataCount = 0
+        if(alertData.isEmpty == false){
+            alertDataCount = alertData.count
+        }
+        
+        UserDefaults.standard.set(alertDataCount, forKey: "alertCount")
         UserDefaults.standard.set(alertData, forKey: "alertData")
         UserDefaults.standard.synchronize()
         

@@ -77,7 +77,7 @@ class SignInViewController: UIViewController {
                 UserDefaults.standard.set(true, forKey: "isUserSignedIn")
                 UserDefaults.standard.synchronize()
                 
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: false, completion: nil)
             }
         }
     }

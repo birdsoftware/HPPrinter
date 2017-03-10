@@ -150,7 +150,12 @@ class AvailabilityViewController: UIViewController, UITableViewDelegate, UITable
     
     // return number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return availabilitData.count
+        if(availabilitData.isEmpty == false){
+            return availabilitData.count
+        }
+        else {
+            return 0
+        }
     }
     
     // return actual CELL to be displayed

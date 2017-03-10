@@ -16,6 +16,11 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     //table view
     @IBOutlet weak var patientFeedTableView: UITableView!
     
+    @IBOutlet weak var patientFeedSegmentC: UISegmentedControl!
+    
+    @IBOutlet weak var containerView1: UIView!
+    @IBOutlet weak var containerView2: UIView!
+    
     
     var times = [String]()
     var dates = [String]()
@@ -44,6 +49,10 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         //scale button down
         leaveAnUpdate.imageEdgeInsets = UIEdgeInsetsMake(10,10,10,10)
         
+        // Hide container views
+        containerView1.isHidden = true
+        containerView2.isHidden = true
+        
         
     }
     
@@ -61,6 +70,29 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
             patientFeedTableView.reloadData()
     }
     
+    
+    // Buttons
+    
+    @IBAction func feedsSegmentControllerTapped(_ sender: Any) {
+        
+        switch patientFeedSegmentC.selectedSegmentIndex
+        {
+        case 0:
+            containerView1.isHidden = true
+            containerView2.isHidden = true
+        case 1:
+            containerView1.isHidden = false
+            containerView2.isHidden = true
+        case 2:
+            containerView1.isHidden = true
+            containerView2.isHidden = false
+        default:
+            break;
+        }
+
+    }
+    
+    
     //
     // #MARK: - UNWIND SEGUE
     //
@@ -74,7 +106,12 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     
     //return number of rows in each section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return message.count
+        if(message.isEmpty == false){
+            return message.count
+        }
+        else {
+            return 0
+        }
     }
     
     //return actual CELL to be displayed

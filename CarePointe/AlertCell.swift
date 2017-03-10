@@ -15,3 +15,13 @@ class AlertTabelCell: UITableViewCell {
     @IBOutlet weak var message: UILabel!
 
 }
+
+
+class AlertEventsTabelCell: UITableViewCell {
+    //identifier: alertsevents
+    @IBOutlet weak var patientName: UILabel!
+    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var message: UILabel!
+    
+    
+}

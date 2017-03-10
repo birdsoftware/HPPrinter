@@ -22,6 +22,10 @@ extension UIViewController {
                         [ "Cindy Lopper","Marx Ehrlich", "Alicia Watanabe", "Josh Brown"],
                         [ "Desire Aller", "Paulita Wix", "Jenny Binkley", "Lawanda Arno", "Jackqueline Naumann", "Regine Kohnke","Brad Birdsong", "Dallas Remy", "Noel Devitt","Mike Brown","Sev Donada"]]
         
+        let patientImageNames = [["RuthQuinones.jpg","","","","","","","",""],
+                                 ["","","",""],
+                                 ["","","","","","","","","","",""]]
+        
         let times = [["12:32 AM","01:56 PM","03:22 PM","11:12 AM","10:52 AM","12:01 PM","07:02 AM","05:05 PM","07:25 PM"],
                      ["12:32 AM","01:56 PM","03:22 PM","11:12 AM"],
                      ["12:32 AM","01:56 PM","03:22 PM","11:12 AM","10:52 AM","12:01 PM","07:02 AM","05:05 PM","07:25 PM","09:43 PM","10:52 AM"]]
@@ -48,9 +52,10 @@ extension UIViewController {
         self.setUpInBoxDataInDefaults()
         self.setUpSentBoxDataInDefaults()
         
-        UserDefaults.standard.set(9, forKey: "inboxCount")
+        
         UserDefaults.standard.set(appointmentIDs, forKey: "appID")
         UserDefaults.standard.set(patients, forKey: "appPat")
+        UserDefaults.standard.set(patientImageNames, forKey: "appPatImage")
         UserDefaults.standard.set(times, forKey: "appTime")
         UserDefaults.standard.set(dates, forKey: "appDate")
         UserDefaults.standard.set(appointmentMessage, forKey: "appMessage")

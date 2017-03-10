@@ -46,7 +46,10 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     //2 return number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return medicationData.count
+        if(medicationData.isEmpty == false){
+            return medicationData.count
+        }
+            return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

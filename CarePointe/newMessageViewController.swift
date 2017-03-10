@@ -34,6 +34,16 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
     var sendToList:[String] = []
     var recipientCount:Int = 0
     
+    var isMe = false
+    var inBoxData:Array<Dictionary<String,String>> = []
+    
+    //Segue from A Message Vars
+    var isReply = false
+    var segueFromList: String!
+    var segueDate: String!
+    var segueSubject: String!
+    var segueMessage:String!
+    
     // Drop down list resources:
     //  http://www.iosinsight.com/uitextfield-drop-down-list-in-swift/
     // Getting/Setting Cursor Position:
@@ -102,6 +112,21 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
                            name: .UIKeyboardWillHide,
                            object: nil)
         
+        // New Reply? Do set up?
+        if (isReply == true){//segueFromList.isEmpty == false) {
+
+            addUsersTextField.text = segueFromList
+            subjectTextField.text = segueSubject
+            
+            messageBox.text = segueMessage
+            
+            //place cursor in messageBox
+            messageBox.becomeFirstResponder()
+            
+            //Set cursor position
+            let newPosition = messageBox.beginningOfDocument
+            messageBox.selectedTextRange = messageBox.textRange(from: newPosition, to: newPosition)
+        }
     }
     
     
@@ -288,9 +313,29 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         let currentTime = returnCurrentDateOrCurrentTime(timeOnly: true)//4:41 PM
         let todaysDate = returnCurrentDateOrCurrentTime(timeOnly: false)//"2/14/2017"
         
-        sentBoxData.append(["recipient":recipient,"title":"Position","subject":subject,"message":message,"date":todaysDate,"time":currentTime])
+        sentBoxData.append(["recipient":recipient,"title":"Position","subject":subject,"message":message,"date":todaysDate,"time":currentTime,"isRead":"false"])
         UserDefaults.standard.set(sentBoxData, forKey: "sentData")
         UserDefaults.standard.synchronize()
+    }
+    
+    func appendNewMessageToInBoxData(){
+        
+        if isKeyPresentInUserDefaults(key: "inBoxData"){
+            
+            inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
+       
+            let recipient = addUsersTextField.text!
+            let subject = subjectTextField.text!
+            let message = messageBox.text!
+            
+            let currentTime = returnCurrentDateOrCurrentTime(timeOnly: true)//4:41 PM
+            let todaysDate = returnCurrentDateOrCurrentTime(timeOnly: false)//"2/14/2017"
+            
+            inBoxData.append(["recipient":recipient,"title":"Position","subject":subject,"message":message,"date":todaysDate,"time":currentTime,"isRead":"false"])
+            UserDefaults.standard.set(inBoxData, forKey: "inBoxData")
+            UserDefaults.standard.synchronize()
+            
+        }
     }
 
     
@@ -318,6 +363,19 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
             }, completion: { finished in
                 
                 self.appendNewMessageToSentBoxData()
+                
+                //Check if selected me
+                let selectedName = "Jennifer Johnson"
+                
+                // IF typedSubstring contains Selected, ignore
+                let typedSubstring = self.addUsersTextField.text! //search
+                if typedSubstring.range(of:selectedName) != nil {
+                    //print("\(selectedName) already exists!")
+                    
+                    self.isMe = true
+
+                    self.appendNewMessageToInBoxData()
+                }
                 
                 // Instantiate a view controller from Storyboard and present it
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -376,30 +434,54 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         var selectedData:Dictionary<String,String> = SearchData[indexPath.row]
         
+        //Check if selected me
+        if(selectedData["name"] == "Jennifer Johnson"){
+            isMe = true
+        }
+        
         // Row selected, so set textField to relevant value, hide tableView, endEditing can trigger some other action according to requirements
-        if(addUsersTextField.text?.isEmpty)! {
+        if(addUsersTextField.text?.isEmpty == true) {
             
             addUsersTextField.text = selectedData["name"]!
             //SearchData.remove(at: indexPath.row)
             recipientCount = 1
         } else {
             
-            // Remove what has been typed already
+            // No Remove what has been typed already
             let typedSubstring = addUsersTextField.text! //search
             let selectedName = selectedData["name"]!
             
             // IF typedSubstring contains Selected, ignore
             if typedSubstring.range(of:selectedName) != nil {
                 print("\(selectedName) already exists!")
-                //alertMessageLabel.text = "\(selectedName) already exists!"
             }
             else //typedSubstring !contains Selected, add Selected and remove anything !recipient
             {
-                //SearchData.remove(at: indexPath.row)
                 
                 //remove typed substring if less than 1 recipient exists (selectedData)
                 if (recipientCount < 1) {
-                    addUsersTextField.text = selectedData["name"]! //there is a bug here if 1.type char, 2. select user, 3. type comma, 4. select user this user replaces recipient line
+                    //name exists in typed?
+                    // Yes keep this name
+                    var names: [String] = []
+                    var isNameInUserTextField = false
+                    
+                    for dict in AllData { //thing is pic, name, position
+                        guard let name = dict["name"] else { continue }
+                        
+                        if typedSubstring.range(of:name) != nil {//check if name is in the typedSubstring
+                            isNameInUserTextField = true
+                            names.append(name)
+                        }
+                    }
+                    //Yes name found
+                    let stringNames = names.joined(separator: ", ")
+                    if(isNameInUserTextField)
+                    {
+                        addUsersTextField.text = stringNames  + ", " + selectedData["name"]!
+                    }
+                    else {//No name so remove typed text
+                        addUsersTextField.text = selectedData["name"]! //there is a bug here if 1.type char, 2. select user, 3. type comma, 4. select user this user replaces recipient line
+                    }
                 }
                 else {
                     addUsersTextField.text = addUsersTextField.text!  + ", " + selectedData["name"]!

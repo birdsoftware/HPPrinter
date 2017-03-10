@@ -67,7 +67,12 @@ class TasksViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     // returns the number of rows in each component..
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return careTeamList.count
+        if(careTeamList.isEmpty == false){
+            return careTeamList.count
+        }
+        else {
+            return 0
+        }
     }
     // returns data to display in care team picker
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

@@ -36,9 +36,15 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if isKeyPresentInUserDefaults(key: "inBoxData"){
             inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
+            inBoxSent.setTitle("Inbox (\(inBoxData.count))", forSegmentAt: 0)
+        } else {
+            inBoxSent.setTitle("Inbox (\(0))", forSegmentAt: 0)
         }
         if isKeyPresentInUserDefaults(key: "sentData"){
             sentBoxData = UserDefaults.standard.value(forKey: "sentData") as! Array<Dictionary<String, String>>
+            inBoxSent.setTitle("Sent (\(sentBoxData.count))", forSegmentAt: 1)
+        } else {
+            inBoxSent.setTitle("Sent (\(0))", forSegmentAt: 1)
         }
         
         SearchData = inBoxData//need this to start off tableView with all data and not blank table
@@ -52,9 +58,8 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 //scale button down
                 newEmailButton.imageEdgeInsets = UIEdgeInsetsMake(10,10,10,10)
         
-            //searchBar.layer.borderWidth = 1
-            //searchBar.layer.borderColor = UIColor(white: 1.0, alpha: 0.1).cgColor// UIColor.Fern().cgColor
-        //searchBar.backgroundImage = UIImage(named: "jennifer.png")
+                let attr = NSDictionary(object: UIFont(name: "Futura", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
+                UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject] , for: .normal)
         
         
         //delegates
@@ -74,7 +79,9 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
             UserDefaults.standard.synchronize()
             searchBar.placeholder = "Search Inbox"
             selectedSegmentIndexValue = 0
-            inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
+            if isKeyPresentInUserDefaults(key: "inBoxData") {
+                inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
+            }
             SearchData = inBoxData
             inboxTable.reloadData()
         case 1:
@@ -82,7 +89,9 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
             UserDefaults.standard.synchronize()
             searchBar.placeholder = "Search Sent"
             selectedSegmentIndexValue = 1
-            sentBoxData = UserDefaults.standard.value(forKey: "sentData") as! Array<Dictionary<String, String>>
+            if isKeyPresentInUserDefaults(key: "sentData"){
+                sentBoxData = UserDefaults.standard.value(forKey: "sentData") as! Array<Dictionary<String, String>>
+            }
             SearchData = sentBoxData
             inboxTable.reloadData()
         default:
@@ -186,7 +195,12 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // " 1. click cell drag to second view. select the “show” segue in the “Selection Segue” section. "
     //http://www.codingexplorer.com/segue-uitableviewcell-taps-swift/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SearchData.count//fromName[0].count
+        if(SearchData.isEmpty == false){
+            return SearchData.count
+        }
+        else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -195,9 +209,17 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var Data:Dictionary<String,String> = SearchData[indexPath.row]
         
-        cell.backgroundColor = UIColor.polar()
+        let status:String = Data["isRead"]!
+        
+        
         // Set text from the data model
-        cell.inboxStatusImage.image = UIImage(named: "orange.circle.png")
+        if( status == "false"){
+            cell.inboxStatusImage.image = UIImage(named: "orange.circle.png")
+            cell.backgroundColor = UIColor.polar()
+        } else {
+            cell.inboxStatusImage.image = UIImage(named: "gray.circle.png")
+            cell.backgroundColor = UIColor.white
+        }
         cell.inboxFromTitle.text = Data["title"]
         //if recipients > 1 show first recipients plus number of remaining recipients
         
@@ -219,23 +241,21 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //if (tableView == self.alertTableView)
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             
-            //remove entire row
+            // Remove entire row
             SearchData.remove(at: (indexPath as NSIndexPath).row)
 
             
-            
-            // set Inbox and Sent Badge Numbers
-            //let boxCount = SearchData.count
-            //UserDefaults.standard.integer(forKey: "boxCount")
-            
+            // Reset Inbox and Sent Badge Numbers
             // NOTE SearchData = inBoxData if SEGMENT=0, =sentBoxData if SEG=1
             if( selectedSegmentIndexValue == 0 )
             {
                 UserDefaults.standard.set(SearchData, forKey: "inBoxData")
+                inBoxSent.setTitle("Inbox (\(SearchData.count))", forSegmentAt: 0)
             }
             if( selectedSegmentIndexValue == 1 )
             {
                 UserDefaults.standard.set(SearchData, forKey: "sentData")
+                inBoxSent.setTitle("Sent (\(SearchData.count))", forSegmentAt: 1)
             }
             
             UserDefaults.standard.synchronize()
@@ -256,13 +276,25 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let selectedRow = ((inboxTable.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
             var Data:Dictionary<String,String> = SearchData[selectedRow]
             
+            // Mark this message as read ,"isRead":"true"
+                SearchData[selectedRow]["isRead"] = "true"
+                if( selectedSegmentIndexValue == 0 )
+                {
+                    UserDefaults.standard.set(SearchData, forKey: "inBoxData")
+                }
+                if( selectedSegmentIndexValue == 1 )
+                {
+                    UserDefaults.standard.set(SearchData, forKey: "sentData")
+                }
+
             
-            if let toViewController = segue.destination as? /*1 sendTo ViewController*/ AMessageViewController {
+            if let toViewController = segue.destination as? /*1 sendTo AMessageViewController*/ AMessageViewController {
                 /*maker sure .segueFromList is a var delaired in sendTo ViewController*/
                 toViewController.segueFromList = Data["recipient"]//"Dr. Gary Webb"
                 toViewController.segueDate = Data["date"]! + " " + Data["time"]! //"3/2/17 11:32 AM"
-                toViewController.segueSubject = Data["subject"] //"Subject: Patient Update"
-                toViewController.segueMessage =  Data["message"] //"The Incredible Human Body: The human body is defined as the entire structure of a human being and comprises a head, neck, trunk (which includes the thorax and abdomen), arms and hands, legs and feet.  Every part of the body is composed of various types of cells, the fundamental unit of life. The study of the human body involves both anatomy and physiology.  Human anatomy is defined as the primarily scientific study of the morphology of the human body. Human physiology is defined as the science of the mechanical, physical, bio-electrical, and biochemical functions of humans in good health, their organs, and the cells of which they are composed."
+                toViewController.segueSubject = Data["subject"]
+                toViewController.segueMessage =  Data["message"]
+                toViewController.segueSelectedRow = selectedRow
             }
             
         }

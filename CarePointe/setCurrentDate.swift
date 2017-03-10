@@ -16,9 +16,10 @@ extension UIViewController {
         let date = Date()
         let formatter = DateFormatter()
         
-        formatter.dateFormat = "M/dd/yy"
+        //formatter.dateFormat = "M/dd/yy" //"2/04/2017"
+        formatter.dateStyle = .short //"2/4/2017"
         
-        let result = formatter.string(from: date) //"2/14/2017"
+        let result = formatter.string(from: date)
         UserDefaults.standard.set(result, forKey: "currentDate")
         UserDefaults.standard.synchronize()
     }
@@ -36,8 +37,9 @@ extension UIViewController {
         } else {
             
             let formatter = DateFormatter()
-            formatter.dateStyle = .short // = "M/dd/yy"
-            return formatter.string(from: date) //"2/14/2017"
+            formatter.dateStyle = .short //"2/4/2017"
+            //formatter.dateFormat = "M/dd/yy" //"2/04/2017"
+            return formatter.string(from: date)
             
         }
         

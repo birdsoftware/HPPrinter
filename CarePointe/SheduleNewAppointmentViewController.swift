@@ -114,7 +114,7 @@ class SheduleNewAppointmentViewController: UIViewController {
                 
                 //SHOW Appointment date and Time in View UI
                     let dateTimeFormat = DateFormatter()
-                    dateTimeFormat.dateStyle = DateFormatter.Style.short
+                    dateTimeFormat.dateStyle = DateFormatter.Style.short //"2/4/2017"
                     dateTimeFormat.timeStyle = DateFormatter.Style.short
                     let stringTimeDate = dateTimeFormat.string(for: dateAndTime!)!
                     self.appointmentDateTime.text = "  Appointment Date, Time: \(stringTimeDate)"

@@ -47,8 +47,13 @@ class HamburgerViewController: UIViewController {
         let numberNewPatients: Int = UserDefaults.standard.integer(forKey: "numberNewPatients")
         patientsCount.text = "\(numberNewPatients)"
         
-        let inboxNumberMessages = UserDefaults.standard.integer(forKey: "inboxCount")
-        inboxCount.text = String(inboxNumberMessages)
+        // UPDATE MESSAGES NOT READ COUNT ------------------------------------------
+        var inboxCountInt = UserDefaults.standard.integer(forKey: "inboxCount")
+        if isKeyPresentInUserDefaults(key: "inBoxData"){
+            let inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
+            inboxCountInt = inBoxData.count
+        }
+        inboxCount.text = String(inboxCountInt)
     }
     
     /*

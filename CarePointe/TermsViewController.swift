@@ -55,12 +55,6 @@ class TermsViewController: UIViewController {
     }
     
     @IBAction func agreeBoxChecked(_ sender: Any) {
-       // if (toggleAgreeButton) {
-        //    agreeButton.setImage(UIImage(named:"box.png"), for: .normal)
-        //    toggleAgreeButton = false
-        //} else {
-            //agreeButton.setImage(UIImage(named:"checkBox.png"), for: .normal)
-            //toggleAgreeButton = true
             
             // if eSign is TRUE do segue to SignInViewController
             checkIfeSignCompleted()
@@ -159,7 +153,7 @@ class TermsViewController: UIViewController {
             if(userDidESign){
                 //agreeButton.setImage(UIImage(named:"checkBox.png"), for: .normal)
                 //self.performSegue(withIdentifier: "termsCompleted", sender: self)
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: false, completion: nil)
             } else {
             //show alert
             displayESignNotComplete()

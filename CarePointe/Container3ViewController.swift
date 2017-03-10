@@ -37,7 +37,12 @@ class Container3ViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     //2 return number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allergyData.count
+        if(allergyData.isEmpty == false){
+            return allergyData.count
+        }
+        else{
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

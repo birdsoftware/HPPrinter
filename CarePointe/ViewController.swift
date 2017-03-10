@@ -98,6 +98,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 name: NSNotification.Name(rawValue: "updateAlert"),
                 object: nil)
         
+        // LOG OUT After 30 Minutes
+        //let thirtyMinutes: TimeInterval = 3600.0
+        Timer.scheduledTimer(timeInterval: 3600.0,
+                             target: self,
+                             selector: #selector(logOutAfter30Minutes),
+                             userInfo: nil,
+                             repeats: true)
+        
+        //NotificationCenter.default.addObserver(self, selector: #selector(logOutAfter30Minutes), name:NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        
         // UI Set Up
         
             // TOP SEARCH BAR Set up -------------------------------------------
@@ -154,16 +164,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // GET DATA FROM DEFAULTS --------------------------------------------------
         if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does this exist? [yes]
-            
             getUpdateAppointmentData()
             print("getUpdateAppointmentData")
-            
         } else {//[no] does not exist
             setUpAppointmentData()
             print("setUpAppointmentData there is no key onlyDoOnce")
         }
         
-        let inboxCount = UserDefaults.standard.integer(forKey: "inboxCount")
+        // UPDATE MESSAGES NOT READ COUNT ------------------------------------------
+        var inboxCount = UserDefaults.standard.integer(forKey: "inboxCount")
+        if isKeyPresentInUserDefaults(key: "inBoxData"){
+            let inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
+            inboxCount = inBoxData.count
+        }
         unreadMessagesLabel.text = String(inboxCount)
         
         
@@ -197,8 +210,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 0.27, green: 0.52, blue: 0.0, alpha: 1.0)
         
         //save appointments count, inbox patients count
-        let numberNewPatients = (appPat[0].count)
-        let numberScheduledPatients = (appPat[1].count)
+        var numberNewPatients = 0
+        var numberScheduledPatients = 0
+        if (appPat.isEmpty == false) {
+            
+            //"There are appDate objects!"
+            numberNewPatients = (appPat[0].count)
+            numberScheduledPatients = (appPat[1].count)
+            
+        }
         
         UserDefaults.standard.set(numberScheduledPatients, forKey: "numberScheduledPatients")
         //inbox needed
@@ -376,6 +396,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    // --- LOG OUT AFTER 30 MINUTES ---
+    func logOutAfter30Minutes() {
+        
+        UserDefaults.standard.set(false, forKey: "isUserSignedIn")
+        UserDefaults.standard.synchronize()
+        
+        self.performSegue(withIdentifier: "ShowLogInView", sender: self)
+    }
+    
+    
     func setHideAndShowOffsetFromDeviceType() {
         let model = UIDevice.current.modelSize //return device model size
         
@@ -435,52 +465,58 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
         //searchText = strDate //This contains date selected "2/17/17"
         
-        var integerArray:[Int] = []
-    
-        self.filteredDates = self.appDate[1].filter({ (text) -> Bool in
-        let tmp: NSString = text as NSString
-        let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+        if (appDate.isEmpty == false) {
+            print("There are appDate objects!")
         
-        //filteredAlertImages = alertImageNames.filter({text -> Bool in range.location != NSNotFound})
+            var integerArray:[Int] = []
         
-        integerArray.append(range.location)
-        return range.location != NSNotFound //NSNotFound is NSIntegerMax range.location if item not found returns 2^63 or 9223372036854775807
-        })
-        
-        
-        var index = 1
-        self.filteredTime.removeAll()
-        self.filteredPatient.removeAll()
-        self.filteredMessage.removeAll()
-        self.filteredAppID.removeAll()
-        for i in integerArray {
-            if i != NSNotFound {
-                //TEST print("match \(i),\(index)") //testing
-                //add
-                self.filteredTime.append(self.appTime[1][index-1])
-                self.filteredPatient.append(self.appPat[1][index-1])
-                self.filteredMessage.append(self.appMessage[1][index-1])
-                self.filteredAppID.append(self.appID[1][index-1])
-                if(index < integerArray.count) {
-                    index += 1
+            self.filteredDates = self.appDate[1].filter({ (text) -> Bool in
+                let tmp: NSString = text as NSString
+                let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+                
+                //filteredAlertImages = alertImageNames.filter({text -> Bool in range.location != NSNotFound})
+                
+                integerArray.append(range.location)
+                return range.location != NSNotFound //NSNotFound is NSIntegerMax range.location if item not found returns 2^63 or 9223372036854775807
+            })
+            
+            
+            var index = 1
+            self.filteredTime.removeAll()
+            self.filteredPatient.removeAll()
+            self.filteredMessage.removeAll()
+            self.filteredAppID.removeAll()
+            for i in integerArray {
+                if i != NSNotFound {
+                    //TEST print("match \(i),\(index)") //testing
+                    //add
+                    self.filteredTime.append(self.appTime[1][index-1])
+                    self.filteredPatient.append(self.appPat[1][index-1])
+                    self.filteredMessage.append(self.appMessage[1][index-1])
+                    self.filteredAppID.append(self.appID[1][index-1])
+                    if(index < integerArray.count) {
+                        index += 1
+                    }
+                }
+                else {
+                    //remove
+                    //TEST print("not match \(i),\(index)") //testing
+                    if(index < integerArray.count) {
+                        index += 1
+                    }
                 }
             }
-            else {
-                //remove
-                //TEST print("not match \(i),\(index)") //testing
-                if(index < integerArray.count) {
-                    index += 1
-                }
-            }
+            
+            print(self.filteredDates)
+            
+            self.filterActive = true;
+
+            showAlertIfTasksTableEmpty()
+            
+            self.tasksTableView.reloadData()
         }
         
-        print(self.filteredDates)
-        
-        self.filterActive = true;
-
-        showAlertIfTasksTableEmpty()
-        
-        self.tasksTableView.reloadData()
+        print("There are no appDate objects!")
     }
     
     func moveSlideMenu(Menu: String) {
@@ -650,7 +686,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return filteredDates.count
         }
         
-        return appPat[1].count//patients.count
+        if (appDate.isEmpty == false) {
+            //print("There are appDate objects!")
+            return appPat[1].count//patients.count
+        }
+        
+        return 0
         
     }
     
