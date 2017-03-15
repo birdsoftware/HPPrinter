@@ -30,8 +30,8 @@ public extension UIDevice {
         case "iPhone5,1", "iPhone5,2":                  return "iPhone 5"       //320
         case "iPhone5,3", "iPhone5,4":                  return "iPhone 5c"      //320
         case "iPhone6,1", "iPhone6,2":                  return "iPhone 5s"      //320
-        case "iPhone7,2":                               return "iPhone 6"       //375
-        case "iPhone7,1":                               return "iPhone 6 Plus"  //414
+        case "iPhone7,2":                               return "iPhone 6"       //375 Screen Width: 375 / Screen Height: 647
+        case "iPhone7,1":                               return "iPhone 6 Plus"  //414  iphone 7+ Screen Width: 414 / Screen Height: 736
         case "iPhone8,1":                               return "iPhone 6s"      //375
         case "iPhone8,2":                               return "iPhone 6s Plus" //414
         case "iPhone8,4":                               return "iPhone SE"
@@ -39,7 +39,7 @@ public extension UIDevice {
         case "iPad3,1", "iPad3,2", "iPad3,3":           return "iPad 3"         //768
         case "iPad3,4", "iPad3,5", "iPad3,6":           return "iPad 4"         //768
         case "iPad4,1", "iPad4,2", "iPad4,3":           return "iPad Air"       //768
-        case "iPad5,3", "iPad5,4":                      return "iPad Air 2"     //768
+        case "iPad5,3", "iPad5,4":                      return "iPad Air 2"     //768 Screen Width: 768 / Screen Height: 1024
         case "iPad2,5", "iPad2,6", "iPad2,7":           return "iPad Mini"      //768
         case "iPad4,4", "iPad4,5", "iPad4,6":           return "iPad Mini 2"    //768
         case "iPad4,7", "iPad4,8", "iPad4,9":           return "iPad Mini 3"    //768

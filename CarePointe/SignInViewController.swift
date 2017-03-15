@@ -164,6 +164,7 @@ func notifyUser(_ msg: String, err: String?) {
         displayAlertMessage(userMessage: "Contact CarePointe Support at 1-800-SUPPORT Monday-Friday 8am-5pm  PST")
     }
     
+    //http://www.techotopia.com/index.php/Implementing_TouchID_Authentication_in_iOS_8_Apps
     @IBAction func signInButtonTapped(_ sender: Any) {
         let userEmail = email.text
         let userPassword = password.text

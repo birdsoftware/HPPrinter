@@ -27,3 +27,12 @@ class AppointmentCell: UITableViewCell {
     }
 
 }
+
+class addContactCell: UITableViewCell {
+    //identifier: addcontactcell
+    
+    @IBOutlet weak var contactImage: UIImageView!
+    @IBOutlet weak var contactName: UILabel!
+    @IBOutlet weak var contactPosition: UILabel!
+    
+}

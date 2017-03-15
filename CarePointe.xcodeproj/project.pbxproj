@@ -97,6 +97,8 @@
 		58B18A541E69E4CF009769A2 /* backArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B18A531E69E4CF009769A2 /* backArrow.png */; };
 		58B18A571E69FEF0009769A2 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B18A551E69FEF0009769A2 /* delete.png */; };
 		58B18A581E69FEF0009769A2 /* reply.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B18A561E69FEF0009769A2 /* reply.png */; };
+		58BBF0231E786F2B00384866 /* closed-envelope-circle-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 58BBF0211E786F2B00384866 /* closed-envelope-circle-white.png */; };
+		58BBF0241E786F2B00384866 /* VideoCameraWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 58BBF0221E786F2B00384866 /* VideoCameraWhite.png */; };
 		58BEC4361E6112FD00363FAD /* newMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BEC4351E6112FD00363FAD /* newMessageViewController.swift */; };
 		58CBC0071E4D4233001A9698 /* PatientUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */; };
 		58CBC0091E4D42D1001A9698 /* toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CBC0081E4D42D1001A9698 /* toast.swift */; };
@@ -263,6 +265,8 @@
 		58B18A531E69E4CF009769A2 /* backArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backArrow.png; path = ../../imageFiles/backArrow.png; sourceTree = "<group>"; };
 		58B18A551E69FEF0009769A2 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = delete.png; path = ../../imageFiles/delete.png; sourceTree = "<group>"; };
 		58B18A561E69FEF0009769A2 /* reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = reply.png; path = ../../imageFiles/reply.png; sourceTree = "<group>"; };
+		58BBF0211E786F2B00384866 /* closed-envelope-circle-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "closed-envelope-circle-white.png"; path = "../../imageFiles/careTeam/closed-envelope-circle-white.png"; sourceTree = "<group>"; };
+		58BBF0221E786F2B00384866 /* VideoCameraWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = VideoCameraWhite.png; path = ../../imageFiles/careTeam/VideoCameraWhite.png; sourceTree = "<group>"; };
 		58BEC4351E6112FD00363FAD /* newMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newMessageViewController.swift; sourceTree = "<group>"; };
 		58CBC0061E4D4233001A9698 /* PatientUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientUpdateViewController.swift; sourceTree = "<group>"; };
 		58CBC0081E4D42D1001A9698 /* toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = toast.swift; sourceTree = "<group>"; };
@@ -545,6 +549,8 @@
 		58CBC0191E4E42D5001A9698 /* patient images */ = {
 			isa = PBXGroup;
 			children = (
+				58BBF0211E786F2B00384866 /* closed-envelope-circle-white.png */,
+				58BBF0221E786F2B00384866 /* VideoCameraWhite.png */,
 				58D633641E4D26AB00DC3EB9 /* smartphone.png */,
 				58174CEC1E71E75A00023003 /* handicap.png */,
 				58D633651E4D26AB00DC3EB9 /* Untitled.png */,
@@ -829,10 +835,12 @@
 				58B18A581E69FEF0009769A2 /* reply.png in Resources */,
 				58B18A541E69E4CF009769A2 /* backArrow.png in Resources */,
 				58254B5A1E0855FF00933B60 /* gray.circle.png in Resources */,
+				58BBF0231E786F2B00384866 /* closed-envelope-circle-white.png in Resources */,
 				58D633741E4D34CB00DC3EB9 /* doctor.png in Resources */,
 				58496C191E527FD900DF103A /* box.png in Resources */,
 				58D633591E4A73F600DC3EB9 /* exitandgoback.png in Resources */,
 				58B18A571E69FEF0009769A2 /* delete.png in Resources */,
+				58BBF0241E786F2B00384866 /* VideoCameraWhite.png in Resources */,
 				586BFDDA1E3BE28C00DC6770 /* gears.png in Resources */,
 				58CEEB521E663D4200104057 /* paper-clip.png in Resources */,
 				58272AED1E3FE93C00E779CF /* user.png in Resources */,

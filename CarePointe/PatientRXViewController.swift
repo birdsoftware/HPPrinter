@@ -17,6 +17,8 @@ class PatientRXViewController: UIViewController {
     @IBOutlet weak var containerView1: UIView!
     @IBOutlet weak var containerView2: UIView!
     @IBOutlet weak var containerView3: UIView!
+    @IBOutlet var mainView: UIView!
+    
     
     @IBOutlet weak var drugToDrugView: UIView!
     @IBOutlet weak var topDrugToDrug: NSLayoutConstraint!
@@ -36,7 +38,7 @@ class PatientRXViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // show patient Name in title
-        bottomHeight = setBottumHeightBasedOnDeviceType() //bottumHeigh used in drags
+        bottomHeight = mainView.bounds.size.height-260//setBottumHeightBasedOnDeviceType() //bottumHeigh used in drags
         
         
         let patientName = UserDefaults.standard.string(forKey: "patientName")
@@ -92,9 +94,9 @@ class PatientRXViewController: UIViewController {
         var heightBottum:CGFloat = 0
         
         switch model {
-        case 375:  /*  iPhone  */          heightBottum = 400.0
+        case 375:  /*  iPhone  */          heightBottum = mainView.bounds.size.height-260//400.0
                                         topHeight = -100.0
-        case 414:  /* iPhone + */          heightBottum = 477.0
+        case 414:  /* iPhone + */          heightBottum = mainView.bounds.size.height-260//477.0
         
         case 320:  /*   iPad   */          heightBottum = 477.0
 

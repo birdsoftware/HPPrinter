@@ -26,10 +26,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var hamburgerOutsideButton: UIButton!
     @IBOutlet weak var alertOutsideButton: UIButton!
-
+    @IBOutlet weak var messageContactButton: UIButton!
+    @IBOutlet weak var videoContactButton: UIButton!
+    
     // views
+    @IBOutlet weak var communicationButtonsView: UIView!
     @IBOutlet weak var hamburgerContainerView: UIView!
     @IBOutlet weak var alertContainerView: UIView!
+    @IBOutlet var mainView: UIView!
     
     
     // labels
@@ -41,8 +45,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var orangeLine3: UILabel!
     @IBOutlet weak var noAppointmentsTodayLabel: UILabel!
     
-    // tabel views
+    // table views
     @IBOutlet weak var tasksTableView: UITableView!
+    @IBOutlet weak var contactsTable: UITableView!
+    
     
     // bar buttons
     @IBOutlet weak var hamburger: UIBarButtonItem!
@@ -88,9 +94,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var searchActive : Bool = false
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //show screen size
+        //var bounds: CGRect = UIScreen.mainScreen().bounds
+        let w:Int  = Int(mainView.bounds.size.width)
+        let h:Int  = Int(mainView.bounds.size.height)
+        print("Screen Width: \(w)")
+        print("Screen Height: \(h)")
         
         // Update Badge # HERE if DELETE occurred in Alert Table ----------------
         NotificationCenter.default.addObserver(self,
@@ -121,10 +133,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.navigationItem.titleView = searchBar
         
                 // set Default bar status.
-                searchBar.searchBarStyle = UISearchBarStyle.default
+                searchBar.searchBarStyle = UISearchBarStyle.prominent//.default
         
                 // change the color of cursol and cancel button.
                 searchBar.tintColor = .black
+        
+                //searchBar.sizeToFit()//need?
         
         
             noAppointmentsTodayLabel.isHidden = true
@@ -136,9 +150,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             AddTaskButton.isHidden = true
             AddTaskButton.layer.cornerRadius = 5
         
+            contactsTable.isHidden = true
+            communicationButtonsView.isHidden = true
+            messageContactButton.layer.cornerRadius = 5
+            videoContactButton.layer.cornerRadius = 5
+        
         // HAMBURGER MENU --------------------------------------------------------
             //1. Determine device Type and set alert & hamburger view offsets
-            setHideAndShowOffsetFromDeviceType()
+            //setHideAndShowOffsetFromDeviceType()
             //2. Move slide menues off screen
             moveSlideMenu(Menu: "hideHamburgerView")
             moveSlideMenu(Menu: "hideAlertView")
@@ -313,7 +332,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     
-    @IBAction func AddTaskButtonTapped(_ sender: Any) {
+    @IBAction func AddTaskButtonTapped(_ sender: Any) {//OLD Add task button
         
         self.performSegue(withIdentifier: "ShowAddTaskView", sender: self)
     }
@@ -406,28 +425,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    func setHideAndShowOffsetFromDeviceType() {
-        let model = UIDevice.current.modelSize //return device model size
-        
-        
-        switch model {
-        case 375:  /*  iPhone  */          alertOffset = 320
-                                        hambuOffset = 320
-                                        print("UIDevice current model is 375 'iPhone'")
-        case 414:  /* iPhone + */          alertOffset = 358
-                                        hambuOffset = 310
-                                        //adjustPhoneButtonSizeForDeviceType(sideLength:60)
-                                        print("UIDevice current model is 414 'iPhone+'")
-        case 320:  /*   iPad   */          alertOffset = 710
-                                        hambuOffset = 670
-                                        //adjustPhoneButtonSizeForDeviceType(sideLength:70)
-                                        print("UIDevice current model is 320 'ipad mini'")
-        default: print("UIDevice current model not 375 'iPhone', 414 'iPhone+' or 320 'ipad mini'")
-                        alertOffset = 0
-                        hambuOffset = 0
-        }
-        
-    }
+//    func setHideAndShowOffsetFromDeviceType() {
+//        let model = UIDevice.current.modelSize //return device model size
+//        
+//        
+//        switch model {
+//        case 375:  /*  iPhone  */          alertOffset = 320
+//                                        hambuOffset = 320
+//                                        print("UIDevice current model is 375 'iPhone'")
+//        case 414:  /* iPhone + */          alertOffset = 358
+//                                        hambuOffset = 310
+//                                        //adjustPhoneButtonSizeForDeviceType(sideLength:60)
+//                                        print("UIDevice current model is 414 'iPhone+'")
+//        case 320:  /*   iPad   */          alertOffset = 710
+//                                        hambuOffset = 670
+//                                        //adjustPhoneButtonSizeForDeviceType(sideLength:70)
+//                                        print("UIDevice current model is 320 'ipad mini'")
+//        default: print("UIDevice current model not 375 'iPhone', 414 'iPhone+' or 320 'ipad mini'")
+//                        alertOffset = 0
+//                        hambuOffset = 0
+//        }
+//        
+//    }
     
 //    func adjustPhoneButtonSizeForDeviceType(sideLength: CGFloat ) {
 //        //phoneButton.layer.frame = CGRectMake(200, 200, 100, 100)
@@ -520,8 +539,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func moveSlideMenu(Menu: String) {
-        let alertMenuConstraint:CGFloat = alertOffset //710//358
-        let hamburgerMenuConstraint:CGFloat = hambuOffset //670//310
+        let alertMenuConstraint:CGFloat = mainView.bounds.size.width - 55 //alertOffset //710//358//320
+        let hamburgerMenuConstraint:CGFloat = alertMenuConstraint//hambuOffset //670//310//320
     
         switch Menu {
         case "showHamburgerView":
@@ -643,7 +662,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchActive = true
         searchBar.showsCancelButton = true
         searchBar.placeholder = ""
-        
+        contactsTable.isHidden = false
+        communicationButtonsView.isHidden = false
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -657,6 +677,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchBar.endEditing(true)
         searchBar.showsCancelButton = false
         searchBar.placeholder = "Start Communication"
+        contactsTable.isHidden = true
+        communicationButtonsView.isHidden = true
     }
     
     
@@ -682,13 +704,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //[2] RETURN number of ROWS in each section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if(filterActive) {
-            return filteredDates.count
-        }
-        
-        if (appDate.isEmpty == false) {
-            //print("There are appDate objects!")
-            return appPat[1].count//patients.count
+        if(tableView == tasksTableView){
+            if(filterActive) {
+                return filteredDates.count
+            }
+            
+            if (appDate.isEmpty == false) {
+                //print("There are appDate objects!")
+                return appPat[1].count//patients.count
+            }
         }
         
         return 0
