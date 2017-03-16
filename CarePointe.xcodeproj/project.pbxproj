@@ -63,6 +63,7 @@
 		58496C191E527FD900DF103A /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = 58496C171E527FD900DF103A /* box.png */; };
 		58496C1A1E527FD900DF103A /* checkBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 58496C181E527FD900DF103A /* checkBox.png */; };
 		58496C1C1E52843D00DF103A /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58496C1B1E52843D00DF103A /* TermsViewController.swift */; };
+		5851F6BA1E7A018600229659 /* setUpUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5851F6B91E7A018600229659 /* setUpUserData.swift */; };
 		585A4D2D1E5CF9A300A16118 /* moveAppointmentFromAcceptedToCompleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585A4D2C1E5CF9A300A16118 /* moveAppointmentFromAcceptedToCompleted.swift */; };
 		585A4D2F1E5D175C00A16118 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585A4D2E1E5D175C00A16118 /* InboxViewController.swift */; };
 		585A4D311E5E008100A16118 /* InboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585A4D301E5E008100A16118 /* InboxCell.swift */; };
@@ -231,6 +232,7 @@
 		58496C171E527FD900DF103A /* box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = box.png; path = ../../imageFiles/box.png; sourceTree = "<group>"; };
 		58496C181E527FD900DF103A /* checkBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkBox.png; path = ../../imageFiles/checkBox.png; sourceTree = "<group>"; };
 		58496C1B1E52843D00DF103A /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		5851F6B91E7A018600229659 /* setUpUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setUpUserData.swift; sourceTree = "<group>"; };
 		585A4D2C1E5CF9A300A16118 /* moveAppointmentFromAcceptedToCompleted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = moveAppointmentFromAcceptedToCompleted.swift; sourceTree = "<group>"; };
 		585A4D2E1E5D175C00A16118 /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
 		585A4D301E5E008100A16118 /* InboxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxCell.swift; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				58327A6C1E64DE40006F4FB4 /* setUserImage.swift */,
 				585A4D2C1E5CF9A300A16118 /* moveAppointmentFromAcceptedToCompleted.swift */,
 				58A8DCD11E57ABC6008711D1 /* setUpPatientData.swift */,
+				5851F6B91E7A018600229659 /* setUpUserData.swift */,
 				58FDD46F1E5F4CFC00F97D86 /* setupAlertData.swift */,
 				58FDD4731E5F971600F97D86 /* setUpFeedData.swift */,
 				580790401E6777CA0038FC61 /* setUpInBoxData.swift */,
@@ -965,6 +968,7 @@
 				BB51F7C51E009E53008A5EA8 /* gradient.swift in Sources */,
 				585A4D2F1E5D175C00A16118 /* InboxViewController.swift in Sources */,
 				58CBC0181E4E4007001A9698 /* Container3ViewController.swift in Sources */,
+				5851F6BA1E7A018600229659 /* setUpUserData.swift in Sources */,
 				58EB0DC81E732DC40009FD57 /* caseCell.swift in Sources */,
 				58272AF61E400C2F00E779CF /* addBadge.swift in Sources */,
 				58CBC0211E4E75D8001A9698 /* AScreeningViewController.swift in Sources */,
