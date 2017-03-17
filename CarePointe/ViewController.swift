@@ -72,6 +72,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var w:Int = 0
     var h:Int = 0
     
+    var strDate:String = ""
+    
     //
     // Class Public Data
     //
@@ -213,7 +215,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         
         // RELOAD table based on current date if date not selected from PICKER -----
-        updateTableByDate(searchText: currentDateFromDefaults!)
+        if (strDate.isEmpty == true) {
+            updateTableByDate(searchText: currentDateFromDefaults!)
+        } else {
+            updateTableByDate(searchText: strDate)
+        }
         
         // ADD BADGE to Right Bar Button Item in nav controller --------------------
         var alertCount = 0
@@ -476,13 +482,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let dateFormat = DateFormatter()
                 dateFormat.dateStyle = DateFormatter.Style.short
                 //dateFormat.timeStyle = DateFormatter.Style.short --NO TIME
-                let strDate = dateFormat.string(for: date!)!
+                self.strDate = dateFormat.string(for: date!)!
                 //self.dateLabel.text = "\(strDate)"
-                self.dateDisplayButton.setTitle(strDate, for: .normal)
-                UserDefaults.standard.setValue(strDate ,forKey: "newDate")
+                self.dateDisplayButton.setTitle(self.strDate, for: .normal)
+                UserDefaults.standard.setValue(self.strDate ,forKey: "newDate")
                 
                 //----- UPDATE TABLE BY DATE SELECTED ---------
-                self.updateTableByDate(searchText: strDate)
+                self.updateTableByDate(searchText: self.strDate)
                 
             }
         }

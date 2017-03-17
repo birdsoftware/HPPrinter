@@ -80,7 +80,6 @@
 		586BFDE51E3C0C4800DC6770 /* AlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE41E3C0C4800DC6770 /* AlertCell.swift */; };
 		586BFDE71E3C17D700DC6770 /* hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE61E3C17D700DC6770 /* hexColor.swift */; };
 		587FFECF1E64A8C800078EFC /* UIImageFixOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587FFECE1E64A8C800078EFC /* UIImageFixOrientation.swift */; };
-		588BE2621E6F7D8B00BA78C3 /* RuthQuinones.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 588BE2611E6F7D8B00BA78C3 /* RuthQuinones.jpg */; };
 		588BE2641E706A3200BA78C3 /* InfoContainer1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588BE2631E706A3200BA78C3 /* InfoContainer1VC.swift */; };
 		588BE2661E706D2900BA78C3 /* VitalsContainer2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588BE2651E706D2900BA78C3 /* VitalsContainer2VC.swift */; };
 		588BE2681E706D4800BA78C3 /* ApptContainer3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588BE2671E706D4800BA78C3 /* ApptContainer3VC.swift */; };
@@ -106,6 +105,13 @@
 		58B5C9E71E7B114E002A2785 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B5C9E61E7B114E002A2785 /* MobileCoreServices.framework */; };
 		58B5C9E91E7B1155002A2785 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B5C9E81E7B1155002A2785 /* QuartzCore.framework */; };
 		58B5C9EB1E7B115D002A2785 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B5C9EA1E7B115D002A2785 /* SystemConfiguration.framework */; };
+		58B71F111E7C8069000AD088 /* insertNewFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B71F101E7C8069000AD088 /* insertNewFeed.swift */; };
+		58B71F131E7C8CCE000AD088 /* getPatientSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B71F121E7C8CCE000AD088 /* getPatientSelected.swift */; };
+		58B71F151E7CA038000AD088 /* RuthQuinones.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 58B71F141E7CA038000AD088 /* RuthQuinones.jpg */; };
+		58B71F191E7CA0C3000AD088 /* BarrieThomson.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 58B71F181E7CA0C3000AD088 /* BarrieThomson.jpeg */; };
+		58B71F1B1E7CA207000AD088 /* VictorOwen.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 58B71F1A1E7CA207000AD088 /* VictorOwen.jpeg */; };
+		58B71F1D1E7CA268000AD088 /* BillSummers.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 58B71F1C1E7CA268000AD088 /* BillSummers.jpeg */; };
+		58B71F1F1E7CA305000AD088 /* AliceNjavro.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 58B71F1E1E7CA305000AD088 /* AliceNjavro.jpeg */; };
 		58BBF0231E786F2B00384866 /* closed-envelope-circle-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 58BBF0211E786F2B00384866 /* closed-envelope-circle-white.png */; };
 		58BBF0241E786F2B00384866 /* VideoCameraWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 58BBF0221E786F2B00384866 /* VideoCameraWhite.png */; };
 		58BEC4361E6112FD00363FAD /* newMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BEC4351E6112FD00363FAD /* newMessageViewController.swift */; };
@@ -257,7 +263,6 @@
 		586BFDE41E3C0C4800DC6770 /* AlertCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertCell.swift; sourceTree = "<group>"; };
 		586BFDE61E3C17D700DC6770 /* hexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hexColor.swift; sourceTree = "<group>"; };
 		587FFECE1E64A8C800078EFC /* UIImageFixOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageFixOrientation.swift; sourceTree = "<group>"; };
-		588BE2611E6F7D8B00BA78C3 /* RuthQuinones.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = RuthQuinones.jpg; path = ../../imageFiles/RuthQuinones.jpg; sourceTree = "<group>"; };
 		588BE2631E706A3200BA78C3 /* InfoContainer1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoContainer1VC.swift; sourceTree = "<group>"; };
 		588BE2651E706D2900BA78C3 /* VitalsContainer2VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VitalsContainer2VC.swift; sourceTree = "<group>"; };
 		588BE2671E706D4800BA78C3 /* ApptContainer3VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApptContainer3VC.swift; sourceTree = "<group>"; };
@@ -283,6 +288,13 @@
 		58B5C9E61E7B114E002A2785 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		58B5C9E81E7B1155002A2785 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		58B5C9EA1E7B115D002A2785 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		58B71F101E7C8069000AD088 /* insertNewFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = insertNewFeed.swift; sourceTree = "<group>"; };
+		58B71F121E7C8CCE000AD088 /* getPatientSelected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getPatientSelected.swift; sourceTree = "<group>"; };
+		58B71F141E7CA038000AD088 /* RuthQuinones.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = RuthQuinones.jpg; path = ../../imageFiles/patients/RuthQuinones.jpg; sourceTree = "<group>"; };
+		58B71F181E7CA0C3000AD088 /* BarrieThomson.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = BarrieThomson.jpeg; path = ../../imageFiles/patients/BarrieThomson.jpeg; sourceTree = "<group>"; };
+		58B71F1A1E7CA207000AD088 /* VictorOwen.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = VictorOwen.jpeg; path = ../../imageFiles/patients/VictorOwen.jpeg; sourceTree = "<group>"; };
+		58B71F1C1E7CA268000AD088 /* BillSummers.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = BillSummers.jpeg; path = ../../imageFiles/patients/BillSummers.jpeg; sourceTree = "<group>"; };
+		58B71F1E1E7CA305000AD088 /* AliceNjavro.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = AliceNjavro.jpeg; path = ../../imageFiles/patients/AliceNjavro.jpeg; sourceTree = "<group>"; };
 		58BBF0211E786F2B00384866 /* closed-envelope-circle-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "closed-envelope-circle-white.png"; path = "../../imageFiles/careTeam/closed-envelope-circle-white.png"; sourceTree = "<group>"; };
 		58BBF0221E786F2B00384866 /* VideoCameraWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = VideoCameraWhite.png; path = ../../imageFiles/careTeam/VideoCameraWhite.png; sourceTree = "<group>"; };
 		58BEC4351E6112FD00363FAD /* newMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newMessageViewController.swift; sourceTree = "<group>"; };
@@ -463,7 +475,11 @@
 				58CEEB4C1E65F07200104057 /* Alice.png */,
 				58CEEB481E65EF8200104057 /* tammie.png */,
 				582806661E09B5AF00421815 /* jennifer.jpg */,
-				588BE2611E6F7D8B00BA78C3 /* RuthQuinones.jpg */,
+				58B71F141E7CA038000AD088 /* RuthQuinones.jpg */,
+				58B71F181E7CA0C3000AD088 /* BarrieThomson.jpeg */,
+				58B71F1A1E7CA207000AD088 /* VictorOwen.jpeg */,
+				58B71F1C1E7CA268000AD088 /* BillSummers.jpeg */,
+				58B71F1E1E7CA305000AD088 /* AliceNjavro.jpeg */,
 				586BFDD71E3BCB2200DC6770 /* HamburgerViewController.swift */,
 			);
 			name = "Hamburger View";
@@ -546,6 +562,7 @@
 				58A8DCCA1E578E44008711D1 /* movePatientToSection.swift */,
 				58FDD47B1E60B42300F97D86 /* dragableImageView.swift */,
 				58FDD4711E5F6B7600F97D86 /* getColumnInArray.swift */,
+				58B71F121E7C8CCE000AD088 /* getPatientSelected.swift */,
 				58327A6C1E64DE40006F4FB4 /* setUserImage.swift */,
 				585A4D2C1E5CF9A300A16118 /* moveAppointmentFromAcceptedToCompleted.swift */,
 				58A8DCD11E57ABC6008711D1 /* setUpPatientData.swift */,
@@ -555,6 +572,7 @@
 				580790401E6777CA0038FC61 /* setUpInBoxData.swift */,
 				580790421E67803F0038FC61 /* setUpSentBoxData.swift */,
 				58A8DCD31E57B2BB008711D1 /* setCurrentDate.swift */,
+				58B71F101E7C8069000AD088 /* insertNewFeed.swift */,
 			);
 			name = helpers;
 			sourceTree = "<group>";
@@ -860,12 +878,12 @@
 				582806631E09AB0C00421815 /* side_menu_bg.jpg in Resources */,
 				58CEEB491E65EF8200104057 /* tammie.png in Resources */,
 				586BFDDD1E3BE40C00DC6770 /* calendar2.png in Resources */,
-				588BE2621E6F7D8B00BA78C3 /* RuthQuinones.jpg in Resources */,
 				58D633681E4D26AB00DC3EB9 /* Untitled.png in Resources */,
 				583646951E08A7BC003C2E60 /* bell.png in Resources */,
 				586BFDE01E3BFBCD00DC6770 /* phoneCircle.png in Resources */,
 				58CEEB4B1E65EFB400104057 /* brad.png in Resources */,
 				5807903F1E675FDE0038FC61 /* searchBackGround.jpg in Resources */,
+				58B71F1F1E7CA305000AD088 /* AliceNjavro.jpeg in Resources */,
 				58254B571E0855D000933B60 /* key.png in Resources */,
 				58A8DCD01E57A717008711D1 /* greenback.png in Resources */,
 				58254B521E0850EA00933B60 /* hamburger.png in Resources */,
@@ -893,14 +911,18 @@
 				58496C1A1E527FD900DF103A /* checkBox.png in Resources */,
 				58496C141E52735000DF103A /* x_sign80x680.png in Resources */,
 				58254B5B1E0855FF00933B60 /* orange.circle.png in Resources */,
+				58B71F1B1E7CA207000AD088 /* VictorOwen.jpeg in Resources */,
 				583646931E08A1CE003C2E60 /* menu_large.png in Resources */,
 				58174CE91E71D4CD00023003 /* Landing_screen.png in Resources */,
 				582806671E09B5AF00421815 /* jennifer.jpg in Resources */,
 				582806651E09AC4100421815 /* care.white.png in Resources */,
 				58272AFA1E411F8A00E779CF /* green.circle.png in Resources */,
+				58B71F151E7CA038000AD088 /* RuthQuinones.jpg in Resources */,
 				58CEEB4D1E65F07200104057 /* Alice.png in Resources */,
 				58FDD47A1E60A6CD00F97D86 /* dangerOrange.png in Resources */,
 				BB57C2D91DFF41DE00731AC4 /* Assets.xcassets in Resources */,
+				58B71F1D1E7CA268000AD088 /* BillSummers.jpeg in Resources */,
+				58B71F191E7CA0C3000AD088 /* BarrieThomson.jpeg in Resources */,
 				BB57C2D71DFF41DE00731AC4 /* Main.storyboard in Resources */,
 				58272B021E42495800E779CF /* calendarGreen.png in Resources */,
 			);
@@ -944,6 +966,7 @@
 				58A8DCCB1E578E44008711D1 /* movePatientToSection.swift in Sources */,
 				58174CF71E72139200023003 /* filesCell.swift in Sources */,
 				583646971E08AE2F003C2E60 /* TasksViewController.swift in Sources */,
+				58B71F111E7C8069000AD088 /* insertNewFeed.swift in Sources */,
 				58A8DC881E56671D008711D1 /* SheduleNewAppointmentViewController.swift in Sources */,
 				58496C101E526E1700DF103A /* SignatureViewController.swift in Sources */,
 				586BFDE51E3C0C4800DC6770 /* AlertCell.swift in Sources */,
@@ -1007,6 +1030,7 @@
 				586BFDD81E3BCB2200DC6770 /* HamburgerViewController.swift in Sources */,
 				BB51F7C51E009E53008A5EA8 /* gradient.swift in Sources */,
 				585A4D2F1E5D175C00A16118 /* InboxViewController.swift in Sources */,
+				58B71F131E7C8CCE000AD088 /* getPatientSelected.swift in Sources */,
 				58CBC0181E4E4007001A9698 /* Container3ViewController.swift in Sources */,
 				5851F6BA1E7A018600229659 /* setUpUserData.swift in Sources */,
 				58EB0DC81E732DC40009FD57 /* caseCell.swift in Sources */,

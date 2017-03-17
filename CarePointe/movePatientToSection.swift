@@ -22,6 +22,8 @@ extension UIViewController {
         var appDate = [[String]]()
         var appMessage = [[String]]()
         
+        //var patientID =  [[String]]()
+        
         
         // show specific patient Name from defaults i.e. "Ruth Quinonez" etc.
         //patientName = UserDefaults.standard.string(forKey: "patientName")!
@@ -46,6 +48,9 @@ extension UIViewController {
         let appTimeT = UserDefaults.standard.object(forKey: "appTime")
         let appDateT = UserDefaults.standard.object(forKey: "appDate")
         let appMessageT = UserDefaults.standard.object(forKey: "appMessage")
+        
+        var patientID = UserDefaults.standard.object(forKey: "patientID") as? [[String]] ?? [[String]]()
+        var appPatImage = UserDefaults.standard.object(forKey: "appPatImage") as? [[String]] ?? [[String]]()
         
         if let appIDT = appIDT {
             appID = appIDT as! [[String]]
@@ -72,6 +77,8 @@ extension UIViewController {
         let associatedTime = appTime[sectionForSelectedRow][selectedRow]
         let associatedDay = appDate[sectionForSelectedRow][selectedRow]
         let associatedMessage = appMessage[sectionForSelectedRow][selectedRow]
+        let associatedPatientID = patientID[sectionForSelectedRow][selectedRow]
+        let associatedAppPatImage = appPatImage[sectionForSelectedRow][selectedRow]
         
         //remove appointmentID & patient from [sectionForSelectedRow][selectedRow]
         appID[sectionForSelectedRow].remove(at: selectedRow)
@@ -79,6 +86,8 @@ extension UIViewController {
         appTime[sectionForSelectedRow].remove(at: selectedRow)
         appDate[sectionForSelectedRow].remove(at: selectedRow)
         appMessage[sectionForSelectedRow].remove(at: selectedRow)
+        patientID[sectionForSelectedRow].remove(at: selectedRow)
+        appPatImage[sectionForSelectedRow].remove(at: selectedRow)
         
         //append appointmentID & patient
         appID[completedSection].append(appointmentID)
@@ -86,6 +95,8 @@ extension UIViewController {
         appTime[completedSection].append(associatedTime)
         appDate[completedSection].append(associatedDay)
         appMessage[completedSection].append(associatedMessage)
+        patientID[completedSection].append(associatedPatientID)
+        appPatImage[completedSection].append(associatedAppPatImage)
     
         //update defaults from public arrays above
         //UserDefaults.standard.set(appSec, forKey: "appSec")
@@ -94,6 +105,8 @@ extension UIViewController {
         UserDefaults.standard.set(appTime, forKey: "appTime")
         UserDefaults.standard.set(appDate, forKey: "appDate")
         UserDefaults.standard.set(appMessage, forKey: "appMessage")
+        UserDefaults.standard.set(patientID, forKey: "patientID")
+        UserDefaults.standard.set(appPatImage, forKey: "appPatImage")
         UserDefaults.standard.synchronize()
     }
 }

@@ -165,7 +165,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hF4-8z-b28" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1623" y="-1352"/>
+            <point key="canvasLocation" x="1756" y="-1352"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="IYg-2W-hhZ">
@@ -205,7 +205,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kRM-uC-HFL" id="0Bw-c6-U7V">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04:44 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfb-Pm-V55">
@@ -4511,7 +4511,7 @@ Performance: 13</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rCl-Qf-Tcx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Q79-Em-tgP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="687" y="-1370"/>
+            <point key="canvasLocation" x="990" y="-1352"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1ZM-Vb-KDG">
@@ -6096,7 +6096,7 @@ Performance: 13</string>
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qlP-vw-yNa" id="fku-fC-TX8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMR Data 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1S-O5-YLS">
@@ -6491,8 +6491,8 @@ Performance: 13</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="zWG-cM-x3M"/>
-        <segue reference="45i-eQ-EHR"/>
-        <segue reference="5z8-i9-OWi"/>
+        <segue reference="Y9y-Kl-Igq"/>
         <segue reference="PtL-n1-eqT"/>
+        <segue reference="5z8-i9-OWi"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -40,7 +40,7 @@ class InfoContainer1VC: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         // BADGES
         //INPUT 1. Int: emojiNumber, UIColor: .candyGreen(), .Iron(), String: Alert, location
-        
+        // badge label 1 ---
         let iconsSize = CGRect(x: 5, y: -2, width: 18, height: 18)
         let emojisCollection = [UIImage(named: "SurveyWhite"), UIImage(named: "FeedWhite"), UIImage(named: "handicap.png")]
         
@@ -58,7 +58,7 @@ class InfoContainer1VC: UIViewController, UITableViewDelegate, UITableViewDataSo
         badgeLabel.backgroundColor = UIColor.candyGreen()
         badgeLabel.clipsToBounds = true
         
-        // badgeLabel2 ---
+        // badge Label 2 ---
         let careGiver = NSTextAttachment()
         careGiver.image = emojisCollection[2]
         careGiver.bounds = iconsSize
@@ -71,11 +71,12 @@ class InfoContainer1VC: UIViewController, UITableViewDelegate, UITableViewDataSo
         badgeLabel2.layer.cornerRadius = 5
         badgeLabel2.backgroundColor = UIColor.Iron()
         badgeLabel2.clipsToBounds = true
-        
+        //------------
         
         // show specific patient Name from defaults i.e. "Ruth Quinonez" etc.
         patientName = UserDefaults.standard.string(forKey: "patientName")!
         patientNameLabel.text = patientName + "'s Information"
+        
         // show patient photo
         let patientPic = UserDefaults.standard.string(forKey: "patientPic")!
         if(patientPic.isEmpty == false){

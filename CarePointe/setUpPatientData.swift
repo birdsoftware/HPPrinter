@@ -14,6 +14,12 @@ extension UIViewController {
     
     func setUpPatientDataInDefaults() {
         
+        
+        
+        let patientID = [["P00001","P00002","P00003","P00004","P00005","P00006","P00007","P00008","P00009"],
+                         ["P00010","P00011","P00012","P00013"],
+                         ["P00014","P00015","P00016","P00017","P00018","P00019","P00020","P00021","P00022","P00023","P00024"]]
+        
         let appointmentIDs = [["90933","52718","12543","36221","160336","12718","68958","51500","27496"],
                               ["7498","47598","46233","78543"],
                               ["42321","36221","99699","25818","72021","372","86930","17498","23412","8975","76231"]]
@@ -22,7 +28,7 @@ extension UIViewController {
                         [ "Cindy Lopper","Marx Ehrlich", "Alicia Watanabe", "Josh Brown"],
                         [ "Desire Aller", "Paulita Wix", "Jenny Binkley", "Lawanda Arno", "Jackqueline Naumann", "Regine Kohnke","Brad Birdsong", "Dallas Remy", "Noel Devitt","Mike Brown","Sev Donada"]]
         
-        let patientImageNames = [["RuthQuinones.jpg","","","","","","","",""],
+        let patientImageNames = [["RuthQuinones.jpg","BarrieThomson.jpeg","VictorOwen.jpeg","BillSummers.jpeg","AliceNjavro.jpeg","","","",""],
                                  ["","","",""],
                                  ["","","","","","","","","","",""]]
         
@@ -59,6 +65,7 @@ extension UIViewController {
         UserDefaults.standard.set(times, forKey: "appTime")
         UserDefaults.standard.set(dates, forKey: "appDate")
         UserDefaults.standard.set(appointmentMessage, forKey: "appMessage")
+        UserDefaults.standard.set(patientID, forKey: "patientID")
         UserDefaults.standard.synchronize()
         
     }

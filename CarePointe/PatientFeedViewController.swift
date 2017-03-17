@@ -165,6 +165,7 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         
         return cell
     }
+//DONT REMOVE 
     //times dates messageCreator message
     //DELETE row (the event) method
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

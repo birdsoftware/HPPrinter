@@ -30,6 +30,10 @@ extension UIViewController {
         let appTimeT = UserDefaults.standard.object(forKey: "appTime")
         let appDateT = UserDefaults.standard.object(forKey: "appDate")
         let appMessageT = UserDefaults.standard.object(forKey: "appMessage")
+        
+        var patientID = UserDefaults.standard.object(forKey: "patientID") as? [[String]] ?? [[String]]()
+        var appPatImage = UserDefaults.standard.object(forKey: "appPatImage") as? [[String]] ?? [[String]]()
+        
         if let appIDT = appIDT {
             appID = appIDT as! [[String]]
         }
@@ -56,6 +60,8 @@ extension UIViewController {
             let associatedTime = appTime[1][i]
             let associatedDay = appDate[1][i]
             let associatedMessage = appMessage[1][i]
+            let associatedPatientID = patientID[1][i]
+            let associatedAppPatImage = appPatImage[1][i]
             
             //remove FROM accepted appointment[1] TO completed appointment[2]
             appID[1].remove(at: i)
@@ -63,12 +69,16 @@ extension UIViewController {
             appTime[1].remove(at: i)
             appDate[1].remove(at: i)
             appMessage[1].remove(at: i)
+            patientID[1].remove(at: i)
+            appPatImage[1].remove(at: i)
             
             appID[2].append(appointmentID)
             appPat[2].append(patientName)
             appTime[2].append(associatedTime)
             appDate[2].append(associatedDay)
             appMessage[2].append(associatedMessage)
+            patientID[2].append(associatedPatientID)
+            appPatImage[2].append(associatedAppPatImage)
             
             //save to disk
             UserDefaults.standard.set(appID, forKey: "appID")
@@ -76,6 +86,8 @@ extension UIViewController {
             UserDefaults.standard.set(appTime, forKey: "appTime")
             UserDefaults.standard.set(appDate, forKey: "appDate")
             UserDefaults.standard.set(appMessage, forKey: "appMessage")
+            UserDefaults.standard.set(patientID, forKey: "patientID")
+            UserDefaults.standard.set(appPatImage, forKey: "appPatImage")
             UserDefaults.standard.synchronize()
             
         }
