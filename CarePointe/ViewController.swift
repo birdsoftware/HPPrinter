@@ -8,6 +8,7 @@
 //  http://stackoverflow.com/questions/25630315/autolayout-unable-to-simultaneously-satisfy-constraints debugging constraints
 
 import UIKit
+import UXCam
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
     
@@ -68,6 +69,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var hamburgerMenuShowing = false
     var alertTableShowing = false
     
+    var w:Int = 0
+    var h:Int = 0
     
     //
     // Class Public Data
@@ -89,6 +92,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var filterActive : Bool = false
     
     
+    // userData for communication drop down table
+    var userData:Array<Dictionary<String,String>> = []
+    var SearchData:Array<Dictionary<String,String>> = []
+    
     // Search Bar (top nav controller title view) ------------------------
     lazy var searchBar:UISearchBar = UISearchBar(frame: CGRect(x:0,y:0,width:200,height:200))
     var searchActive : Bool = false
@@ -97,12 +104,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //show screen size
-        //var bounds: CGRect = UIScreen.mainScreen().bounds
-        let w:Int  = Int(mainView.bounds.size.width)
-        let h:Int  = Int(mainView.bounds.size.height)
-        print("Screen Width: \(w)")
-        print("Screen Height: \(h)")
+        UXCam.tagUsersName("Brian")
+        
+        //get screen size for determining the autolayout bounds for the alert and hamburger views
+        w  = Int(mainView.bounds.size.width) //print("Screen Width: \(w)")
+        h  = Int(mainView.bounds.size.height) //print("Screen Height: \(h)")
         
         // Update Badge # HERE if DELETE occurred in Alert Table ----------------
         NotificationCenter.default.addObserver(self,
@@ -119,6 +125,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                              repeats: true)
         
         //NotificationCenter.default.addObserver(self, selector: #selector(logOutAfter30Minutes), name:NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        
+        // get userData for communication drop down list
+        if isKeyPresentInUserDefaults(key: "userData"){
+            userData = UserDefaults.standard.value(forKey: "userData") as! Array<Dictionary<String, String>>
+            
+            SearchData = userData//need this to start off tableView with all data and not blank table
+        }
         
         // UI Set Up
         
@@ -662,8 +675,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchActive = true
         searchBar.showsCancelButton = true
         searchBar.placeholder = ""
-        contactsTable.isHidden = false
-        communicationButtonsView.isHidden = false
+        if(w < 700) {contactsTable.isHidden = false
+            communicationButtonsView.isHidden = false }
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -743,6 +756,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.time.text = appTime[1][IndexPath.row]//times[IndexPath.row]
             
         }
+        
+        
         cell.accessoryType = .disclosureIndicator // add arrow > to cell
         
         return cell

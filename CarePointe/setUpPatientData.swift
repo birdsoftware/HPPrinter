@@ -51,7 +51,7 @@ extension UIViewController {
         self.setUpFeedDataInDefaults()
         self.setUpInBoxDataInDefaults()
         self.setUpSentBoxDataInDefaults()
-        
+        self.setUpUserDataInDefaults()
         
         UserDefaults.standard.set(appointmentIDs, forKey: "appID")
         UserDefaults.standard.set(patients, forKey: "appPat")

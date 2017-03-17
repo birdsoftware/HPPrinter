@@ -100,7 +100,7 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         alertMessageLabel.layer.cornerRadius = 5
         alertMessageLabel.text = ""
         
-        //keyboard notification
+        //keyboard notification for show/hide closeKeyboardButton (x)
         let center = NotificationCenter.default
         center.addObserver(self,
                            selector: #selector(keyboardWillShow),

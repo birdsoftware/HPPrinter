@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UXCam //pod 'UXCam'
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Parameters
+        // sensitiveView: A UIView object that contains senstive information
+        //+(void) occludeSensitiveView:(UIView*)sensitiveView
+        
+        UXCam.start(withKey: "3870e860f178fb7") //bbirdunlv ako
+        
         return true
     }
 
