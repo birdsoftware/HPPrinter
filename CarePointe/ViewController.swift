@@ -71,8 +71,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var w:Int = 0
     var h:Int = 0
+
     
     var strDate:String = ""
+
     
     //
     // Class Public Data
@@ -106,8 +108,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
         UXCam.tagUsersName("Brian")
         
+
         //get screen size for determining the autolayout bounds for the alert and hamburger views
         w  = Int(mainView.bounds.size.width) //print("Screen Width: \(w)")
         h  = Int(mainView.bounds.size.height) //print("Screen Height: \(h)")

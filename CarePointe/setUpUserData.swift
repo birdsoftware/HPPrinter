@@ -23,6 +23,7 @@ extension UIViewController {
                         ["pic":"tammie.png","name":"Tammie Summers","position":"Case Manager"],
                         ]
         
+
         let profileName = "Jennifer"
         let profileLastName = "Johnson"
         let title = "Care Team & Case Manager"
@@ -32,6 +33,7 @@ extension UIViewController {
         UserDefaults.standard.set(profileLastName, forKey: "profileLastName")
         UserDefaults.standard.set(title, forKey: "title")
         UserDefaults.standard.set(email, forKey: "email")
+
         
         UserDefaults.standard.set(userData, forKey: "userData")
         UserDefaults.standard.synchronize()
