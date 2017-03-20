@@ -17,11 +17,15 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var signIn: UIButton!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var launchTouchIDButton: UIButton!
+    
+    var remindMeToUseTouchID: Bool = true //true = show email/passoword fields
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         registerButton.isHidden = true
+        launchTouchIDButton.isHidden = true
         
         //sign in UI set up
         signIn.layer.cornerRadius = 5
@@ -32,10 +36,18 @@ class SignInViewController: UIViewController {
         password.leftViewMode = .always
         password.leftView = UIImageView(image: UIImage(named: "key.png"))
         
-        // --save didESign BOOL = false
-        // This is set to true when user esign in SignatureViewController and is cheched in TermsViewController
-        // before suegue back to this view
-        //UserDefaults.standard.set(false, forKey: "didESign")
+        if isKeyPresentInUserDefaults(key:  "remindMeToUseTouchID") {
+            remindMeToUseTouchID = UserDefaults.standard.bool(forKey: "remindMeToUseTouchID")
+        }
+        
+        //check if using touchID and hide elements
+        if (remindMeToUseTouchID == false) {
+            signIn.isHidden = true
+            email.isHidden = true
+            password.isHidden = true
+            launchTouchID()
+        }
+        
         
         //Tap to Dismiss KEYBOARD
             let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignInViewController.dismissKeyboard))
@@ -60,6 +72,10 @@ class SignInViewController: UIViewController {
     //
     
     @IBAction func testTouchIDTapped(_ sender: Any) {
+        launchTouchID()
+    }
+    
+    func launchTouchID() {
         
         let context = LAContext()
         
@@ -83,16 +99,18 @@ class SignInViewController: UIViewController {
                             case LAError.Code.systemCancel.rawValue:
                                 self.notifyUser("Session cancelled",
                                                 err: error?.localizedDescription)
+                                //"Session cancelled" is shown 1st then "Please try again" below is shown 
                                 
                             case LAError.Code.userCancel.rawValue:
                                 self.notifyUser("Please try again",
                                                 err: error?.localizedDescription)
+                                self.showHiddenSignInFields()
                                 
                             case LAError.Code.userFallback.rawValue:
                                 self.notifyUser("Authentication",
-                                                err: "Password option selected - Not Set Up Yet.")
+                                                err: "Password PIN option selected - No PIN Set Up.")
                                 // Custom code to obtain password here
-                                
+                                self.showHiddenSignInFields()
                                 
                             default:
                                 self.notifyUser("Authentication failed",
@@ -146,19 +164,54 @@ class SignInViewController: UIViewController {
     }
     
     
-func notifyUser(_ msg: String, err: String?) {
-    let alert = UIAlertController(title: msg,
-                                  message: err,
-                                  preferredStyle: .alert)
+    func notifyUser(_ msg: String, err: String?) {
+        let alert = UIAlertController(title: msg,
+                                      message: err,
+                                      preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "OK",
+                                         style: .cancel, handler: nil)
+        
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true,
+                     completion: nil)
+    }
     
-    let cancelAction = UIAlertAction(title: "OK",
-                                     style: .cancel, handler: nil)
-    
-    alert.addAction(cancelAction)
-    
-    self.present(alert, animated: true,
-                 completion: nil)
-}
+    func askUseTouchID(_ msg: String, question: String?) {
+        let alert = UIAlertController(title: msg,
+                                      message: question,
+                                      preferredStyle: .alert)
+        
+        let doAction = UIAlertAction(title: "YES",
+                                     style: .default, handler: { (action) -> Void in
+                                        
+                                        //Sign In successfull
+                                        self.remindMeToUseTouchID = false
+                                        UserDefaults.standard.set(false, forKey: "remindMeToUseTouchID")
+                                        UserDefaults.standard.synchronize()
+                                        
+                                        //go to dashboard
+                                        self.dismiss(animated: false, completion: nil)
+        })
+        
+        
+        let remindAction = UIAlertAction(title: "NO Remind me next time",
+                                         style: .cancel, handler: { (action) -> Void in
+                                            
+                                            //Sign In successfull
+                                            self.remindMeToUseTouchID = true
+                                            //go to dashboard
+                                            self.dismiss(animated: false, completion: nil)
+        })
+        
+        alert.addAction(doAction)
+        alert.addAction(remindAction)
+        
+        self.present(alert, animated: true,
+                     completion: nil)
+    }
+//---------------- END TouchID ---------------------------
 
     @IBAction func supportButtonTapped(_ sender: Any) {
         displayAlertMessage(userMessage: "Contact CarePointe Support at 1-800-SUPPORT Monday-Friday 8am-5pm  PST")
@@ -180,7 +233,11 @@ func notifyUser(_ msg: String, err: String?) {
                 UserDefaults.standard.set(true, forKey: "isUserSignedIn")
                 UserDefaults.standard.synchronize()
                 
-                self.dismiss(animated: false, completion: nil)
+                //Use touchID next time? YES | NO remind me next time
+                askUseTouchID("Sign In", question: "Use TouchID next time?")
+                
+                //close window moved to askUseTouchID()
+                //self.dismiss(animated: false, completion: nil)
             }
         }
     }
@@ -204,12 +261,11 @@ func notifyUser(_ msg: String, err: String?) {
         self.present(myAlert, animated: true){}
     }
     
-    /*
-     * Check if value Already Exists in user defaults
-     *
-     */
-//    func isKeyPresentInUserDefaults(key: String) -> Bool {
-//        return UserDefaults.standard.object(forKey: key) != nil
-//    }
+    func showHiddenSignInFields() {
+        launchTouchIDButton.isHidden = false
+        signIn.isHidden = false
+        email.isHidden = false
+        password.isHidden = false
+    }
 
 }
