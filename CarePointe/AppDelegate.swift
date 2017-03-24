@@ -23,8 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UXCam.start(withKey: "3870e860f178fb7") //bbirdunlv ako //9eb3d8b656c7d44
         
         //REQUEST NEW API ENDPOINT KEY
-        let getToken = GETToken()
-        getToken.signInCarepoint(userEmail: "test@test.com", userPassword: "test123456")
+        let beginRest = DispatchREST()
+        beginRest.beginRestCalls()
+        
+        
 
         return true
     }

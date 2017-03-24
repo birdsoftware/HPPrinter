@@ -110,7 +110,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
 
         UXCam.tagUsersName("Brian")
-        
 
         //get screen size for determining the autolayout bounds for the alert and hamburger views
         w  = Int(mainView.bounds.size.width) //print("Screen Width: \(w)")

@@ -11,7 +11,7 @@ import Foundation
 
 class GETToken {
 
-    func signInCarepoint(userEmail: String, userPassword: String) {
+    func signInCarepoint(userEmail: String, userPassword: String, dispachInstance: DispatchGroup) {
         
         var token = String()
         
@@ -58,43 +58,53 @@ class GETToken {
                                 //print("dataTask: \(token)")
                             }
                         }
+                        //Update token
+                        UserDefaults.standard.set(token, forKey: "token")
+                        UserDefaults.standard.synchronize()
+                        
+                        print("finished GET Token")
+                        dispachInstance.leave()
+                        
+                        
+                        
                     }
                 } catch {
                     print("Error deserializing JSON: \(error)")
                 }
                 
-                DispatchQueue.main.async {
+                //DispatchQueue.main.async {
                     //Update your UI here
                     //activityIndicator.removeFromSuperview()
                     
-                    //GET token
-                    UserDefaults.standard.set(token, forKey: "token")
-                    UserDefaults.standard.synchronize()
+//                    //Update token
+//                    UserDefaults.standard.set(token, forKey: "token")
+//                    UserDefaults.standard.synchronize()
+//                    
+//                    //GET Patients -> save in defaults:  all patients: forKey: "RESTPatients" & patientID column: forKey: "RESTPatientsPatientIDs"
+//                    let getPatientsInstance = GETPatients()
+//                    getPatientsInstance.getPatients(token: token)
+//                    
+//                    //GET Patient Alerts for each patientID-> defaults forKey: "RESTAlerts"
+//                    let patientIDs = UserDefaults.standard.array(forKey: "RESTPatientsPatientIDs") as? [String] ?? [String]()
+//                    
+//                    print("\n patientID's: \(patientIDs)\n")
+//                    
+//                    let getAlertsInstance = GETAlerts()
+//                    //let allAlerts = [[String]]()
+//                    for patientID in patientIDs {
+//                        getAlertsInstance.getAlerts(token: token, patientid: patientID)
+//                    }
+                    //let allAlerts = UserDefaults.standard.array(forKey: "RESTAlerts") as? [[String]] ?? [[String]]()
+                    //print("\nall alerts: \(allAlerts)\n")
                     
-                    //GET Patients -> defaults  forKey: "RESTPatients"
-                    let getPatientsInstance = GETPatients()
-                    getPatientsInstance.getPatients(token: token)
-                    
-                    //GET Patient Alerts for each patientID-> defaults forKey: "RESTAlerts"
-                    let patientIDs = UserDefaults.standard.array(forKey: "RESTPatientsPatientIDs") as! [String]
-                    
-                    print("patientID's: \(patientIDs)")
-                    
-                    let getAlertsInstance = GETAlerts()
-                    
-                    for patientID in patientIDs {
-                        getAlertsInstance.getAlerts(token: token, patientid: patientID)
-                    }
-                    
-                    
-                }
+                //}
                 
             }//else
         })
         
         dataTask.resume()
         
-        //return token
+        
     }
     
 }

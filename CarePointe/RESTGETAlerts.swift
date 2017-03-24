@@ -19,9 +19,10 @@ import Foundation
 
 class GETAlerts {
     
-    func getAlerts(token: String, patientid: String) {
+    func getAlerts(token: String, patientid: String){
         
-        var alerts = [[String]]()
+        //var alerts = [[String]]()
+
         let nsurlAlerts = "http://carepointe.cloud:4300/api/alerts/patientId/" + patientid
         
         let headers = [
@@ -48,24 +49,38 @@ class GETAlerts {
                                                     if let data = data,  //go from a Data? type (optional Data) to a non-optional Data
                                                         let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
                                                         let alertsJSON = json["data"] as? [[String: Any]] {
-                                                        for alert in alertsJSON {
-                                                            let tableID = alert["tblid"] as? Int ?? -1 //------
-                                                            let userID = alert["userid"] as? Int ?? -1 //------
-                                                            let patientID = alert["patientid"] as? Int ?? -1 //------
-                                                            let manageAlertID = alert["manage_alert_id"] as? Int ?? -1 //------
-                                                            let createdDateTime = alert["createdDate"] as? String ?? ""
-                                                            let isViewed = alert["isViewed"] as? Int ?? -1 //------
-                                                            let status = alert["status"] as? String ?? "" //can be null ""
-                                                            let note = alert["note"] as? String ?? ""
+                                                        if(alertsJSON.isEmpty == false){
+                                                            var allAlerts = UserDefaults.standard.array(forKey: "RESTAlerts") as? [[String]] ?? [[String]]()
                                                             
-                                                            //conver Ints to strings for uniform String Array bellow
-                                                            let tid = String(tableID)
-                                                            let uid = String(userID)
-                                                            let pid = String(patientID)
-                                                            let maid = String(manageAlertID)
-                                                            let isView = String(isViewed)
+                                                            for alert in alertsJSON {
+                                                                let tableID = alert["tblid"] as? Int ?? -1 //------
+                                                                let userID = alert["userid"] as? Int ?? -1 //------
+                                                                let patientID = alert["patientid"] as? Int ?? -1 //------
+                                                                let manageAlertID = alert["manage_alert_id"] as? Int ?? -1 //------
+                                                                let createdDateTime = alert["createdDate"] as? String ?? ""
+                                                                let isViewed = alert["isViewed"] as? Int ?? -1 //------
+                                                                let status = alert["status"] as? String ?? "" //can be null ""
+                                                                let note = alert["note"] as? String ?? ""
+                                                                
+                                                                //conver Ints to strings for uniform String Array bellow
+                                                                let tid = String(tableID)
+                                                                let uid = String(userID)
+                                                                let pid = String(patientID)
+                                                                let maid = String(manageAlertID)
+                                                                let isView = String(isViewed)
+                                                                
+                                                                //alerts.append([tid, uid, pid, maid, createdDateTime, isView, status, note])
+                                                                allAlerts.append([tid, uid, pid, maid, createdDateTime, isView, status, note])
+                                                                
+                                                            }
                                                             
-                                                            alerts.append([tid, uid, pid, maid, createdDateTime, isView, status, note])
+                                                            
+                                                            print("\n")
+                                                            print(allAlerts)
+                                                            print("\n")
+
+                                                           UserDefaults.standard.set(allAlerts, forKey: "RESTAlerts")
+                                                           UserDefaults.standard.synchronize()
                                                         }
                                                     }
                                                 } catch {
@@ -79,25 +94,29 @@ class GETAlerts {
                                                 //
                                                 //let httpData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                                                 //                print("Response String :\(httpData)")
-                                                if(alerts.isEmpty == false){
-                                                    print("\n")
-                                                    print(alerts)
-                                                    print("\n")
-                                                
-                                                    DispatchQueue.main.async {
-                                                        
-                                                        UserDefaults.standard.set(alerts, forKey: "RESTAlerts")
-                                                        UserDefaults.standard.synchronize()
-                                                        
-                                                        
-                                                    }
-                                                }
+//                                               if(alertsJSON.isEmpty == false){
+//                                                
+//                                                    print("\n")
+//                                                    print(alerts)
+//                                                    print("\n")
+//                                                UserDefaults.standard.set(alerts, forKey: "RESTAlerts")
+//                                                UserDefaults.standard.synchronize()
+//                                                
+//                                                
+//                                                    DispatchQueue.main.async { //happens now before dataTask finishes
+//                                                        //UserDefaults.standard.set(alerts, forKey: "RESTAlerts")
+//                                                        //UserDefaults.standard.synchronize()
+//                                                        
+//                                                        
+//                                                    }
+//                                                }
                                                 
                                             }
         })
         
         dataTask.resume()
-        
+
+
     }
     
 }

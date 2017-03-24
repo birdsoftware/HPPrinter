@@ -154,6 +154,7 @@
 		58EB0DC81E732DC40009FD57 /* caseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB0DC71E732DC40009FD57 /* caseCell.swift */; };
 		58EB0DCC1E734D200009FD57 /* ServicesC1ViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB0DCB1E734D200009FD57 /* ServicesC1ViewC.swift */; };
 		58EB0DCE1E73614A0009FD57 /* locationsViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB0DCD1E73614A0009FD57 /* locationsViewC.swift */; };
+		58F4CB931E85D256000C3185 /* dispatchRESTCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F4CB921E85D256000C3185 /* dispatchRESTCalls.swift */; };
 		58FDD4701E5F4CFC00F97D86 /* setupAlertData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FDD46F1E5F4CFC00F97D86 /* setupAlertData.swift */; };
 		58FDD4721E5F6B7600F97D86 /* getColumnInArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FDD4711E5F6B7600F97D86 /* getColumnInArray.swift */; };
 		58FDD4741E5F971600F97D86 /* setUpFeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FDD4731E5F971600F97D86 /* setUpFeedData.swift */; };
@@ -340,6 +341,7 @@
 		58EB0DC71E732DC40009FD57 /* caseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = caseCell.swift; sourceTree = "<group>"; };
 		58EB0DCB1E734D200009FD57 /* ServicesC1ViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesC1ViewC.swift; sourceTree = "<group>"; };
 		58EB0DCD1E73614A0009FD57 /* locationsViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = locationsViewC.swift; sourceTree = "<group>"; };
+		58F4CB921E85D256000C3185 /* dispatchRESTCalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dispatchRESTCalls.swift; sourceTree = "<group>"; };
 		58FDD46F1E5F4CFC00F97D86 /* setupAlertData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setupAlertData.swift; sourceTree = "<group>"; };
 		58FDD4711E5F6B7600F97D86 /* getColumnInArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getColumnInArray.swift; sourceTree = "<group>"; };
 		58FDD4731E5F971600F97D86 /* setUpFeedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setUpFeedData.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				58A8DCCA1E578E44008711D1 /* movePatientToSection.swift */,
+				58F4CB921E85D256000C3185 /* dispatchRESTCalls.swift */,
 				583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */,
 				5848FBE61E84617C004B7F44 /* RESTGETPatients.swift */,
 				5848FBE81E847F66004B7F44 /* RESTGETAlerts.swift */,
@@ -1012,6 +1015,7 @@
 				58CBC0121E4E2066001A9698 /* RxContainer1Cell.swift in Sources */,
 				58458ABE1E43EB2E005DFEDA /* defualtsComments.swift in Sources */,
 				58CBC00B1E4D4432001A9698 /* CaseViewController.swift in Sources */,
+				58F4CB931E85D256000C3185 /* dispatchRESTCalls.swift in Sources */,
 				58272AFC1E4120B900E779CF /* PTVDetailViewController.swift in Sources */,
 				58CBC01B1E4E43DA001A9698 /* PatientScreeningsViewController.swift in Sources */,
 				58496C1C1E52843D00DF103A /* TermsViewController.swift in Sources */,
