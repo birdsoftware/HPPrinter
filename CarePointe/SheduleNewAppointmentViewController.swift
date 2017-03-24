@@ -71,6 +71,19 @@ class SheduleNewAppointmentViewController: UIViewController {
     //#MARK -Button Actions
     //
     
+    @IBAction func backButtonTapped(_ sender: Any) {
+        //1. palce "@IBAction func unwind...(segue: UIStoryboardSegue) {}" in view controller you want to unwind too
+        
+        //2. In storyboard connect this view () -> to [exit]
+        //   In storyboard set unwind segue identifier: "unwindToPatientDB"
+        //                     Action: "unwind..."
+        
+        //3. Trigger unwind segue programmatically (below)
+        
+        self.performSegue(withIdentifier: "unwindToPatientDashboard", sender: self)
+    }
+    
+    
     @IBAction func sendAppointmentButtonTapped(_ sender: Any) {
         
         //Update Date and time local data for new section

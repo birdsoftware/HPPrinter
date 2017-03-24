@@ -15,7 +15,7 @@ import UIKit
 extension UIViewController {
 
     func moveFromAcceptedToCompletedFor(AppointmentID: String){
-        print(AppointmentID)
+        print("appointmentID: \(AppointmentID)")
         
         var appID = [[String]]() //empty array of arrays of type string
         var appPat = [[String]]()

@@ -203,10 +203,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // GET DATA FROM DEFAULTS --------------------------------------------------
         if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does this exist? [yes]
             getUpdateAppointmentData()
-            print("getUpdateAppointmentData")
+            //print("getUpdateAppointmentData")
         } else {//[no] does not exist
             setUpAppointmentData()
-            print("setUpAppointmentData there is no key onlyDoOnce")
+            //print("setUpAppointmentData there is no key onlyDoOnce")
         }
         
         // UPDATE MESSAGES NOT READ COUNT ------------------------------------------
@@ -508,7 +508,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //searchText = strDate //This contains date selected "2/17/17"
         
         if (appDate.isEmpty == false) {
-            print("There are appDate objects!")
+            //print("There are appDate objects!")
         
             var integerArray:[Int] = []
         
@@ -549,7 +549,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
             }
             
-            print(self.filteredDates)
+            print("self.filteredDates: \(self.filteredDates)")
             
             self.filterActive = true;
 
@@ -558,7 +558,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.tasksTableView.reloadData()
         }
         
-        print("There are no appDate objects!")
+        //print("There are no appDate objects!")
     }
     
     func moveSlideMenu(Menu: String) {

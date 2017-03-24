@@ -123,6 +123,15 @@
  
  inboxViewController
  
+ RESTPatients.swift
+ 
+    UserDefaults.standard.set(patients, forKey: "RESTPatients")
+    UserDefaults.standard.synchronize()
+ 
+ RESTGETToken.swift
+    UserDefaults.standard.set(token, forKey: "token")
+    UserDefaults.standard.synchronize()
+ 
  /*
  * Check if value Already Exists in user defaults
  *

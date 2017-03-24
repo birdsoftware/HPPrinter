@@ -115,6 +115,7 @@ class SignInViewController: UIViewController {
                             default:
                                 self.notifyUser("Authentication failed",
                                                 err: error?.localizedDescription)
+                                self.showHiddenSignInFields()
                             }
                             
                         } else {

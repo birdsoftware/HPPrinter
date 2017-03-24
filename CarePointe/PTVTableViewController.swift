@@ -38,7 +38,7 @@ class PTVTableViewController: UITableViewController {
         //if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does this exist? [yes]
 
                 getUpdateAppointmentData()
-                print("getUpdateAppointmentData")
+                //print("getUpdateAppointmentData")
         //if isKeyPresentInUserDefaults(key: "appPatImage") { //does this exist? [yes]
         //TODO: fix this is crashes in build 12
                 appPatImage = UserDefaults.standard.object(forKey: "appPatImage") as! [[String]]

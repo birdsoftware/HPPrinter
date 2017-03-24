@@ -19,14 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
-        
-        // Parameters
-        // sensitiveView: A UIView object that contains senstive information
-        //+(void) occludeSensitiveView:(UIView*)sensitiveView
         
         UXCam.start(withKey: "3870e860f178fb7") //bbirdunlv ako //9eb3d8b656c7d44
         
+        //REQUEST NEW API ENDPOINT KEY
+        let getToken = GETToken()
+        getToken.signInCarepoint(userEmail: "test@test.com", userPassword: "test123456")
 
         return true
     }
@@ -39,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        UserDefaults.standard.set(false, forKey: "isUserSignedIn")
+        UserDefaults.standard.synchronize()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

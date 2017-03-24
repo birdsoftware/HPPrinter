@@ -188,7 +188,7 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
             search=textField.text!+string
         }
         
-        print(search)
+        print("search: \(search)")
         let predicate=NSPredicate(format: "SELF.name CONTAINS[cd] %@", search)
         let arr=(AllData as NSArray).filtered(using: predicate)
         

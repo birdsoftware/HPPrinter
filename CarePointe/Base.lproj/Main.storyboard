@@ -3200,7 +3200,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         <outlet property="containerView4" destination="7p0-7u-UsF" id="0zX-Kf-vXK"/>
                         <outlet property="declinePatientButton" destination="9xX-i2-nlQ" id="9vw-jV-tci"/>
                         <outlet property="segmentControl" destination="pom-pe-zEl" id="iHM-e2-PpR"/>
-                        <segue destination="NGQ-Px-5G7" kind="presentation" identifier="newPatientAppointment" id="Gva-bH-0f0"/>
+                        <segue destination="NGQ-Px-5G7" kind="presentation" identifier="newPatientAppointment" animates="NO" id="Gva-bH-0f0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZJ-MS-VgL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3458,11 +3458,27 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="48A-qk-JtT">
+                                        <rect key="frame" x="8" y="26" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="5fo-cG-5gO"/>
+                                            <constraint firstAttribute="width" constant="46" id="voI-Pk-dLe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="NGQ-Px-5G7" eventType="touchUpInside" id="DU7-l3-uq2"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="1F1-Ko-cAr" firstAttribute="centerX" secondItem="TSY-vS-ZBy" secondAttribute="centerX" constant="5" id="Kpg-Jt-uJk"/>
                                     <constraint firstAttribute="height" constant="70" id="SgB-YI-NOR"/>
+                                    <constraint firstItem="48A-qk-JtT" firstAttribute="centerY" secondItem="1F1-Ko-cAr" secondAttribute="centerY" id="StV-0q-ZXQ"/>
+                                    <constraint firstItem="48A-qk-JtT" firstAttribute="leading" secondItem="TSY-vS-ZBy" secondAttribute="leading" constant="8" id="Wg6-7W-jC7"/>
                                     <constraint firstItem="1F1-Ko-cAr" firstAttribute="top" secondItem="TSY-vS-ZBy" secondAttribute="top" constant="31" id="WhN-4p-QQt"/>
                                 </constraints>
                             </view>
@@ -3569,11 +3585,13 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         <outlet property="patientMessage" destination="6xU-AQ-Mrs" id="TID-3x-NaA"/>
                         <outlet property="patientName" destination="PJH-Ia-18Y" id="TKN-oB-hsq"/>
                         <outlet property="sendAppointment" destination="hal-9G-MoN" id="RtU-mT-5hu"/>
+                        <segue destination="55b-IB-OwI" kind="unwind" identifier="unwindToPatientDashboard" animates="NO" unwindAction="unwindToPatientDashboardWithSegue:" id="B6m-7j-FMD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cPY-qY-6s1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="55b-IB-OwI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="7577" y="-1209"/>
+            <point key="canvasLocation" x="7577" y="-1173"/>
         </scene>
         <!--Screenings-->
         <scene sceneID="Gw1-qM-84c">
@@ -5974,7 +5992,7 @@ Performance: 13</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vfx-zl-D70" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8300" y="-1255"/>
+            <point key="canvasLocation" x="8300" y="-1209"/>
         </scene>
         <!--files-->
         <scene sceneID="NyQ-e6-Vn6">
@@ -6491,9 +6509,9 @@ Performance: 13</string>
         <image name="x_sign80x680.png" width="80" height="680"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="PtL-n1-eqT"/>
         <segue reference="zWG-cM-x3M"/>
         <segue reference="Y9y-Kl-Igq"/>
-        <segue reference="PtL-n1-eqT"/>
         <segue reference="5z8-i9-OWi"/>
     </inferredMetricsTieBreakers>
 </document>

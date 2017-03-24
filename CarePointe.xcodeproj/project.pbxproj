@@ -47,6 +47,7 @@
 		583646931E08A1CE003C2E60 /* menu_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646921E08A1CE003C2E60 /* menu_large.png */; };
 		583646951E08A7BC003C2E60 /* bell.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646941E08A7BC003C2E60 /* bell.png */; };
 		583646971E08AE2F003C2E60 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583646961E08AE2F003C2E60 /* TasksViewController.swift */; };
+		583FC4FF1E80590D00D178C4 /* RESTGETToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */; };
 		58458ABA1E43C49D005DFEDA /* PasswordChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58458AB91E43C49D005DFEDA /* PasswordChangeViewController.swift */; };
 		58458ABC1E43DD1C005DFEDA /* attention.png in Resources */ = {isa = PBXBuildFile; fileRef = 58458ABB1E43DD1C005DFEDA /* attention.png */; };
 		58458ABE1E43EB2E005DFEDA /* defualtsComments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58458ABD1E43EB2E005DFEDA /* defualtsComments.swift */; };
@@ -56,6 +57,8 @@
 		58458AC61E452474005DFEDA /* AddContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58458AC51E452474005DFEDA /* AddContainerViewController.swift */; };
 		58458AC81E45365B005DFEDA /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58458AC71E45365B005DFEDA /* RangeSlider.swift */; };
 		58458ACA1E45403F005DFEDA /* RangeSliderThumbLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58458AC91E45403F005DFEDA /* RangeSliderThumbLayer.swift */; };
+		5848FBE71E84617C004B7F44 /* RESTGETPatients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5848FBE61E84617C004B7F44 /* RESTGETPatients.swift */; };
+		5848FBE91E847F66004B7F44 /* RESTGETAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5848FBE81E847F66004B7F44 /* RESTGETAlerts.swift */; };
 		58496C0E1E526D2D00DF103A /* x_sign340x40_360.png in Resources */ = {isa = PBXBuildFile; fileRef = 58496C0D1E526D2D00DF103A /* x_sign340x40_360.png */; };
 		58496C101E526E1700DF103A /* SignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58496C0F1E526E1700DF103A /* SignatureViewController.swift */; };
 		58496C141E52735000DF103A /* x_sign80x680.png in Resources */ = {isa = PBXBuildFile; fileRef = 58496C131E52735000DF103A /* x_sign80x680.png */; };
@@ -230,6 +233,7 @@
 		583646921E08A1CE003C2E60 /* menu_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_large.png; path = ../../../menu_large.png; sourceTree = "<group>"; };
 		583646941E08A7BC003C2E60 /* bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bell.png; path = ../../imageFiles/bell.png; sourceTree = "<group>"; };
 		583646961E08AE2F003C2E60 /* TasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETToken.swift; sourceTree = "<group>"; };
 		58458AB91E43C49D005DFEDA /* PasswordChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordChangeViewController.swift; sourceTree = "<group>"; };
 		58458ABB1E43DD1C005DFEDA /* attention.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = attention.png; path = ../../imageFiles/attention.png; sourceTree = "<group>"; };
 		58458ABD1E43EB2E005DFEDA /* defualtsComments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = defualtsComments.swift; sourceTree = "<group>"; };
@@ -239,6 +243,8 @@
 		58458AC51E452474005DFEDA /* AddContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContainerViewController.swift; sourceTree = "<group>"; };
 		58458AC71E45365B005DFEDA /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		58458AC91E45403F005DFEDA /* RangeSliderThumbLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderThumbLayer.swift; sourceTree = "<group>"; };
+		5848FBE61E84617C004B7F44 /* RESTGETPatients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETPatients.swift; sourceTree = "<group>"; };
+		5848FBE81E847F66004B7F44 /* RESTGETAlerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETAlerts.swift; sourceTree = "<group>"; };
 		58496C0D1E526D2D00DF103A /* x_sign340x40_360.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = x_sign340x40_360.png; path = ../../imageFiles/x_sign340x40_360.png; sourceTree = "<group>"; };
 		58496C0F1E526E1700DF103A /* SignatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureViewController.swift; sourceTree = "<group>"; };
 		58496C131E52735000DF103A /* x_sign80x680.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = x_sign80x680.png; path = ../../imageFiles/x_sign80x680.png; sourceTree = "<group>"; };
@@ -560,6 +566,9 @@
 			isa = PBXGroup;
 			children = (
 				58A8DCCA1E578E44008711D1 /* movePatientToSection.swift */,
+				583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */,
+				5848FBE61E84617C004B7F44 /* RESTGETPatients.swift */,
+				5848FBE81E847F66004B7F44 /* RESTGETAlerts.swift */,
 				58FDD47B1E60B42300F97D86 /* dragableImageView.swift */,
 				58FDD4711E5F6B7600F97D86 /* getColumnInArray.swift */,
 				58B71F121E7C8CCE000AD088 /* getPatientSelected.swift */,
@@ -960,6 +969,7 @@
 				58CBC0161E4E20CD001A9698 /* RxContainer3Cell.swift in Sources */,
 				588BE2661E706D2900BA78C3 /* VitalsContainer2VC.swift in Sources */,
 				BB57C2D41DFF41DE00731AC4 /* ViewController.swift in Sources */,
+				5848FBE91E847F66004B7F44 /* RESTGETAlerts.swift in Sources */,
 				58A8DCD41E57B2BB008711D1 /* setCurrentDate.swift in Sources */,
 				588BE2681E706D4800BA78C3 /* ApptContainer3VC.swift in Sources */,
 				58D633781E4D360400DC3EB9 /* PatientFeedViewCell.swift in Sources */,
@@ -990,6 +1000,7 @@
 				58272AFE1E412DFE00E779CF /* PatientInformationCell.swift in Sources */,
 				58458AC81E45365B005DFEDA /* RangeSlider.swift in Sources */,
 				58272AF21E3FFD1E00E779CF /* PTVTableViewController.swift in Sources */,
+				583FC4FF1E80590D00D178C4 /* RESTGETToken.swift in Sources */,
 				BB93EA9E1E0349F8000C15D3 /* RegisterViewController.swift in Sources */,
 				58EB0DCE1E73614A0009FD57 /* locationsViewC.swift in Sources */,
 				58D6335B1E4A78C400DC3EB9 /* RangeSliderTrackLayer.swift in Sources */,
@@ -1022,6 +1033,7 @@
 				588BE26A1E706D6A00BA78C3 /* FilesContainer3VC.swift in Sources */,
 				58CBC00D1E4D463D001A9698 /* PatientRXViewController.swift in Sources */,
 				58327A6F1E64F49F006F4FB4 /* AddUsersCell.swift in Sources */,
+				5848FBE71E84617C004B7F44 /* RESTGETPatients.swift in Sources */,
 				58FDD4761E5FB24E00F97D86 /* SingleEMRViewController.swift in Sources */,
 				58FDD4781E5FB40400F97D86 /* EMRCell.swift in Sources */,
 				58272AEF1E3FEFD800E779CF /* UpdateProfileViewController.swift in Sources */,
