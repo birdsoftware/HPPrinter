@@ -10,43 +10,57 @@ import Foundation
 
 class DispatchREST {//http://stackoverflow.com/questions/42146274/syncronize-async-functions
     //https://www.raywenderlich.com/148515/grand-central-dispatch-tutorial-swift-3-part-2
+    //http://stackoverflow.com/questions/30418101/find-key-value-pair-in-an-array-of-dictionaries
     
     func beginRestCalls() {
         
         let downloadToken = DispatchGroup()
         
-        downloadToken.enter()
+        //1 token
+            downloadToken.enter()
         let getToken = GETToken()
-        getToken.signInCarepoint(userEmail: "test@test.com", userPassword: "test123456", dispachInstance: downloadToken)
-        
+            getToken.signInCarepoint(userEmail: "test@test.com", userPassword: "test123456", dispachInstance: downloadToken) //  "admin@carepointe.com" "Phoenix2016"
         
         let downloadPatients = DispatchGroup()
-        downloadPatients.enter()
+            downloadPatients.enter()
         
-        // the notify closure is called when the (downloadToken-) groups enter and leave counts are balanced.
+        //2 patients
+        //notify closure called when (downloadToken-) enter and leave counts are balanced
         downloadToken.notify(queue: DispatchQueue.main)  {
+            
             //GET Patients -> save in defaults:  all patients: forKey: "RESTPatients" & patientID column: forKey: "RESTPatientsPatientIDs"
             let token = UserDefaults.standard.string(forKey: "token")
-            let getPatientsInstance = GETPatients()
-            getPatientsInstance.getPatients(token: token!, dispachInstance: downloadPatients)
+            let callGetPatients = GETPatients()
+                callGetPatients.getPatients(token: token!, dispachInstance: downloadPatients)
+            
+            //3 users
+            let callGetUsers = GETUsers()
+                callGetUsers.getUsers(token: token!)
         }
         
         //let downloadAlerts = DispatchGroup()
         //downloadAlerts.enter()
         
         downloadPatients.notify(queue:DispatchQueue.main){
-            //GET Patient Alerts for each patientID-> defaults forKey: "RESTAlerts"
-            let patientIDs = UserDefaults.standard.array(forKey: "RESTPatientsPatientIDs") as? [String] ?? [String]()
+            UserDefaults.standard.set(nil, forKey: "RESTAlerts")//clear old
+            UserDefaults.standard.synchronize()
+            
+            //GET Patient Alerts for each patientID -> defaults forKey: "RESTAlerts"
+            let patientIDs = UserDefaults.standard.array(forKey: "RESTPatientsPatientIDs") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()//as? [String] ?? [String]()
             let token = UserDefaults.standard.string(forKey: "token")
             print("\n patientID's: \(patientIDs)\n")
             
             let getAlertsInstance = GETAlerts()
-            //let allAlerts = [[String]]()
-            for patientID in patientIDs {
-                getAlertsInstance.getAlerts(token: token!, patientid: patientID)
+            
+            for dict in patientIDs {
+                getAlertsInstance.getAlerts(token: token!, patientDict: dict)//TODO: convert [[String]] to Array<Dictionary<String,String>>
             }
+
+            
+            
+            //print #keys in user defaults
+            print(UserDefaults.standard.dictionaryRepresentation().keys.count)
         }
-        
 
     }
 

@@ -21,7 +21,9 @@ class GETPatients {
     
     func getPatients(token: String, dispachInstance: DispatchGroup) {
         
-        var patients = [[String]]()
+        //var patients = [[String]]()
+        var patients = Array<Dictionary<String,String>>()
+        var patientNameID:Array<Dictionary<String,String>> = []
         
         let headers = [
             "authorization": token,
@@ -39,7 +41,7 @@ class GETPatients {
         let dataTask = session.dataTask(with: request as URLRequest,
                                         completionHandler: { (data, response, error) -> Void in
                                             if (error != nil) {
-                                                print("Error:\n\(error)")
+                                                print("Error when Attempting to GET Patients\(String(describing: error))")
                                                 return
                                             } else {
                                                 
@@ -48,7 +50,9 @@ class GETPatients {
                                                         let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
                                                         let patientsJSON = json["data"] as? [[String: Any]] {
                                                         if(patientsJSON.isEmpty == false){
+
                                                             for patient in patientsJSON {
+                                                                
                                                                 let patientID = patient["Patient_ID"] as? Int ?? -1 //------
                                                                 let patientUniqid = patient["patient_uniqid"] as? String ?? ""
                                                                 let firstName = patient["FirstName"] as? String ?? ""
@@ -107,19 +111,49 @@ class GETPatients {
                                                                 let cu = String(cscUser)
                                                                 let org = String(organization)
                                                                 
-                                                                patients.append([pid, patientUniqid, firstName, lastName, gender, ethnicity, ssn, patientRAF,
-                                                                                 dob, emailID, primaryLanguage, patientAddNotes, homeAddress, city, state,
-                                                                                 zip, Phone, cell, additionalContact, contactRelationship, contactPhone,
-                                                                                 contactNotes, primarySource, pS_Account, medicaid, medicare, primaryCommercial,
-                                                                                 pC_Account, secondaryCommercial, sC_Account, insurance, financeInfoAddNotes, patientSummary,
-                                                                                 primaryPhysician, physicianContact, additionalPhysicians, referrerOrigin, initialDischarge,
-                                                                                 tlc, isActive, pstatus, cb, createdDateTime, up, updatedDateTime, careteam, profileImage, cu,
-                                                                                 pharmacyNCPDP, org])
+                                                                //define dictionary literals
+                                                                //http://stackoverflow.com/questions/30418101/find-key-value-pair-in-an-array-of-dictionaries
+                                                                patients.append(["Patient_ID":pid, "patient_uniqid":patientUniqid, "FirstName":firstName, "LastName":lastName, "Gender":gender,
+                                                                                 "Ethnicity":ethnicity, "SSN":ssn, "patient_RAF":patientRAF, "DOB":dob, "EmailID":emailID,
+                                                                                 "PrimaryLanguage":primaryLanguage, "PatientAddNotes":patientAddNotes, "HomeAddress":homeAddress, "City":city,
+                                                                                 "State":state, "Zip":zip, "Phone":Phone, "Cell":cell, "AdditionalContact":additionalContact,
+                                                                                 "ContactRelationship":contactRelationship, "ContactPhone":contactPhone, "ContactNotes":contactNotes,
+                                                                                 "PrimarySource":primarySource, "PS_Account":pS_Account, "Medicaid":medicaid, "Medicare":medicare,
+                                                                                 "PrimaryCommercial":primaryCommercial, "PC_Account":pC_Account, "SecondaryCommercial":secondaryCommercial,
+                                                                                 "SC_Account":sC_Account, "insurance":insurance, "FinanceInfoAddNotes":financeInfoAddNotes,
+                                                                                 "PatientSummary":patientSummary, "PrimaryPhysician":primaryPhysician, "PhysicianContact":physicianContact,
+                                                                                 "AdditionalPhysicians":additionalPhysicians, "ReferrerOrigin":referrerOrigin, "InitialDischarge":initialDischarge,
+                                                                                 "TimeLineCount":tlc, "IsActive":isActive, "pstatus":pstatus, "CreatedBy":cb, "CreatedDateTime":createdDateTime,
+                                                                                 "Updatedby":up, "UpdatedDateTime":updatedDateTime, "careteam":careteam, "profile_image":profileImage, "csc_user":cu,
+                                                                                 "pharmacy_NCPDP":pharmacyNCPDP, "organization":org])
+                                                                
+                                                                patientNameID.append(["Patient_ID":pid,"patientName":firstName+""+lastName])
+                                                                
+                                                                //define [[String]] Literals
+//                                                                patients.append([pid, patientUniqid, firstName, lastName, gender, ethnicity, ssn, patientRAF,
+//                                                                                 dob, emailID, primaryLanguage, patientAddNotes, homeAddress, city, state,
+//                                                                                 zip, Phone, cell, additionalContact, contactRelationship, contactPhone,
+//                                                                                 contactNotes, primarySource, pS_Account, medicaid, medicare, primaryCommercial,
+//                                                                                 pC_Account, secondaryCommercial, sC_Account, insurance, financeInfoAddNotes, patientSummary,
+//                                                                                 primaryPhysician, physicianContact, additionalPhysicians, referrerOrigin, initialDischarge,
+//                                                                                 tlc, isActive, pstatus, cb, createdDateTime, up, updatedDateTime, careteam, profileImage, cu,
+//                                                                                 pharmacyNCPDP, org])
                                                             }
+                                                                
                                                             print(patients)
                                                             
-                                                            let patientIDColumn = patients.getColumn(column: 0)
-                                                            UserDefaults.standard.set(patientIDColumn, forKey:"RESTPatientsPatientIDs")
+//                                                            let patientIDColumn =  patients.getColumn(column: 0)
+//                                                            let patientFirstName = patients.getColumn(column: 2)
+//                                                            let patientLastName = patients.getColumn(column: 3)
+//                                                            
+//                                                            var patientNameID = [[String]]()
+//                                                            for Iterator in 0..<(patients.count){
+//                                                                patientNameID.append(["\(patientFirstName[Iterator])" + " " + "\(patientLastName[Iterator])", "\(patientIDColumn[Iterator])"])
+//                                                            }
+                                                            
+                                                            print(patientNameID)
+                                                            
+                                                            UserDefaults.standard.set(patientNameID, forKey:"RESTPatientsPatientIDs")
                                                             UserDefaults.standard.set(patients, forKey: "RESTPatients")
                                                             UserDefaults.standard.synchronize()
                                                             

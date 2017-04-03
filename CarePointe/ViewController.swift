@@ -132,11 +132,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //NotificationCenter.default.addObserver(self, selector: #selector(logOutAfter30Minutes), name:NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
         
         // get userData for communication drop down list
-        if isKeyPresentInUserDefaults(key: "userData"){
-            userData = UserDefaults.standard.value(forKey: "userData") as! Array<Dictionary<String, String>>
+        if isKeyPresentInUserDefaults(key: "RESTusers"){//""userData"){
+            userData = UserDefaults.standard.value(forKey: "RESTusers") as! Array<Dictionary<String, String>>//"userData") as! Array<Dictionary<String, String>>
             
             SearchData = userData//need this to start off tableView with all data and not blank table
+            print("SearchData: \(SearchData)")
         }
+        
+        //delegation
+        tasksTableView.dataSource = self
+        tasksTableView.delegate = self
+        contactsTable.dataSource = self
+        contactsTable.delegate = self
+        
+        tasksTableView.rowHeight = UITableViewAutomaticDimension
+        tasksTableView.estimatedRowHeight = 150
+        contactsTable.rowHeight = UITableViewAutomaticDimension
+        contactsTable.estimatedRowHeight = 150
         
         // UI Set Up
         
@@ -684,7 +696,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchActive = true
         searchBar.showsCancelButton = true
         searchBar.placeholder = ""
-        if(w < 700) {contactsTable.isHidden = false
+        if(w < 700) {contactsTable.isHidden = false //TODO: fix for iPad
             communicationButtonsView.isHidden = false }
     }
     
@@ -736,7 +748,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 return appPat[1].count//patients.count
             }
         }
-        
+        if(tableView == contactsTable) {
+            print("SearchData.count: \(SearchData.count)")
+            return SearchData.count
+            
+        }
+        print("0: \(SearchData.count)")
         return 0
         
     }
@@ -748,29 +765,47 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //http://www.codingexplorer.com/segue-uitableviewcell-taps-swift/
     func tableView(_ tableView: UITableView, cellForRowAt IndexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "apptCell")! as! AppointmentCell
-        cell.photo.image = UIImage(named: "green.circle.png")//photos[IndexPath.row]
-        
-        if(filterActive){
-            //var filteredTime:[String] = []
-            //var filteredPatient:[String] = []
-            //var filteredMessage:[String] = []
-            cell.task.text = filteredMessage[IndexPath.row]
-            cell.patient.text = filteredPatient[IndexPath.row]
-            cell.time.text = filteredTime[IndexPath.row]
-        } else {
-        
-        cell.task.text = appMessage[1][IndexPath.row]//appointments[IndexPath.row]
-        cell.patient.text = appPat[1][IndexPath.row]//patients[IndexPath.row]
-        cell.time.text = appTime[1][IndexPath.row]//times[IndexPath.row]
+        if(tableView == tasksTableView){
+            let cell = tableView.dequeueReusableCell(withIdentifier: "apptCell")! as! AppointmentCell
+            cell.photo.image = UIImage(named: "green.circle.png")//photos[IndexPath.row]
             
+            if(filterActive){
+                //var filteredTime:[String] = []
+                //var filteredPatient:[String] = []
+                //var filteredMessage:[String] = []
+                cell.task.text = filteredMessage[IndexPath.row]
+                cell.patient.text = filteredPatient[IndexPath.row]
+                cell.time.text = filteredTime[IndexPath.row]
+            }
+            else {
+            
+                cell.task.text = appMessage[1][IndexPath.row]//appointments[IndexPath.row]
+                cell.patient.text = appPat[1][IndexPath.row]//patients[IndexPath.row]
+                cell.time.text = appTime[1][IndexPath.row]//times[IndexPath.row]
+                
+            }
+            
+            cell.accessoryType = .disclosureIndicator // add arrow > to cell
+            
+            return cell
+            
+        } else {//contactsTable
+            let cell = tableView.dequeueReusableCell(withIdentifier: "addcontactcell")! as! addContactCell //see AppointmentCell.swift
+            
+            var Data:Dictionary<String,String> = SearchData[IndexPath.row]
+            
+            cell.contactImage.image = UIImage(named: "user.png")
+            cell.contactName.text = "\(Data["FirstName"]!) \(Data["LastName"]!)"//Data["name"]
+            cell.contactPosition.text = Data["RoleType"] //Data["position"]
+            
+            cell.accessoryType = .disclosureIndicator // add arrow > to cell
+            
+            return cell
         }
         
         
-        cell.accessoryType = .disclosureIndicator // add arrow > to cell
-        
-        return cell
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

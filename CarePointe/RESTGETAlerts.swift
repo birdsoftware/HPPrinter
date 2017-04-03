@@ -19,11 +19,13 @@ import Foundation
 
 class GETAlerts {
     
-    func getAlerts(token: String, patientid: String){
+    func getAlerts(token: String, patientDict: Dictionary<String,String>){
         
         //var alerts = [[String]]()
+        let patientid = patientDict["Patient_ID"]
+        let patientName = patientDict["patientName"]
 
-        let nsurlAlerts = "http://carepointe.cloud:4300/api/alerts/patientId/" + patientid
+        let nsurlAlerts = "http://carepointe.cloud:4300/api/alerts/patientId/" + patientid!
         
         let headers = [
             "authorization": token,
@@ -41,7 +43,7 @@ class GETAlerts {
         let dataTask = session.dataTask(with: request as URLRequest,
                                         completionHandler: { (data, response, error) -> Void in
                                             if (error != nil) {
-                                                print("Error:\n\(error)")
+                                                print("Error:\n\(String(describing: error))")
                                                 return
                                             } else {
                                                 
@@ -53,9 +55,9 @@ class GETAlerts {
                                                             var allAlerts = UserDefaults.standard.array(forKey: "RESTAlerts") as? [[String]] ?? [[String]]()
                                                             
                                                             for alert in alertsJSON {
-                                                                let tableID = alert["tblid"] as? Int ?? -1 //------
-                                                                let userID = alert["userid"] as? Int ?? -1 //------
-                                                                let patientID = alert["patientid"] as? Int ?? -1 //------
+                                                                //let tableID = alert["tblid"] as? Int ?? -1 //------
+                                                                //let userID = alert["userid"] as? Int ?? -1 //------
+                                                                //let patientID = alert["patientid"] as? Int ?? -1 //------
                                                                 let manageAlertID = alert["manage_alert_id"] as? Int ?? -1 //------
                                                                 let createdDateTime = alert["createdDate"] as? String ?? ""
                                                                 let isViewed = alert["isViewed"] as? Int ?? -1 //------
@@ -63,14 +65,14 @@ class GETAlerts {
                                                                 let note = alert["note"] as? String ?? ""
                                                                 
                                                                 //conver Ints to strings for uniform String Array bellow
-                                                                let tid = String(tableID)
-                                                                let uid = String(userID)
-                                                                let pid = String(patientID)
-                                                                let maid = String(manageAlertID)
+                                                                //let tid = String(tableID)
+                                                                //let uid = String(userID)
+                                                                //let pid = String(patientID)
+                                                                let alertTitle = self.manageAlert(code: manageAlertID)//String(manageAlertID) //1=Complexity High, 2=Sugar Level, 3=Sugar Levels test, 5=Urgent Status
                                                                 let isView = String(isViewed)
                                                                 
                                                                 //alerts.append([tid, uid, pid, maid, createdDateTime, isView, status, note])
-                                                                allAlerts.append([tid, uid, pid, maid, createdDateTime, isView, status, note])
+                                                                allAlerts.append([patientName!, alertTitle, createdDateTime, isView, status, note])
                                                                 
                                                             }
                                                             
@@ -119,6 +121,21 @@ class GETAlerts {
 
     }
     
+    func manageAlert(code: Int) -> String {
+        
+        //1=Complexity High, 2=Sugar Level, 3=Sugar Levels test, 5=Urgent Status
+        var codeString:String
+        
+        switch code{
+            case 1: codeString = "Complexity High"
+            case 2: codeString = "Sugar Level"
+            case 3: codeString = "Sugar Levels test"
+            case 5: codeString = "Urgent Status"
+            default: codeString = ""
+        }
+        
+        return codeString
+    }
 }
 
 

@@ -16,7 +16,7 @@ class PatientUpdateViewController: UIViewController {
     @IBOutlet weak var messageTextBox: UITextView!
     @IBOutlet weak var patientImage: UIImageView!
     
-    var feedData = [[String]]()
+    //var feedData = [[String]]()
     
     
     override func viewDidLoad() {
@@ -36,7 +36,8 @@ class PatientUpdateViewController: UIViewController {
         updateToSavedImage(Userimage: patientImage)
         
         
-        feedData = UserDefaults.standard.object(forKey: "feedData") as! [[String]] //?? [[String]]()
+//        feedData = UserDefaults.standard.object(forKey: "feedData") as! [[String]] //?? [[String]]()
+        
 //        times = feedData.getColumn(column: 0)
 //        dates = feedData.getColumn(column: 1)
 //        messageCreator = feedData.getColumn(column: 2)
@@ -59,14 +60,6 @@ class PatientUpdateViewController: UIViewController {
 //    }
     
     func appendNewMessageToDefaults(){
-        //let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short)
-//        let date = Date()
-//        let formatter = DateFormatter()
-//        let formatterTime = DateFormatter()
-//        formatter.dateStyle = .short // = "M/dd/yy"
-//        formatterTime.timeStyle = .short
-//        let currentTime = formatterTime.string(from: date)
-//        let todaysDate = formatter.string(from: date) //"2/14/2017"
         
         var userName = ""
         //if value does not exists don't update placehold text, O.W. display locally saved text
@@ -78,29 +71,9 @@ class PatientUpdateViewController: UIViewController {
             userName += " " + UserDefaults.standard.string(forKey: "profileLastName")!
         }
         
-        //let messageCreatedBy = userName
-        
-        //let newUpdateMessage = self.messageTextBox.text
         
         self.insertPatientFeed(messageCreator: userName, message: messageTextBox.text, patientID: "")
         
-//        print("From: " + messageCreatedBy)
-//        print("Date: " + todaysDate)
-//        print("Time: " + currentTime)
-//        print("Update: " + newUpdateMessage!)
-//        
-//        let newUpdate = [currentTime,todaysDate,messageCreatedBy,newUpdateMessage!]
-//        
-//        // APPEND
-//        
-//        //feedData.append(newUpdate)
-//        
-//        //INSERT AT BEGINING
-//        
-//        feedData.insert(newUpdate, at: 0)
-//        
-//        UserDefaults.standard.set(feedData, forKey: "feedData")
-//        UserDefaults.standard.synchronize()
     }
     
     @IBAction func goBackButtonTapped(_ sender: Any) {

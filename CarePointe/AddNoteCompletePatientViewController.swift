@@ -94,7 +94,7 @@ class AddNoteCompletePatientViewController: UIViewController {
             
             // Instantiate a view controller from Storyboard and present it
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "NavControllerMainDB") as UIViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "NavControllerMainDB") as UIViewController //PTV
             self.present(vc, animated: true, completion: nil)
             
         })

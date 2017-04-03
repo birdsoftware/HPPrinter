@@ -100,7 +100,7 @@ class HamburgerViewController: UIViewController {
 
                     userPhoto.image = imageer
                     // 8 --rotate image by 90 degrees M_PI_2 "if image is taken from camera"
-                    let angle =  CGFloat(M_PI_2)
+                    let angle =  CGFloat(Double.pi/2)
                     let tr = CGAffineTransform.identity.rotated(by: angle)
                     userPhoto.transform = tr
                 } else { print("found nil while unwrapping dataer in HamburgerViewController") }

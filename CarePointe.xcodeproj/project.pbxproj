@@ -44,7 +44,6 @@
 		58327A6D1E64DE40006F4FB4 /* setUserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58327A6C1E64DE40006F4FB4 /* setUserImage.swift */; };
 		58327A6F1E64F49F006F4FB4 /* AddUsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58327A6E1E64F49F006F4FB4 /* AddUsersCell.swift */; };
 		583646911E0890FC003C2E60 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646901E0890FC003C2E60 /* menu.png */; };
-		583646931E08A1CE003C2E60 /* menu_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646921E08A1CE003C2E60 /* menu_large.png */; };
 		583646951E08A7BC003C2E60 /* bell.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646941E08A7BC003C2E60 /* bell.png */; };
 		583646971E08AE2F003C2E60 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583646961E08AE2F003C2E60 /* TasksViewController.swift */; };
 		583FC4FF1E80590D00D178C4 /* RESTGETToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */; };
@@ -145,12 +144,14 @@
 		58D633681E4D26AB00DC3EB9 /* Untitled.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D633651E4D26AB00DC3EB9 /* Untitled.png */; };
 		58D6336A1E4D310100DC3EB9 /* quillPen.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D633691E4D310100DC3EB9 /* quillPen.png */; };
 		58D6336C1E4D316A00DC3EB9 /* PatientFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D6336B1E4D316A00DC3EB9 /* PatientFeedViewController.swift */; };
-		58D6336E1E4D347D00DC3EB9 /* attention.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D6336D1E4D347D00DC3EB9 /* attention.png */; };
 		58D633731E4D34CB00DC3EB9 /* bullets.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D6336F1E4D34CB00DC3EB9 /* bullets.png */; };
 		58D633741E4D34CB00DC3EB9 /* doctor.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D633701E4D34CB00DC3EB9 /* doctor.png */; };
 		58D633751E4D34CB00DC3EB9 /* pills.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D633711E4D34CB00DC3EB9 /* pills.png */; };
 		58D633761E4D34CB00DC3EB9 /* telephone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58D633721E4D34CB00DC3EB9 /* telephone.png */; };
 		58D633781E4D360400DC3EB9 /* PatientFeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D633771E4D360400DC3EB9 /* PatientFeedViewCell.swift */; };
+		58E7FC951E8B0E9000F203C6 /* GETUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E7FC941E8B0E9000F203C6 /* GETUsers.swift */; };
+		58E7FC971E8B19F400F203C6 /* UpdateSavedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E7FC961E8B19F400F203C6 /* UpdateSavedDictionary.swift */; };
+		58E7FC991E8C4CE300F203C6 /* users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E7FC981E8C4CE300F203C6 /* users.swift */; };
 		58EB0DC81E732DC40009FD57 /* caseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB0DC71E732DC40009FD57 /* caseCell.swift */; };
 		58EB0DCC1E734D200009FD57 /* ServicesC1ViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB0DCB1E734D200009FD57 /* ServicesC1ViewC.swift */; };
 		58EB0DCE1E73614A0009FD57 /* locationsViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB0DCD1E73614A0009FD57 /* locationsViewC.swift */; };
@@ -231,7 +232,6 @@
 		58327A6C1E64DE40006F4FB4 /* setUserImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setUserImage.swift; sourceTree = "<group>"; };
 		58327A6E1E64F49F006F4FB4 /* AddUsersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUsersCell.swift; sourceTree = "<group>"; };
 		583646901E0890FC003C2E60 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu.png; path = ../../imageFiles/menu.png; sourceTree = "<group>"; };
-		583646921E08A1CE003C2E60 /* menu_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_large.png; path = ../../../menu_large.png; sourceTree = "<group>"; };
 		583646941E08A7BC003C2E60 /* bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bell.png; path = ../../imageFiles/bell.png; sourceTree = "<group>"; };
 		583646961E08AE2F003C2E60 /* TasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETToken.swift; sourceTree = "<group>"; };
@@ -338,6 +338,9 @@
 		58D633711E4D34CB00DC3EB9 /* pills.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pills.png; path = ../../imageFiles/pills.png; sourceTree = "<group>"; };
 		58D633721E4D34CB00DC3EB9 /* telephone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = telephone.png; path = ../../imageFiles/telephone.png; sourceTree = "<group>"; };
 		58D633771E4D360400DC3EB9 /* PatientFeedViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientFeedViewCell.swift; sourceTree = "<group>"; };
+		58E7FC941E8B0E9000F203C6 /* GETUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GETUsers.swift; sourceTree = "<group>"; };
+		58E7FC961E8B19F400F203C6 /* UpdateSavedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSavedDictionary.swift; sourceTree = "<group>"; };
+		58E7FC981E8C4CE300F203C6 /* users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = users.swift; sourceTree = "<group>"; };
 		58EB0DC71E732DC40009FD57 /* caseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = caseCell.swift; sourceTree = "<group>"; };
 		58EB0DCB1E734D200009FD57 /* ServicesC1ViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesC1ViewC.swift; sourceTree = "<group>"; };
 		58EB0DCD1E73614A0009FD57 /* locationsViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = locationsViewC.swift; sourceTree = "<group>"; };
@@ -569,7 +572,10 @@
 			children = (
 				58A8DCCA1E578E44008711D1 /* movePatientToSection.swift */,
 				58F4CB921E85D256000C3185 /* dispatchRESTCalls.swift */,
+				58E7FC961E8B19F400F203C6 /* UpdateSavedDictionary.swift */,
+				58E7FC981E8C4CE300F203C6 /* users.swift */,
 				583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */,
+				58E7FC941E8B0E9000F203C6 /* GETUsers.swift */,
 				5848FBE61E84617C004B7F44 /* RESTGETPatients.swift */,
 				5848FBE81E847F66004B7F44 /* RESTGETAlerts.swift */,
 				58FDD47B1E60B42300F97D86 /* dragableImageView.swift */,
@@ -691,7 +697,6 @@
 				583646901E0890FC003C2E60 /* menu.png */,
 				583646941E08A7BC003C2E60 /* bell.png */,
 				582806601E0991F400421815 /* calendar.png */,
-				583646921E08A1CE003C2E60 /* menu_large.png */,
 				58254B4F1E0850EA00933B60 /* hamburger.png */,
 				58254B581E0855FF00933B60 /* gray.circle.png */,
 				582806621E09AB0C00421815 /* side_menu_bg.jpg */,
@@ -828,7 +833,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Mogul Pro Media";
 				TargetAttributes = {
 					BB57C2CD1DFF41DC00731AC4 = {
@@ -918,13 +923,11 @@
 				58CEEB521E663D4200104057 /* paper-clip.png in Resources */,
 				58272AED1E3FE93C00E779CF /* user.png in Resources */,
 				58CEEB501E65FC4600104057 /* CloseKeyboardButton.png in Resources */,
-				58D6336E1E4D347D00DC3EB9 /* attention.png in Resources */,
 				583646911E0890FC003C2E60 /* menu.png in Resources */,
 				58496C1A1E527FD900DF103A /* checkBox.png in Resources */,
 				58496C141E52735000DF103A /* x_sign80x680.png in Resources */,
 				58254B5B1E0855FF00933B60 /* orange.circle.png in Resources */,
 				58B71F1B1E7CA207000AD088 /* VictorOwen.jpeg in Resources */,
-				583646931E08A1CE003C2E60 /* menu_large.png in Resources */,
 				58174CE91E71D4CD00023003 /* Landing_screen.png in Resources */,
 				582806671E09B5AF00421815 /* jennifer.jpg in Resources */,
 				582806651E09AC4100421815 /* care.white.png in Resources */,
@@ -998,12 +1001,14 @@
 				585A4D311E5E008100A16118 /* InboxCell.swift in Sources */,
 				58A8DCD21E57ABC6008711D1 /* setUpPatientData.swift in Sources */,
 				BB57C2D21DFF41DE00731AC4 /* AppDelegate.swift in Sources */,
+				58E7FC971E8B19F400F203C6 /* UpdateSavedDictionary.swift in Sources */,
 				58CBC0091E4D42D1001A9698 /* toast.swift in Sources */,
 				58EB0DCC1E734D200009FD57 /* ServicesC1ViewC.swift in Sources */,
 				58272AFE1E412DFE00E779CF /* PatientInformationCell.swift in Sources */,
 				58458AC81E45365B005DFEDA /* RangeSlider.swift in Sources */,
 				58272AF21E3FFD1E00E779CF /* PTVTableViewController.swift in Sources */,
 				583FC4FF1E80590D00D178C4 /* RESTGETToken.swift in Sources */,
+				58E7FC991E8C4CE300F203C6 /* users.swift in Sources */,
 				BB93EA9E1E0349F8000C15D3 /* RegisterViewController.swift in Sources */,
 				58EB0DCE1E73614A0009FD57 /* locationsViewC.swift in Sources */,
 				58D6335B1E4A78C400DC3EB9 /* RangeSliderTrackLayer.swift in Sources */,
@@ -1020,6 +1025,7 @@
 				58CBC01B1E4E43DA001A9698 /* PatientScreeningsViewController.swift in Sources */,
 				58496C1C1E52843D00DF103A /* TermsViewController.swift in Sources */,
 				58D633621E4D25AE00DC3EB9 /* PatientCareTeamCell.swift in Sources */,
+				58E7FC951E8B0E9000F203C6 /* GETUsers.swift in Sources */,
 				BB93EA981E033314000C15D3 /* SignInViewController.swift in Sources */,
 				58FDD4741E5F971600F97D86 /* setUpFeedData.swift in Sources */,
 				58FDD47C1E60B42300F97D86 /* dragableImageView.swift in Sources */,

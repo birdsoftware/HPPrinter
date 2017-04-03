@@ -106,15 +106,6 @@
       "scale" : "2x"
     },
     {
-      "extent" : "full-screen",
-      "idiom" : "ipad",
-      "subtype" : "1366h",
-      "filename" : "LaunchImage-800-Landscape-736h@3x-1.png",
-      "minimum-system-version" : "8.0",
-      "orientation" : "portrait",
-      "scale" : "2x"
-    },
-    {
       "orientation" : "portrait",
       "idiom" : "iphone",
       "filename" : "LaunchImage@2x-1.png",

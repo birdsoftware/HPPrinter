@@ -27,11 +27,11 @@ class VitalsContainer2VC: UIViewController, UITableViewDelegate, UITableViewData
         vitalsTable.rowHeight = UITableViewAutomaticDimension
         vitalsTable.estimatedRowHeight = 150
         
-        vitals = [["Height","5ft 7 in"],
-                        ["Weight","140 lbs"],
+        vitals = [["Height ft/in","5ft 7 in"],
+                        ["Weight lbs","140 lbs"],
                         ["BMI","27.6"],
                         ["BMI Status","Obesity"],
-                        ["Body Temperature","98.3 ℉"],
+                        ["Body Temperature ℉","98.3 ℉"],
                         ["BP-Sitting Location","Left"],
                         ["BP-Sitting Sys/Dia","120/80"],
         ]
@@ -43,6 +43,108 @@ class VitalsContainer2VC: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
+    //
+    // #MARK: - Button Action
+    //
+    
+    @IBAction func updateButtonTapped(_ sender: Any) {
+        
+        // Show Alert, get new vitals[n] text, show [Update] [Cancel] buttons
+        let alert = UIAlertController(title: "Patient Vitals",
+                                      message: "Update patient vitals",
+                                      preferredStyle: .alert)
+        
+        // Submit button
+        let submitAction = UIAlertAction(title: "Update now", style: .default, handler: { (action) -> Void in
+            // Get 1st TextField's text
+            let weightTextField = alert.textFields![0] //print(textField)
+            let bmiTextField = alert.textFields![1]
+            let bmiStatusTextField = alert.textFields![2]
+            let bodyTempTextField = alert.textFields![3]
+            let bpLocationTextField = alert.textFields![4]
+            let bpTextField = alert.textFields![5]
+            
+            self.vitals[0][1] = weightTextField.text!
+            self.vitals[1][1] = bmiTextField.text!
+            self.vitals[2][1] = bmiStatusTextField.text!
+            self.vitals[3][1] = bodyTempTextField.text!
+            self.vitals[4][1] = bpLocationTextField.text!
+            self.vitals[5][1] = bpTextField.text!
+            
+            self.vitalsTable.reloadData()
+            
+        })
+        
+        // Cancel button
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        
+        // Add Height textField and customize
+        alert.addTextField { (textField: UITextField) in
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .default
+            textField.autocorrectionType = .default
+            textField.placeholder = "New Height ft/in"
+            textField.clearButtonMode = .whileEditing
+            
+        }
+        // Add Weight textField and customize
+        alert.addTextField { (textField: UITextField) in
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .default
+            textField.autocorrectionType = .default
+            textField.placeholder = "New Weight lbs"
+            textField.clearButtonMode = .whileEditing
+            
+        }
+        // Add BMI textField and customize
+        alert.addTextField { (textField: UITextField) in
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .default
+            textField.autocorrectionType = .default
+            textField.placeholder = "New BMI"
+            textField.clearButtonMode = .whileEditing
+        }
+        // Add BMI Status textField and customize
+        alert.addTextField { (textField: UITextField) in
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .default
+            textField.autocorrectionType = .default
+            textField.placeholder = "New BMI Status"
+            textField.clearButtonMode = .whileEditing
+        }
+        // Add Body Temperature textField and customize
+        alert.addTextField { (textField: UITextField) in
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .default
+            textField.autocorrectionType = .default
+            textField.placeholder = "New Body Temperature ℉"
+            textField.clearButtonMode = .whileEditing
+        }
+        // Add textField and customize
+        alert.addTextField { (textField: UITextField) in
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .default
+            textField.autocorrectionType = .default
+            textField.placeholder = "New BP-Sitting Location"
+            textField.clearButtonMode = .whileEditing
+        }
+        // Add textField and customize
+        alert.addTextField { (textField: UITextField) in
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .default
+            textField.autocorrectionType = .default
+            textField.placeholder = "New BP-Sitting Sys/Dia"
+            textField.clearButtonMode = .whileEditing
+        }
+        
+        //let height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 1.80)
+       // alert.view.addConstraint(height)
+        
+        // Add action buttons and present the Alert
+        alert.addAction(submitAction)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
 
     //
     // #MARK: - Table View

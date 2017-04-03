@@ -133,13 +133,31 @@ class PTVDetailViewController: UIViewController {
         
         // Submit button
         let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { (action) -> Void in
-            // Get 1st TextField's text
-            //let textField = alert.textFields![0] print(textField)
+            // get patientID
+            let patientID = self.returnSelectedPatientID()
+            var userName:String = ""
             
+            // get profile user name
+            if self.isKeyPresentInUserDefaults(key: "profileName") {
+                userName = UserDefaults.standard.string(forKey: "profileName")!
+            }
+            if self.isKeyPresentInUserDefaults(key: "profileLastName") {
+                userName += " " + UserDefaults.standard.string(forKey: "profileLastName")!
+            }
+            
+            // Get 1st TextField's text
+            let declineMessage = "Patient \(patientID) declined by \(userName). " + alert.textFields![0].text! //print(textField)
+            
+            // 1 MOVE PATIENT FROM NEW TO COMPLETED
             let completed = 2 //0 new,1 accept,2 completed
             self.moveAppointmentToSection(SectionNumber: completed)
             
-            // Instantiate a view controller from Storyboard and present it
+            // 2 UPDATE PATIENT FEED
+            //      times   dates   messageCreator  message     patientID
+            self.insertPatientFeed(messageCreator: userName, message: declineMessage, patientID: patientID)
+            
+            
+            // 3. Instantiate a view controller from Storyboard and present it
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
             self.present(vc, animated: false, completion: nil)
