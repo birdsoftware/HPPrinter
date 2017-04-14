@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 import UXCam //pod 'UXCam'
 
 
@@ -22,10 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UXCam.start(withKey: "3870e860f178fb7") //bbirdunlv ako //9eb3d8b656c7d44
         
-        //REQUEST NEW API ENDPOINT KEY
-        let beginRest = DispatchREST()
-        beginRest.beginRestCalls()
-        
+        //check if we have internet connection
+        if Reachability.isConnectedToNetwork() == true
+        {
+            print("Internet Connection Available!")
+            if Reachability.isReturningUser() == true {
+                
+                //REQUEST API ENDPOINT KEY and Data
+                let beginRest = DispatchREST()
+                beginRest.beginRestCalls()
+                
+            }
+        } else {
+            print("Internet Connection not Available!")
+        }
         
 
         return true

@@ -18,14 +18,17 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signIn: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var launchTouchIDButton: UIButton!
+    @IBOutlet weak var showSignInAgain: UIButton!
     
     var remindMeToUseTouchID: Bool = true //true = show email/passoword fields
+    //var isWorkingOffline: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         registerButton.isHidden = true
         launchTouchIDButton.isHidden = true
+        showSignInAgain.isHidden = true
         
         //sign in UI set up
         signIn.layer.cornerRadius = 5
@@ -36,18 +39,23 @@ class SignInViewController: UIViewController {
         password.leftViewMode = .always
         password.leftView = UIImageView(image: UIImage(named: "key.png"))
         
+ 
         if isKeyPresentInUserDefaults(key:  "remindMeToUseTouchID") {
             remindMeToUseTouchID = UserDefaults.standard.bool(forKey: "remindMeToUseTouchID")
         }
         
         //check if using touchID and hide elements
         if (remindMeToUseTouchID == false) {
-            signIn.isHidden = true
-            email.isHidden = true
-            password.isHidden = true
-            launchTouchID()
+            //this is a returning user
+                signIn.isHidden = true
+                email.isHidden = true
+                password.isHidden = true
+                launchTouchID()
+            
         }
         
+        let isReturningUser = Reachability.isReturningUser()
+        print("is Returning User: \(isReturningUser)")
         
         //Tap to Dismiss KEYBOARD
             let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignInViewController.dismissKeyboard))
@@ -100,10 +108,11 @@ class SignInViewController: UIViewController {
                                 self.notifyUser("Session cancelled",
                                                 err: error?.localizedDescription)
                                 //"Session cancelled" is shown 1st then "Please try again" below is shown 
+                                self.showHiddenSignInFields()
                                 
                             case LAError.Code.userCancel.rawValue:
-                                self.notifyUser("Please try again",
-                                                err: error?.localizedDescription)
+                                //self.notifyUser("Please try again",               //commented out so there is not 2 alers 1. TouchID, 2. Please Try Again
+                                //                err: error?.localizedDescription)
                                 self.showHiddenSignInFields()
                                 
                             case LAError.Code.userFallback.rawValue:
@@ -119,11 +128,10 @@ class SignInViewController: UIViewController {
                             }
                             
                         } else {
-                            //self.notifyUser("Authentication Successful", err: "You now have full access")
-                            self.touchLoginAlert()
-                        }
-                    }
-            })
+                            self.touchLoginAlert()//self.notifyUser("Authentication Successful", err: "You now have full access")
+                         }//end else
+                    }//DispatchQueue
+            })//device can use touch
             
         } else {
             // Device cannot use TouchID
@@ -157,8 +165,24 @@ class SignInViewController: UIViewController {
             //Sign In successfull
             UserDefaults.standard.set(true, forKey: "isUserSignedIn")
             UserDefaults.standard.synchronize()
-            //go to dashboard
-            self.dismiss(animated: false, completion: nil)
+            
+            //check if we DON'T have internet connection
+            if Reachability.isConnectedToNetwork() == false {
+                
+                let myAlert2 = UIAlertController(title: "Internet connection not found",
+                                                message: "Enable internet connection to receive new updates.",
+                                                preferredStyle: .alert)
+                myAlert2.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                    //go to dashboard
+                    self.dismiss(animated: false, completion: nil)
+                    }))
+                
+                self.present(myAlert2, animated: true){}
+                
+            } else {
+                //go to dashboard
+                self.dismiss(animated: false, completion: nil)
+            }
         }))
         
         present(myAlert, animated: true){}
@@ -215,32 +239,110 @@ class SignInViewController: UIViewController {
 //---------------- END TouchID ---------------------------
 
     @IBAction func supportButtonTapped(_ sender: Any) {
-        displayAlertMessage(userMessage: "Contact CarePointe Support at 1-800-SUPPORT Monday-Friday 8am-5pm  PST")
+        displayAlertMessage(userMessage: "Contact CarePointe Support at 480-494-2466")
     }
     
     //http://www.techotopia.com/index.php/Implementing_TouchID_Authentication_in_iOS_8_Apps
+    
     @IBAction func signInButtonTapped(_ sender: Any) {
-        let userEmail = email.text
-        let userPassword = password.text
+        let userEmail = email.text!
+        let userPassword = password.text!
         
-        let savedUserEmail = UserDefaults.standard.string(forKey: "email")
-        let savedUserPassword = UserDefaults.standard.string(forKey: "password")
+        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
+        print("savedUserPassword:\(savedUserPassword)")
+        print("savedUserEmail:\(savedUserEmail)")
         
-        if(userEmail == savedUserEmail || userEmail == "test")
-        {
-            if(userPassword == savedUserPassword || userPassword == "test")
-            {
-                //Sign In successfull
-                UserDefaults.standard.set(true, forKey: "isUserSignedIn")
-                UserDefaults.standard.synchronize()
-                
-                //Use touchID next time? YES | NO remind me next time
-                askUseTouchID("Sign In", question: "Use TouchID next time?")
-                
-                //close window moved to askUseTouchID()
-                //self.dismiss(animated: false, completion: nil)
-            }
+        print("remindMeToUseTouchID: \(remindMeToUseTouchID)")
+        print("userEmail: \(userEmail)")
+        print("userPassword: \(userPassword)")
+
+        
+        if(userEmail.isEmpty || userPassword.isEmpty){
+            
+            notifyUser("New user Sign In failure", err: "Make sure E-mail and Password fields are not empty")
+            return
         }
+        
+
+        //1 Check if NEW USER
+        if remindMeToUseTouchID == true {
+            
+            //check if we have internet connection
+            if Reachability.isConnectedToNetwork() == true
+            {
+                //Internet Connection Available
+                
+                //TRY signin
+                let signinNewUser = DispatchGroup()
+                signinNewUser.enter()
+                
+                // SignIn to API -----------
+                let postSignIN = POSTSignin()
+                postSignIN.signInUser(userEmail: userEmail, userPassword: userPassword, dispachInstance: signinNewUser)
+                
+                // API Responded
+                signinNewUser.notify(queue: DispatchQueue.main) {
+                    
+                    let userExists = UserDefaults.standard.bool(forKey: "APISignedInSuccess")
+                    
+                    if(userExists){//API {"type":"true"} thus user matched server!
+                        
+                        //Sign In successfull Save userName/Email, Password, and isUserSignedIn
+                        print("Sign In successfull Save userName/Email, Password, and isUserSignedIn")
+                        
+                        UserDefaults.standard.set(userEmail, forKey: "email")
+                        UserDefaults.standard.set(userPassword, forKey: "password")
+                        UserDefaults.standard.set(true, forKey: "isUserSignedIn")
+                        UserDefaults.standard.synchronize()
+                        
+                        self.askUseTouchID("Sign In", question: "Use TouchID next time?")
+                        //close window moved to askUseTouchID() - self.dismiss(animated: false, completion: nil)
+                        
+                    } else {
+                        //Sign in not successfull
+                        let errorMessage = UserDefaults.standard.string(forKey: "APISignedInErrorMessage")
+                        self.notifyUser("New user Sign In failure", err: errorMessage)
+                    }//user
+                    
+                }//API
+            }//reachable internet
+            else {
+                notifyUser("Internet connection not found", err: "Enable internet so we can setup your account")
+            }
+            
+        } else {
+            //1 Is Returning USER
+            
+                if isUserEmailPasswordMatchingDefaults() {
+                    //Sign In successfull
+                    UserDefaults.standard.set(true, forKey: "isUserSignedIn")
+                    UserDefaults.standard.synchronize()
+                    
+                    //check if we DON'T have internet connection
+                    if Reachability.isConnectedToNetwork() == false
+                    {
+                        let myAlert = UIAlertController(title: "Internet connection not found",
+                                                        message: "New alerts, messages and patient data will not be available in offline mode. Enable internet to get updates.",
+                                                        preferredStyle: .alert)
+                        
+                                    myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                                        //close sign in page and show dashboard
+                                        self.dismiss(animated: false, completion: nil)
+                                    }))
+                            
+                                    present(myAlert, animated: true){}
+                    } else {
+                        //Sign in successfull and we have internet connection
+                        //close sign in page and show dashboard
+                        self.dismiss(animated: false, completion: nil)
+                        
+                    }
+                    
+                }
+            
+        }
+        
     }
 
     @IBAction func showLoginPageAgain(_ sender: Any) {
@@ -257,8 +359,11 @@ class SignInViewController: UIViewController {
     
     func displayAlertMessage(userMessage:String){
         let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: .alert)
-        myAlert.addAction(UIAlertAction(title: "OK", style: .default) { _ in })
-        
+        myAlert.addAction(UIAlertAction(title: "OK", style: .cancel) { _ in })
+        myAlert.addAction(UIAlertAction(title: "Call CarePointe", style: .default, handler: { (action) -> Void in
+            self.open(scheme: "tel://4804942466")
+        }))
+
         self.present(myAlert, animated: true){}
     }
     
@@ -268,5 +373,99 @@ class SignInViewController: UIViewController {
         email.isHidden = false
         password.isHidden = false
     }
+    
+    func isUserEmailPasswordMatchingDefaults() -> Bool {
+        
+        let userEmail = email.text!
+        let userPassword = password.text!
+        
+        //let patientIDData = UserDefaults.standard.object(forKey: "patientID") as? [[String]] ?? [[String]]()
+        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
+        
+        if(userEmail == savedUserEmail || userEmail == "test")
+        {
+            if(userPassword == savedUserPassword || userPassword == "test")
+            {
+                //Sign In successfull
+                return true
+                
+            } else {
+                //passwords don't match try API
+                let message = "User password does not match. Try again."
+                trySignin(userEmail: userEmail, userPassword: userPassword, failMessage:message)
+//                let userExists = UserDefaults.standard.bool(forKey: "APISignedInSuccess")
+//                if(userExists == false){
+//                    print("passwords don't match userPassword:\(userPassword), savedUserPassword:\(savedUserPassword)")
+//                    simpleAlert(title:"Returning user Sign In failure",
+//                                message:"User password does not match. Try again.",
+//                                buttonTitle:"OK")
+//                }
+            }
+        } else {
+            //Username don't match try API
+            let message = "User with this Username does not exists. Try again."
+            trySignin(userEmail: userEmail, userPassword: userPassword, failMessage:message)
+//            let userExists = UserDefaults.standard.bool(forKey: "APISignedInSuccess")
+//            if(userExists == false){
+//                print("Username don't match userEmail:\(userEmail), savedUserEmail:\(savedUserEmail)")
+//                simpleAlert(title:"Returning user Sign In failure",
+//                            message:"User with this Username does not exists. Try again.",
+//                            buttonTitle:"OK")
+//            }
+        }
+
+        return false
+        
+    }
+    
+    func trySignin(userEmail: String, userPassword: String, failMessage: String){
+        
+        let signinNewUser = DispatchGroup()
+        signinNewUser.enter()
+        
+        // SignIn to API -----------
+        let postSignIN = POSTSignin()
+        postSignIN.signInUser(userEmail: userEmail, userPassword: userPassword, dispachInstance: signinNewUser)
+        
+        // API Responded
+        signinNewUser.notify(queue: DispatchQueue.main) {
+            
+            let userExists = UserDefaults.standard.bool(forKey: "APISignedInSuccess")
+            
+            if(userExists){
+                //sign in success - update password and close window
+                UserDefaults.standard.set(userEmail, forKey: "email")
+                UserDefaults.standard.set(userPassword, forKey: "password")
+                UserDefaults.standard.set(true, forKey: "isUserSignedIn")
+                UserDefaults.standard.synchronize()
+                self.dismiss(animated: false, completion: nil)
+            } else {
+                
+                        self.simpleAlert(title:"Returning user Sign In failure",
+                                    message:failMessage,
+                                    buttonTitle:"OK")
+            }
+        }//API
+    }
+
+    
+    //Supports CALL IBACTION
+    func open(scheme: String) {
+        //http://useyourloaf.com/blog/openurl-deprecated-in-ios10/
+        if let url = URL(string: scheme) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:],
+                                          completionHandler: {
+                                            (success) in
+                                            print("Open \(scheme): \(success)")
+                })
+            } else {
+                let success = UIApplication.shared.openURL(url)
+                print("Open \(scheme): \(success)")
+            }
+        }
+    }
+    
 
 }

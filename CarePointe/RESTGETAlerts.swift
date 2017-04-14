@@ -29,8 +29,8 @@ class GETAlerts {
         
         let headers = [
             "authorization": token,
-            "cache-control": "no-cache",
-            "postman-token": "5b46169a-a62b-bd4a-e93f-5056ff0b508a"
+            "cache-control": "no-cache"
+            //"postman-token": "5b46169a-a62b-bd4a-e93f-5056ff0b508a"
         ]
         
         let request = NSMutableURLRequest(url: NSURL(string: nsurlAlerts)! as URL,
@@ -43,7 +43,7 @@ class GETAlerts {
         let dataTask = session.dataTask(with: request as URLRequest,
                                         completionHandler: { (data, response, error) -> Void in
                                             if (error != nil) {
-                                                print("Error:\n\(String(describing: error))")
+                                                print("GET Alerts Error:\n\(String(describing: error))")
                                                 return
                                             } else {
                                                 

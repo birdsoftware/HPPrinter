@@ -9,20 +9,24 @@
 import Foundation
 
 class User {
+    
+    var firstLastName: String
+    var company: String
     var id: String
-    var userName: String
-    var firstName: String
-    var lastName: String
-    var emailID1: String
+    //var userName: String
+    //var firstName: String
+    //var lastName: String
     var roleType: String
     
-    init(id: String, userName: String, firstName: String,
-         lastName: String, emailID1: String, roleType: String) {
+    init(firstLastName: String/*firstName: String,
+         lastName: String*/, company: String, id: String, /*userName: String,*/ roleType: String) {
+        
+        self.firstLastName = firstLastName
+        //self.firstName = firstName
+        //self.lastName = lastName
+        self.company = company
         self.id = id
-        self.userName = userName
-        self.firstName = firstName
-        self.lastName = lastName
-        self.emailID1 = emailID1
+        //self.userName = userName
         self.roleType = roleType
     }
 }

@@ -13,12 +13,12 @@ class GETToken {
 
     func signInCarepoint(userEmail: String, userPassword: String, dispachInstance: DispatchGroup) {
         
-        var token = String()
+        //var token = String()
         
         let headers = [
             "content-type": "application/json",
-            "cache-control": "no-cache",
-            "postman-token": "0e161852-1169-8f8e-335c-42a4d2389c25"
+            "cache-control": "no-cache"
+            //"postman-token": "0e161852-1169-8f8e-335c-42a4d2389c25"
         ]
         let parameters = [
             "email": userEmail,
@@ -52,15 +52,31 @@ class GETToken {
                         let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
                         let authData = json["data"] as? [[String: Any]] {
                         for aData in authData {
-                            if let tokenBuff = aData["Token"] as? String {
-                                
-                                token = tokenBuff
-                                //print("dataTask: \(token)")
-                            }
+                            let token = aData["Token"] as? String ?? ""
+                            //let User_ID = aData["User_ID"] as? String ?? ""
+                            let RoleType = aData["RoleType"] as? String ?? ""
+                           // let UserName = aData["UserName"] as? String ?? "" //"test@test.com"
+                           // let Password = aData["Password"] as? String ?? "" //"47ec2dd791e31e2ef2076caf64ed9b3d"
+                            let FirstName = aData["FirstName"] as? String ?? ""
+                            let LastName = aData["LastName"] as? String ?? ""
+                            //let profile_image = aData["profile_image"] as? String ?? ""
+                            let EmailID1 = aData["EmailID1"] as? String ?? ""
+                            
+                            //let roleIdDescription = self.manageRoleID(code: Role_ID)
+                            let profileName = FirstName
+                            let profileLastName = LastName
+                            
+                            UserDefaults.standard.set(token, forKey: "token")
+                            UserDefaults.standard.set(profileName, forKey: "profileName")
+                            UserDefaults.standard.set(profileLastName, forKey: "profileLastName")
+                            UserDefaults.standard.set(RoleType, forKey: "title")
+                            UserDefaults.standard.set(EmailID1, forKey: "EmailID1")
+                            UserDefaults.standard.synchronize()
+                            
                         }
                         //Update token
-                        UserDefaults.standard.set(token, forKey: "token")
-                        UserDefaults.standard.synchronize()
+                        //UserDefaults.standard.set(token, forKey: "token")
+                        //UserDefaults.standard.synchronize()
                         
                         print("finished GET Token")
                         dispachInstance.leave()
@@ -106,5 +122,25 @@ class GETToken {
         
         
     }
+    
+    
+//    func manageRoleID(code: String) -> String {
+//        //1=Complexity High, 2=Sugar Level, 3=Sugar Levels test, 5=Urgent Status
+//        var codeString:String
+//        switch code{
+//            case "1": codeString = "Admin"
+//            case "2": codeString = "Care Coordinator"
+//            case "3": codeString = "Vendor"
+//            case "4": codeString = "Care Team"
+//            case "5": codeString = "Origin"
+//            case "6": codeString = "Physician"
+//            case "7": codeString = "Case Team"
+//            case "8": codeString = "Organization"
+//            case "9": codeString = "Case Team Manager"
+//            case "10": codeString = "Nurse Practitioner"
+//            default: codeString = ""
+//        }
+//        return codeString
+//    }
     
 }

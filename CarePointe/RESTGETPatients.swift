@@ -27,8 +27,8 @@ class GETPatients {
         
         let headers = [
             "authorization": token,
-            "cache-control": "no-cache",
-            "postman-token": "5b46169a-a62b-bd4a-e93f-5056ff0b508a"
+            "cache-control": "no-cache"
+           // "postman-token": "5b46169a-a62b-bd4a-e93f-5056ff0b508a"
         ]
         
         let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/patients")! as URL,
@@ -110,6 +110,7 @@ class GETPatients {
                                                                 let up = String(updatedby)
                                                                 let cu = String(cscUser)
                                                                 let org = String(organization)
+                                                                let firstLastName = firstName + " " + lastName
                                                                 
                                                                 //define dictionary literals
                                                                 //http://stackoverflow.com/questions/30418101/find-key-value-pair-in-an-array-of-dictionaries
@@ -127,7 +128,7 @@ class GETPatients {
                                                                                  "Updatedby":up, "UpdatedDateTime":updatedDateTime, "careteam":careteam, "profile_image":profileImage, "csc_user":cu,
                                                                                  "pharmacy_NCPDP":pharmacyNCPDP, "organization":org])
                                                                 
-                                                                patientNameID.append(["Patient_ID":pid,"patientName":firstName+""+lastName])
+                                                                patientNameID.append(["Patient_ID":pid,"patientName":firstLastName,"CreatedDateTime":createdDateTime])
                                                                 
                                                                 //define [[String]] Literals
 //                                                                patients.append([pid, patientUniqid, firstName, lastName, gender, ethnicity, ssn, patientRAF,

@@ -56,35 +56,34 @@ class HamburgerViewController: UIViewController {
         inboxCount.text = String(inboxCountInt)
     }
     
-    /*
-     * Check if value Already Exists in user defaults
-     *
-     */
-//    func isKeyPresentInUserDefaults(key: String) -> Bool {
-//        return UserDefaults.standard.object(forKey: key) != nil
-//    }
-    
     func updateProfileFromDefaults() {
         
         //if value does not exists don't update placehold text, O.W. display locally saved text
-        var fName: String
-        if isKeyPresentInUserDefaults(key: "profileName") {
-            
-            fName =  UserDefaults.standard.string(forKey: "profileName")!
-            if isKeyPresentInUserDefaults(key: "profileLastName") {
-                
-                userName.text = fName + " " + UserDefaults.standard.string(forKey: "profileLastName")!
-                
-            } else {
-                
-                userName.text = fName
-            }
-        }
+        
+        let fName = UserDefaults.standard.object(forKey: "profileName") as? String ?? "-"
+        let lName = UserDefaults.standard.object(forKey: "profileLastName") as? String ?? "-"
+        userName.text = fName + " " + lName
+        
+        let title = UserDefaults.standard.object(forKey: "title") as? String ?? "-"
+        userTitle.text = title
+        
+//        if isKeyPresentInUserDefaults(key: "profileName") {
+//            
+//            fName =  UserDefaults.standard.string(forKey: "profileName")!
+//            if isKeyPresentInUserDefaults(key: "profileLastName") {
+//                
+//                userName.text = fName + " " + UserDefaults.standard.string(forKey: "profileLastName")!
+//                
+//            } else {
+//                
+//                userName.text = fName
+//            }
+//        }
 
-        if isKeyPresentInUserDefaults(key: "title") {
-            
-            userTitle.text = UserDefaults.standard.string(forKey: "title")!
-        }
+//        if isKeyPresentInUserDefaults(key: "title") {
+//            
+//            userTitle.text = UserDefaults.standard.string(forKey: "title")!
+//        }
 
         // UPDATE User Photo
         if isKeyPresentInUserDefaults(key: "imageNeedsUpdate") {
@@ -103,7 +102,7 @@ class HamburgerViewController: UIViewController {
                     let angle =  CGFloat(Double.pi/2)
                     let tr = CGAffineTransform.identity.rotated(by: angle)
                     userPhoto.transform = tr
-                } else { print("found nil while unwrapping dataer in HamburgerViewController") }
+                } else { print("found nil while unwrapping Image dataer in HamburgerViewController") }
             }
         }
         
@@ -116,6 +115,14 @@ class HamburgerViewController: UIViewController {
         self.performSegue(withIdentifier: "ShowLogInView", sender: self)
     }
 
+    @IBAction func showDashBoardButtonTapped(_ sender: Any) {
+        // Instantiate messages view controller from Storyboard and present it
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController //fourButtonView
+        self.present(vc, animated: false, completion: nil)
+        
+        
+    }
 
 
 }

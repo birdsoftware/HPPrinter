@@ -14,17 +14,31 @@ class DispatchREST {//http://stackoverflow.com/questions/42146274/syncronize-asy
     
     func beginRestCalls() {
         
-        let downloadToken = DispatchGroup()
+        let signin = DispatchGroup()
+        signin.enter()
         
-        //1 token
-            downloadToken.enter()
+        // 0 signin -----------
+        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
+        
+        let postSignIN = POSTSignin()
+            postSignIN.signInUser(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: signin)
+        
+        let downloadToken = DispatchGroup()
+        downloadToken.enter()
+        
+        // 1 token -----------
+        signin.notify(queue: DispatchQueue.main) {
+            
         let getToken = GETToken()
-            getToken.signInCarepoint(userEmail: "test@test.com", userPassword: "test123456", dispachInstance: downloadToken) //  "admin@carepointe.com" "Phoenix2016"
+            getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken) //  "admin@carepointe.com" "Phoenix2016"
+        
+        }// ------------------
         
         let downloadPatients = DispatchGroup()
             downloadPatients.enter()
         
-        //2 patients
+        // 2 patients  -----------
         //notify closure called when (downloadToken-) enter and leave counts are balanced
         downloadToken.notify(queue: DispatchQueue.main)  {
             
@@ -34,9 +48,9 @@ class DispatchREST {//http://stackoverflow.com/questions/42146274/syncronize-asy
                 callGetPatients.getPatients(token: token!, dispachInstance: downloadPatients)
             
             //3 users
-            let callGetUsers = GETUsers()
-                callGetUsers.getUsers(token: token!)
-        }
+            let callGetUsers = GETRecipients()
+                callGetUsers.getInboxUsers(token: token!)
+        }// -----------------------
         
         //let downloadAlerts = DispatchGroup()
         //downloadAlerts.enter()
@@ -45,16 +59,18 @@ class DispatchREST {//http://stackoverflow.com/questions/42146274/syncronize-asy
             UserDefaults.standard.set(nil, forKey: "RESTAlerts")//clear old
             UserDefaults.standard.synchronize()
             
-            //GET Patient Alerts for each patientID -> defaults forKey: "RESTAlerts"
+            //
+            // GET Patient Alerts for each patientID -> defaults forKey: "RESTAlerts"
+            //
             let patientIDs = UserDefaults.standard.array(forKey: "RESTPatientsPatientIDs") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()//as? [String] ?? [String]()
-            let token = UserDefaults.standard.string(forKey: "token")
+            //let token = UserDefaults.standard.string(forKey: "token")
             print("\n patientID's: \(patientIDs)\n")
             
-            let getAlertsInstance = GETAlerts()
+            //let getAlertsInstance = GETAlerts()
             
-            for dict in patientIDs {
-                getAlertsInstance.getAlerts(token: token!, patientDict: dict)//TODO: convert [[String]] to Array<Dictionary<String,String>>
-            }
+            //for dict in patientIDs {
+            //     getAlertsInstance.getAlerts(token: token!, patientDict: dict)//TODO: convert [[String]] to Array<Dictionary<String,String>>
+            //}
 
             
             

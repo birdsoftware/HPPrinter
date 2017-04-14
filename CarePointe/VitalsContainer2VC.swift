@@ -57,19 +57,36 @@ class VitalsContainer2VC: UIViewController, UITableViewDelegate, UITableViewData
         // Submit button
         let submitAction = UIAlertAction(title: "Update now", style: .default, handler: { (action) -> Void in
             // Get 1st TextField's text
-            let weightTextField = alert.textFields![0] //print(textField)
-            let bmiTextField = alert.textFields![1]
-            let bmiStatusTextField = alert.textFields![2]
-            let bodyTempTextField = alert.textFields![3]
-            let bpLocationTextField = alert.textFields![4]
-            let bpTextField = alert.textFields![5]
+            let heightTextField = alert.textFields![0].text!
+            let weightTextField = alert.textFields![1].text! //print(textField)
+            let bmiTextField = alert.textFields![2].text!
+            let bmiStatusTextField = alert.textFields![3].text!
+            let bodyTempTextField = alert.textFields![4].text!
+            let bpLocationTextField = alert.textFields![5].text!
+            let bpTextField = alert.textFields![6].text!
             
-            self.vitals[0][1] = weightTextField.text!
-            self.vitals[1][1] = bmiTextField.text!
-            self.vitals[2][1] = bmiStatusTextField.text!
-            self.vitals[3][1] = bodyTempTextField.text!
-            self.vitals[4][1] = bpLocationTextField.text!
-            self.vitals[5][1] = bpTextField.text!
+            //check for empty fields
+            if (heightTextField.isEmpty == false) {
+                self.vitals[0][1] = heightTextField//.text!
+            }
+            if (weightTextField.isEmpty == false) {
+                self.vitals[1][1] = weightTextField//.text!
+            }
+            if (bmiTextField.isEmpty == false) {
+                self.vitals[2][1] = bmiTextField//.text!
+            }
+            if (bmiStatusTextField.isEmpty == false) {
+                self.vitals[3][1] = bmiStatusTextField//.text!
+            }
+            if (bodyTempTextField.isEmpty == false) {
+                self.vitals[4][1] = bodyTempTextField//.text!
+            }
+            if (bpLocationTextField.isEmpty == false) {
+                self.vitals[5][1] = bpLocationTextField//.text!
+            }
+            if (bpTextField.isEmpty == false) {
+                self.vitals[6][1] = bpTextField//.text!
+            }
             
             self.vitalsTable.reloadData()
             

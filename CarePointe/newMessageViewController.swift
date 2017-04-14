@@ -27,6 +27,7 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var usersTableView: UITableView!
     
     var AllData:Array<Dictionary<String,String>> = []
+    var AllData2:Array<Dictionary<String,String>> = []
     var SearchData:Array<Dictionary<String,String>> = []
     var search:String=""
     
@@ -63,8 +64,23 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         if isKeyPresentInUserDefaults(key: "sentData"){
             sentBoxData = UserDefaults.standard.value(forKey: "sentData") as! Array<Dictionary<String, String>>
         }
+        
+        // get userData for communication drop down list
+        if isKeyPresentInUserDefaults(key: "RESTInboxUsers"){//""userData"){
+            AllData2 = UserDefaults.standard.value(forKey: "RESTInboxUsers") as! Array<Dictionary<String, String>>//"userData") as! Array<Dictionary<String, String>>
+            
+            //SearchData = userData//need this to start off tableView with all data and not blank table
+            //print("SearchData: \(SearchData)")
+        }
+        
+        for user in AllData2{
+            let userName = user["FirstLastName"]!
+            let roleType = user["RoleType"]!
 
-        AllData = [["pic":"Alice.png","name":"Alice Smith","position":"Nurse"],
+            AllData.append(["pic":"user.png","name":userName,"position":roleType])
+        }
+
+        let AllData3 = [["pic":"Alice.png","name":"Alice Smith","position":"Nurse"],
                    ["pic":"brad.png","name":"Brad Smith MD","position":"Primary Doctor"],
                    ["pic":"user.png","name":"Dr. Quam","position":"Immunologist"],
                    ["pic":"jennifer.jpg","name":"Jennifer Johnson","position":"Case Manager"],
@@ -287,10 +303,6 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         let spacer = "\r\n"
         let alert = UIAlertController(title: userMessage, message: spacer, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in })
-        //        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width:40, height:40))
-        //        imageView.contentMode = UIViewContentMode.center
-        //        imageView.image = UIImage(named: "checked.png")
-        //alert.view.addSubview(imageView)
         
         present(alert, animated: true){}
     }
@@ -416,10 +428,10 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         var Data:Dictionary<String,String> = SearchData[indexPath.row]
         
         // Set text from the data model
-        cell.userImage.image = UIImage(named: Data["pic"]!)
-        cell.userName.text = Data["name"]
+        cell.userImage.image = /*UIImage(named: "user.png")*/UIImage(named: Data["pic"]!)
+        cell.userName.text = /*"\(Data["FirstName"]!) \(Data["LastName"]!)"*/Data["name"]
         cell.userName?.font = addUsersTextField.font
-        cell.userPosition.text = Data["position"]
+        cell.userPosition.text = /*Data["RoleType"]*/Data["position"]
         
         return cell
     }
@@ -433,27 +445,28 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         //    attributedName.addAttributes(blueColor, range: NSRange(location:0,length:length!))
         
         var selectedData:Dictionary<String,String> = SearchData[indexPath.row]
+        let userName = selectedData["name"]!
         
         //Check if selected me
-        if(selectedData["name"] == "Jennifer Johnson"){
+        if(userName == "Jennifer Johnson"){//TODO:check user name saved from API
             isMe = true
         }
         
         // Row selected, so set textField to relevant value, hide tableView, endEditing can trigger some other action according to requirements
         if(addUsersTextField.text?.isEmpty == true) {
             
-            addUsersTextField.text = selectedData["name"]!
+            addUsersTextField.text = userName
             //SearchData.remove(at: indexPath.row)
             recipientCount = 1
         } else {
             
             // No Remove what has been typed already
             let typedSubstring = addUsersTextField.text! //search
-            let selectedName = selectedData["name"]!
+            //let selectedName = username//selectedData["name"]!
             
             // IF typedSubstring contains Selected, ignore
-            if typedSubstring.range(of:selectedName) != nil {
-                print("\(selectedName) already exists!")
+            if typedSubstring.range(of:userName) != nil {
+                print("\(userName) already exists!")
             }
             else //typedSubstring !contains Selected, add Selected and remove anything !recipient
             {
@@ -466,7 +479,7 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
                     var isNameInUserTextField = false
                     
                     for dict in AllData { //thing is pic, name, position
-                        guard let name = dict["name"] else { continue }
+                        guard let name = /*dict["FirstName"]*/ dict["name"] else { continue }
                         
                         if typedSubstring.range(of:name) != nil {//check if name is in the typedSubstring
                             isNameInUserTextField = true
@@ -477,14 +490,14 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
                     let stringNames = names.joined(separator: ", ")
                     if(isNameInUserTextField)
                     {
-                        addUsersTextField.text = stringNames  + ", " + selectedData["name"]!
+                        addUsersTextField.text = stringNames  + ", " + userName// selectedData["name"]!
                     }
                     else {//No name so remove typed text
-                        addUsersTextField.text = selectedData["name"]! //there is a bug here if 1.type char, 2. select user, 3. type comma, 4. select user this user replaces recipient line
+                        addUsersTextField.text = userName//selectedData["name"]! //there is a bug here if 1.type char, 2. select user, 3. type comma, 4. select user this user replaces recipient line
                     }
                 }
                 else {
-                    addUsersTextField.text = addUsersTextField.text!  + ", " + selectedData["name"]!
+                    addUsersTextField.text = addUsersTextField.text!  + ", " + userName//selectedData["name"]!
                 }
                 recipientCount += 1
             }

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Patient ListVC-->
+        <scene sceneID="mnf-dg-ZQ1">
+            <objects>
+                <viewController storyboardIdentifier="PatientListView" id="U6i-iS-DwC" customClass="PatientListVC" customModule="CarePointe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Fkh-JB-dvs"/>
+                        <viewControllerLayoutGuide type="bottom" id="cxl-Z7-VY0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aah-uk-r9h">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search Patients" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzo-gN-u1K">
+                                <rect key="frame" x="0.0" y="70" width="375" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="jm7-u3-JrX"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.31095686550000001" green="0.56154131890000003" blue="0.001000816934" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="818-Ww-N9L">
+                                <rect key="frame" x="0.0" y="115" width="375" height="552"/>
+                                <color key="backgroundColor" red="0.92126840350000005" green="0.97659069300000001" blue="0.976051271" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="separatorColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="patientListCell" rowHeight="60" id="zWg-ac-aZQ" customClass="PatientListCell" customModule="CarePointe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zWg-ac-aZQ" id="nwM-c5-eQM">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ruth Quinonez RESTPatients" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="D3v-QX-l6y">
+                                                    <rect key="frame" x="103" y="8" width="264" height="23"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1270011" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="1Ch-ih-jEd">
+                                                    <rect key="frame" x="8" y="0.0" width="85" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="85" id="uEL-vd-1T0"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12/25/17 09:27 AM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xt5-VE-jfd">
+                                                    <rect key="frame" x="103" y="30" width="215" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="215" id="VYv-Nz-h5L"/>
+                                                        <constraint firstAttribute="height" constant="17" id="hJn-uh-jp2"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Xt5-VE-jfd" secondAttribute="bottom" constant="4.5" id="84i-ki-bhy"/>
+                                                <constraint firstItem="D3v-QX-l6y" firstAttribute="top" secondItem="nwM-c5-eQM" secondAttribute="top" constant="8" id="ES9-48-k6I"/>
+                                                <constraint firstItem="D3v-QX-l6y" firstAttribute="leading" secondItem="1Ch-ih-jEd" secondAttribute="trailing" constant="10" id="LOD-YB-Fss"/>
+                                                <constraint firstItem="1Ch-ih-jEd" firstAttribute="leading" secondItem="nwM-c5-eQM" secondAttribute="leading" constant="8" id="Rmx-bh-UWJ"/>
+                                                <constraint firstItem="1Ch-ih-jEd" firstAttribute="top" secondItem="nwM-c5-eQM" secondAttribute="top" id="UHY-PV-dea"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="D3v-QX-l6y" secondAttribute="trailing" id="Ygm-cX-cGH"/>
+                                                <constraint firstItem="Xt5-VE-jfd" firstAttribute="leading" secondItem="1Ch-ih-jEd" secondAttribute="trailing" constant="10" id="lhS-EL-IZF"/>
+                                                <constraint firstAttribute="bottom" secondItem="1Ch-ih-jEd" secondAttribute="bottom" id="v3J-qp-Uu8"/>
+                                                <constraint firstItem="Xt5-VE-jfd" firstAttribute="top" secondItem="D3v-QX-l6y" secondAttribute="bottom" constant="-1" id="xto-4C-JTd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="date" destination="Xt5-VE-jfd" id="SzV-O2-x5p"/>
+                                            <outlet property="name" destination="D3v-QX-l6y" id="MS9-yY-aBo"/>
+                                            <outlet property="patientID" destination="1Ch-ih-jEd" id="a8H-tQ-2da"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAE-cG-B77">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Patients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tcj-YH-xcN">
+                                        <rect key="frame" x="55" y="31" width="265" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="ZL5-LE-NIa"/>
+                                            <constraint firstAttribute="width" constant="265" id="thh-re-f2I"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ys7-Ex-Mio">
+                                        <rect key="frame" x="6" y="26" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="BD5-i2-lRP"/>
+                                            <constraint firstAttribute="width" constant="46" id="ixj-74-wzI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="U6i-iS-DwC" eventType="touchUpInside" id="Sr7-fp-y81"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="3u5-M9-6Af"/>
+                                    <constraint firstItem="Tcj-YH-xcN" firstAttribute="centerX" secondItem="WAE-cG-B77" secondAttribute="centerX" id="7uf-Bb-jcf"/>
+                                    <constraint firstItem="Ys7-Ex-Mio" firstAttribute="leading" secondItem="WAE-cG-B77" secondAttribute="leading" constant="6" id="8bt-6c-7CJ"/>
+                                    <constraint firstItem="Tcj-YH-xcN" firstAttribute="top" secondItem="WAE-cG-B77" secondAttribute="top" constant="31" id="Z4P-tT-xLd"/>
+                                    <constraint firstItem="Ys7-Ex-Mio" firstAttribute="top" secondItem="WAE-cG-B77" secondAttribute="top" constant="26" id="qVL-ub-sdr"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="818-Ww-N9L" firstAttribute="top" secondItem="gzo-gN-u1K" secondAttribute="bottom" id="35E-xu-N7y"/>
+                            <constraint firstItem="cxl-Z7-VY0" firstAttribute="top" secondItem="818-Ww-N9L" secondAttribute="bottom" id="5eG-MP-Em1"/>
+                            <constraint firstItem="818-Ww-N9L" firstAttribute="leading" secondItem="aah-uk-r9h" secondAttribute="leading" id="aTH-gA-lgH"/>
+                            <constraint firstItem="gzo-gN-u1K" firstAttribute="top" secondItem="WAE-cG-B77" secondAttribute="bottom" id="bqO-gT-FIi"/>
+                            <constraint firstAttribute="trailing" secondItem="WAE-cG-B77" secondAttribute="trailing" id="ddg-z4-VU6"/>
+                            <constraint firstAttribute="trailing" secondItem="gzo-gN-u1K" secondAttribute="trailing" id="epc-dv-Ihx"/>
+                            <constraint firstItem="gzo-gN-u1K" firstAttribute="leading" secondItem="aah-uk-r9h" secondAttribute="leading" id="i8m-xs-vkf"/>
+                            <constraint firstItem="WAE-cG-B77" firstAttribute="leading" secondItem="aah-uk-r9h" secondAttribute="leading" id="jP8-YC-CKz"/>
+                            <constraint firstItem="WAE-cG-B77" firstAttribute="top" secondItem="aah-uk-r9h" secondAttribute="top" id="ncK-Up-3JE"/>
+                            <constraint firstAttribute="trailing" secondItem="818-Ww-N9L" secondAttribute="trailing" id="pwD-bA-TUe"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="patientSearchBar" destination="gzo-gN-u1K" id="Mum-0l-TUD"/>
+                        <outlet property="patientTable" destination="818-Ww-N9L" id="61w-bg-eBw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NzM-Ft-r1n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1724" y="206"/>
+        </scene>
+    </scenes>
+</document>

@@ -24,7 +24,7 @@ extension UIViewController {
                         ]
         
 
-        let profileName = "Jennifer"
+        /*let profileName = "Jennifer"
         let profileLastName = "Johnson"
         let title = "Care Team & Case Manager"
         let email = "jjohnson@carepointe.com"
@@ -32,7 +32,7 @@ extension UIViewController {
         UserDefaults.standard.set(profileName, forKey: "profileName")
         UserDefaults.standard.set(profileLastName, forKey: "profileLastName")
         UserDefaults.standard.set(title, forKey: "title")
-        UserDefaults.standard.set(email, forKey: "email")
+        UserDefaults.standard.set(email, forKey: "email") */
 
         
         UserDefaults.standard.set(userData, forKey: "userData")

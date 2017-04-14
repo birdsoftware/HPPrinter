@@ -131,13 +131,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //NotificationCenter.default.addObserver(self, selector: #selector(logOutAfter30Minutes), name:NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
         
-        // get userData for communication drop down list
-        if isKeyPresentInUserDefaults(key: "RESTusers"){//""userData"){
-            userData = UserDefaults.standard.value(forKey: "RESTusers") as! Array<Dictionary<String, String>>//"userData") as! Array<Dictionary<String, String>>
-            
-            SearchData = userData//need this to start off tableView with all data and not blank table
-            print("SearchData: \(SearchData)")
-        }
+        
+        //check if we have internet connection
+//        if Reachability.isConnectedToNetwork() == true
+//        {
+//            //print("Internet Connection Available!")
+//           
+//        }
+//        else
+//        {
+//            let myAlert = UIAlertController(title: "Internet connection not available",
+//                                            message: "New alerts, messages and patient data will not be available in offline mode. Enable internet to get updates.",
+//                                            preferredStyle: .alert)
+//            
+//            myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+//                //self.dismiss(animated: false, completion: nil)
+//            }))
+//            
+//            present(myAlert, animated: true){}
+//        }
+
         
         //delegation
         tasksTableView.dataSource = self
@@ -245,6 +258,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // DISPLAY "No Appointments for this Day -----------------------------------
         showAlertIfTasksTableEmpty()
+        
+        // get userData for communication drop down list
+        if isKeyPresentInUserDefaults(key: "RESTusers"){//""userData"){
+            userData = UserDefaults.standard.value(forKey: "RESTusers") as! Array<Dictionary<String, String>>//"userData") as! Array<Dictionary<String, String>>
+            
+            SearchData = userData//need this to start off tableView with all data and not blank table
+            print("SearchData: \(SearchData)")
+        }//else play loading animation
  
     }
     
@@ -256,7 +277,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let isUserSignedIn = UserDefaults.standard.bool(forKey: "isUserSignedIn")
         if(!isUserSignedIn)
         {
-            self.performSegue(withIdentifier: "ShowLogInView", sender: self)
+            //self.performSegue(withIdentifier: "ShowLogInView", sender: self)
+            self.performSegue(withIdentifier: "Show4ButtonView", sender: self)
         }
         
         // change navigation bar to custom color "fern"
@@ -280,35 +302,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         pendingPatientsLabel.text = "\(numberNewPatients)"
         scheduledAppointLabel.text = "\(numberScheduledPatients)"
         
-        if isKeyPresentInUserDefaults(key: "didESign") {
-            
-            //check if user did eSign
-            let userDidESign = UserDefaults.standard.bool(forKey: "didESign")
-            
-            if(!userDidESign)
-            {
-                self.performSegue(withIdentifier: "showTermsView", sender: self)
-            }
-        } else { //no eSign defaults key present so show the terms and condtions page
-            self.performSegue(withIdentifier: "showTermsView", sender: self)
-        }
+//        if isKeyPresentInUserDefaults(key: "didESign") {
+//            
+//            //check if user did eSign
+//            let userDidESign = UserDefaults.standard.bool(forKey: "didESign")
+//            
+//            if(!userDidESign)
+//            {
+//                self.performSegue(withIdentifier: "showTermsView", sender: self)
+//            }
+//        } else { //no eSign defaults key present so show the terms and condtions page
+//            self.performSegue(withIdentifier: "showTermsView", sender: self)
+//        }
         
     }
     
 //    override func viewDidAppear( _ animated: Bool) {
-//        
-//        //check if user is signed in ELSE go to Sign In View
-//        let isUserSignedIn = UserDefaults.standard.bool(forKey: "isUserSignedIn")
-//        if(!isUserSignedIn)
-//        {
-//            self.performSegue(withIdentifier: "ShowLogInView", sender: self)
-//        }
-//        
-//        // change navigation bar to custom color "fern"
-//        self.navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 0.27, green: 0.52, blue: 0.0, alpha: 1.0)
-//        
-//        
 //    }
+    
     
     //
     // #MARK: - Button Actions
@@ -378,7 +389,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBAction func callButtonTapped(_ sender: Any) {
         //UIApplication.shared.openURL(url) deprecieated in iOS 10
-            open(scheme: "tel://8556235691")
+            open(scheme: "tel://4804942466")
     }
     
     
@@ -795,7 +806,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var Data:Dictionary<String,String> = SearchData[IndexPath.row]
             
             cell.contactImage.image = UIImage(named: "user.png")
-            cell.contactName.text = "\(Data["FirstName"]!) \(Data["LastName"]!)"//Data["name"]
+            cell.contactName.text = Data["FirstLastName"]//"\(Data["FirstName"]!) \(Data["LastName"]!)"//Data["name"]
             cell.contactPosition.text = Data["RoleType"] //Data["position"]
             
             cell.accessoryType = .disclosureIndicator // add arrow > to cell
