@@ -213,6 +213,11 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         containerView2.isHidden = false
     }
     
+    
+    //
+    // supporting functions
+    //
+    
     func determineWhatTextChanged(profileTextField: UITextField ) -> String {
         let someText = profileTextField.text!
         let someTextIsEmpty = profileTextField.text?.isEmpty
@@ -290,7 +295,12 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         
         myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
             //Action when OK pressed
-            self.performSegue(withIdentifier: "showDashboard", sender: self)
+            //self.performSegue(withIdentifier: "showDashboard", sender: self)
+            // 4. Present a view controller from a different storyboard
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
+            //vc.navigationController?.pushViewController(vc, animated: false)
+            self.present(vc, animated: false, completion: nil)
         }))
             
         //        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width:40, height:40))
@@ -330,7 +340,7 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
           *
           */
         
-        displayWhatWasChanged()
+        displayWhatWasChanged()//show change, close and go to 4 button view if OK tapped
         
         // --save first, last name and title
         
@@ -344,7 +354,13 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
     }
     
     @IBAction func cancelChangesButtonTapped(_ sender: Any) {
-        self.performSegue(withIdentifier: "showDashboard", sender: self)
+        //self.performSegue(withIdentifier: "showDashboard", sender: self)
+        
+        // 4. Present a view controller from a different storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
+        //vc.navigationController?.pushViewController(vc, animated: false)
+        self.present(vc, animated: false, completion: nil)
     }
     
 

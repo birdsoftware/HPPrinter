@@ -16,13 +16,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Outlets
     //
     
-    @IBOutlet weak var demoAlertButton: UIButton!
-    
     // buttons
     @IBOutlet weak var AddTaskButton: UIButton!
     @IBOutlet weak var pendingReferralsButton: UIButton!
     @IBOutlet weak var scheduledEncountersButton: UIButton!
-    @IBOutlet weak var unreadMessagesButton: UIButton!
+    @IBOutlet weak var CompleteButton: UIButton!
     @IBOutlet weak var dateDisplayButton: UIButton!
     @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var hamburgerOutsideButton: UIButton!
@@ -108,7 +106,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        //for ForButtonViewController
+//        var numberOfAPIDownoads = 0
+//        if isKeyPresentInUserDefaults(key: "numberOfAPIDownoads") {
+//            numberOfAPIDownoads = 1
+//            UserDefaults.standard.set(numberOfAPIDownoads, forKey: "numberOfAPIDownoads")
+//        } else {
+//            numberOfAPIDownoads = 0
+//            UserDefaults.standard.set(numberOfAPIDownoads, forKey: "numberOfAPIDownoads")
+//        }
+        
         UXCam.tagUsersName("Brian")
 
         //get screen size for determining the autolayout bounds for the alert and hamburger views
@@ -216,7 +223,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // DRAW White thin line [] | [] | [] between buttons ----------------------------
             pendingReferralsButton.layer.addBorder(edge: UIRectEdge.right, color: .white, thickness: 0.5)
-            unreadMessagesButton.layer.addBorder(edge: UIRectEdge.left, color: .white, thickness: 0.5)
+            CompleteButton.layer.addBorder(edge: UIRectEdge.left, color: .white, thickness: 0.5)
         // DRAW Orange line below number labels
             orangeLine1.layer.addBorder(edge: UIRectEdge.bottom, color: .orange, thickness: 2)
             orangeLine2.layer.addBorder(edge: UIRectEdge.bottom, color: .orange, thickness: 2)
@@ -326,34 +333,44 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //
 
     
-    @IBAction func demoAlertButtonTapped(_ sender: Any) {
-        
-        demoAlertButton.isHidden = true
-        
-        let myAlert = UIAlertController(title: "Review New Alert Information", message: "Ruth Quinones has been admitted to hospital", preferredStyle: .alert)
-        
-        myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-            //Action when OK pressed
-            // Instantiate a view controller from Storyboard and present it
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
-            self.present(vc, animated: false, completion: nil)
-        }))
-        
-        present(myAlert, animated: true){}
-        
-        
-    }
+//    @IBAction func demoAlertButtonTapped(_ sender: Any) {
+//        
+//        demoAlertButton.isHidden = true
+//        
+//        let myAlert = UIAlertController(title: "Review New Alert Information", message: "Ruth Quinones has been admitted to hospital", preferredStyle: .alert)
+//        
+//        myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+//            //Action when OK pressed
+//            // Instantiate a view controller from Storyboard and present it
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
+//            self.present(vc, animated: false, completion: nil)
+//        }))
+//        
+//        present(myAlert, animated: true){}
+//        
+//        
+//    }
     
     
-    @IBAction func unreadMessagesButtonTapped(_ sender: Any) {
+//    @IBAction func unreadMessagesButtonTapped(_ sender: Any) {
+//        
+//        // Instantiate messages view controller from Storyboard and present it
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "messages") as UIViewController
+//        self.present(vc, animated: false, completion: nil)
+//        
+//    }
+    
+    @IBAction func completeButtonTapped(_ sender: Any) {
         
-        // Instantiate messages view controller from Storyboard and present it
+        // Instantiate a view controller from Storyboard and present it
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "messages") as UIViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
         self.present(vc, animated: false, completion: nil)
         
     }
+
     
     
     @IBAction func pendingReferralsButtonTapped(_ sender: Any) {
@@ -395,25 +412,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func hamburgerBarButtonTapped(_ sender: Any) {
         
-        if(hamburgerMenuShowing) {//if showing hide menu
-            //leadingConstraintContainerView.constant = -270
-            moveSlideMenu(Menu: "hideHamburgerView")
-            UIView.animate(withDuration: 0.2, animations: {
-                self.view.layoutIfNeeded()
-            })
-        }
-        else {
-            //leadingConstraintContainerView.constant = 0
-            moveSlideMenu(Menu: "showHamburgerView")
-            if(alertTableShowing){
-                moveSlideMenu(Menu: "hideAlertView")
-                alertTableShowing = !alertTableShowing
-            }
-            UIView.animate(withDuration: 0.2, animations: {
-                self.view.layoutIfNeeded()
-            })
-        }
-        hamburgerMenuShowing = !hamburgerMenuShowing
+        // 4. Present a view controller from a different storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
+        //vc.navigationController?.pushViewController(vc, animated: false)
+        self.present(vc, animated: false, completion: nil)
+        
+//        if(hamburgerMenuShowing) {//if showing hide menu
+//            //leadingConstraintContainerView.constant = -270
+//            moveSlideMenu(Menu: "hideHamburgerView")
+//            UIView.animate(withDuration: 0.2, animations: {
+//                self.view.layoutIfNeeded()
+//            })
+//        }
+//        else {
+//            //leadingConstraintContainerView.constant = 0
+//            moveSlideMenu(Menu: "showHamburgerView")
+//            if(alertTableShowing){
+//                moveSlideMenu(Menu: "hideAlertView")
+//                alertTableShowing = !alertTableShowing
+//            }
+//            UIView.animate(withDuration: 0.2, animations: {
+//                self.view.layoutIfNeeded()
+//            })
+//        }
+//        hamburgerMenuShowing = !hamburgerMenuShowing
     }
     @IBAction func hamburgerOutsideButtonTapped(_ sender: Any) {
         moveSlideMenu(Menu: "hideHamburgerView")

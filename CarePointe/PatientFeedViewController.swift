@@ -27,7 +27,8 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     var dates = [String]()
     var messageCreator = [String]()
     var message = [String]()
-    
+    var updatedFrom = [String]()
+    var updatedType = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +71,9 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
             dates = feedData.getColumn(column: 1)
             messageCreator = feedData.getColumn(column: 2)
             message = feedData.getColumn(column: 3)
+        //patientID 4
+            updatedFrom = feedData.getColumn(column: 5)
+            updatedType = feedData.getColumn(column: 6)
             
             patientFeedTableView.reloadData()
     }
@@ -97,6 +101,89 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     
+    // helper functions
+    
+    // get update icon.   Images from http://fontawesome.io
+    func getUpdateIcon(updatedFrom:String, updateType:String) -> UIImage
+    {
+        if (updateType != "") {
+            switch updateType
+            {
+                case "Routine":
+                    return UIImage(named:"fa-phone-square.png")!
+                
+                case "CICA", "Urgent":
+                    return UIImage(named:"fa-exclamation-triangle.png")!
+                
+                case "IDT":
+                    return UIImage(named:"fa-user-md.png")!
+                
+                default:
+                    return UIImage(named:"fa-phone-square.png")!
+            }
+        } else {
+            switch updatedFrom
+            {
+                case "referraldetails", "patientprofileidt":
+                    return UIImage(named:"fa-user-md.png")!
+
+                case "patientprofile", "careflows":
+                    return UIImage(named:"fa-phone-square.png")!
+
+                case "telemedvideo":
+                    return UIImage(named:"fa-video-camera.png")!
+                
+                case "patientprofilescreening":
+                    return UIImage(named:"fa-list-ul.png")!
+                
+                case "patientdocumentupload", "patientprofilerxuploadedlist":
+                    return UIImage(named:"fa-file.png")!
+
+                default:
+                    return UIImage(named:"fa-phone-square.png")!
+            }
+        }
+    }
+    
+    func getUpdateTitle(updatedFrom:String, updateType:String) -> String
+    {
+        if (updateType != "") {
+            return updateType + ": " //"Routine" or "CICA" etc.
+        } else {
+            switch updatedFrom
+            {
+            case "referraldetails":
+                return "Referral Details: "
+                
+            case "patientprofileidt":
+                return "Patient Profile IDT: "
+                
+            case "patientprofile":
+                return "Patient Profile: "
+                
+            case "careflows":
+                return "Careflows: "
+                
+            case "telemedvideo":
+                return "Tele-med Video: "
+                
+            case "patientprofilescreening":
+                return "Patient Profile Screening: "
+                
+            case "patientdocumentupload":
+                return "Patient Document Upload: "
+                
+            case "patientprofilerxuploadedlist":
+                return "Patient Profile Rx Uploaded List: "
+                
+            default:
+                return "Update: "
+            }
+
+        }
+    }
+
+    
     //
     // #MARK: - UNWIND SEGUE
     //
@@ -122,24 +209,10 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PatientFeedCell") as! PatientFeedViewCell
         
-        //        let updateDate = "Update: "// + dates[indexPath.row]
-        //        let updateTime = " @ " + times[indexPath.row]
-        //        let updateString = updateDate + updateTime + " " + messageCreator[indexPath.row]
-        //
-        //
-        //        let yourAttributes = [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.systemFont(ofSize: 17)]
-        //        let yourOtherAttributes = [NSForegroundColorAttributeName: UIColor.blue, NSFontAttributeName: UIFont.systemFont(ofSize: 17)]
-        //
-        //        let partOne = NSMutableAttributedString(string: "Update: ", attributes: yourAttributes)
-        //        let partTwo = NSMutableAttributedString(string: "for the combination of Attributed String!", attributes: yourOtherAttributes)
-        //
-        //        let combination = NSMutableAttributedString()
-        //
-        //        combination.append(partOne)
-        //        combination.append(partTwo)
+        let update = getUpdateTitle(updatedFrom: updatedFrom[indexPath.row], updateType: updatedType[indexPath.row])
         
         // 1 https://www.ioscreator.com/tutorials/attributed-strings-tutorial-ios8-swift
-        let stringUpdate = "Update: " + dates[indexPath.row] + " @ " + times[indexPath.row]  as NSString
+        let stringUpdate = update + dates[indexPath.row] + " @ " + times[indexPath.row]  as NSString
         let stringCreatedBy = "Created by: " + messageCreator[indexPath.row] as NSString
         let attributedString1 = NSMutableAttributedString(string: stringUpdate as String)
         let attributedString2 = NSMutableAttributedString(string: stringCreatedBy as String)
@@ -162,6 +235,8 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         cell.patientUpdateTitle.attributedText = attributedString1//combination.string
         cell.createdBy.attributedText = attributedString2
         cell.patientUpdateMessage.text = message[indexPath.row]
+        
+        cell.feedImage.image = getUpdateIcon(updatedFrom: updatedFrom[indexPath.row], updateType: updatedType[indexPath.row])
         
         return cell
     }

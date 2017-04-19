@@ -112,7 +112,7 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         cell.patientID.text = Data["Patient_ID"]
         cell.name.text = Data["patientName"]
-        cell.date.text = Data["CreatedDateTime"]
+        cell.date.text = "\u{F098}"//Data["CreatedDateTime"]
         
         return cell
     }

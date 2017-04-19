@@ -14,7 +14,7 @@ class PTVTableViewController: UITableViewController {
     
  
     
-    let section = ["New/Pending", "Scheduled", "Completed/Archived"]
+    let section = ["Pending", "Scheduled", "Completed/Archived"]
     
     var appSec = [String]()
     var appID = [[String]]() //empty array of arrays of type string

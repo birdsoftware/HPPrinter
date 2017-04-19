@@ -38,10 +38,13 @@ class HamburgerViewController: UIViewController {
             countWhiteMid.layer.cornerRadius = 5
             countWhiteBottum.layer.cornerRadius = 5
         
-        updateProfileFromDefaults()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        updateProfileFromDefaults()
+        
         let numberScheduledPatients: Int = UserDefaults.standard.integer(forKey: "numberScheduledPatients")
         dashboardCount.text = "\(numberScheduledPatients)" //# of appointments
         let numberNewPatients: Int = UserDefaults.standard.integer(forKey: "numberNewPatients")

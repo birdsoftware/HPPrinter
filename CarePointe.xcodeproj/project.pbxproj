@@ -51,6 +51,12 @@
 		583D5EC51EA1537C0024604B /* PatientListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583D5EC41EA1537C0024604B /* PatientListVC.swift */; };
 		583D5EC71EA1572B0024604B /* PatientList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 583D5EC61EA1572B0024604B /* PatientList.storyboard */; };
 		583FC4FF1E80590D00D178C4 /* RESTGETToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */; };
+		5843BF151EA7D5A500B1966B /* fa-exclamation-triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 5843BF0F1EA7D5A500B1966B /* fa-exclamation-triangle.png */; };
+		5843BF161EA7D5A500B1966B /* fa-file.png in Resources */ = {isa = PBXBuildFile; fileRef = 5843BF101EA7D5A500B1966B /* fa-file.png */; };
+		5843BF171EA7D5A500B1966B /* fa-phone-square.png in Resources */ = {isa = PBXBuildFile; fileRef = 5843BF111EA7D5A500B1966B /* fa-phone-square.png */; };
+		5843BF181EA7D5A500B1966B /* fa-user-md.png in Resources */ = {isa = PBXBuildFile; fileRef = 5843BF121EA7D5A500B1966B /* fa-user-md.png */; };
+		5843BF191EA7D5A500B1966B /* fa-list-ul.png in Resources */ = {isa = PBXBuildFile; fileRef = 5843BF131EA7D5A500B1966B /* fa-list-ul.png */; };
+		5843BF1A1EA7D5A500B1966B /* fa-video-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 5843BF141EA7D5A500B1966B /* fa-video-camera.png */; };
 		58458ABA1E43C49D005DFEDA /* PasswordChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58458AB91E43C49D005DFEDA /* PasswordChangeViewController.swift */; };
 		58458ABC1E43DD1C005DFEDA /* attention.png in Resources */ = {isa = PBXBuildFile; fileRef = 58458ABB1E43DD1C005DFEDA /* attention.png */; };
 		58458ABE1E43EB2E005DFEDA /* defualtsComments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58458ABD1E43EB2E005DFEDA /* defualtsComments.swift */; };
@@ -249,6 +255,12 @@
 		583D5EC41EA1537C0024604B /* PatientListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientListVC.swift; sourceTree = "<group>"; };
 		583D5EC61EA1572B0024604B /* PatientList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PatientList.storyboard; sourceTree = "<group>"; };
 		583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETToken.swift; sourceTree = "<group>"; };
+		5843BF0F1EA7D5A500B1966B /* fa-exclamation-triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fa-exclamation-triangle.png"; path = "../../imageFiles/fa-exclamation-triangle.png"; sourceTree = "<group>"; };
+		5843BF101EA7D5A500B1966B /* fa-file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fa-file.png"; path = "../../imageFiles/fa-file.png"; sourceTree = "<group>"; };
+		5843BF111EA7D5A500B1966B /* fa-phone-square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fa-phone-square.png"; path = "../../imageFiles/fa-phone-square.png"; sourceTree = "<group>"; };
+		5843BF121EA7D5A500B1966B /* fa-user-md.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fa-user-md.png"; path = "../../imageFiles/fa-user-md.png"; sourceTree = "<group>"; };
+		5843BF131EA7D5A500B1966B /* fa-list-ul.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fa-list-ul.png"; path = "../../imageFiles/fa-list-ul.png"; sourceTree = "<group>"; };
+		5843BF141EA7D5A500B1966B /* fa-video-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fa-video-camera.png"; path = "../../imageFiles/fa-video-camera.png"; sourceTree = "<group>"; };
 		58458AB91E43C49D005DFEDA /* PasswordChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordChangeViewController.swift; sourceTree = "<group>"; };
 		58458ABB1E43DD1C005DFEDA /* attention.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = attention.png; path = ../../imageFiles/attention.png; sourceTree = "<group>"; };
 		58458ABD1E43EB2E005DFEDA /* defualtsComments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = defualtsComments.swift; sourceTree = "<group>"; };
@@ -442,9 +454,6 @@
 		58272AE91E3FE7EB00E779CF /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
-				58A8DCCD1E57A716008711D1 /* blueback.png */,
-				58A8DCCE1E57A716008711D1 /* greenback.png */,
-				58272AEC1E3FE93C00E779CF /* user.png */,
 				58272B011E42495800E779CF /* calendarGreen.png */,
 				58458ABF1E43F77F005DFEDA /* checked.png */,
 				58458ABB1E43DD1C005DFEDA /* attention.png */,
@@ -475,6 +484,102 @@
 			name = Patient;
 			sourceTree = "<group>";
 		};
+		5843BF081EA7D39A00B1966B /* All Images */ = {
+			isa = PBXGroup;
+			children = (
+				5843BF0A1EA7D3F000B1966B /* CarePointe */,
+				5843BF091EA7D3D200B1966B /* color circles */,
+				5843BF0B1EA7D41900B1966B /* users */,
+				5843BF0E1EA7D58E00B1966B /* updates */,
+				586BFDD91E3BE28C00DC6770 /* gears.png */,
+				583646941E08A7BC003C2E60 /* bell.png */,
+				582806601E0991F400421815 /* calendar.png */,
+				58254B4F1E0850EA00933B60 /* hamburger.png */,
+				58272AEC1E3FE93C00E779CF /* user.png */,
+				583646901E0890FC003C2E60 /* menu.png */,
+				5843BF0C1EA7D47B00B1966B /* HomeScreen */,
+				5843BF0D1EA7D49F00B1966B /* messages */,
+			);
+			name = "All Images";
+			sourceTree = "<group>";
+		};
+		5843BF091EA7D3D200B1966B /* color circles */ = {
+			isa = PBXGroup;
+			children = (
+				58254B581E0855FF00933B60 /* gray.circle.png */,
+				58272AF91E411F8A00E779CF /* green.circle.png */,
+				58254B591E0855FF00933B60 /* orange.circle.png */,
+			);
+			name = "color circles";
+			sourceTree = "<group>";
+		};
+		5843BF0A1EA7D3F000B1966B /* CarePointe */ = {
+			isa = PBXGroup;
+			children = (
+				58254B4C1E084FEA00933B60 /* care.png */,
+				58A8DCCE1E57A716008711D1 /* greenback.png */,
+				58A8DCCD1E57A716008711D1 /* blueback.png */,
+				582806621E09AB0C00421815 /* side_menu_bg.jpg */,
+				582806641E09AC4100421815 /* care.white.png */,
+			);
+			name = CarePointe;
+			sourceTree = "<group>";
+		};
+		5843BF0B1EA7D41900B1966B /* users */ = {
+			isa = PBXGroup;
+			children = (
+				58CEEB4A1E65EFB400104057 /* brad.png */,
+				58CEEB4C1E65F07200104057 /* Alice.png */,
+				58CEEB481E65EF8200104057 /* tammie.png */,
+				582806661E09B5AF00421815 /* jennifer.jpg */,
+				58B71F141E7CA038000AD088 /* RuthQuinones.jpg */,
+				58B71F181E7CA0C3000AD088 /* BarrieThomson.jpeg */,
+				58B71F1A1E7CA207000AD088 /* VictorOwen.jpeg */,
+				58B71F1C1E7CA268000AD088 /* BillSummers.jpeg */,
+				58B71F1E1E7CA305000AD088 /* AliceNjavro.jpeg */,
+			);
+			name = users;
+			sourceTree = "<group>";
+		};
+		5843BF0C1EA7D47B00B1966B /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				586BFDDC1E3BE40C00DC6770 /* calendar2.png */,
+				5845BAEE1EA02F4500EDE935 /* group.png */,
+				5845BAEC1EA02CB000EDE935 /* circleGreen.png */,
+				585A4D381E5E338000A16118 /* letterC.png */,
+				585A4D361E5E31EF00A16118 /* letter C.png */,
+				586BFDDF1E3BFBCD00DC6770 /* phoneCircle.png */,
+			);
+			name = HomeScreen;
+			sourceTree = "<group>";
+		};
+		5843BF0D1EA7D49F00B1966B /* messages */ = {
+			isa = PBXGroup;
+			children = (
+				5807903E1E675FDE0038FC61 /* searchBackGround.jpg */,
+				58CEEB511E663D4200104057 /* paper-clip.png */,
+				58CEEB4F1E65FC4600104057 /* CloseKeyboardButton.png */,
+				58B18A531E69E4CF009769A2 /* backArrow.png */,
+				58B18A551E69FEF0009769A2 /* delete.png */,
+				58B18A561E69FEF0009769A2 /* reply.png */,
+			);
+			name = messages;
+			sourceTree = "<group>";
+		};
+		5843BF0E1EA7D58E00B1966B /* updates */ = {
+			isa = PBXGroup;
+			children = (
+				5843BF0F1EA7D5A500B1966B /* fa-exclamation-triangle.png */,
+				5843BF101EA7D5A500B1966B /* fa-file.png */,
+				5843BF111EA7D5A500B1966B /* fa-phone-square.png */,
+				5843BF121EA7D5A500B1966B /* fa-user-md.png */,
+				5843BF131EA7D5A500B1966B /* fa-list-ul.png */,
+				5843BF141EA7D5A500B1966B /* fa-video-camera.png */,
+			);
+			name = updates;
+			sourceTree = "<group>";
+		};
 		586BFDD31E3BB4B300DC6770 /* Customize Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,17 +606,6 @@
 		586BFDD61E3BCAD700DC6770 /* Hamburger View */ = {
 			isa = PBXGroup;
 			children = (
-				582806641E09AC4100421815 /* care.white.png */,
-				586BFDD91E3BE28C00DC6770 /* gears.png */,
-				58CEEB4A1E65EFB400104057 /* brad.png */,
-				58CEEB4C1E65F07200104057 /* Alice.png */,
-				58CEEB481E65EF8200104057 /* tammie.png */,
-				582806661E09B5AF00421815 /* jennifer.jpg */,
-				58B71F141E7CA038000AD088 /* RuthQuinones.jpg */,
-				58B71F181E7CA0C3000AD088 /* BarrieThomson.jpeg */,
-				58B71F1A1E7CA207000AD088 /* VictorOwen.jpeg */,
-				58B71F1C1E7CA268000AD088 /* BillSummers.jpeg */,
-				58B71F1E1E7CA305000AD088 /* AliceNjavro.jpeg */,
 				586BFDD71E3BCB2200DC6770 /* HamburgerViewController.swift */,
 			);
 			name = "Hamburger View";
@@ -520,12 +614,6 @@
 		586BFDDB1E3BE3B500DC6770 /* Main Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				586BFDDC1E3BE40C00DC6770 /* calendar2.png */,
-				5845BAEE1EA02F4500EDE935 /* group.png */,
-				5845BAEC1EA02CB000EDE935 /* circleGreen.png */,
-				585A4D381E5E338000A16118 /* letterC.png */,
-				585A4D361E5E31EF00A16118 /* letter C.png */,
-				586BFDDF1E3BFBCD00DC6770 /* phoneCircle.png */,
 				58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */,
 				BB32754A1E048AD100699280 /* AppointmentCell.swift */,
 				5845BAF01EA034BB00EDE935 /* FourButtonViewController.swift */,
@@ -542,7 +630,6 @@
 			children = (
 				58496C0D1E526D2D00DF103A /* x_sign340x40_360.png */,
 				58496C131E52735000DF103A /* x_sign80x680.png */,
-				58254B4C1E084FEA00933B60 /* care.png */,
 				58254B541E0855D000933B60 /* envelope.png */,
 				58254B551E0855D000933B60 /* key.png */,
 				58496C171E527FD900DF103A /* box.png */,
@@ -674,14 +761,8 @@
 		58CEEB4E1E65FBEC00104057 /* messages */ = {
 			isa = PBXGroup;
 			children = (
-				5807903E1E675FDE0038FC61 /* searchBackGround.jpg */,
-				58CEEB511E663D4200104057 /* paper-clip.png */,
 				585A4D2E1E5D175C00A16118 /* InboxViewController.swift */,
 				585A4D301E5E008100A16118 /* InboxCell.swift */,
-				58CEEB4F1E65FC4600104057 /* CloseKeyboardButton.png */,
-				58B18A531E69E4CF009769A2 /* backArrow.png */,
-				58B18A551E69FEF0009769A2 /* delete.png */,
-				58B18A561E69FEF0009769A2 /* reply.png */,
 				58B18A511E69DF21009769A2 /* AMessageViewController.swift */,
 				58BEC4351E6112FD00363FAD /* newMessageViewController.swift */,
 				58327A6E1E64F49F006F4FB4 /* AddUsersCell.swift */,
@@ -723,14 +804,6 @@
 			isa = PBXGroup;
 			children = (
 				583646961E08AE2F003C2E60 /* TasksViewController.swift */,
-				583646901E0890FC003C2E60 /* menu.png */,
-				583646941E08A7BC003C2E60 /* bell.png */,
-				582806601E0991F400421815 /* calendar.png */,
-				58254B4F1E0850EA00933B60 /* hamburger.png */,
-				58254B581E0855FF00933B60 /* gray.circle.png */,
-				582806621E09AB0C00421815 /* side_menu_bg.jpg */,
-				58272AF91E411F8A00E779CF /* green.circle.png */,
-				58254B591E0855FF00933B60 /* orange.circle.png */,
 			);
 			name = TaskView;
 			sourceTree = "<group>";
@@ -760,6 +833,7 @@
 		BB57C2D01DFF41DE00731AC4 /* CarePointe */ = {
 			isa = PBXGroup;
 			children = (
+				5843BF081EA7D39A00B1966B /* All Images */,
 				58A8DC891E576B75008711D1 /* Commons */,
 				58A8DCCC1E5793D4008711D1 /* helpers */,
 				586BFDD31E3BB4B300DC6770 /* Customize Classes */,
@@ -915,6 +989,7 @@
 				BB57C2DC1DFF41DE00731AC4 /* LaunchScreen.storyboard in Resources */,
 				58254B561E0855D000933B60 /* envelope.png in Resources */,
 				58458AC01E43F77F005DFEDA /* checked.png in Resources */,
+				5843BF181EA7D5A500B1966B /* fa-user-md.png in Resources */,
 				58D633751E4D34CB00DC3EB9 /* pills.png in Resources */,
 				58D6336A1E4D310100DC3EB9 /* quillPen.png in Resources */,
 				58174CED1E71E75A00023003 /* handicap.png in Resources */,
@@ -935,6 +1010,7 @@
 				58A8DCD01E57A717008711D1 /* greenback.png in Resources */,
 				58254B521E0850EA00933B60 /* hamburger.png in Resources */,
 				582806611E0991F400421815 /* calendar.png in Resources */,
+				5843BF1A1EA7D5A500B1966B /* fa-video-camera.png in Resources */,
 				58A8DCCF1E57A717008711D1 /* blueback.png in Resources */,
 				585A4D391E5E338000A16118 /* letterC.png in Resources */,
 				58254B4D1E084FEA00933B60 /* care.png in Resources */,
@@ -948,6 +1024,7 @@
 				58D633741E4D34CB00DC3EB9 /* doctor.png in Resources */,
 				58496C191E527FD900DF103A /* box.png in Resources */,
 				58D633591E4A73F600DC3EB9 /* exitandgoback.png in Resources */,
+				5843BF171EA7D5A500B1966B /* fa-phone-square.png in Resources */,
 				58B18A571E69FEF0009769A2 /* delete.png in Resources */,
 				58BBF0241E786F2B00384866 /* VideoCameraWhite.png in Resources */,
 				586BFDDA1E3BE28C00DC6770 /* gears.png in Resources */,
@@ -961,10 +1038,13 @@
 				58254B5B1E0855FF00933B60 /* orange.circle.png in Resources */,
 				58B71F1B1E7CA207000AD088 /* VictorOwen.jpeg in Resources */,
 				58174CE91E71D4CD00023003 /* Landing_screen.png in Resources */,
+				5843BF161EA7D5A500B1966B /* fa-file.png in Resources */,
+				5843BF191EA7D5A500B1966B /* fa-list-ul.png in Resources */,
 				582806671E09B5AF00421815 /* jennifer.jpg in Resources */,
 				5845BAEF1EA02F4500EDE935 /* group.png in Resources */,
 				582806651E09AC4100421815 /* care.white.png in Resources */,
 				58272AFA1E411F8A00E779CF /* green.circle.png in Resources */,
+				5843BF151EA7D5A500B1966B /* fa-exclamation-triangle.png in Resources */,
 				58B71F151E7CA038000AD088 /* RuthQuinones.jpg in Resources */,
 				58CEEB4D1E65F07200104057 /* Alice.png in Resources */,
 				58FDD47A1E60A6CD00F97D86 /* dangerOrange.png in Resources */,

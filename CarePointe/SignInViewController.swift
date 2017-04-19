@@ -383,9 +383,9 @@ class SignInViewController: UIViewController {
         let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
         let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
         
-        if(userEmail == savedUserEmail || userEmail == "test")
+        if(userEmail == savedUserEmail )//|| userEmail == "test")
         {
-            if(userPassword == savedUserPassword || userPassword == "test")
+            if(userPassword == savedUserPassword )//|| userPassword == "test")
             {
                 //Sign In successfull
                 return true

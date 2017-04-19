@@ -74,7 +74,7 @@ class PTVDetailViewController: UIViewController {
         
         switch status
         {
-        case "New/Pending":                         //Show accept decline, hide completed
+        case "Pending":                         //Show accept decline, hide completed
             completedPatientButton.isHidden = true
         case "Scheduled":                           //Show completed, hide accept decline
             acceptPatientButton.isHidden = true
