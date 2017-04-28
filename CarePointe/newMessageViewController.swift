@@ -80,13 +80,13 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
             AllData.append(["pic":"user.png","name":userName,"position":roleType])
         }
 
-        let AllData3 = [["pic":"Alice.png","name":"Alice Smith","position":"Nurse"],
-                   ["pic":"brad.png","name":"Brad Smith MD","position":"Primary Doctor"],
-                   ["pic":"user.png","name":"Dr. Quam","position":"Immunologist"],
-                   ["pic":"jennifer.jpg","name":"Jennifer Johnson","position":"Case Manager"],
-                   ["pic":"user.png","name":"John Banks MD","position":"Cardiologist"],
-                   ["pic":"tammie.png","name":"Tammie Summers","position":"Case Manager"],
-                   ]
+//        let AllData3 = [["pic":"Alice.png","name":"Alice Smith","position":"Nurse"],
+//                   ["pic":"brad.png","name":"Brad Smith MD","position":"Primary Doctor"],
+//                   ["pic":"user.png","name":"Dr. Quam","position":"Immunologist"],
+//                   ["pic":"jennifer.jpg","name":"Jennifer Johnson","position":"Case Manager"],
+//                   ["pic":"user.png","name":"John Banks MD","position":"Cardiologist"],
+//                   ["pic":"tammie.png","name":"Tammie Summers","position":"Case Manager"],
+//                   ]
         
         SearchData = AllData//need this to start off tableView with all data and not blank table
         
@@ -361,6 +361,7 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "messages") as UIViewController
         self.present(vc, animated: false, completion: nil)
+        
         
     }
     

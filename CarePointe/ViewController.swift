@@ -22,14 +22,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var scheduledEncountersButton: UIButton!
     @IBOutlet weak var CompleteButton: UIButton!
     @IBOutlet weak var dateDisplayButton: UIButton!
-    @IBOutlet weak var phoneButton: UIButton!
-    @IBOutlet weak var hamburgerOutsideButton: UIButton!
-    @IBOutlet weak var alertOutsideButton: UIButton!
-    @IBOutlet weak var messageContactButton: UIButton!
-    @IBOutlet weak var videoContactButton: UIButton!
+    
+    
+    //@IBOutlet weak var alertOutsideButton: UIButton!
+    //@IBOutlet weak var messageContactButton: UIButton!
+    //@IBOutlet weak var videoContactButton: UIButton!
     
     // views
-    @IBOutlet weak var communicationButtonsView: UIView!
+    //@IBOutlet weak var communicationButtonsView: UIView!
     @IBOutlet weak var hamburgerContainerView: UIView!
     @IBOutlet weak var alertContainerView: UIView!
     @IBOutlet var mainView: UIView!
@@ -46,7 +46,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // table views
     @IBOutlet weak var tasksTableView: UITableView!
-    @IBOutlet weak var contactsTable: UITableView!
+    //@IBOutlet weak var contactsTable: UITableView!
     
     
     // bar buttons
@@ -56,7 +56,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // constraints
     @IBOutlet weak var leadingConstraintContainerView: NSLayoutConstraint!
     @IBOutlet weak var leadingConstraintContainerView2: NSLayoutConstraint!
-    @IBOutlet weak var phoneButtonHeight: NSLayoutConstraint!
+    
     
     //
     // Class Variables
@@ -106,15 +106,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //for ForButtonViewController
-//        var numberOfAPIDownoads = 0
-//        if isKeyPresentInUserDefaults(key: "numberOfAPIDownoads") {
-//            numberOfAPIDownoads = 1
-//            UserDefaults.standard.set(numberOfAPIDownoads, forKey: "numberOfAPIDownoads")
-//        } else {
-//            numberOfAPIDownoads = 0
-//            UserDefaults.standard.set(numberOfAPIDownoads, forKey: "numberOfAPIDownoads")
-//        }
+        //HIDE THINGS FOR NEW UPDATE: HOME screen
+        self.rightBarButtonAlert.tintColor = .clear
+        self.rightBarButtonAlert.isEnabled = false
+        hamburgerContainerView.isHidden = true
+        alertContainerView.isHidden = true
+        
         
         UXCam.tagUsersName("Brian")
 
@@ -123,10 +120,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         h  = Int(mainView.bounds.size.height) //print("Screen Height: \(h)")
         
         // Update Badge # HERE if DELETE occurred in Alert Table ----------------
-        NotificationCenter.default.addObserver(self,
-                selector:#selector(updateAlertBadgeNumber),
-                name: NSNotification.Name(rawValue: "updateAlert"),
-                object: nil)
+        //NEW UPDATE: HOME screen
+//        NotificationCenter.default.addObserver(self,
+//                selector:#selector(updateAlertBadgeNumber),
+//                name: NSNotification.Name(rawValue: "updateAlert"),
+//                object: nil)
         
         // LOG OUT After 30 Minutes
         //let thirtyMinutes: TimeInterval = 3600.0
@@ -137,83 +135,59 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                              repeats: true)
         
         //NotificationCenter.default.addObserver(self, selector: #selector(logOutAfter30Minutes), name:NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
-        
-        
-        //check if we have internet connection
-//        if Reachability.isConnectedToNetwork() == true
-//        {
-//            //print("Internet Connection Available!")
-//           
-//        }
-//        else
-//        {
-//            let myAlert = UIAlertController(title: "Internet connection not available",
-//                                            message: "New alerts, messages and patient data will not be available in offline mode. Enable internet to get updates.",
-//                                            preferredStyle: .alert)
-//            
-//            myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-//                //self.dismiss(animated: false, completion: nil)
-//            }))
-//            
-//            present(myAlert, animated: true){}
-//        }
 
         
         //delegation
         tasksTableView.dataSource = self
         tasksTableView.delegate = self
-        contactsTable.dataSource = self
-        contactsTable.delegate = self
+        //contactsTable.dataSource = self
+        //contactsTable.delegate = self
         
         tasksTableView.rowHeight = UITableViewAutomaticDimension
         tasksTableView.estimatedRowHeight = 150
-        contactsTable.rowHeight = UITableViewAutomaticDimension
-        contactsTable.estimatedRowHeight = 150
+        //contactsTable.rowHeight = UITableViewAutomaticDimension
+        //contactsTable.estimatedRowHeight = 150
         
         // UI Set Up
         
             // TOP SEARCH BAR Set up -------------------------------------------
                 // Initialize and set up the search controller
                 // http://swift.attojs.com/index.php/2016/03/21/how-to-make-uisearchbar-programmatically/
-                searchBar.delegate = self
-                searchBar.placeholder = "Start Communication"
-                //definesPresentationContext = true
-        
-                //var titleNavBarButton = UIBarButtonItem(customview: searchBar)
-                self.navigationItem.titleView = searchBar
-        
-                // set Default bar status.
-                searchBar.searchBarStyle = UISearchBarStyle.prominent//.default
-        
-                // change the color of cursol and cancel button.
-                searchBar.tintColor = .black
-        
-                //searchBar.sizeToFit()//need?
+//                searchBar.delegate = self
+//                searchBar.placeholder = "Start Communication"
+//                //definesPresentationContext = true
+//        
+//                //var titleNavBarButton = UIBarButtonItem(customview: searchBar)
+//                self.navigationItem.titleView = searchBar
+//        
+//                // set Default bar status.
+//                searchBar.searchBarStyle = UISearchBarStyle.prominent//.default
+//        
+//                // change the color of cursol and cancel button.
+//                searchBar.tintColor = .black
+//        
+//                //searchBar.sizeToFit()//need?
         
         
             noAppointmentsTodayLabel.isHidden = true
-            phoneButtonHeight.constant = 60
-            phoneButton.layer.cornerRadius = phoneButton.bounds.height / 2 //frame.size.width
-            phoneButton.clipsToBounds = true
-            phoneButton.layer.borderWidth = 2.0
-            phoneButton.layer.borderColor = UIColor.red.cgColor
+        
             AddTaskButton.isHidden = true
             AddTaskButton.layer.cornerRadius = 5
         
-            contactsTable.isHidden = true
-            communicationButtonsView.isHidden = true
-            messageContactButton.layer.cornerRadius = 5
-            videoContactButton.layer.cornerRadius = 5
+            //contactsTable.isHidden = true
+            //communicationButtonsView.isHidden = true
+            //messageContactButton.layer.cornerRadius = 5
+            //videoContactButton.layer.cornerRadius = 5
         
         // HAMBURGER MENU --------------------------------------------------------
             //1. Determine device Type and set alert & hamburger view offsets
             //setHideAndShowOffsetFromDeviceType()
             //2. Move slide menues off screen
-            moveSlideMenu(Menu: "hideHamburgerView")
-            moveSlideMenu(Menu: "hideAlertView")
+            //moveSlideMenu(Menu: "hideHamburgerView")
+            //moveSlideMenu(Menu: "hideAlertView")
             //3. Cast shadow along slide out menu edge for 3D effect
-            hamburgerContainerView.layer.shadowOpacity = 1
-            alertContainerView.layer.shadowOpacity = 1
+            //hamburgerContainerView.layer.shadowOpacity = 1
+            //alertContainerView.layer.shadowOpacity = 1
         
         // SET CURRENT DATE TIME & dateDisplayButton UI ---------------------------
             self.setCurrentDateInDefaults()
@@ -257,11 +231,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         // ADD BADGE to Right Bar Button Item in nav controller --------------------
-        var alertCount = 0
-        if isKeyPresentInUserDefaults(key: "alertCount") {
-            alertCount = UserDefaults.standard.integer(forKey: "alertCount")
-        }
-        rightBarButtonAlert.addBadge(number: alertCount)//alertImageNames.count)
+        //HIDE THINGS FOR NEW UPDATE: HOME screen
+//        var alertCount = 0
+//        if isKeyPresentInUserDefaults(key: "alertCount") {
+//            alertCount = UserDefaults.standard.integer(forKey: "alertCount")
+//        }
+//        rightBarButtonAlert.addBadge(number: alertCount)//alertImageNames.count)
         
         // DISPLAY "No Appointments for this Day -----------------------------------
         showAlertIfTasksTableEmpty()
@@ -403,12 +378,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         showCalendarAlert()
     }
     
-
-    @IBAction func callButtonTapped(_ sender: Any) {
-        //UIApplication.shared.openURL(url) deprecieated in iOS 10
-            open(scheme: "tel://4804942466")
-    }
-    
     
     @IBAction func hamburgerBarButtonTapped(_ sender: Any) {
         
@@ -418,70 +387,52 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //vc.navigationController?.pushViewController(vc, animated: false)
         self.present(vc, animated: false, completion: nil)
         
-//        if(hamburgerMenuShowing) {//if showing hide menu
-//            //leadingConstraintContainerView.constant = -270
-//            moveSlideMenu(Menu: "hideHamburgerView")
+    }
+//    @IBAction func hamburgerOutsideButtonTapped(_ sender: Any) {
+//        moveSlideMenu(Menu: "hideHamburgerView")
+//        hamburgerMenuShowing = !hamburgerMenuShowing
+//        hamburgerOutsideButton.isHidden = true
+//    }
+    
+//    @IBAction func alertButtonTapped(_ sender: Any) {
+//        
+//        if(alertTableShowing) {//if alert showing then hide alert
+//            moveSlideMenu(Menu: "hideAlertView")
 //            UIView.animate(withDuration: 0.2, animations: {
 //                self.view.layoutIfNeeded()
 //            })
 //        }
 //        else {
-//            //leadingConstraintContainerView.constant = 0
-//            moveSlideMenu(Menu: "showHamburgerView")
-//            if(alertTableShowing){
-//                moveSlideMenu(Menu: "hideAlertView")
-//                alertTableShowing = !alertTableShowing
+//            moveSlideMenu(Menu: "showAlertView")
+//            if(hamburgerMenuShowing){
+//                moveSlideMenu(Menu: "hideHamburgerView")
+//                hamburgerMenuShowing = !hamburgerMenuShowing
 //            }
 //            UIView.animate(withDuration: 0.2, animations: {
 //                self.view.layoutIfNeeded()
 //            })
 //        }
-//        hamburgerMenuShowing = !hamburgerMenuShowing
-    }
-    @IBAction func hamburgerOutsideButtonTapped(_ sender: Any) {
-        moveSlideMenu(Menu: "hideHamburgerView")
-        hamburgerMenuShowing = !hamburgerMenuShowing
-        hamburgerOutsideButton.isHidden = true
-    }
-    
-    @IBAction func alertButtonTapped(_ sender: Any) {
-        
-        if(alertTableShowing) {//if alert showing then hide alert
-            moveSlideMenu(Menu: "hideAlertView")
-            UIView.animate(withDuration: 0.2, animations: {
-                self.view.layoutIfNeeded()
-            })
-        }
-        else {
-            moveSlideMenu(Menu: "showAlertView")
-            if(hamburgerMenuShowing){
-                moveSlideMenu(Menu: "hideHamburgerView")
-                hamburgerMenuShowing = !hamburgerMenuShowing
-            }
-            UIView.animate(withDuration: 0.2, animations: {
-                self.view.layoutIfNeeded()
-            })
-        }
-        
-        alertTableShowing = !alertTableShowing
-    }
-    @IBAction func alertOutsideButtonTapped(_ sender: Any) {
-        moveSlideMenu(Menu: "hideAlertView")
-        alertTableShowing = !alertTableShowing
-        alertOutsideButton.isHidden = true
-    }
+//        
+//        alertTableShowing = !alertTableShowing
+//    }
+//    @IBAction func alertOutsideButtonTapped(_ sender: Any) {
+//        moveSlideMenu(Menu: "hideAlertView")
+//        alertTableShowing = !alertTableShowing
+//        alertOutsideButton.isHidden = true
+//    }
     
     
     
     //
     // #MARK: - Supporting Functions
     //
-    
-    @objc func updateAlertBadgeNumber(){//newNumber: Int) {
-        let alertCount = UserDefaults.standard.integer(forKey: "alertCount")
-        rightBarButtonAlert.updateBadge(number: alertCount)//newNumber) //rightBarButtonAlert: UIBarButtonItem!
-        
-    }
+
+    //HIDE THINGS FOR NEW UPDATE: HOME screen
+//    @objc func updateAlertBadgeNumber(){//newNumber: Int) {
+//        let alertCount = UserDefaults.standard.integer(forKey: "alertCount")
+//        rightBarButtonAlert.updateBadge(number: alertCount)//newNumber) //rightBarButtonAlert: UIBarButtonItem!
+//        
+//    }
     
     // --- LOG OUT AFTER 30 MINUTES ---
     func logOutAfter30Minutes() {
@@ -606,48 +557,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //print("There are no appDate objects!")
     }
     
-    func moveSlideMenu(Menu: String) {
-        let alertMenuConstraint:CGFloat = mainView.bounds.size.width - 55 //alertOffset //710//358//320
-        let hamburgerMenuConstraint:CGFloat = alertMenuConstraint//hambuOffset //670//310//320
-    
-        switch Menu {
-        case "showHamburgerView":
-            leadingConstraintContainerView.constant = 0
-            //trailingConstraintHamburgerView.constant -= hamburgerMenuConstraint//270 iPhone 6, 310 for 6+
-            hamburgerOutsideButton.isHidden=false
-        case "hideHamburgerView":
-            leadingConstraintContainerView.constant = -hamburgerMenuConstraint
-            //trailingConstraintHamburgerView.constant += hamburgerMenuConstraint
-            hamburgerOutsideButton.isHidden=true
-        case "showAlertView":
-            leadingConstraintContainerView2.constant -= alertMenuConstraint//320 for iPhone 6, 358 iPhone 6+
-//            trailingConstraintAlertView.constant += alertMenuConstraint
-            alertOutsideButton.isHidden = false
-        case "hideAlertView":
-            leadingConstraintContainerView2.constant += alertMenuConstraint
-//            trailingConstraintAlertView.constant -= alertMenuConstraint
-            alertOutsideButton.isHidden = true
-        default:
-            print("fail: openClose")
-        }
-    }
-    
-    //Supports CALL IBACTION
-    func open(scheme: String) {
-        //http://useyourloaf.com/blog/openurl-deprecated-in-ios10/
-        if let url = URL(string: scheme) {
-            if #available(iOS 10, *) {
-                UIApplication.shared.open(url, options: [:],
-                                          completionHandler: {
-                                            (success) in
-                                            print("Open \(scheme): \(success)")
-                })
-            } else {
-                let success = UIApplication.shared.openURL(url)
-                print("Open \(scheme): \(success)")
-            }
-        }
-    }
+//    func moveSlideMenu(Menu: String) {
+//        let alertMenuConstraint:CGFloat = mainView.bounds.size.width - 55 //alertOffset //710//358//320
+//        let hamburgerMenuConstraint:CGFloat = alertMenuConstraint//hambuOffset //670//310//320
+//    
+//        switch Menu {
+//        case "showHamburgerView":
+//            leadingConstraintContainerView.constant = 0
+//            //trailingConstraintHamburgerView.constant -= hamburgerMenuConstraint//270 iPhone 6, 310 for 6+
+//            hamburgerOutsideButton.isHidden=false
+//        case "hideHamburgerView":
+//            leadingConstraintContainerView.constant = -hamburgerMenuConstraint
+//            //trailingConstraintHamburgerView.constant += hamburgerMenuConstraint
+//            hamburgerOutsideButton.isHidden=true
+//        case "showAlertView":
+//            leadingConstraintContainerView2.constant -= alertMenuConstraint//320 for iPhone 6, 358 iPhone 6+
+////            trailingConstraintAlertView.constant += alertMenuConstraint
+//            alertOutsideButton.isHidden = false
+//        case "hideAlertView":
+//            leadingConstraintContainerView2.constant += alertMenuConstraint
+////            trailingConstraintAlertView.constant -= alertMenuConstraint
+//            alertOutsideButton.isHidden = true
+//        default:
+//            print("fail: openClose")
+//        }
+//    }
     
     
 //    func isKeyPresentInUserDefaults(key: String) -> Bool {
@@ -730,8 +664,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchActive = true
         searchBar.showsCancelButton = true
         searchBar.placeholder = ""
-        if(w < 700) {contactsTable.isHidden = false //TODO: fix for iPad
-            communicationButtonsView.isHidden = false }
+        //if(w < 700) {contactsTable.isHidden = false //TODO: fix for iPad
+        //}//communicationButtonsView.isHidden = false }
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -745,8 +679,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchBar.endEditing(true)
         searchBar.showsCancelButton = false
         searchBar.placeholder = "Start Communication"
-        contactsTable.isHidden = true
-        communicationButtonsView.isHidden = true
+        //contactsTable.isHidden = true
+        //communicationButtonsView.isHidden = true
     }
     
     
@@ -782,12 +716,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 return appPat[1].count//patients.count
             }
         }
-        if(tableView == contactsTable) {
-            print("SearchData.count: \(SearchData.count)")
-            return SearchData.count
-            
-        }
-        print("0: \(SearchData.count)")
+//        if(tableView == contactsTable) {
+//            print("SearchData.count: \(SearchData.count)")
+//            return SearchData.count
+//            
+//        }
+//        print("0: \(SearchData.count)")
         return 0
         
     }
@@ -799,7 +733,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //http://www.codingexplorer.com/segue-uitableviewcell-taps-swift/
     func tableView(_ tableView: UITableView, cellForRowAt IndexPath: IndexPath) -> UITableViewCell {
         
-        if(tableView == tasksTableView){
+        //if(tableView == tasksTableView){
             let cell = tableView.dequeueReusableCell(withIdentifier: "apptCell")! as! AppointmentCell
             cell.photo.image = UIImage(named: "green.circle.png")//photos[IndexPath.row]
             
@@ -823,19 +757,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             return cell
             
-        } else {//contactsTable
-            let cell = tableView.dequeueReusableCell(withIdentifier: "addcontactcell")! as! addContactCell //see AppointmentCell.swift
-            
-            var Data:Dictionary<String,String> = SearchData[IndexPath.row]
-            
-            cell.contactImage.image = UIImage(named: "user.png")
-            cell.contactName.text = Data["FirstLastName"]//"\(Data["FirstName"]!) \(Data["LastName"]!)"//Data["name"]
-            cell.contactPosition.text = Data["RoleType"] //Data["position"]
-            
-            cell.accessoryType = .disclosureIndicator // add arrow > to cell
-            
-            return cell
-        }
+//        } else {//contactsTable
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "addcontactcell")! as! addContactCell //see AppointmentCell.swift
+//            
+//            var Data:Dictionary<String,String> = SearchData[IndexPath.row]
+//            
+//            cell.contactImage.image = UIImage(named: "user.png")
+//            cell.contactName.text = Data["FirstLastName"]//"\(Data["FirstName"]!) \(Data["LastName"]!)"//Data["name"]
+//            cell.contactPosition.text = Data["RoleType"] //Data["position"]
+//            
+//            cell.accessoryType = .disclosureIndicator // add arrow > to cell
+//            
+//            return cell
+//        }
         
         
     }

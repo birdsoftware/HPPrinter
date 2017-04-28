@@ -9,10 +9,13 @@
 import UIKit
 
 class PatientListCell: UITableViewCell {
-//identifier: patientListCell
+    
+    //identifier: patientListCell
     
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var status: UILabel!
+    @IBOutlet weak var org: UILabel!
+    @IBOutlet weak var caseProgram: UILabel!
     @IBOutlet weak var patientID: UILabel!
 
 }

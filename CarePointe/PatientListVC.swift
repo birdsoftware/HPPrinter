@@ -19,9 +19,13 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // class vars
     var searchActive : Bool = false
     var patientData:Array<Dictionary<String,String>> = []
+    var SearchData:Array<Dictionary<String,String>> = []
+    
     var patientIDs = [String]()
     var names = [String]()
     var createdDateTime = [String]()
+    
+    var demographics = [[String]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,9 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         patientTable.rowHeight = UITableViewAutomaticDimension
         patientTable.estimatedRowHeight = 90
         
+        // change the color of cursol and cancel button.
+            patientSearchBar.tintColor = .black
+        
         
     }//UserDefaults.standard.set(patientNameID, forKey:"RESTPatientsPatientIDs")
 
@@ -45,10 +52,10 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         //let patientData = UserDefaults.standard.object(forKey: "RESTPatientsPatientIDs") as? [[String]] ?? [[String]]()
         // get userData for communication drop down list
-        if isKeyPresentInUserDefaults(key: "RESTPatientsPatientIDs"){//""userData"){
-            patientData = UserDefaults.standard.value(forKey: "RESTPatientsPatientIDs") as! Array<Dictionary<String, String>>//"userData") as! Array<Dictionary<String, String>>
+        if isKeyPresentInUserDefaults(key: "RESTPatients"){ //"RESTPatientsPatientIDs"){//""userData"){
+            patientData = UserDefaults.standard.value(forKey: "RESTPatients") as! Array<Dictionary<String, String>>//"userData") as! Array<Dictionary<String, String>>
         }
-        
+        SearchData = patientData
         patientTable.reloadData()
     }
     
@@ -67,13 +74,26 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     // #MARK: - Search Functions
     //
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        //print("PLsearch: \(searchText)")
+        let predicate=NSPredicate(format: "SELF.patientName CONTAINS[cd] %@", searchText) // returns .patientName from patientName["patientName"]
+        let arr=(patientData as NSArray).filtered(using: predicate)
+        
+        if arr.count > 0
+        {
+            SearchData=arr as! Array<Dictionary<String,String>>
+        } else {
+            SearchData=patientData
+        }
+        patientTable.reloadData()
+    }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
+        searchActive = true
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false;
+        searchActive = false
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -96,8 +116,8 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     //return number of rows in each section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(patientData.isEmpty == false){
-            return patientData.count
+        if(SearchData.isEmpty == false){
+            return SearchData.count
         }
         else {
             return 0
@@ -108,14 +128,75 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "patientListCell") as! PatientListCell
         
-        var Data:Dictionary<String,String> = patientData[indexPath.row]
+        var Data:Dictionary<String,String> = SearchData[indexPath.row]
         
         cell.patientID.text = Data["Patient_ID"]
         cell.name.text = Data["patientName"]
-        cell.date.text = "\u{F098}"//Data["CreatedDateTime"]
+        cell.status.text = "Status: " + Data["pstatus"]!
+        cell.org.text = "Organization: " + Data["organization"]!
+        cell.caseProgram.text = "Case Program: " + Data["ReferrerOrigin"]! //case program
         
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //http://www.codingexplorer.com/segue-uitableviewcell-taps-swift/
+        // " 1. click cell drag to view 2. select the “show” segue in the “Selection Segue” section. "
+        
+        if segue.identifier == "patientDetail"{
+            //addBackButton = true
+            
+            let selectedRow = ((patientTable.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
+            //let sectionOfSelectedRow = (tableView.indexPathForSelectedRow?.section)! //retuns int
+            //print("\\(selectedRow)" + " \\(sectionOfSelectedRow)")
+            
+            var Data:Dictionary<String,String> = patientData[selectedRow]
+            
+            let patientName = Data["patientName"]
+            //let appointmentID = appID[sectionOfSelectedRow][selectedRow] as String
+            let patientStatus = "Inactive"//Data["pstatus"]
+            let patientImage = "" //appPatImage[sectionOfSelectedRow][selectedRow]
+            
+            // Store data locally change to mySQL? server later
+            let defaults = UserDefaults.standard
+            defaults.set(patientName, forKey: "patientName")
+            defaults.set(patientImage, forKey: "patientPic")
+            //defaults.set(appointmentID, forKey: "appointmentID")
+            defaults.set(patientStatus, forKey: "patientStatus") //need this to hide the accept and decline buttons in completed view
+            //defaults.set(selectedRow, forKey: "selectedRow")
+            //defaults.set(sectionOfSelectedRow, forKey: "sectionForSelectedRow")
+            
+            demographics = [
+                ["UniqueID", Data["Patient_ID"]! ],
+                ["Assigned", "--Waiting for API update--" ],
+                ["Gender", Data["Gender"]! ],
+                ["Ethnicity", Data["Ethnicity"]! ],
+                ["SSN#", Data["SSN"]! ],
+                ["DOB", Data["DOB"]! ],
+                ["Primary Language", Data["PrimaryLanguage"]! ],
+                ["Email", Data["EmailID"]! ],
+                ["Intake Notes", "--Waiting for API update--" ],
+                ["Home Address", Data["HomeAddress"]! ],
+                ["City", Data["City"]! ],
+                ["Zip", Data["Zip"]! ],
+                ["Phone", Data["Phone"]! ],
+                ["Cell", Data["Cell"]! ],
+                ["Additional Contact", Data["AdditionalContact"]! ],
+                ["Contact Relationship", Data["ContactRelationship"]! ],
+                ["Contact Phone", Data["ContactPhone"]! ],
+                ["Contact Notes", Data["ContactNotes"]! ],
+                ["Primary Source", Data["PrimarySource"]! ],
+                ["Primary Insurance", Data["PrimaryCommercial"]! ],
+                ["Secondary Insurance", Data["SecondaryCommercial"]! ]
+                ]
+            defaults.set(demographics, forKey: "demographics")
+            
+            defaults.synchronize()
+ 
+            }
+            
+        }//prepare(for segue:
+    
 
 }
 

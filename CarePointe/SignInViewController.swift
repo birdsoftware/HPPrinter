@@ -12,6 +12,7 @@ import LocalAuthentication
 
 class SignInViewController: UIViewController {
 
+    @IBOutlet weak var signInActivityView: UIView!
     
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -25,6 +26,13 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        signInActivityView.isHidden = true
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector:#selector(signinAlertToUser),
+                                               name: NSNotification.Name(rawValue: "signinAlert"),
+                                               object: nil)
         
         registerButton.isHidden = true
         launchTouchIDButton.isHidden = true
@@ -74,6 +82,17 @@ class SignInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //
+    @objc func signinAlertToUser(){
+        
+//        self.simpleAlert(title:"Server sign in/authnticate failure",
+//                         message:"Contact Administrator",
+//                         buttonTitle:"OK")
+        notifyUser("Server authntication failure",
+                   err: "Notify Administrator")
+        
+    }
     
     //
     // #MARK: - Button Actions
@@ -281,8 +300,12 @@ class SignInViewController: UIViewController {
                 let postSignIN = POSTSignin()
                 postSignIN.signInUser(userEmail: userEmail, userPassword: userPassword, dispachInstance: signinNewUser)
                 
+                startActivityIndicator()
+                
                 // API Responded
                 signinNewUser.notify(queue: DispatchQueue.main) {
+                    
+                    self.stopActivityIndicator()
                     
                     let userExists = UserDefaults.standard.bool(forKey: "APISignedInSuccess")
                     
@@ -300,7 +323,7 @@ class SignInViewController: UIViewController {
                         //close window moved to askUseTouchID() - self.dismiss(animated: false, completion: nil)
                         
                     } else {
-                        //Sign in not successfull
+                        //Sign in FAILED
                         let errorMessage = UserDefaults.standard.string(forKey: "APISignedInErrorMessage")
                         self.notifyUser("New user Sign In failure", err: errorMessage)
                     }//user
@@ -427,9 +450,12 @@ class SignInViewController: UIViewController {
         // SignIn to API -----------
         let postSignIN = POSTSignin()
         postSignIN.signInUser(userEmail: userEmail, userPassword: userPassword, dispachInstance: signinNewUser)
+        //startActivityIndicator()
         
         // API Responded
         signinNewUser.notify(queue: DispatchQueue.main) {
+            
+            //self.stopActivityIndicator()
             
             let userExists = UserDefaults.standard.bool(forKey: "APISignedInSuccess")
             
@@ -467,5 +493,38 @@ class SignInViewController: UIViewController {
         }
     }
     
+    
+    //show busy indicator animtation and text
+    func startActivityIndicator(){
+        
+        signInActivityView.isHidden = false
+//        backgroundActivityIndicator.isHidden = false
+//        
+//        activityView.backgroundColor = UIColor.white
+//        activityView.alpha = 0.8
+//        activityView.layer.cornerRadius = 10
+        
+        //Here the spinnier is initialized
+        let activitySpinView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        activitySpinView.frame = CGRect(x: 0, y: 200, width: 60, height: 60)
+        activitySpinView.startAnimating()
+        
+        let textLabel = UILabel(frame: CGRect(x: 60, y: 200, width: 250, height: 50))
+        textLabel.textColor = UIColor.gray
+        textLabel.text = "Connecting..."
+        
+        signInActivityView.addSubview(activitySpinView)
+        signInActivityView.addSubview(textLabel)
+        
+        view.addSubview(signInActivityView)
+        
+    }
+    
+    func stopActivityIndicator(){
+        
+        signInActivityView.removeFromSuperview()
+        signInActivityView.isHidden = true
+        
+    }
 
 }

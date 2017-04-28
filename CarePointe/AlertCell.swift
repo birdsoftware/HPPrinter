@@ -10,6 +10,7 @@ import UIKit
 
 class AlertTabelCell: UITableViewCell {
 
+    @IBOutlet weak var alertName: UILabel!
     @IBOutlet weak var patientName: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var message: UILabel!

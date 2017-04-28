@@ -42,6 +42,7 @@ class GETPatients {
                                         completionHandler: { (data, response, error) -> Void in
                                             if (error != nil) {
                                                 print("Error when Attempting to GET Patients\(String(describing: error))")
+                                                dispachInstance.leave()
                                                 return
                                             } else {
                                                 
@@ -114,7 +115,9 @@ class GETPatients {
                                                                 
                                                                 //define dictionary literals
                                                                 //http://stackoverflow.com/questions/30418101/find-key-value-pair-in-an-array-of-dictionaries
-                                                                patients.append(["Patient_ID":pid, "patient_uniqid":patientUniqid, "FirstName":firstName, "LastName":lastName, "Gender":gender,
+                                                                patients.append(["Patient_ID":pid, "patient_uniqid":patientUniqid,
+                                                                                 "patientName":firstLastName, /*"FirstName":firstName, "LastName":lastName, */
+                                                                                 "Gender":gender,
                                                                                  "Ethnicity":ethnicity, "SSN":ssn, "patient_RAF":patientRAF, "DOB":dob, "EmailID":emailID,
                                                                                  "PrimaryLanguage":primaryLanguage, "PatientAddNotes":patientAddNotes, "HomeAddress":homeAddress, "City":city,
                                                                                  "State":state, "Zip":zip, "Phone":Phone, "Cell":cell, "AdditionalContact":additionalContact,
@@ -128,7 +131,7 @@ class GETPatients {
                                                                                  "Updatedby":up, "UpdatedDateTime":updatedDateTime, "careteam":careteam, "profile_image":profileImage, "csc_user":cu,
                                                                                  "pharmacy_NCPDP":pharmacyNCPDP, "organization":org])
                                                                 
-                                                                patientNameID.append(["Patient_ID":pid,"patientName":firstLastName,"CreatedDateTime":createdDateTime])
+                                                                patientNameID.append(["Patient_ID":pid,"patientName":firstLastName,"CreatedDateTime":createdDateTime, "pstatus":pstatus, "organization":org, "ReferrerOrigin":referrerOrigin])
                                                                 
                                                                 //define [[String]] Literals
 //                                                                patients.append([pid, patientUniqid, firstName, lastName, gender, ethnicity, ssn, patientRAF,
@@ -141,7 +144,7 @@ class GETPatients {
 //                                                                                 pharmacyNCPDP, org])
                                                             }
                                                                 
-                                                            print(patients)
+                                                            //print(patients)
                                                             
 //                                                            let patientIDColumn =  patients.getColumn(column: 0)
 //                                                            let patientFirstName = patients.getColumn(column: 2)
@@ -152,7 +155,7 @@ class GETPatients {
 //                                                                patientNameID.append(["\(patientFirstName[Iterator])" + " " + "\(patientLastName[Iterator])", "\(patientIDColumn[Iterator])"])
 //                                                            }
                                                             
-                                                            print(patientNameID)
+                                                            //print(patientNameID)
                                                             
                                                             UserDefaults.standard.set(patientNameID, forKey:"RESTPatientsPatientIDs")
                                                             UserDefaults.standard.set(patients, forKey: "RESTPatients")
@@ -165,6 +168,7 @@ class GETPatients {
                                                     }
                                                 } catch {
                                                     print("Error deserializing Patients JSON: \(error)")
+                                                    dispachInstance.leave()
                                                 }
                                                 
                                                 //                let httpResponse = response as? HTTPURLResponse
@@ -179,14 +183,14 @@ class GETPatients {
 //                                                
 //                                                let patientIDColumn = patients.getColumn(column: 0)
                                                 
-                                                DispatchQueue.main.async {
-                                                    
-//                                                    UserDefaults.standard.set(patientIDColumn, forKey:"RESTPatientsPatientIDs")
-//                                                    UserDefaults.standard.set(patients, forKey: "RESTPatients")
-//                                                    UserDefaults.standard.synchronize()
-                                                    
-                                                    
-                                                }
+//                                                DispatchQueue.main.async {
+//                                                    
+////                                                    UserDefaults.standard.set(patientIDColumn, forKey:"RESTPatientsPatientIDs")
+////                                                    UserDefaults.standard.set(patients, forKey: "RESTPatients")
+////                                                    UserDefaults.standard.synchronize()
+//                                                    
+//                                                    
+//                                                }
                                                 
                                             }
         })

@@ -15,8 +15,8 @@ class locationsViewC: UIViewController , UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var locationsTable: UITableView!
     
     var locations = [
-        ["Facility Name","02/02/2017"],
-        ["Residence","02/03/2017"]
+        ["Banner Desert Medical Center","Home Visit","04/02/2017"],
+        ["Life Care of Paradise valley","Home Visit","02/03/2017"]
     ]
     
     override func viewDidLoad() {
@@ -48,6 +48,7 @@ class locationsViewC: UIViewController , UITableViewDelegate, UITableViewDataSou
         
         cell.label.text = locations[indexPath.row][0]
         cell.details.text = locations[indexPath.row][1]
+        cell.details2.text = locations[indexPath.row][2]
         
         if(indexPath.row % 2 == 0){
             cell.backgroundColor = UIColor.polar()  }

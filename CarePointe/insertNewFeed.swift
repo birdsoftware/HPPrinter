@@ -11,7 +11,7 @@ import UIKit
 
 extension UIViewController {
 
-    func insertPatientFeed(messageCreator: String, message: String, patientID: String) {
+    func insertPatientFeed(messageCreator: String, message: String, patientID: String, updatedFrom: String, updatedType: String) {
         
         // get current Date and Time
         let currentDate = returnCurrentDateOrCurrentTime(timeOnly: false)
@@ -21,7 +21,7 @@ extension UIViewController {
         var feedData = UserDefaults.standard.object(forKey: "feedData") as? [[String]] ?? [[String]]()
         
         // insert feed                      times       dates       messageCreator  message     patientID
-        feedData.insert([currentTime,currentDate,messageCreator,message,patientID], at: 0)
+        feedData.insert([currentTime,currentDate,messageCreator,message,patientID,updatedFrom,updatedType], at: 0)
         
         // save
         UserDefaults.standard.set(feedData, forKey: "feedData")

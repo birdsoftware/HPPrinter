@@ -146,7 +146,13 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //   In storyboard click "Unwind segue" set unwind segue identifier: "unwindToMainDB"
         //                                                           Action: "unwindToMainDashboard:"
         //3. Trigger unwind segue programmatically (below)
-        self.performSegue(withIdentifier: "unwindToMainDB", sender: self)
+        //self.performSegue(withIdentifier: "unwindToMainDB", sender: self)
+        
+        //Update 4/20/17 new home screen 
+        // 4. Present a view controller from a different storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
+        self.present(vc, animated: false, completion: nil)
     }
 
     

@@ -11,9 +11,9 @@ import UIKit
 class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //TOP BAR OUTLETS
-    @IBOutlet weak var careProviderImage: UIImageView!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var careTeamTitle: UILabel!
+//    @IBOutlet weak var careProviderImage: UIImageView!
+//    @IBOutlet weak var backButton: UIButton!
+//    @IBOutlet weak var careTeamTitle: UILabel!
     
     //TABLE VIEW OUTLETS
     @IBOutlet weak var patientCareTeamTable: UITableView!
@@ -26,16 +26,16 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
         
         //round careTeam button
-        careProviderImage.layer.cornerRadius = 0.5 * careProviderImage.bounds.size.width
-        careProviderImage.clipsToBounds = true
-        updateToSavedImage(Userimage: careProviderImage)
+       // careProviderImage.layer.cornerRadius = 0.5 * careProviderImage.bounds.size.width
+       // careProviderImage.clipsToBounds = true
+       // updateToSavedImage(Userimage: careProviderImage)
         
         //scale back '<' button down
-        backButton.imageEdgeInsets = UIEdgeInsetsMake(8,8,8,8)
+       // backButton.imageEdgeInsets = UIEdgeInsetsMake(8,8,8,8)
         
         //show patient Name in title
-        let patientName = UserDefaults.standard.string(forKey: "patientName")
-        careTeamTitle.text = patientName! + "'s Care Team"
+      //  let patientName = UserDefaults.standard.string(forKey: "patientName")
+      //  careTeamTitle.text = patientName! + "'s Care Team"
         
         // delegate 
         patientCareTeamTable.delegate = self //table view

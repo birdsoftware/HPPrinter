@@ -8,19 +8,29 @@
 
 import UIKit
 
-class PatientUpdateViewController: UIViewController {
+class PatientUpdateViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    //@IBOutlet weak var patientNameTitle: UILabel!
     @IBOutlet weak var patientNameTitle: UILabel!
     
     @IBOutlet weak var messageTextBox: UITextView!
     @IBOutlet weak var patientImage: UIImageView!
     
-    //var feedData = [[String]]()
+    @IBOutlet weak var typePicker: UIPickerView!
+    @IBOutlet weak var button: RoundedButton!
     
+    //public class vars
+    var type = [String]()
+    
+    var chosenType:String = "Routine"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Delegates
+        typePicker.delegate = self
+        typePicker.dataSource = self
+        
+        type = ["Routine", "CICA", "Urgent", "IDT"]
         
         // show patient Name in title
         let patientName = UserDefaults.standard.string(forKey: "patientName")
@@ -36,14 +46,6 @@ class PatientUpdateViewController: UIViewController {
         updateToSavedImage(Userimage: patientImage)
         
         
-//        feedData = UserDefaults.standard.object(forKey: "feedData") as! [[String]] //?? [[String]]()
-        
-//        times = feedData.getColumn(column: 0)
-//        dates = feedData.getColumn(column: 1)
-//        messageCreator = feedData.getColumn(column: 2)
-//        message = feedData.getColumn(column: 3)
-        
-        
         //Tap to Dismiss KEYBOARD
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignInViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -55,9 +57,7 @@ class PatientUpdateViewController: UIViewController {
         view.endEditing(true)
     }
     
-//    func isKeyPresentInUserDefaults(key: String) -> Bool {
-//        return UserDefaults.standard.object(forKey: key) != nil
-//    }
+    //supporting functions
     
     func appendNewMessageToDefaults(){
         
@@ -72,9 +72,12 @@ class PatientUpdateViewController: UIViewController {
         }
         
         
-        self.insertPatientFeed(messageCreator: userName, message: messageTextBox.text, patientID: "")
+        self.insertPatientFeed(messageCreator: userName, message: messageTextBox.text, patientID: "", updatedFrom: "mobile", updatedType: chosenType)
         
     }
+    
+    
+    // Button Actions
     
     @IBAction func goBackButtonTapped(_ sender: Any) {
         //1. palce "@IBAction func unwind...(segue: UIStoryboardSegue) {}" in view controller you want to unwind too
@@ -105,5 +108,30 @@ class PatientUpdateViewController: UIViewController {
     }
 
     
+    //
+    // #MARK: - Picker View
+    //
+    
+    // returns the number of 'columns' to display.
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    // returns the number of rows in each component..
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        return type.count
+    }
+    
+    // returns data to display in care team picker
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return type[row]
+    }
+    // picker value selected
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        button.setTitle("Send " + type[row], for: .normal)
+        chosenType = type[row]
+
+    }
+
     
 }

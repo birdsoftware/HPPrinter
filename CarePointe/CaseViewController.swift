@@ -22,19 +22,16 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var clinicalTable: UITableView!
     
     let caseInfo = [["Start Date","02/02/2017"],
-                   ["Case Program","Transitional Care"],
-                   ["Special Needs","Caregiver, Supplies, Transportation"],
-                   ["Case Summary","Patient being discharged from chandler hospital"]
+                   ["Program","Transitional Care"],
+                   ["Disease","Fibromyalgia"],
+                   ["Acuity","High"],
+                   ["SNP","Caregiver, Supplies, Transportation"],
+                   ["Summary","Patient came to us from Observation Unit at Chandler Regional Hospital. Patient had a few prior hospitalizations due to falls in the past weeks. Patient suffers from permanent brain damage due to traumatic car accident. Experiences access falls and confusion and needs 24hr monitoring. Lives with Husband and Daughter that act as caregivers."]
                    ]
     
-    let clinicalData = [["Label 1","Clinical detail 1"],
-    ["Label 2","Clinical long detail test the expaning cell test in this cell"],
-    ["Label 3","Clinical detail 3"],
-    ["Label 4","Clinical detail 4"],
-    ["Label 5","Clinical detail 5"],
-    ["Label 6","Clinical detail 6"],
-    ["Label 7","Clinical detail 7"],
-    ]
+    let clinicalData = [["ICD-10's","Dependence on Wheelchair"],
+                        ["Symptoms","-"]
+                        ]
 
     
     override func viewDidLoad() {

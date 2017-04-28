@@ -14,5 +14,21 @@ class AddUsersCell: UITableViewCell {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userPosition: UILabel!
    
+}
 
+class AddUsers2Cell: UITableViewCell {
+    
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userPosition: UILabel!
+    @IBOutlet weak var userCompany: UILabel!
+    
+}
+
+class AddUsers3Cell: UITableViewCell {
+    
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userPositionCompany: UILabel!
+    @IBOutlet weak var callButton: RoundedButton!
+    
 }

@@ -28,6 +28,7 @@ class servicesCell: UITableViewCell {
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var details: UILabel!
+    @IBOutlet weak var details2: UILabel!
     
     
 }
@@ -36,6 +37,7 @@ class locationsCell: UITableViewCell {
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var details: UILabel!
+    @IBOutlet weak var details2: UILabel!
     
     
 }

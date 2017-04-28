@@ -189,7 +189,7 @@ class PTVTableViewController: UITableViewController {
         if segue.identifier == "patientViewToDashBoard" {//this is the going back to the main dashboard
             //do something
         }
-        else {
+        else if segue.identifier == "patientDetail"{
             let selectedRow = ((tableView.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
             let sectionOfSelectedRow = (tableView.indexPathForSelectedRow?.section)! //retuns int
             //print("\\(selectedRow)" + " \\(sectionOfSelectedRow)")

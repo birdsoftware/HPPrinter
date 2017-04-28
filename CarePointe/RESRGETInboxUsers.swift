@@ -55,6 +55,7 @@ class GETRecipients {
                                                                 let company = dict["Company"] as? String ?? ""
                                                                 let userID = dict["User_ID"] as? Int ?? -1 //------ //Convert to string
                                                                 let lastName = dict["LastName"] as? String ?? ""    //Combine with firstName
+                                                                let phoneNumber = dict["phone_number"] as? String ?? ""
                                                                 let roleType = dict["RoleType"] as? String ?? ""
                                                                 
                                                                 let firstLastName = firstName + " " + lastName
@@ -63,7 +64,7 @@ class GETRecipients {
                                                                 
                                                                 //define dictionary literals
                                                                 //http://stackoverflow.com/questions/30418101/find-key-value-pair-in-an-array-of-dictionaries
-                                                                users.append(["FirstLastName":firstLastName, "Company":company, "User_ID":uid, "RoleType":roleType])
+                                                                users.append(["FirstLastName":firstLastName, "Company":company, "User_ID":uid, "phone_number":phoneNumber, "RoleType":roleType])
                                                                 
                                                                 //newUsers.append(User(firstLastName: firstLastName, company:company, id: uid, userName: userName, roleType:roleType))
                                                             }

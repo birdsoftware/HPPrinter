@@ -74,7 +74,7 @@ class AddNoteCompletePatientViewController: UIViewController {
         
         // 2 UPDATE PATIENT FEED
         //                            times     dates   messageCreator  message     patientID
-        self.insertPatientFeed(messageCreator: userName, message: messageTextBox.text, patientID: patientID)
+        self.insertPatientFeed(messageCreator: userName, message: messageTextBox.text, patientID: patientID, updatedFrom: "mobile", updatedType: "Update")
         
         // ANIMATE "Patient Complete" TOAST then unwind segue back to MAIN dashboard
         UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in

@@ -28,6 +28,8 @@ class PTVDetailViewController: UIViewController {
     @IBOutlet weak var declinePatientButton: UIButton!
     @IBOutlet weak var acceptPatientButton: UIButton!
     //@IBOutlet weak var careTeamButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    
     
     var patientName = ""
     
@@ -38,6 +40,7 @@ class PTVDetailViewController: UIViewController {
         acceptPatientButton.layer.cornerRadius = 5
         declinePatientButton.layer.cornerRadius = 5
         completedPatientButton.layer.cornerRadius = 5
+        backButton.layer.cornerRadius = 5
         //careTeam button round button
         //careTeamButton.layer.cornerRadius = 0.5 * careTeamButton.bounds.size.width
         //careTeamButton.clipsToBounds = true
@@ -72,21 +75,22 @@ class PTVDetailViewController: UIViewController {
 
     func updatePatientView(status: String){
         
-        switch status
-        {
-        case "Pending":                         //Show accept decline, hide completed
-            completedPatientButton.isHidden = true
-        case "Scheduled":                           //Show completed, hide accept decline
+        
+//        switch status
+//        {
+//        case "Pending", "Not Taken Under Care":            //Show accept decline, hide completed
+//            completedPatientButton.isHidden = true
+//        case "Scheduled", "Active":                        //Show completed, hide accept decline
+//            acceptPatientButton.isHidden = true
+//            declinePatientButton.isHidden = true
+//            completedPatientButton.isHidden = false
+//        case "Completed/Archived", "Inactive", "Deseased": //hide all
             acceptPatientButton.isHidden = true
             declinePatientButton.isHidden = true
-            completedPatientButton.isHidden = false
-        case "Completed/Archived":                           //hide all
-            acceptPatientButton.isHidden = true
-            declinePatientButton.isHidden = true
             completedPatientButton.isHidden = true
-        default:
-            print("fail: updatePatientView")
-        }
+//        default:
+//            print("fail: updatePatientView")
+//        }
         
     }
     
@@ -124,6 +128,20 @@ class PTVDetailViewController: UIViewController {
     }
     
     
+    //
+    // #MARK - buttons
+    //
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        // 4. Present a view controller from a different storyboard
+        let storyboard = UIStoryboard(name: "PatientList", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PatientListView") as UIViewController
+        //vc.navigationController?.pushViewController(vc, animated: false)
+        self.present(vc, animated: false, completion: nil)
+    }
+    
+    
+    
     @IBAction func declinePatientButtonTapped(_ sender: Any) {
         
         // Show Alert, ask why, get leave a note text, show [Submit] [Cancel] buttons
@@ -154,7 +172,7 @@ class PTVDetailViewController: UIViewController {
             
             // 2 UPDATE PATIENT FEED
             //      times   dates   messageCreator  message     patientID
-            self.insertPatientFeed(messageCreator: userName, message: declineMessage, patientID: patientID)
+            self.insertPatientFeed(messageCreator: userName, message: declineMessage, patientID: patientID, updatedFrom: "mobile", updatedType: "Update")
             
             
             // 3. Instantiate a view controller from Storyboard and present it

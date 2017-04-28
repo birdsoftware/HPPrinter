@@ -1,29 +1,25 @@
 //
-//  AScreeningViewController.swift
+//  TeleConnectVC.swift
 //  CarePointe
 //
-//  Created by Brian Bird on 2/10/17.
+//  Created by Brian Bird on 4/21/17.
 //  Copyright © 2017 Mogul Pro Media. All rights reserved.
 //
 
 import UIKit
 
-class AScreeningViewController: UIViewController {
+class TeleConnectVC: UIViewController {
 
-    @IBOutlet weak var patientNameLabel: UILabel!
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // UI/UX setup
-        
-        // show specific patient Name from defaults i.e. "Ruth Quinonez" etc.
-        let patientName = UserDefaults.standard.string(forKey: "patientName")
-        patientNameLabel.text = patientName! + "'s Screenings"
+        // Do any additional setup after loading the view.
     }
 
-
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
 
     /*

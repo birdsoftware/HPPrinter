@@ -38,44 +38,44 @@ class DispatchREST {//http://stackoverflow.com/questions/42146274/syncronize-asy
         let downloadPatients = DispatchGroup()
             downloadPatients.enter()
         
-        // 2 patients  -----------
-        //notify closure called when (downloadToken-) enter and leave counts are balanced
-        downloadToken.notify(queue: DispatchQueue.main)  {
+        
+        // 2 patients - notify closure called when (downloadToken) enter & leave counts balance
+        downloadToken.notify(queue: DispatchQueue.main)  { //Signin token & user profile Downloaded now what?
             
-            //GET Patients -> save in defaults:  all patients: forKey: "RESTPatients" & patientID column: forKey: "RESTPatientsPatientIDs"
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "startActivityIndicator"), object: nil)
+            
             let token = UserDefaults.standard.string(forKey: "token")
-            let callGetPatients = GETPatients()
-                callGetPatients.getPatients(token: token!, dispachInstance: downloadPatients)
             
-            //3 users
-            let callGetUsers = GETRecipients()
-                callGetUsers.getInboxUsers(token: token!)
-        }// -----------------------
+            let startGetPatients = GETPatients()
+                startGetPatients.getPatients(token: token!, dispachInstance: downloadPatients)
+            
+            //3 All Inbox Users -----------
+            let startGetUsers = GETRecipients()
+                startGetUsers.getInboxUsers(token: token!)
+        }
         
-        //let downloadAlerts = DispatchGroup()
-        //downloadAlerts.enter()
+        let downloadAlerts = DispatchGroup()
+        downloadAlerts.enter()
         
-        downloadPatients.notify(queue:DispatchQueue.main){
-            UserDefaults.standard.set(nil, forKey: "RESTAlerts")//clear old
-            UserDefaults.standard.synchronize()
-            
-            //
-            // GET Patient Alerts for each patientID -> defaults forKey: "RESTAlerts"
-            //
-            let patientIDs = UserDefaults.standard.array(forKey: "RESTPatientsPatientIDs") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()//as? [String] ?? [String]()
-            //let token = UserDefaults.standard.string(forKey: "token")
-            print("\n patientID's: \(patientIDs)\n")
-            
-            //let getAlertsInstance = GETAlerts()
-            
-            //for dict in patientIDs {
-            //     getAlertsInstance.getAlerts(token: token!, patientDict: dict)//TODO: convert [[String]] to Array<Dictionary<String,String>>
-            //}
+        downloadPatients.notify(queue:DispatchQueue.main){ //Patients Downloaded now do what?
 
+            let token = UserDefaults.standard.string(forKey: "token")
             
+            //4 Get All Global Alerts
+            let startGlobalAlerts = GETGlobalAlerts()
+            startGlobalAlerts.getGlobalAlerts(token: token!, dispachInstance: downloadAlerts)
+            
+            
+        }
+        
+        downloadAlerts.notify(queue:DispatchQueue.main) {//Alerts Downloaded now do what?
+            
+            //Stop Activity Indicator 2. Update Patient Profile 3. Update Alerts Count
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopActivityIndicator"), object: nil)
             
             //print #keys in user defaults
             print(UserDefaults.standard.dictionaryRepresentation().keys.count)
+            
         }
 
     }

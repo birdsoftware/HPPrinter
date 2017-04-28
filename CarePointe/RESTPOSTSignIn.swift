@@ -42,8 +42,13 @@ class POSTSignin {
                 
                 print("Error when Attempting to POST Signin: \(error!)") //The Internet connection appears to be offline. -1009
                 
+                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "signinAlert"), object: nil)
+                UserDefaults.standard.set(false, forKey: "APISignedInSuccess")
+                UserDefaults.standard.set("\(error!)", forKey: "APISignedInErrorMessage")
+                UserDefaults.standard.synchronize()
+                dispachInstance.leave() // API Responded
                 
-            } else { 
+            } else {
                 
                 //let httpResponse = response as? HTTPURLResponse
                 //print("\(httpResponse)")
@@ -65,7 +70,7 @@ class POSTSignin {
                                 
                                 
                             } else {
-                                let errorMessage = json["data"] as? String
+                                let errorMessage = json["data"] as? String //API will return {"type":"false","data":"User password does not match" or "User with this Username does not exist"
                                 
                                 print("could not POST Signin: \(errorMessage!)")
                                 
@@ -73,12 +78,18 @@ class POSTSignin {
                                 UserDefaults.standard.set(errorMessage, forKey: "APISignedInErrorMessage")
                                 UserDefaults.standard.synchronize()
                             }
-                        dispachInstance.leave()
+                        dispachInstance.leave() // API Responded
                     }
                 } catch {
                     print("Error deserializing signin JSON: \(error)")
+                    UserDefaults.standard.set(false, forKey: "APISignedInSuccess")
+                    UserDefaults.standard.set("\(error)", forKey: "APISignedInErrorMessage")
+                    UserDefaults.standard.synchronize()
+                    dispachInstance.leave() // API Responded
                 }
                 
+                //DispatchQueue.main.async {
+                //}
                 
             }//else
         })

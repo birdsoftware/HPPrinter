@@ -15,9 +15,8 @@ class ServicesC1ViewC: UIViewController , UITableViewDelegate, UITableViewDataSo
     @IBOutlet weak var servicesTable: UITableView!
     
     var services = [
-        
-        ["Home Health","In Service"],
-        ["DME","Completed"]
+        ["Admin Admin","Home Health", "Completed"],
+        ["Walter Simmons","Home Health", "Pending"]
     ]
     
     override func viewDidLoad() {
@@ -52,6 +51,7 @@ class ServicesC1ViewC: UIViewController , UITableViewDelegate, UITableViewDataSo
         
         cell.label.text = services[indexPath.row][0]
         cell.details.text = services[indexPath.row][1]
+        cell.details2.text = services[indexPath.row][2]
         
         if(indexPath.row % 2 == 0){
             cell.backgroundColor = UIColor.polar()  }

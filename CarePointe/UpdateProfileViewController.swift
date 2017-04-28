@@ -47,12 +47,14 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         addAvailabilityButton.layer.cornerRadius = 5
         resetPasswordButton.layer.borderWidth = 2
         addAvailabilityButton.layer.borderWidth = 2
+        cancelChangesButton.layer.borderWidth = 2
         resetPasswordButton.layer.borderColor = UIColor(hex: 0x028401).cgColor//green
         addAvailabilityButton.layer.borderColor = UIColor(hex: 0x028401).cgColor
-        background1.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-        background2.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-        background4.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-        background3.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        cancelChangesButton.layer.borderColor = UIColor(hex: 0x028401).cgColor
+        background1.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        background2.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        background4.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        background3.backgroundColor = UIColor.white.withAlphaComponent(0.1)
         
         containerView1.isHidden = true
         containerView2.isHidden = true
@@ -99,7 +101,7 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         }
         
         //Tap to Dismiss KEYBOARD
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignInViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UpdateProfileViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
     }
