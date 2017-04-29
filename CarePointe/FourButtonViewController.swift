@@ -28,7 +28,8 @@ class FourButtonViewController: UIViewController {
         activityView.isHidden = true
         backgroundActivityIndicator.isHidden = true
         isConnectedToAPI.isHidden = true
-        let serverSuccess = UserDefaults.standard.bool(forKey: "APISignedInSuccess")
+        
+        let serverSuccess = UserDefaults.standard.bool(forKey: "APISignedInSuccess") 
         if isKeyPresentInUserDefaults(key: "APISignedInErrorMessage") {
             errorMessage = UserDefaults.standard.string(forKey: "APISignedInErrorMessage")!
         }
@@ -94,8 +95,8 @@ class FourButtonViewController: UIViewController {
             if(userDidESign)
             {
                 if isKeyPresentInUserDefaults(key: "numberOfAPIDownoads") {
-                    //check if first time log in/new user
-                } else {
+                    //true not new user
+                } else {//false = first time log in/new user
                 
                         //Activity indicator
                         //activityIndicator()
@@ -248,12 +249,29 @@ class FourButtonViewController: UIViewController {
         
         //if value does not exists don't update placehold text, O.W. display locally saved text
         
-        let fName = UserDefaults.standard.object(forKey: "profileName") as? String ?? "-"
-        let lName = UserDefaults.standard.object(forKey: "profileLastName") as? String ?? "-"
-        userName.text = fName + " " + lName
+        if isKeyPresentInUserDefaults(key: "userProfile") {
+        let userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
         
-        let title = UserDefaults.standard.object(forKey: "title") as? String ?? "-"
-        userTitle.text = title
+            if userProfile.isEmpty == false {
+                let user = userProfile[0]
+                let name = user["userName"]!
+                let title = user["Title"]!
+                let role = user["RoleType"]!
+                
+                //let fName = UserDefaults.standard.object(forKey: "profileName") as? String ?? "-"
+                //let lName = UserDefaults.standard.object(forKey: "profileLastName") as? String ?? "-"
+                userName.text = name//fName + " " + lName
+                
+                //let title = UserDefaults.standard.object(forKey: "title") as? String ?? "-"
+                userTitle.text = title + ", " + role
+            } else {
+                userName.text = "-"
+                userTitle.text = "-"
+            }
+        } else {
+            userName.text = "-"
+            userTitle.text = "-"
+        }
     }
     
     func updateAlertsCount(){

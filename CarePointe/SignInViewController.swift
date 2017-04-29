@@ -497,7 +497,12 @@ class SignInViewController: UIViewController {
     //show busy indicator animtation and text
     func startActivityIndicator(){
         
-        signInActivityView.isHidden = false
+        if signInActivityView != nil { // Make sure the view exists
+            signInActivityView.isHidden = false
+        } else { // put back
+            view.addSubview(signInActivityView)
+            signInActivityView.isHidden = false
+        }
 //        backgroundActivityIndicator.isHidden = false
 //        
 //        activityView.backgroundColor = UIColor.white

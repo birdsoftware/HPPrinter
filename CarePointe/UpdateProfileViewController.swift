@@ -33,6 +33,11 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
     @IBOutlet weak var cancelChangesButton: UIButton!
     @IBOutlet weak var resetPasswordButton: UIButton!
     @IBOutlet weak var addAvailabilityButton: UIButton!
+    
+    // Constraints
+    @IBOutlet weak var keyboardViewBottom: NSLayoutConstraint! //33 - normal
+    @IBOutlet weak var keyboardViewTop: NSLayoutConstraint!
+    
 
     // Properties
     var imagesDirectoryPath:String!
@@ -67,17 +72,6 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
          *   value :  Your Color or RGB value
          */
         
-        /*
-          *  GET PLACEHOLDER TEXT FROM API and set in this view
-          *  firstNameField.placeholder = "Bob" 
-          *  lastNameField.placeholder = "Smith" 
-          *  titleField.placeholder = "Care Team Case Manager"
-          *  emailField.placeholder = "bob@yahoo.com"
-          */
-        
-        // Display saved defaults to placeholder text fields
-        displayLocallySavedTextInPlaceholders()
-        
         //✅Store data locally change to mySQL? server later✅
         let defaults = UserDefaults.standard
         defaults.set(false, forKey: "passwordReset")
@@ -104,11 +98,49 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UpdateProfileViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
+        //keyboard notification for push fields up/down
+        let center = NotificationCenter.default
+        center.addObserver(self,
+                           selector: #selector(keyboardWillShow),
+                           name: .UIKeyboardWillShow,
+                           object: nil)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        /*
+         *  GET PLACEHOLDER TEXT FROM API and set in this view
+         *  firstNameField.placeholder = "Bob"
+         *  lastNameField.placeholder = "Smith"
+         *  titleField.placeholder = "Care Team Case Manager"
+         *  emailField.placeholder = "bob@yahoo.com"
+         */
+        
+        // Display saved defaults to placeholder text fields
+        displayLocallySavedTextInPlaceholders()
     }
     
     // This will hide keyboard when click off field or finished editing text field
     func dismissKeyboard(){
         view.endEditing(true)
+        keyboardViewBottom.constant = 33
+        keyboardViewTop.constant = 0
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    @objc func keyboardWillShow(sender: NSNotification){
+        if let keyboardSize = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue{
+            let keyboardHeight = keyboardSize.height
+            keyboardViewTop.constant = -keyboardHeight+33
+                    
+                    keyboardViewBottom.constant = keyboardHeight-33
+                    UIView.animate(withDuration: 0.2, animations: { () -> Void in
+                        self.view.layoutIfNeeded()
+                    })
+        }
+
     }
 
 
@@ -216,104 +248,6 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
     }
     
     
-    //
-    // supporting functions
-    //
-    
-    func determineWhatTextChanged(profileTextField: UITextField ) -> String {
-        let someText = profileTextField.text!
-        let someTextIsEmpty = profileTextField.text?.isEmpty
-        
-        if someTextIsEmpty! {
-            return  profileTextField.placeholder!
-        } else { return someText }
-    }
-    
-    func saveTextLocally() {
-        let fName = determineWhatTextChanged(profileTextField: firstNameField)
-        let lName = determineWhatTextChanged(profileTextField: lastNameField)
-        let title = determineWhatTextChanged(profileTextField: titleField)
-        let email = determineWhatTextChanged(profileTextField: emailField)
-        
-        //✅Store data locally (user entered or if blank place holder text) change to mySQL? server later✅
-        let defaults = UserDefaults.standard
-        UserDefaults.standard.set(fName, forKey: "profileName")
-        UserDefaults.standard.set(lName, forKey: "profileLastName")
-        UserDefaults.standard.set(title, forKey: "title")
-        UserDefaults.standard.set(email, forKey: "email")
-        
-        defaults.synchronize()
-        
-    }
-    
-    
-    /*
-      * Check if value Already Exists in user defaults
-      *
-      */
-//    func isKeyPresentInUserDefaults(key: String) -> Bool {
-//        return UserDefaults.standard.object(forKey: key) != nil
-//    }
-    
-    func displayLocallySavedTextInPlaceholders() { //Array<String>
-        
-//print("\(UserDefaults.standard.string(forKey: "profileName"))")
-//print("\(UserDefaults.standard.string(forKey: "profileLastName"))")
-//print("\(UserDefaults.standard.string(forKey: "title"))")
-//print("\(UserDefaults.standard.string(forKey: "email"))")
-        
-        //if value does not exists don't update placehold text, O.W. display locally saved text
-        if isKeyPresentInUserDefaults(key: "profileName") {
-            firstNameField.placeholder =  UserDefaults.standard.string(forKey: "profileName")!
-        }
-        if isKeyPresentInUserDefaults(key: "profileLastName") {
-            lastNameField.placeholder = UserDefaults.standard.string(forKey: "profileLastName")!
-        }
-        if isKeyPresentInUserDefaults(key: "title") {
-            titleField.placeholder = UserDefaults.standard.string(forKey: "title")!
-        }
-        if isKeyPresentInUserDefaults(key: "email") {
-            emailField.placeholder = UserDefaults.standard.string(forKey: "email")!
-        }
-        
-    }
-    
-    func displayWhatWasChanged() {
-
-        let fName = determineWhatTextChanged(profileTextField: firstNameField)
-        let lName = determineWhatTextChanged(profileTextField: lastNameField)
-        let title = determineWhatTextChanged(profileTextField: titleField)
-        let email = determineWhatTextChanged(profileTextField: emailField)
-        let password: String
-        let passwordDidChange = UserDefaults.standard.bool(forKey: "passwordReset")
-        if passwordDidChange { password = "was updated" }
-        else {  password = "did not change" }
-       
-        
-        let changeMessage = "\n\u{2022} First Name: \(fName) \n" + "\n\u{2022} Last Name: \(lName) \n" + "\n\u{2022} Title: \(title) \n" + "\n\u{2022} Email: \(email) \n"
-                            + "\n\u{2022} Password \(password) \n"
-        
-        let myAlert = UIAlertController(title: "Review Your Information", message: changeMessage, preferredStyle: .alert)
-        
-        myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-            //Action when OK pressed
-            //self.performSegue(withIdentifier: "showDashboard", sender: self)
-            // 4. Present a view controller from a different storyboard
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
-            //vc.navigationController?.pushViewController(vc, animated: false)
-            self.present(vc, animated: false, completion: nil)
-        }))
-            
-        //        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width:40, height:40))
-        //        imageView.contentMode = UIViewContentMode.center
-        //        imageView.image = UIImage(named: "checked.png")
-        //alert.view.addSubview(imageView)
-        
-        present(myAlert, animated: true){}
-        
-    }
-    
     @IBAction func acceptChangesButtonTapped(_ sender: Any) {
         
         let firstNamePlacementText = firstNameField.placeholder!
@@ -342,11 +276,11 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
           *
           */
         
+        // --save first, last name, title & email
+        
+        
+        
         displayWhatWasChanged()//show change, close and go to 4 button view if OK tapped
-        
-        // --save first, last name and title
-        
-        saveTextLocally()
         
         // --profileNeedsUpdate
         UserDefaults.standard.set(true, forKey: "profileNeedsUpdate")
@@ -364,6 +298,151 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         //vc.navigationController?.pushViewController(vc, animated: false)
         self.present(vc, animated: false, completion: nil)
     }
+    
+    //
+    // supporting functions
+    //
+    
+    func determineWhatTextChanged(profileTextField: UITextField ) -> String {
+        let someText = profileTextField.text!
+        let someTextIsEmpty = profileTextField.text?.isEmpty
+        
+        if someTextIsEmpty! {
+            return  profileTextField.placeholder!
+        } else { return someText }
+    }
+    
+    func saveTextLocally() {
+        let fName = determineWhatTextChanged(profileTextField: firstNameField)
+        let lName = determineWhatTextChanged(profileTextField: lastNameField)
+        let title = determineWhatTextChanged(profileTextField: titleField)
+        let email = determineWhatTextChanged(profileTextField: emailField)
+        
+        //get user profile from local that got it from API
+        let userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
+        let user = userProfile[0]
+        //pass through what hasn't changed
+        let token = user["Token"]!
+        let firstLastName = fName + " " + lName
+        let RoleType = user["RoleType"]!
+        let RoleID = user["Role_ID"]!
+        let uid = user["User_ID"]!
+        let phoneNo = user["PhoneNo"]!
+        
+        var userP: Array<Dictionary<String,String>> = []
+        userP.append(["FirstName":fName, "LastName":lName, "Token":token,"userName":firstLastName,"RoleType":RoleType, "Role_ID":RoleID, "Title":title, "EmailID1":email, "User_ID":uid, "PhoneNo":phoneNo])
+        
+        //✅Store data locally (user entered or if blank place holder text) change to mySQL? server later✅
+        let defaults = UserDefaults.standard
+        //UserDefaults.standard.set(fName, forKey: "profileName")
+        //UserDefaults.standard.set(lName, forKey: "profileLastName")
+        //UserDefaults.standard.set(title, forKey: "title")
+        //UserDefaults.standard.set(email, forKey: "email")
+        
+        UserDefaults.standard.set(userP, forKey: "userProfile")
+        
+        defaults.synchronize()
+        
+    }
+    
+    func saveTextToWebServer(){
+        
+        //get local user profile
+        let userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
+        let user = userProfile[0]
+
+        let token = user["Token"]!
+        let firstName = user["FirstName"]!
+        let lastName = user["LastName"]!
+        let title = user["Title"]!
+        let uid = user["User_ID"]!
+        let email = user["EmailID1"]!
+        let phoneNo = user["PhoneNo"]!
+        
+        //save local with any changes to web server
+        let updateProfile = PUTUpdateProfile()
+        updateProfile.updateProfile(token: token, userID: uid, firstname: firstName, lastname: lastName, title: title, emailid: email, PhoneNo: phoneNo)
+        
+    }
+    
+    
+    func displayLocallySavedTextInPlaceholders() {
+        
+        if isKeyPresentInUserDefaults(key: "userProfile") {
+            let userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
+            
+            if userProfile.isEmpty == false {
+                let user = userProfile[0]
+                
+                let fname = user["FirstName"]!
+                let lname = user["LastName"]!
+                let title = user["Title"]!
+                //let role = user["RoleType"]! //"Physician"
+                let email = user["EmailID1"]!
+                
+                //if value does not exists don't update placehold text, O.W. display locally saved text
+                //if isKeyPresentInUserDefaults(key: "profileName") {
+                firstNameField.placeholder =  fname//UserDefaults.standard.string(forKey: "profileName")!
+                //}
+                //if isKeyPresentInUserDefaults(key: "profileLastName") {
+                lastNameField.placeholder = lname//UserDefaults.standard.string(forKey: "profileLastName")!
+                //}
+                //if isKeyPresentInUserDefaults(key: "title") {
+                titleField.placeholder = title//UserDefaults.standard.string(forKey: "title")!
+                //}
+                //if isKeyPresentInUserDefaults(key: "email") {
+                emailField.placeholder = email//UserDefaults.standard.string(forKey: "email")!
+            }
+        }
+        
+        
+        
+    }
+    
+    func displayWhatWasChanged() {
+        
+        let fName = determineWhatTextChanged(profileTextField: firstNameField)
+        let lName = determineWhatTextChanged(profileTextField: lastNameField)
+        let title = determineWhatTextChanged(profileTextField: titleField)
+        let email = determineWhatTextChanged(profileTextField: emailField)
+        let password: String
+        let passwordDidChange = UserDefaults.standard.bool(forKey: "passwordReset")
+        if passwordDidChange { password = "was updated" }
+        else {  password = "did not change" }
+        
+        
+        let changeMessage = "\n\u{2022} First Name: \(fName) \n" + "\n\u{2022} Last Name: \(lName) \n" + "\n\u{2022} Title: \(title) \n" + "\n\u{2022} Email: \(email) \n"
+            + "\n\u{2022} Password \(password) \n"
+        
+        let myAlert = UIAlertController(title: "Review Your Information and Save to Web Server", message: changeMessage, preferredStyle: .alert)
+        
+        myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            
+            self.saveTextLocally()
+            
+            self.saveTextToWebServer()
+            
+            
+            //Action when OK pressed
+            //self.performSegue(withIdentifier: "showDashboard", sender: self)
+            // 4. Present a view controller from a different storyboard
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
+            //vc.navigationController?.pushViewController(vc, animated: false)
+            self.present(vc, animated: false, completion: nil)
+        }))
+        
+        myAlert.addAction(UIAlertAction(title: "Cancel", style: .destructive) { _ in })
+        
+        //        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width:40, height:40))
+        //        imageView.contentMode = UIViewContentMode.center
+        //        imageView.image = UIImage(named: "checked.png")
+        //alert.view.addSubview(imageView)
+        
+        present(myAlert, animated: true){}
+        
+    }
+
     
 
 }

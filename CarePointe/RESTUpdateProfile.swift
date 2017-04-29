@@ -9,28 +9,31 @@
 import Foundation
 //import UIKit
 
-class POSTSignin {
+class PUTUpdateProfile {
     
-    func signInUser(userEmail: String, userPassword: String, dispachInstance: DispatchGroup) {
-
+    func updateProfile(token: String, userID: String, firstname: String, lastname: String, title:String, emailid:String, PhoneNo:String) {
+        
         let headers = [
+            "authorization":token,
             "content-type": "application/json",
             "cache-control": "no-cache"
-            //"postman-token": "0e161852-1169-8f8e-335c-42a4d2389c25"
         ]
         let parameters = [
-            "email": userEmail,
-            "password": userPassword
+            "firstname": firstname,
+            "lastname": lastname,
+            "title":title,
+            "emailid":emailid,
+            "PhoneNo":PhoneNo
             ] as [String : Any]
         
         let postData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
         //print(String(data: postData, encoding: .utf8)!) //{test@test.com, test123456}
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/signin")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/user/updateProfile/"+userID)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
-        request.httpMethod = "POST"
+        request.httpMethod = "PUT"
         request.allHTTPHeaderFields = headers
         request.httpBody = postData as Data
         
@@ -40,13 +43,13 @@ class POSTSignin {
                 
                 //let errorLocalDes = error?.localizedDescription
                 
-                print("Error when Attempting to POST Signin: \(error!)") //The Internet connection appears to be offline. -1009
+                print("Error when Attempting to PUT UpdateProfile: \(error!)") //The Internet connection appears to be offline. -1009
                 
                 //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "signinAlert"), object: nil)
-                UserDefaults.standard.set(false, forKey: "APISignedInSuccess")
-                UserDefaults.standard.set("\(error!)", forKey: "APISignedInErrorMessage")
+                UserDefaults.standard.set(false, forKey: "APIUpdateProfileSuccess")
+                UserDefaults.standard.set("\(error!)", forKey: "APIUpdateProfileMessage")
                 UserDefaults.standard.synchronize()
-                dispachInstance.leave() // API Responded
+                
                 
             } else {
                 
@@ -61,32 +64,23 @@ class POSTSignin {
                     if let data = data,  //go from a Data? type (optional Data) to a non-optional Data
                         let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
                         let type = json["type"] as? Bool{
-                            if(type == true){
-
-                                UserDefaults.standard.set(true, forKey: "APISignedInSuccess")
-                                UserDefaults.standard.set("none", forKey: "APISignedInErrorMessage")
-                                UserDefaults.standard.synchronize()
-                                
-                                print("finished POST Signin")
-                                
-                                
-                            } else {
-                                let errorMessage = json["data"] as? String //API will return {"type":"false","data":"User password does not match" or "User with this Username does not exist"
-                                
-                                print("could not POST Signin: \(errorMessage!)")
-                                
-                                UserDefaults.standard.set(false, forKey: "APISignedInSuccess")
-                                UserDefaults.standard.set(errorMessage, forKey: "APISignedInErrorMessage")
-                                UserDefaults.standard.synchronize()
-                            }
-                        dispachInstance.leave() // API Responded
+                        if(type == true){
+                            
+                            UserDefaults.standard.set(true, forKey: "APIUpdateProfileSuccess")
+                            UserDefaults.standard.synchronize()
+                            
+                            print("finished PUT UpdateProfile")
+                            
+                            
+                        }
+                        
                     }
                 } catch {
-                    print("Error deserializing signin JSON: \(error)")
-                    UserDefaults.standard.set(false, forKey: "APISignedInSuccess")
-                    UserDefaults.standard.set("\(error)", forKey: "APISignedInErrorMessage")
+                    print("Error deserializing PUT UpdateProfile JSON: \(error)")
+                    UserDefaults.standard.set(false, forKey: "APIUpdateProfileSuccess")
+                    UserDefaults.standard.set("\(error)", forKey: "APIUpdateProfileMessage")
                     UserDefaults.standard.synchronize()
-                    dispachInstance.leave() // API Responded
+                    
                 }
                 
                 //DispatchQueue.main.async {

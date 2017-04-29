@@ -116,6 +116,7 @@
 		588E875C1E9D6AA000D5CD8A /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588E875B1E9D6AA000D5CD8A /* SimpleAlert.swift */; };
 		589AB1C71EB10A87004C821D /* reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 589AB1C61EB10A87004C821D /* reload.png */; };
 		589AB1C91EB12CA9004C821D /* RESTGETGlobalAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589AB1C81EB12CA9004C821D /* RESTGETGlobalAlerts.swift */; };
+		589AB1CB1EB3F792004C821D /* RESTUpdateProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589AB1CA1EB3F792004C821D /* RESTUpdateProfile.swift */; };
 		58A8DC851E562CBE008711D1 /* AddNoteCompletePatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */; };
 		58A8DC881E56671D008711D1 /* SheduleNewAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC871E56671D008711D1 /* SheduleNewAppointmentViewController.swift */; };
 		58A8DC8B1E576BA4008711D1 /* Bordered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8DC8A1E576BA4008711D1 /* Bordered.swift */; };
@@ -335,6 +336,7 @@
 		588E875B1E9D6AA000D5CD8A /* SimpleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
 		589AB1C61EB10A87004C821D /* reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = reload.png; path = ../../imageFiles/reload.png; sourceTree = "<group>"; };
 		589AB1C81EB12CA9004C821D /* RESTGETGlobalAlerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETGlobalAlerts.swift; sourceTree = "<group>"; };
+		589AB1CA1EB3F792004C821D /* RESTUpdateProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTUpdateProfile.swift; sourceTree = "<group>"; };
 		58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteCompletePatientViewController.swift; sourceTree = "<group>"; };
 		58A8DC871E56671D008711D1 /* SheduleNewAppointmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheduleNewAppointmentViewController.swift; sourceTree = "<group>"; };
 		58A8DC8A1E576BA4008711D1 /* Bordered.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bordered.swift; sourceTree = "<group>"; };
@@ -737,6 +739,7 @@
 				5848FBE61E84617C004B7F44 /* RESTGETPatients.swift */,
 				589AB1C81EB12CA9004C821D /* RESTGETGlobalAlerts.swift */,
 				5848FBE81E847F66004B7F44 /* RESTGETAlerts.swift */,
+				589AB1CA1EB3F792004C821D /* RESTUpdateProfile.swift */,
 				58FDD47B1E60B42300F97D86 /* dragableImageView.swift */,
 				58FDD4711E5F6B7600F97D86 /* getColumnInArray.swift */,
 				58B71F121E7C8CCE000AD088 /* getPatientSelected.swift */,
@@ -1209,6 +1212,7 @@
 				58458AC21E44EF41005DFEDA /* AvailabilityViewController.swift in Sources */,
 				BB32754B1E048AD100699280 /* AppointmentCell.swift in Sources */,
 				58496C161E52756E00DF103A /* YPDrawSignatureView.swift in Sources */,
+				589AB1CB1EB3F792004C821D /* RESTUpdateProfile.swift in Sources */,
 				58CBC0141E4E20B0001A9698 /* RxContainer2Cell.swift in Sources */,
 				580790431E67803F0038FC61 /* setUpSentBoxData.swift in Sources */,
 				58B18A521E69DF21009769A2 /* AMessageViewController.swift in Sources */,

@@ -13,7 +13,7 @@ class GETToken {
 
     func signInCarepoint(userEmail: String, userPassword: String, dispachInstance: DispatchGroup) {
         
-        //var token = String()
+        var userProfile:Array<Dictionary<String,String>> = []
         
         let headers = [
             "content-type": "application/json",
@@ -53,24 +53,31 @@ class GETToken {
                         let authData = json["data"] as? [[String: Any]] {
                         for aData in authData {
                             let token = aData["Token"] as? String ?? ""
-                            //let User_ID = aData["User_ID"] as? String ?? ""
-                            let RoleType = aData["RoleType"] as? String ?? ""
+                            let User_ID = aData["User_ID"] as? Int ?? 0 //356
+                            let RoleType = aData["RoleType"] as? String ?? "" //"Physician"
+                            let RoleID = aData["Role_ID"] as? String ?? "" //"6"
+                            let Title = aData["Title"] as? String ?? ""
                            // let UserName = aData["UserName"] as? String ?? "" //"test@test.com"
                            // let Password = aData["Password"] as? String ?? "" //"47ec2dd791e31e2ef2076caf64ed9b3d"
                             let FirstName = aData["FirstName"] as? String ?? ""
                             let LastName = aData["LastName"] as? String ?? ""
                             //let profile_image = aData["profile_image"] as? String ?? ""
                             let EmailID1 = aData["EmailID1"] as? String ?? ""
+                            let phoneNo = aData["PhoneNo"] as? String ?? ""
                             
-                            //let roleIdDescription = self.manageRoleID(code: Role_ID)
+                            let uid = String(User_ID)
                             let profileName = FirstName
                             let profileLastName = LastName
+                            let firstLastName = FirstName + " " + LastName
+                            
+                            userProfile.append(["FirstName":FirstName, "LastName":LastName, "Token":token,"userName":firstLastName,"RoleType":RoleType, "Role_ID":RoleID, "Title":Title, "EmailID1":EmailID1, "User_ID":uid, "PhoneNo":phoneNo])
                             
                             UserDefaults.standard.set(token, forKey: "token")
                             UserDefaults.standard.set(profileName, forKey: "profileName")
                             UserDefaults.standard.set(profileLastName, forKey: "profileLastName")
-                            UserDefaults.standard.set(RoleType, forKey: "title")
+                            UserDefaults.standard.set(Title, forKey: "title")
                             UserDefaults.standard.set(EmailID1, forKey: "EmailID1")
+                            UserDefaults.standard.set(userProfile, forKey: "userProfile")
                             UserDefaults.standard.synchronize()
                             
                         }
