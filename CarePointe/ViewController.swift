@@ -215,12 +215,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         // UPDATE MESSAGES NOT READ COUNT ------------------------------------------
-        var inboxCount = UserDefaults.standard.integer(forKey: "inboxCount")
-        if isKeyPresentInUserDefaults(key: "inBoxData"){
-            let inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
-            inboxCount = inBoxData.count
-        }
-        unreadMessagesLabel.text = String(inboxCount)
+//        var inboxCount = UserDefaults.standard.integer(forKey: "inboxCount")
+//        if isKeyPresentInUserDefaults(key: "inBoxData"){
+//            let inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
+//            inboxCount = inBoxData.count
+//        }
+//        unreadMessagesLabel.text = String(inboxCount)
         
         
         // RELOAD table based on current date if date not selected from PICKER -----
@@ -242,8 +242,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         showAlertIfTasksTableEmpty()
         
         // get userData for communication drop down list
-        if isKeyPresentInUserDefaults(key: "RESTusers"){//""userData"){
-            userData = UserDefaults.standard.value(forKey: "RESTusers") as! Array<Dictionary<String, String>>//"userData") as! Array<Dictionary<String, String>>
+        if isKeyPresentInUserDefaults(key: "RESTusers"){
+            userData = UserDefaults.standard.value(forKey: "RESTusers") as! Array<Dictionary<String, String>>
             
             SearchData = userData//need this to start off tableView with all data and not blank table
             print("SearchData: \(SearchData)")
@@ -266,76 +266,56 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // change navigation bar to custom color "fern"
         self.navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 0.27, green: 0.52, blue: 0.0, alpha: 1.0)
         
+        
         //save appointments count, inbox patients count
         var numberNewPatients = 0
         var numberScheduledPatients = 0
-        if (appPat.isEmpty == false) {
+        var numberCompletePatiets = 0
+        
+        if isKeyPresentInUserDefaults(key: "RESTAllReferrals"){
+            let referrals = UserDefaults.standard.value(forKey: "RESTAllReferrals") as! Array<Dictionary<String,String>>
             
-            //"There are appDate objects!"
-            numberNewPatients = (appPat[0].count)
-            numberScheduledPatients = (appPat[1].count)
-            
+            for referral in referrals {
+//                print("referral.status\(referral["Status"]!)")
+//                if referral["Status"] == "Complete"{
+//                    print("got here")
+                switch referral["Status"]! //from tbl_care_plan
+                {
+                case "Complete", "Rejected/Inactive", "Cancelled":
+                    numberCompletePatiets += 1
+                case "Scheduled", "In Service":
+                    numberScheduledPatients += 1
+                case "Pending", "Opened":
+                    numberNewPatients += 1
+                default:
+                    break
+                } //Others:"Not Taken Under Care", "Completed/Archived", "Inactive", "Deseased", "Active"
+            }
         }
         
+//        if (appPat.isEmpty == false) {
+//            
+//            //"There are appDate objects!"
+//            numberNewPatients = (appPat[0].count)
+//            numberScheduledPatients = (appPat[1].count)
+//            
+//        }
+        
         UserDefaults.standard.set(numberScheduledPatients, forKey: "numberScheduledPatients")
-        //inbox needed
         UserDefaults.standard.set(numberNewPatients, forKey: "numberNewPatients")
+        UserDefaults.standard.synchronize()
         
         pendingPatientsLabel.text = "\(numberNewPatients)"
         scheduledAppointLabel.text = "\(numberScheduledPatients)"
-        
-//        if isKeyPresentInUserDefaults(key: "didESign") {
-//            
-//            //check if user did eSign
-//            let userDidESign = UserDefaults.standard.bool(forKey: "didESign")
-//            
-//            if(!userDidESign)
-//            {
-//                self.performSegue(withIdentifier: "showTermsView", sender: self)
-//            }
-//        } else { //no eSign defaults key present so show the terms and condtions page
-//            self.performSegue(withIdentifier: "showTermsView", sender: self)
-//        }
+        unreadMessagesLabel.text = "\(numberCompletePatiets)"
         
     }
-    
-//    override func viewDidAppear( _ animated: Bool) {
-//    }
     
     
     //
     // #MARK: - Button Actions
     //
 
-    
-//    @IBAction func demoAlertButtonTapped(_ sender: Any) {
-//        
-//        demoAlertButton.isHidden = true
-//        
-//        let myAlert = UIAlertController(title: "Review New Alert Information", message: "Ruth Quinones has been admitted to hospital", preferredStyle: .alert)
-//        
-//        myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-//            //Action when OK pressed
-//            // Instantiate a view controller from Storyboard and present it
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
-//            self.present(vc, animated: false, completion: nil)
-//        }))
-//        
-//        present(myAlert, animated: true){}
-//        
-//        
-//    }
-    
-    
-//    @IBAction func unreadMessagesButtonTapped(_ sender: Any) {
-//        
-//        // Instantiate messages view controller from Storyboard and present it
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "messages") as UIViewController
-//        self.present(vc, animated: false, completion: nil)
-//        
-//    }
     
     @IBAction func completeButtonTapped(_ sender: Any) {
         

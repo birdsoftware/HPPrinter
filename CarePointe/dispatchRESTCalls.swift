@@ -65,6 +65,9 @@ class DispatchREST {//http://stackoverflow.com/questions/42146274/syncronize-asy
             let startGlobalAlerts = GETGlobalAlerts()
             startGlobalAlerts.getGlobalAlerts(token: token!, dispachInstance: downloadAlerts)
             
+            //5 GET ALL Referrals
+            let referrals = GETReferrals()
+            referrals.getAllReferrals(token: token!, userID: "122")
             
         }
         

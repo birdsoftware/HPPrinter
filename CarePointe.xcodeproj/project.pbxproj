@@ -103,6 +103,7 @@
 		586BFDE31E3C09AB00DC6770 /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE21E3C09AB00DC6770 /* AlertVC.swift */; };
 		586BFDE51E3C0C4800DC6770 /* AlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE41E3C0C4800DC6770 /* AlertCell.swift */; };
 		586BFDE71E3C17D700DC6770 /* hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586BFDE61E3C17D700DC6770 /* hexColor.swift */; };
+		586C70D21EB6D95700226556 /* RESTGETReferrals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586C70D11EB6D95700226556 /* RESTGETReferrals.swift */; };
 		586CDB171EAE9D1F00AC4DE6 /* Refferal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 586CDB161EAE9D1F00AC4DE6 /* Refferal.storyboard */; };
 		586CDB191EAE9E4B00AC4DE6 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 586CDB181EAE9E4B00AC4DE6 /* home.png */; };
 		586CDB1B1EAEA59200AC4DE6 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 586CDB1A1EAEA59200AC4DE6 /* clock.png */; };
@@ -323,6 +324,7 @@
 		586BFDE21E3C09AB00DC6770 /* AlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
 		586BFDE41E3C0C4800DC6770 /* AlertCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertCell.swift; sourceTree = "<group>"; };
 		586BFDE61E3C17D700DC6770 /* hexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hexColor.swift; sourceTree = "<group>"; };
+		586C70D11EB6D95700226556 /* RESTGETReferrals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETReferrals.swift; sourceTree = "<group>"; };
 		586CDB161EAE9D1F00AC4DE6 /* Refferal.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Refferal.storyboard; sourceTree = "<group>"; };
 		586CDB181EAE9E4B00AC4DE6 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = ../../imageFiles/home.png; sourceTree = "<group>"; };
 		586CDB1A1EAEA59200AC4DE6 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clock.png; path = ../../imageFiles/clock.png; sourceTree = "<group>"; };
@@ -739,6 +741,7 @@
 				5848FBE61E84617C004B7F44 /* RESTGETPatients.swift */,
 				589AB1C81EB12CA9004C821D /* RESTGETGlobalAlerts.swift */,
 				5848FBE81E847F66004B7F44 /* RESTGETAlerts.swift */,
+				586C70D11EB6D95700226556 /* RESTGETReferrals.swift */,
 				589AB1CA1EB3F792004C821D /* RESTUpdateProfile.swift */,
 				58FDD47B1E60B42300F97D86 /* dragableImageView.swift */,
 				58FDD4711E5F6B7600F97D86 /* getColumnInArray.swift */,
@@ -1155,6 +1158,7 @@
 				58A8DCCB1E578E44008711D1 /* movePatientToSection.swift in Sources */,
 				58174CF71E72139200023003 /* filesCell.swift in Sources */,
 				583646971E08AE2F003C2E60 /* TasksViewController.swift in Sources */,
+				586C70D21EB6D95700226556 /* RESTGETReferrals.swift in Sources */,
 				588E875C1E9D6AA000D5CD8A /* SimpleAlert.swift in Sources */,
 				58B71F111E7C8069000AD088 /* insertNewFeed.swift in Sources */,
 				58A8DC881E56671D008711D1 /* SheduleNewAppointmentViewController.swift in Sources */,
