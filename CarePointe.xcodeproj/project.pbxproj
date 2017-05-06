@@ -19,6 +19,8 @@
 		58174CF71E72139200023003 /* filesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58174CF61E72139200023003 /* filesCell.swift */; };
 		58174CFA1E72209C00023003 /* EMRViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58174CF91E72209C00023003 /* EMRViewC.swift */; };
 		58174CFC1E72253900023003 /* AlertsEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58174CFB1E72253900023003 /* AlertsEventsViewController.swift */; };
+		581B02ED1EBA96C6005337FE /* RESTGETVitals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581B02EC1EBA96C6005337FE /* RESTGETVitals.swift */; };
+		581B02EF1EBAE49F005337FE /* RESTPUTVitals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581B02EE1EBAE49F005337FE /* RESTPUTVitals.swift */; };
 		581DE3901EAA8851006DB32A /* AlertsGlobal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 581DE38F1EAA8851006DB32A /* AlertsGlobal.storyboard */; };
 		581DE3941EAABCE4006DB32A /* videoFeedBox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 581DE3931EAABCE4006DB32A /* videoFeedBox.jpg */; };
 		581DE3961EAABDC1006DB32A /* AdddUser.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 581DE3951EAABDC1006DB32A /* AdddUser.jpg */; };
@@ -55,6 +57,8 @@
 		583D5EC51EA1537C0024604B /* PatientListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583D5EC41EA1537C0024604B /* PatientListVC.swift */; };
 		583D5EC71EA1572B0024604B /* PatientList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 583D5EC61EA1572B0024604B /* PatientList.storyboard */; };
 		583FC4FF1E80590D00D178C4 /* RESTGETToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */; };
+		584192F21EBD347C00844491 /* stringOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584192F11EBD347C00844491 /* stringOperators.swift */; };
+		584192F41EBD41E300844491 /* RESTGETDocuments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584192F31EBD41E300844491 /* RESTGETDocuments.swift */; };
 		5843BF151EA7D5A500B1966B /* fa-exclamation-triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 5843BF0F1EA7D5A500B1966B /* fa-exclamation-triangle.png */; };
 		5843BF161EA7D5A500B1966B /* fa-file.png in Resources */ = {isa = PBXBuildFile; fileRef = 5843BF101EA7D5A500B1966B /* fa-file.png */; };
 		5843BF171EA7D5A500B1966B /* fa-phone-square.png in Resources */ = {isa = PBXBuildFile; fileRef = 5843BF111EA7D5A500B1966B /* fa-phone-square.png */; };
@@ -108,8 +112,11 @@
 		586CDB191EAE9E4B00AC4DE6 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 586CDB181EAE9E4B00AC4DE6 /* home.png */; };
 		586CDB1B1EAEA59200AC4DE6 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 586CDB1A1EAEA59200AC4DE6 /* clock.png */; };
 		586CDB1D1EAEB4C700AC4DE6 /* ReferralsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586CDB1C1EAEB4C700AC4DE6 /* ReferralsVC.swift */; };
+		586F8BFC1EBBAB2C0090B88C /* RESTGETCareTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F8BFB1EBBAB2C0090B88C /* RESTGETCareTeam.swift */; };
+		586F8BFE1EBBE34E0090B88C /* RESTGETLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F8BFD1EBBE34E0090B88C /* RESTGETLocations.swift */; };
 		587218181EA91269002322B8 /* ConnectListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587218171EA91269002322B8 /* ConnectListVC.swift */; };
 		587FFECF1E64A8C800078EFC /* UIImageFixOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587FFECE1E64A8C800078EFC /* UIImageFixOrientation.swift */; };
+		588435CB1EB9345F007F736A /* RefferalAppointmentAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588435CA1EB9345F007F736A /* RefferalAppointmentAlertVC.swift */; };
 		588BE2641E706A3200BA78C3 /* InfoContainer1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588BE2631E706A3200BA78C3 /* InfoContainer1VC.swift */; };
 		588BE2661E706D2900BA78C3 /* VitalsContainer2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588BE2651E706D2900BA78C3 /* VitalsContainer2VC.swift */; };
 		588BE2681E706D4800BA78C3 /* ApptContainer3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588BE2671E706D4800BA78C3 /* ApptContainer3VC.swift */; };
@@ -240,6 +247,8 @@
 		58174CF61E72139200023003 /* filesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = filesCell.swift; sourceTree = "<group>"; };
 		58174CF91E72209C00023003 /* EMRViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMRViewC.swift; sourceTree = "<group>"; };
 		58174CFB1E72253900023003 /* AlertsEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertsEventsViewController.swift; sourceTree = "<group>"; };
+		581B02EC1EBA96C6005337FE /* RESTGETVitals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETVitals.swift; sourceTree = "<group>"; };
+		581B02EE1EBAE49F005337FE /* RESTPUTVitals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTPUTVitals.swift; sourceTree = "<group>"; };
 		581DE38F1EAA8851006DB32A /* AlertsGlobal.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AlertsGlobal.storyboard; sourceTree = "<group>"; };
 		581DE3931EAABCE4006DB32A /* videoFeedBox.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = videoFeedBox.jpg; path = ../../imageFiles/videoFeedBox.jpg; sourceTree = "<group>"; };
 		581DE3951EAABDC1006DB32A /* AdddUser.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = AdddUser.jpg; path = ../../imageFiles/AdddUser.jpg; sourceTree = "<group>"; };
@@ -276,6 +285,8 @@
 		583D5EC41EA1537C0024604B /* PatientListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientListVC.swift; sourceTree = "<group>"; };
 		583D5EC61EA1572B0024604B /* PatientList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PatientList.storyboard; sourceTree = "<group>"; };
 		583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETToken.swift; sourceTree = "<group>"; };
+		584192F11EBD347C00844491 /* stringOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stringOperators.swift; sourceTree = "<group>"; };
+		584192F31EBD41E300844491 /* RESTGETDocuments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETDocuments.swift; sourceTree = "<group>"; };
 		5843BF0F1EA7D5A500B1966B /* fa-exclamation-triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fa-exclamation-triangle.png"; path = "../../imageFiles/fa-exclamation-triangle.png"; sourceTree = "<group>"; };
 		5843BF101EA7D5A500B1966B /* fa-file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fa-file.png"; path = "../../imageFiles/fa-file.png"; sourceTree = "<group>"; };
 		5843BF111EA7D5A500B1966B /* fa-phone-square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fa-phone-square.png"; path = "../../imageFiles/fa-phone-square.png"; sourceTree = "<group>"; };
@@ -329,8 +340,11 @@
 		586CDB181EAE9E4B00AC4DE6 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = ../../imageFiles/home.png; sourceTree = "<group>"; };
 		586CDB1A1EAEA59200AC4DE6 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clock.png; path = ../../imageFiles/clock.png; sourceTree = "<group>"; };
 		586CDB1C1EAEB4C700AC4DE6 /* ReferralsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferralsVC.swift; sourceTree = "<group>"; };
+		586F8BFB1EBBAB2C0090B88C /* RESTGETCareTeam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETCareTeam.swift; sourceTree = "<group>"; };
+		586F8BFD1EBBE34E0090B88C /* RESTGETLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETLocations.swift; sourceTree = "<group>"; };
 		587218171EA91269002322B8 /* ConnectListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectListVC.swift; sourceTree = "<group>"; };
 		587FFECE1E64A8C800078EFC /* UIImageFixOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageFixOrientation.swift; sourceTree = "<group>"; };
+		588435CA1EB9345F007F736A /* RefferalAppointmentAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefferalAppointmentAlertVC.swift; sourceTree = "<group>"; };
 		588BE2631E706A3200BA78C3 /* InfoContainer1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoContainer1VC.swift; sourceTree = "<group>"; };
 		588BE2651E706D2900BA78C3 /* VitalsContainer2VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VitalsContainer2VC.swift; sourceTree = "<group>"; };
 		588BE2671E706D4800BA78C3 /* ApptContainer3VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApptContainer3VC.swift; sourceTree = "<group>"; };
@@ -518,6 +532,32 @@
 			name = Patient;
 			sourceTree = "<group>";
 		};
+		584192EF1EBCDBDF00844491 /* Start App APIs */ = {
+			isa = PBXGroup;
+			children = (
+				58F4CB921E85D256000C3185 /* dispatchRESTCalls.swift */,
+				5820BE251E96C45D004E0AE4 /* RESTPOSTSignIn.swift */,
+				583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */,
+				584D304E1E9C021D004404D9 /* RESRGETInboxUsers.swift */,
+				5848FBE61E84617C004B7F44 /* RESTGETPatients.swift */,
+				589AB1C81EB12CA9004C821D /* RESTGETGlobalAlerts.swift */,
+				586C70D11EB6D95700226556 /* RESTGETReferrals.swift */,
+			);
+			name = "Start App APIs";
+			sourceTree = "<group>";
+		};
+		584192F01EBCDC4900844491 /* Active App API's */ = {
+			isa = PBXGroup;
+			children = (
+				581B02EC1EBA96C6005337FE /* RESTGETVitals.swift */,
+				581B02EE1EBAE49F005337FE /* RESTPUTVitals.swift */,
+				586F8BFB1EBBAB2C0090B88C /* RESTGETCareTeam.swift */,
+				586F8BFD1EBBE34E0090B88C /* RESTGETLocations.swift */,
+				584192F31EBD41E300844491 /* RESTGETDocuments.swift */,
+			);
+			name = "Active App API's";
+			sourceTree = "<group>";
+		};
 		5843BF081EA7D39A00B1966B /* All Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,6 +702,7 @@
 				BB32754A1E048AD100699280 /* AppointmentCell.swift */,
 				5845BAF01EA034BB00EDE935 /* FourButtonViewController.swift */,
 				583D5EC41EA1537C0024604B /* PatientListVC.swift */,
+				588435CA1EB9345F007F736A /* RefferalAppointmentAlertVC.swift */,
 				587218171EA91269002322B8 /* ConnectListVC.swift */,
 				586CDB1C1EAEB4C700AC4DE6 /* ReferralsVC.swift */,
 				583D5EC21EA151D00024604B /* PatientListCell.swift */,
@@ -729,19 +770,16 @@
 		58A8DCCC1E5793D4008711D1 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
-				58A8DCCA1E578E44008711D1 /* movePatientToSection.swift */,
+				58A8DCD31E57B2BB008711D1 /* setCurrentDate.swift */,
+				584192F11EBD347C00844491 /* stringOperators.swift */,
+				584192EF1EBCDBDF00844491 /* Start App APIs */,
+				584192F01EBCDC4900844491 /* Active App API's */,
 				58E7FC961E8B19F400F203C6 /* UpdateSavedDictionary.swift */,
+				58A8DCCA1E578E44008711D1 /* movePatientToSection.swift */,
 				58E7FC981E8C4CE300F203C6 /* users.swift */,
-				58F4CB921E85D256000C3185 /* dispatchRESTCalls.swift */,
 				584D30501E9C3CE7004404D9 /* Reachability.swift */,
-				5820BE251E96C45D004E0AE4 /* RESTPOSTSignIn.swift */,
-				583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */,
-				584D304E1E9C021D004404D9 /* RESRGETInboxUsers.swift */,
 				58E7FC941E8B0E9000F203C6 /* RESTGETUsers.swift */,
-				5848FBE61E84617C004B7F44 /* RESTGETPatients.swift */,
-				589AB1C81EB12CA9004C821D /* RESTGETGlobalAlerts.swift */,
 				5848FBE81E847F66004B7F44 /* RESTGETAlerts.swift */,
-				586C70D11EB6D95700226556 /* RESTGETReferrals.swift */,
 				589AB1CA1EB3F792004C821D /* RESTUpdateProfile.swift */,
 				58FDD47B1E60B42300F97D86 /* dragableImageView.swift */,
 				58FDD4711E5F6B7600F97D86 /* getColumnInArray.swift */,
@@ -754,7 +792,6 @@
 				58FDD4731E5F971600F97D86 /* setUpFeedData.swift */,
 				580790401E6777CA0038FC61 /* setUpInBoxData.swift */,
 				580790421E67803F0038FC61 /* setUpSentBoxData.swift */,
-				58A8DCD31E57B2BB008711D1 /* setCurrentDate.swift */,
 				58B71F101E7C8069000AD088 /* insertNewFeed.swift */,
 			);
 			name = helpers;
@@ -1143,11 +1180,14 @@
 				58D6336C1E4D316A00DC3EB9 /* PatientFeedViewController.swift in Sources */,
 				58D6335E1E4B858000DC3EB9 /* Availability.swift in Sources */,
 				586BFDD51E3BC57B00DC6770 /* addCustomBorder.swift in Sources */,
+				588435CB1EB9345F007F736A /* RefferalAppointmentAlertVC.swift in Sources */,
+				586F8BFC1EBBAB2C0090B88C /* RESTGETCareTeam.swift in Sources */,
 				585A4D2D1E5CF9A300A16118 /* moveAppointmentFromAcceptedToCompleted.swift in Sources */,
 				586BFDE71E3C17D700DC6770 /* hexColor.swift in Sources */,
 				58A8DC8D1E576BC3008711D1 /* Rounded.swift in Sources */,
 				583D5EC51EA1537C0024604B /* PatientListVC.swift in Sources */,
 				58458AC41E450F4D005DFEDA /* AvailabilityCell.swift in Sources */,
+				586F8BFE1EBBE34E0090B88C /* RESTGETLocations.swift in Sources */,
 				58CBC0161E4E20CD001A9698 /* RxContainer3Cell.swift in Sources */,
 				588BE2661E706D2900BA78C3 /* VitalsContainer2VC.swift in Sources */,
 				BB57C2D41DFF41DE00731AC4 /* ViewController.swift in Sources */,
@@ -1158,6 +1198,7 @@
 				58A8DCCB1E578E44008711D1 /* movePatientToSection.swift in Sources */,
 				58174CF71E72139200023003 /* filesCell.swift in Sources */,
 				583646971E08AE2F003C2E60 /* TasksViewController.swift in Sources */,
+				581B02EF1EBAE49F005337FE /* RESTPUTVitals.swift in Sources */,
 				586C70D21EB6D95700226556 /* RESTGETReferrals.swift in Sources */,
 				588E875C1E9D6AA000D5CD8A /* SimpleAlert.swift in Sources */,
 				58B71F111E7C8069000AD088 /* insertNewFeed.swift in Sources */,
@@ -1167,6 +1208,7 @@
 				58458AC61E452474005DFEDA /* AddContainerViewController.swift in Sources */,
 				58327A6D1E64DE40006F4FB4 /* setUserImage.swift in Sources */,
 				5828065F1E098FBC00421815 /* DatePickerDialog.swift in Sources */,
+				581B02ED1EBA96C6005337FE /* RESTGETVitals.swift in Sources */,
 				586CDB1D1EAEB4C700AC4DE6 /* ReferralsVC.swift in Sources */,
 				58174CF31E72072200023003 /* AppointmentDetailsCell.swift in Sources */,
 				58174CFA1E72209C00023003 /* EMRViewC.swift in Sources */,
@@ -1219,6 +1261,7 @@
 				589AB1CB1EB3F792004C821D /* RESTUpdateProfile.swift in Sources */,
 				58CBC0141E4E20B0001A9698 /* RxContainer2Cell.swift in Sources */,
 				580790431E67803F0038FC61 /* setUpSentBoxData.swift in Sources */,
+				584192F41EBD41E300844491 /* RESTGETDocuments.swift in Sources */,
 				58B18A521E69DF21009769A2 /* AMessageViewController.swift in Sources */,
 				587FFECF1E64A8C800078EFC /* UIImageFixOrientation.swift in Sources */,
 				58174CEF1E71F62800023003 /* InfoDemographicsCell.swift in Sources */,
@@ -1240,6 +1283,7 @@
 				BB51F7C51E009E53008A5EA8 /* gradient.swift in Sources */,
 				585A4D2F1E5D175C00A16118 /* InboxViewController.swift in Sources */,
 				58B71F131E7C8CCE000AD088 /* getPatientSelected.swift in Sources */,
+				584192F21EBD347C00844491 /* stringOperators.swift in Sources */,
 				58CBC0181E4E4007001A9698 /* Container3ViewController.swift in Sources */,
 				5851F6BA1E7A018600229659 /* setUpUserData.swift in Sources */,
 				58EB0DC81E732DC40009FD57 /* caseCell.swift in Sources */,

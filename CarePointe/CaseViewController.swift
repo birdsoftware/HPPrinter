@@ -21,17 +21,20 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var caseTable: UITableView!
     @IBOutlet weak var clinicalTable: UITableView!
     
-    let caseInfo = [["Start Date","02/02/2017"],
-                   ["Program","Transitional Care"],
-                   ["Disease","Fibromyalgia"],
-                   ["Acuity","High"],
-                   ["SNP","Caregiver, Supplies, Transportation"],
-                   ["Summary","Patient came to us from Observation Unit at Chandler Regional Hospital. Patient had a few prior hospitalizations due to falls in the past weeks. Patient suffers from permanent brain damage due to traumatic car accident. Experiences access falls and confusion and needs 24hr monitoring. Lives with Husband and Daughter that act as caregivers."]
+    var caseInfo = [["Start Date", "-"],//"02/02/2017"],
+                   ["Program", "-"],//"Transitional Care"],
+                   ["Disease", "-"],//"Fibromyalgia"],
+                   ["Acuity","-"],//"High"],
+                   ["SNP","-"],//"Caregiver, Supplies, Transportation"],
+                   ["Summary","-"],//"Patient came to us from Observation Unit at Chandler Regional Hospital. Patient had a few prior hospitalizations due to falls in the past weeks. Patient suffers from permanent brain damage due to traumatic car accident. Experiences access falls and confusion and needs 24hr monitoring. Lives with Husband and Daughter that act as caregivers."]
                    ]
     
-    let clinicalData = [["ICD-10's","Dependence on Wheelchair"],
+    var clinicalData = [["ICD-10's","-"],//"Dependence on Wheelchair"],
                         ["Symptoms","-"]
                         ]
+    
+    //API data
+    var restLocations = Array<Dictionary<String,String>>()
 
     
     override func viewDidLoad() {
@@ -57,8 +60,49 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
         UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject] , for: .normal)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        restLocations = UserDefaults.standard.object(forKey: "RESTLocations") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
+        
+        if restLocations.isEmpty == false {
+        
+            let caseData = restLocations[0]
+            
+            let admitDate = convertDateStringToDate(longDate: caseData["AdmittanceDate"]!)
+            
+            caseInfo = [["Start Date", admitDate],//
+                        ["Program", caseData["CarePrograms"]!],//"Transitional Care"],
+                        ["Disease", caseData["Disease"]!],//"Fibromyalgia"],
+                        ["Acuity",caseData["ComplexityLevel"]!],//"High"],
+                        ["SNP", caseData["TransferToFacility"]!],//"Caregiver, Supplies, Transportation"],
+                        ["Summary", caseData["EpisodeSummary"]!],//"Patient came to us from Observation Unit at Chandler Regional Hospital. Patient had a few prior hospitalizations due to falls in the past weeks. Patient suffers from permanent brain damage due to traumatic car accident. Experiences access falls and confusion and needs 24hr monitoring. Lives with Husband and Daughter that act as caregivers."]
+            ]
+            
+            clinicalData = [["ICD-10's", caseData["ICD_9s"]!],//"Dependence on Wheelchair"],
+                                ["Symptoms", caseData["Diagnosis"]!]
+            ]
+            
+            caseTable.reloadData()
+            clinicalTable.reloadData()
+        }
+    }
     
-    // Buttons
+    //
+    // #MARK: - Buttons
+    //
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        
+        // 4. Present a view controller from a different storyboard
+        let storyboard = UIStoryboard(name: "PatientList", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PatientListView") as UIViewController
+        //vc.navigationController?.pushViewController(vc, animated: false)
+        self.present(vc, animated: false, completion: nil)
+        
+    }
+    
+    
+    
     
     @IBAction func feedsSegmentControllerTapped(_ sender: Any) {
     

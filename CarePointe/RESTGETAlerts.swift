@@ -15,13 +15,11 @@
 //
 
 import Foundation
-//import UIKit
 
 class GETAlerts {
     
     func getAlerts(token: String, patientDict: Dictionary<String,String>){
         
-        //var alerts = [[String]]()
         let patientid = patientDict["Patient_ID"]
         let patientName = patientDict["patientName"]
 

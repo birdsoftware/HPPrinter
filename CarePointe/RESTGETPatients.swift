@@ -132,20 +132,8 @@ class GETPatients {
                                                                                  "pharmacy_NCPDP":pharmacyNCPDP, "organization":org])
                                                                 
                                                                 patientNameID.append(["Patient_ID":pid,"patientName":firstLastName,"CreatedDateTime":createdDateTime, "pstatus":pstatus, "organization":org, "ReferrerOrigin":referrerOrigin])
-                                                                
-                                                                //define [[String]] Literals
-//                                                                patients.append([pid, patientUniqid, firstName, lastName, gender, ethnicity, ssn, patientRAF,
-//                                                                                 dob, emailID, primaryLanguage, patientAddNotes, homeAddress, city, state,
-//                                                                                 zip, Phone, cell, additionalContact, contactRelationship, contactPhone,
-//                                                                                 contactNotes, primarySource, pS_Account, medicaid, medicare, primaryCommercial,
-//                                                                                 pC_Account, secondaryCommercial, sC_Account, insurance, financeInfoAddNotes, patientSummary,
-//                                                                                 primaryPhysician, physicianContact, additionalPhysicians, referrerOrigin, initialDischarge,
-//                                                                                 tlc, isActive, pstatus, cb, createdDateTime, up, updatedDateTime, careteam, profileImage, cu,
-//                                                                                 pharmacyNCPDP, org])
+
                                                             }
-                                                                
-                                                            //print(patients)
-                                                            
 //                                                            let patientIDColumn =  patients.getColumn(column: 0)
 //                                                            let patientFirstName = patients.getColumn(column: 2)
 //                                                            let patientLastName = patients.getColumn(column: 3)
@@ -154,9 +142,6 @@ class GETPatients {
 //                                                            for Iterator in 0..<(patients.count){
 //                                                                patientNameID.append(["\(patientFirstName[Iterator])" + " " + "\(patientLastName[Iterator])", "\(patientIDColumn[Iterator])"])
 //                                                            }
-                                                            
-                                                            //print(patientNameID)
-                                                            
                                                             UserDefaults.standard.set(patientNameID, forKey:"RESTPatientsPatientIDs")
                                                             UserDefaults.standard.set(patients, forKey: "RESTPatients")
                                                             UserDefaults.standard.synchronize()
@@ -165,6 +150,9 @@ class GETPatients {
                                                             dispachInstance.leave()
                                                             
                                                         }
+                                                        //No Patients
+                                                        //JSON.isEmpty == true
+                                                        print("finished GET All Patients - No Patients to GET")
                                                     }
                                                 } catch {
                                                     print("Error deserializing Patients JSON: \(error)")
@@ -172,24 +160,11 @@ class GETPatients {
                                                 }
                                                 
                                                 //                let httpResponse = response as? HTTPURLResponse
-                                                //                
-                                                //                
                                                 //                print("Status Code : \(httpResponse!.statusCode)")
-                                                //                
-                                                //let httpData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                                                //      let httpData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                                                 //                print("Response String :\(httpData)")
-                                                
-//                                                print(patients)
-//                                                
-//                                                let patientIDColumn = patients.getColumn(column: 0)
-                                                
+
 //                                                DispatchQueue.main.async {
-//                                                    
-////                                                    UserDefaults.standard.set(patientIDColumn, forKey:"RESTPatientsPatientIDs")
-////                                                    UserDefaults.standard.set(patients, forKey: "RESTPatients")
-////                                                    UserDefaults.standard.synchronize()
-//                                                    
-//                                                    
 //                                                }
                                                 
                                             }

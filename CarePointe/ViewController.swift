@@ -95,12 +95,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     // userData for communication drop down table
-    var userData:Array<Dictionary<String,String>> = []
-    var SearchData:Array<Dictionary<String,String>> = []
-    
-    // Search Bar (top nav controller title view) ------------------------
-    lazy var searchBar:UISearchBar = UISearchBar(frame: CGRect(x:0,y:0,width:200,height:200))
-    var searchActive : Bool = false
+//    var userData:Array<Dictionary<String,String>> = []
+//    var SearchData:Array<Dictionary<String,String>> = []
+//    
+//    // Search Bar (top nav controller title view) ------------------------
+//    lazy var searchBar:UISearchBar = UISearchBar(frame: CGRect(x:0,y:0,width:200,height:200))
+//    var searchActive : Bool = false
     
     
     override func viewDidLoad() {
@@ -242,12 +242,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         showAlertIfTasksTableEmpty()
         
         // get userData for communication drop down list
-        if isKeyPresentInUserDefaults(key: "RESTusers"){
-            userData = UserDefaults.standard.value(forKey: "RESTusers") as! Array<Dictionary<String, String>>
-            
-            SearchData = userData//need this to start off tableView with all data and not blank table
-            print("SearchData: \(SearchData)")
-        }//else play loading animation
+//        if isKeyPresentInUserDefaults(key: "RESTusers"){
+//            userData = UserDefaults.standard.value(forKey: "RESTusers") as! Array<Dictionary<String, String>>
+//            
+//            SearchData = userData//need this to start off tableView with all data and not blank table
+//            print("SearchData: \(SearchData)")
+        //}//else play loading animation
  
     }
     
@@ -319,6 +319,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func completeButtonTapped(_ sender: Any) {
         
+        UserDefaults.standard.set("Complete", forKey: "whatAppointmentStatusButtonTapped")
+        UserDefaults.standard.synchronize()
+
         // Instantiate a view controller from Storyboard and present it
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
@@ -330,6 +333,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func pendingReferralsButtonTapped(_ sender: Any) {
         
+        UserDefaults.standard.set("Pending", forKey: "whatAppointmentStatusButtonTapped")
+        UserDefaults.standard.synchronize()
+        
         // Instantiate a view controller from Storyboard and present it
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
@@ -340,6 +346,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func scheduledEncountersButtonTapped(_ sender: Any) {
         
+        UserDefaults.standard.set("Scheduled", forKey: "whatAppointmentStatusButtonTapped")
+        UserDefaults.standard.synchronize()
+        
         // Instantiate a view controller from Storyboard and present it
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
@@ -349,10 +358,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     
-    @IBAction func AddTaskButtonTapped(_ sender: Any) {//OLD Add task button
-        
-        self.performSegue(withIdentifier: "ShowAddTaskView", sender: self)
-    }
+//    @IBAction func AddTaskButtonTapped(_ sender: Any) {//OLD Add task button
+//        
+//        self.performSegue(withIdentifier: "ShowAddTaskView", sender: self)
+//    }
     
     @IBAction func dateDisplatButtonTapped(_ sender: Any) {
         showCalendarAlert()
@@ -368,38 +377,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.present(vc, animated: false, completion: nil)
         
     }
-//    @IBAction func hamburgerOutsideButtonTapped(_ sender: Any) {
-//        moveSlideMenu(Menu: "hideHamburgerView")
-//        hamburgerMenuShowing = !hamburgerMenuShowing
-//        hamburgerOutsideButton.isHidden = true
-//    }
-    
-//    @IBAction func alertButtonTapped(_ sender: Any) {
-//        
-//        if(alertTableShowing) {//if alert showing then hide alert
-//            moveSlideMenu(Menu: "hideAlertView")
-//            UIView.animate(withDuration: 0.2, animations: {
-//                self.view.layoutIfNeeded()
-//            })
-//        }
-//        else {
-//            moveSlideMenu(Menu: "showAlertView")
-//            if(hamburgerMenuShowing){
-//                moveSlideMenu(Menu: "hideHamburgerView")
-//                hamburgerMenuShowing = !hamburgerMenuShowing
-//            }
-//            UIView.animate(withDuration: 0.2, animations: {
-//                self.view.layoutIfNeeded()
-//            })
-//        }
-//        
-//        alertTableShowing = !alertTableShowing
-//    }
-//    @IBAction func alertOutsideButtonTapped(_ sender: Any) {
-//        moveSlideMenu(Menu: "hideAlertView")
-//        alertTableShowing = !alertTableShowing
-//        alertOutsideButton.isHidden = true
-//    }
     
     
     
@@ -423,35 +400,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.performSegue(withIdentifier: "ShowLogInView", sender: self)
     }
     
-    
-//    func setHideAndShowOffsetFromDeviceType() {
-//        let model = UIDevice.current.modelSize //return device model size
-//        
-//        
-//        switch model {
-//        case 375:  /*  iPhone  */          alertOffset = 320
-//                                        hambuOffset = 320
-//                                        print("UIDevice current model is 375 'iPhone'")
-//        case 414:  /* iPhone + */          alertOffset = 358
-//                                        hambuOffset = 310
-//                                        //adjustPhoneButtonSizeForDeviceType(sideLength:60)
-//                                        print("UIDevice current model is 414 'iPhone+'")
-//        case 320:  /*   iPad   */          alertOffset = 710
-//                                        hambuOffset = 670
-//                                        //adjustPhoneButtonSizeForDeviceType(sideLength:70)
-//                                        print("UIDevice current model is 320 'ipad mini'")
-//        default: print("UIDevice current model not 375 'iPhone', 414 'iPhone+' or 320 'ipad mini'")
-//                        alertOffset = 0
-//                        hambuOffset = 0
-//        }
-//        
-//    }
-    
-//    func adjustPhoneButtonSizeForDeviceType(sideLength: CGFloat ) {
-//        //phoneButton.layer.frame = CGRectMake(200, 200, 100, 100)
-//        phoneButtonWidth.constant = sideLength
-//        phoneButtonHeight.constant = sideLength
-//    }
+
     
     func showCalendarAlert(){
         //var searchText = "2/14/17"
@@ -537,36 +486,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //print("There are no appDate objects!")
     }
     
-//    func moveSlideMenu(Menu: String) {
-//        let alertMenuConstraint:CGFloat = mainView.bounds.size.width - 55 //alertOffset //710//358//320
-//        let hamburgerMenuConstraint:CGFloat = alertMenuConstraint//hambuOffset //670//310//320
-//    
-//        switch Menu {
-//        case "showHamburgerView":
-//            leadingConstraintContainerView.constant = 0
-//            //trailingConstraintHamburgerView.constant -= hamburgerMenuConstraint//270 iPhone 6, 310 for 6+
-//            hamburgerOutsideButton.isHidden=false
-//        case "hideHamburgerView":
-//            leadingConstraintContainerView.constant = -hamburgerMenuConstraint
-//            //trailingConstraintHamburgerView.constant += hamburgerMenuConstraint
-//            hamburgerOutsideButton.isHidden=true
-//        case "showAlertView":
-//            leadingConstraintContainerView2.constant -= alertMenuConstraint//320 for iPhone 6, 358 iPhone 6+
-////            trailingConstraintAlertView.constant += alertMenuConstraint
-//            alertOutsideButton.isHidden = false
-//        case "hideAlertView":
-//            leadingConstraintContainerView2.constant += alertMenuConstraint
-////            trailingConstraintAlertView.constant -= alertMenuConstraint
-//            alertOutsideButton.isHidden = true
-//        default:
-//            print("fail: openClose")
-//        }
-//    }
-    
-    
-//    func isKeyPresentInUserDefaults(key: String) -> Bool {
-//        return UserDefaults.standard.object(forKey: key) != nil
-//    }
+
     
     func getUpdateAppointmentData(){
         //Get up to date array
@@ -640,34 +560,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // #MARK: - Search Functions
     //
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true
-        searchBar.showsCancelButton = true
-        searchBar.placeholder = ""
-        //if(w < 700) {contactsTable.isHidden = false //TODO: fix for iPad
-        //}//communicationButtonsView.isHidden = false }
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false
-        searchBar.showsCancelButton = false
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false
-        searchBar.text = ""
-        searchBar.endEditing(true)
-        searchBar.showsCancelButton = false
-        searchBar.placeholder = "Start Communication"
-        //contactsTable.isHidden = true
-        //communicationButtonsView.isHidden = true
-    }
-    
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-        //alertSearchBar.endEditing(true)
-    }
+//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//        searchActive = true
+//        searchBar.showsCancelButton = true
+//        searchBar.placeholder = ""
+//        //if(w < 700) {contactsTable.isHidden = false //TODO: fix for iPad
+//        //}//communicationButtonsView.isHidden = false }
+//    }
+//    
+//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+//        searchActive = false
+//        searchBar.showsCancelButton = false
+//    }
+//    
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        searchActive = false
+//        searchBar.text = ""
+//        searchBar.endEditing(true)
+//        searchBar.showsCancelButton = false
+//        searchBar.placeholder = "Start Communication"
+//        //contactsTable.isHidden = true
+//        //communicationButtonsView.isHidden = true
+//    }
+//    
+//    
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        searchActive = false;
+//        //alertSearchBar.endEditing(true)
+//    }
     
     
     

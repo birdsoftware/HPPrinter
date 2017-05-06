@@ -24,9 +24,9 @@ class PTVDetailViewController: UIViewController {
     //@IBOutlet weak var patientNameLabel: UILabel!
     
     //buttons
-    @IBOutlet weak var completedPatientButton: UIButton!
-    @IBOutlet weak var declinePatientButton: UIButton!
-    @IBOutlet weak var acceptPatientButton: UIButton!
+    //@IBOutlet weak var completedPatientButton: UIButton!
+   // @IBOutlet weak var declinePatientButton: UIButton!
+    //@IBOutlet weak var acceptPatientButton: UIButton!
     //@IBOutlet weak var careTeamButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     
@@ -37,9 +37,9 @@ class PTVDetailViewController: UIViewController {
         super.viewDidLoad()
         
         // round button corners
-        acceptPatientButton.layer.cornerRadius = 5
-        declinePatientButton.layer.cornerRadius = 5
-        completedPatientButton.layer.cornerRadius = 5
+        //acceptPatientButton.layer.cornerRadius = 5
+        //declinePatientButton.layer.cornerRadius = 5
+        //completedPatientButton.layer.cornerRadius = 5
         backButton.layer.cornerRadius = 5
         //careTeam button round button
         //careTeamButton.layer.cornerRadius = 0.5 * careTeamButton.bounds.size.width
@@ -85,9 +85,9 @@ class PTVDetailViewController: UIViewController {
 //            declinePatientButton.isHidden = true
 //            completedPatientButton.isHidden = false
 //        case "Completed/Archived", "Inactive", "Deseased": //hide all
-            acceptPatientButton.isHidden = true
-            declinePatientButton.isHidden = true
-            completedPatientButton.isHidden = true
+            //acceptPatientButton.isHidden = true
+            //declinePatientButton.isHidden = true
+            //completedPatientButton.isHidden = true
 //        default:
 //            print("fail: updatePatientView")
 //        }
@@ -222,7 +222,7 @@ class PTVDetailViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
         self.present(vc, animated: false, completion: nil)
-        completedPatientButton.backgroundColor = UIColor.celestialBlue()
+        //completedPatientButton.backgroundColor = UIColor.celestialBlue()
         
     }
     

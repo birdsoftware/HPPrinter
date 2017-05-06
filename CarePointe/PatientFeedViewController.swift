@@ -59,6 +59,8 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         let attr = NSDictionary(object: UIFont(name: "Futura", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
         UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject] , for: .normal)
         
+        //Diable segment .isEnabled = false 
+        patientFeedSegmentC.setEnabled(false, forSegmentAt: 1)
     }
     
     
@@ -99,6 +101,17 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         }
 
     }
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        
+        // 4. Present a view controller from a different storyboard
+        let storyboard = UIStoryboard(name: "PatientList", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PatientListView") as UIViewController
+        //vc.navigationController?.pushViewController(vc, animated: false)
+        self.present(vc, animated: false, completion: nil)
+        
+    }
+    
     
     
     // helper functions

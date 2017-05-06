@@ -46,6 +46,8 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         super.viewDidLoad()
 
         // set up UI
+        addAvailabilityButton.isEnabled = false
+        
         acceptChangesButton.layer.cornerRadius = 5
         cancelChangesButton.layer.cornerRadius = 5
         resetPasswordButton.layer.cornerRadius = 5
@@ -347,11 +349,11 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
     
     func saveTextToWebServer(){
         
-        //get local user profile
+        //GET local user profile
         let userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
         let user = userProfile[0]
 
-        let token = user["Token"]!
+        //let token = user["Token"]!
         let firstName = user["FirstName"]!
         let lastName = user["LastName"]!
         let title = user["Title"]!
@@ -359,10 +361,26 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         let email = user["EmailID1"]!
         let phoneNo = user["PhoneNo"]!
         
-        //save local with any changes to web server
-        let updateProfile = PUTUpdateProfile()
-        updateProfile.updateProfile(token: token, userID: uid, firstname: firstName, lastname: lastName, title: title, emailid: email, PhoneNo: phoneNo)
+        /**/let downloadToken = DispatchGroup()
+        /**/downloadToken.enter()
         
+        // 0 get token again -----------
+        /**/let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        /**/let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
+        
+        /**/let getToken = GETToken()
+        /**/getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
+        
+        downloadToken.notify(queue: DispatchQueue.main)  {
+        
+            let token = UserDefaults.standard.string(forKey: "token")!
+            
+            //SAVE local with any changes to web server
+            let updateProfile = PUTUpdateProfile()
+            updateProfile.updateProfile(token: token, userID: uid, firstname: firstName, lastname: lastName, title: title, emailid: email, PhoneNo: phoneNo)
+            //-----------------
+            
+        }
     }
     
     

@@ -45,6 +45,33 @@ extension UIViewController {
         
     }
     
+    func convertDateStringToDate(longDate: String) -> String{
+        
+        /* INPUT: longDate = "2017-01-27T05:00:00.000Z"
+         * OUTPUT: "1/26/17"
+         * date_format_you_want_in_string from
+         * http://userguide.icu-project.org/formatparse/datetime
+         */
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let date = dateFormatter.date(from: longDate)
+        
+        if date != nil {
+            
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            let dateShort = formatter.string(from: date!)
+            
+            return dateShort
+            
+        } else {
+            
+            return longDate
+            
+        }
+    }
+    
 }
 
 

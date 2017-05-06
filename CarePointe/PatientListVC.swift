@@ -147,10 +147,8 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //addBackButton = true
             
             let selectedRow = ((patientTable.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
-            //let sectionOfSelectedRow = (tableView.indexPathForSelectedRow?.section)! //retuns int
-            //print("\\(selectedRow)" + " \\(sectionOfSelectedRow)")
             
-            var Data:Dictionary<String,String> = patientData[selectedRow]
+            var Data:Dictionary<String,String> = SearchData[selectedRow]
             
             let patientName = Data["patientName"]
             //let appointmentID = appID[sectionOfSelectedRow][selectedRow] as String
@@ -161,18 +159,16 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let defaults = UserDefaults.standard
             defaults.set(patientName, forKey: "patientName")
             defaults.set(patientImage, forKey: "patientPic")
-            //defaults.set(appointmentID, forKey: "appointmentID")
             defaults.set(patientStatus, forKey: "patientStatus") //need this to hide the accept and decline buttons in completed view
-            //defaults.set(selectedRow, forKey: "selectedRow")
-            //defaults.set(sectionOfSelectedRow, forKey: "sectionForSelectedRow")
+            let dob = convertDateStringToDate(longDate: Data["DOB"]!)
             
             demographics = [
                 ["UniqueID", Data["Patient_ID"]! ],
-                ["Assigned", "--Waiting for API update--" ],
+                //["Assigned", "--Waiting for API update--" ],
                 ["Gender", Data["Gender"]! ],
                 ["Ethnicity", Data["Ethnicity"]! ],
                 ["SSN#", Data["SSN"]! ],
-                ["DOB", Data["DOB"]! ],
+                ["DOB", dob],//Data["DOB"]! ],
                 ["Primary Language", Data["PrimaryLanguage"]! ],
                 ["Email", Data["EmailID"]! ],
                 ["Intake Notes", "--Waiting for API update--" ],
@@ -186,7 +182,7 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 ["Contact Phone", Data["ContactPhone"]! ],
                 ["Contact Notes", Data["ContactNotes"]! ],
                 ["Primary Source", Data["PrimarySource"]! ],
-                ["Primary Insurance", Data["PrimaryCommercial"]! ],
+                ["Primary Insurance", Data["PrimarySource"]! ],
                 ["Secondary Insurance", Data["SecondaryCommercial"]! ]
                 ]
             defaults.set(demographics, forKey: "demographics")

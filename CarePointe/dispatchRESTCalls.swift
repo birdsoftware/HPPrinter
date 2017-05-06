@@ -66,8 +66,23 @@ class DispatchREST {//http://stackoverflow.com/questions/42146274/syncronize-asy
             startGlobalAlerts.getGlobalAlerts(token: token!, dispachInstance: downloadAlerts)
             
             //5 GET ALL Referrals
-            let referrals = GETReferrals()
-            referrals.getAllReferrals(token: token!, userID: "122")
+            //get local user profile
+            let userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
+            if userProfile.isEmpty == false
+            {
+                let user = userProfile[0]
+                
+                //let token = user["Token"]!
+                //let firstName = user["FirstName"]!
+                //let lastName = user["LastName"]!
+                //let title = user["Title"]!
+                let uid = user["User_ID"]!
+                //let email = user["EmailID1"]!
+                //let phoneNo = user["PhoneNo"]!
+                
+                let referrals = GETReferrals()
+                referrals.getAllReferrals(token: token!, userID: uid)//"0")//122
+            }
             
         }
         

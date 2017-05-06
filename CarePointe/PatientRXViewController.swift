@@ -139,6 +139,18 @@ class PatientRXViewController: UIViewController {
     // #MARK: - Buttons
     //
     
+    @IBAction func backButtonTapped(_ sender: Any) {
+        
+        // 4. Present a view controller from a different storyboard
+        let storyboard = UIStoryboard(name: "PatientList", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PatientListView") as UIViewController
+        //vc.navigationController?.pushViewController(vc, animated: false)
+        self.present(vc, animated: false, completion: nil)
+        
+    }
+    
+    
+    
     @IBAction func addRxButtonTapped(_ sender: Any) {
         switch medicationSegmentor.selectedSegmentIndex
         {

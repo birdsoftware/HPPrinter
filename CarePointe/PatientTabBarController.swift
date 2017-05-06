@@ -19,6 +19,17 @@ class PatientTabBarController: UITabBarController {
         // change Tab view controller normal/selected state text color
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for:.selected)
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor(hex: 0xA1DCF8)/*columbia blue*/], for:.normal)
+        
+        
+        //diable last tab bar items
+        if let items = tabBar.items {
+            if items.count > 0 {
+                let itemToDisable = items[items.count - 1]
+                let itemToDisable2 = items[items.count - 2]
+                itemToDisable.isEnabled = false
+                itemToDisable2.isEnabled = false
+            }
+        }
     }
     
 

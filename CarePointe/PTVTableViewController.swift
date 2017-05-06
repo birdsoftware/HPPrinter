@@ -12,43 +12,30 @@ class PTVTableViewController: UITableViewController {
 
     @IBOutlet var PTVTableViewController: UITableView!
     
- 
+    var referrals = Array<Dictionary<String,String>>()
+    var pendingReferrals = Array<Dictionary<String,String>>()
+    var scheduledReferrals = Array<Dictionary<String,String>>()
+    var completeReferrals = Array<Dictionary<String,String>>()
     
-    let section = ["Pending", "Scheduled", "Completed/Archived"]
+    var numberNewPatients = 0
+    var numberScheduledPatients = 0
+    var numberCompletePatiets = 0
     
-    var appSec = [String]()
-    var appID = [[String]]() //empty array of arrays of type string
-    var appPat = [[String]]()
-    var appTime = [[String]]()
-    var appDate = [[String]]()
-    var appMessage = [[String]]()
-    var appPatImage = [[String]]()
+    let section = ["Pending", "Scheduled", "Complete"]
+    var whatAppointmentStatusButtonTapped = "Complete"
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        
-        //if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does this exist? [yes]
 
-                getUpdateAppointmentData()
-                //print("getUpdateAppointmentData")
-        //if isKeyPresentInUserDefaults(key: "appPatImage") { //does this exist? [yes]
+                //getUpdateAppointmentData()
+     
         //TODO: fix this is crashes in build 12
-                appPatImage = UserDefaults.standard.object(forKey: "appPatImage") as! [[String]]
-        
-        
-        //} else {//[no] does not exist
-            //setUpAppointmentData()
-            //print("setUpAppointmentData there is no key onlyDoOnce")
-        //}
-        
+                //appPatImage = UserDefaults.standard.object(forKey: "appPatImage") as! [[String]]
     }
 
 //    func isKeyPresentInUserDefaults(key: String) -> Bool {
@@ -56,10 +43,41 @@ class PTVTableViewController: UITableViewController {
 //    }
     
 
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        PTVTableViewController.reloadData()
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if isKeyPresentInUserDefaults(key: "whatAppointmentStatusButtonTapped"){
+            whatAppointmentStatusButtonTapped = UserDefaults.standard.string(forKey: "whatAppointmentStatusButtonTapped")! 
+        }
+        
+        if isKeyPresentInUserDefaults(key: "RESTAllReferrals"){
+            referrals = UserDefaults.standard.value(forKey: "RESTAllReferrals") as! Array<Dictionary<String,String>>//Pending or Scheduled or Complete
+            
+            // PLACE REFERRALS INTO ARRAYS BY STATUS
+            for referral in referrals {
+                
+                switch referral["Status"]! //from tbl_care_plan
+                {
+                case "Complete", "Rejected/Inactive", "Cancelled":
+                    numberCompletePatiets += 1
+                    completeReferrals.append(referral)
+                    
+                case "Scheduled", "In Service":
+                    numberScheduledPatients += 1
+                    scheduledReferrals.append(referral)
+                    
+                case "Pending", "Opened":
+                    numberNewPatients += 1
+                    pendingReferrals.append(referral)
+                    
+                default:
+                    break
+                } //Others:"Not Taken Under Care", "Completed/Archived", "Inactive", "Deseased", "Active"
+            }
+
+        }
+        
+    }
 
     
     override func viewDidAppear( _ animated: Bool) {
@@ -76,41 +94,7 @@ class PTVTableViewController: UITableViewController {
     // MARK: - Supporting functions
     //
     
-    func getUpdateAppointmentData(){
-        //Get up to date array
-        //let appSecT = UserDefaults.standard.object(forKey: "appSec")
-        let appIDT = UserDefaults.standard.object(forKey: "appID")
-        let appPatT = UserDefaults.standard.object(forKey: "appPat")
-        let appTimeT = UserDefaults.standard.object(forKey: "appTime")
-        let appDateT = UserDefaults.standard.object(forKey: "appDate")
-        let appMessageT = UserDefaults.standard.object(forKey: "appMessage")
-        
-        //check default !nil then update public array from array stored in defaults
-        //if let appSecT = appSecT {
-        //    appSec = appSecT as! [String]
-        //}
-        
-        if let appIDT = appIDT {
-            appID = appIDT as! [[String]]
-        }
-        
-        if let appPatT = appPatT {
-            appPat = appPatT as! [[String]]
-        }
-        //------------------------------ time, date, message needed ViewController in main dash -------//
-        if let appTimeT = appTimeT {
-            appTime = appTimeT as! [[String]]
-        }
-        
-        if let appDateT = appDateT {
-            appDate = appDateT as! [[String]]
-        }
-        
-        if let appMessageT = appMessageT {
-            appMessage = appMessageT as! [[String]]
-        }
-        
-    }
+
 
 
     
@@ -124,7 +108,7 @@ class PTVTableViewController: UITableViewController {
     
    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.section[section]
+        return whatAppointmentStatusButtonTapped//self.section[section]
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
@@ -138,41 +122,52 @@ class PTVTableViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.section.count
+        return 1//self.section.count
     }
-    
+    //Pending or Scheduled or Complete
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #return the number of rows
-        if (appPat.isEmpty == false) {
-            return self.appPat[section].count//patients[section].count
+        if whatAppointmentStatusButtonTapped == "Pending"{//section == 0 {
+            return numberNewPatients
+        }
+        if whatAppointmentStatusButtonTapped == "Scheduled"{//
+            return numberScheduledPatients
         }
         else {
-            return 0
+            return numberCompletePatiets
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "patientcell", for: indexPath) as! PatientCell
         
+        var Data = Dictionary<String,String>()
+        
         // Configure the cell...
         
-        cell.appointmentID?.text = self.appID[indexPath.section][indexPath.row]//self.appointmentIDs[indexPath.section][indexPath.row]
-        cell.patientName?.text = self.appPat[indexPath.section][indexPath.row]//self.patients[indexPath.section][indexPath.row]
-        
-        if(indexPath.section == 0) {
+        if(whatAppointmentStatusButtonTapped == "Pending"){//indexPath.section == 0) {
+            Data = pendingReferrals[indexPath.row]
+            
+            cell.appointmentID?.text = Data["Care_Plan_ID"]
             cell.statusImage?.image = UIImage(named: "orange.circle.png")
-            cell.AppointmentDate.text = self.appDate[indexPath.section][indexPath.row]
+            cell.patientName?.text = Data["Patient_Name"]
+            cell.AppointmentDate.text = Data["StartDate"]
             cell.patientNameTopConstraint.constant = 2
         }
-        
-        if(indexPath.section == 1) {
+        if(whatAppointmentStatusButtonTapped == "Scheduled"){//(indexPath.section == 1) {
+            Data = scheduledReferrals[indexPath.row]
+            
+            cell.appointmentID?.text = Data["Care_Plan_ID"]
             cell.statusImage?.image = UIImage(named: "green.circle.png")
-            cell.AppointmentDate.text = self.appDate[indexPath.section][indexPath.row]
+            cell.patientName?.text = Data["Patient_Name"]
+            cell.AppointmentDate.text = Data["StartDate"]
             cell.patientNameTopConstraint.constant = 2
         }
-        
-        if(indexPath.section == 2) {
+        if(whatAppointmentStatusButtonTapped == "Complete"){//(indexPath.section == 2) {
+            Data = completeReferrals[indexPath.row]
+            
+            cell.appointmentID?.text = Data["Care_Plan_ID"]
             cell.statusImage?.image = UIImage(named: "gray.circle.png")
+            cell.patientName?.text = Data["Patient_Name"]
             cell.AppointmentDate.text = ""
             cell.patientNameTopConstraint.constant = 10
         }
@@ -189,34 +184,49 @@ class PTVTableViewController: UITableViewController {
         if segue.identifier == "patientViewToDashBoard" {//this is the going back to the main dashboard
             //do something
         }
-        else if segue.identifier == "patientDetail"{
-            let selectedRow = ((tableView.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
-            let sectionOfSelectedRow = (tableView.indexPathForSelectedRow?.section)! //retuns int
-            //print("\\(selectedRow)" + " \\(sectionOfSelectedRow)")
-            let patientName = appPat[sectionOfSelectedRow][selectedRow]// + "'s Information" as String
-            let appointmentID = appID[sectionOfSelectedRow][selectedRow] as String
-            let patientStatus = section[sectionOfSelectedRow]
-            let patientImage = appPatImage[sectionOfSelectedRow][selectedRow]
+        if segue.identifier == "patientViewToReferrals" {
+            //print("patientViewToReferrals segue")
             
-            // Store data locally change to mySQL? server later
-            let defaults = UserDefaults.standard
-            defaults.set(patientName, forKey: "patientName")
-            defaults.set(patientImage, forKey: "patientPic")
-            defaults.set(appointmentID, forKey: "appointmentID")
-            defaults.set(patientStatus, forKey: "patientStatus") //need this to hide the accept and decline buttons in completed view
-            defaults.set(selectedRow, forKey: "selectedRow")
-            defaults.set(sectionOfSelectedRow, forKey: "sectionForSelectedRow")
-            defaults.synchronize()
+            let selectedRow = ((PTVTableViewController.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
+            var Data = Dictionary<String,String>()
             
-            //            if let dest = segue.destination as? EventViewController {\
-            //                if let eventObject = events[selectedRow] as? Data {
-            //                    let se = NSKeyedUnarchiver.unarchiveObject(with: eventObject) as! ScenarioEvent
-            //                    dest.scenarioEvent = se
-            //                }
-            //            }
+            if whatAppointmentStatusButtonTapped == "Pending"{//section == 0 {
+                Data = pendingReferrals[selectedRow]
+            }
+            if whatAppointmentStatusButtonTapped == "Scheduled"{//
+                Data = scheduledReferrals[selectedRow]
+            }
+            else {
+                Data = completeReferrals[selectedRow]
+            }
+            
+            
+            if let toViewController = segue.destination as? ReferralsVC {
+                
+                /* 1 */ toViewController.seguePatientNotes = Data["patient_notes"]
+                /*   */ toViewController.seguePatientName = Data["Patient_Name"]
+                /*   */ toViewController.seguePatientCPID = Data["Care_Plan_ID"]
+                /* 4 */ toViewController.seguePatientDate = Data["StartDate"]
+                /*   */ toViewController.segueHourMin = Data["date_hhmm"]
+                /* 5 */ toViewController.segueBookMinutes = Data["book_minutes"]
+                /* 6 */ toViewController.segueProviderName = Data["provider_name"]
+                /*   */ toViewController.segueProviderID = Data["ServiceProvider_ID"]
+                /* 7 */ toViewController.segueEncounterType = Data["book_type"]
+                /* 8 */ toViewController.segueEncounterPurpose = Data["book_purpose"]
+                /* 9 */ toViewController.segueLocationType = Data["location_type"]
+                /* 10 */toViewController.segueBookPlace = Data["book_place"]
+                /*    */toViewController.segueBookAddress = Data["book_address"]
+                /* 11 */toViewController.seguePreAuth = Data["pre_authorization"]
+                /* 12 */toViewController.segueAttachDoc = Data["Attachment_doc"]
+                
+                toViewController.segueStatus = whatAppointmentStatusButtonTapped //"Pending" or "Scheduled" or "Complete"
+                
+            }
+            
         }
+
+
     }
-    
     
     
     /*

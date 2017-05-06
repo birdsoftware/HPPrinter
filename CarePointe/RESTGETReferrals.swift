@@ -89,6 +89,9 @@ class GETReferrals {
                                     print("finished GET All Referals")
                                     
                                 }
+                                //No Referrals
+                                //JSON.isEmpty == true
+                                print("finished GET All Referals - No referrals to GET")
                             }
                         } catch {
                             print("Error deserializing All Referals JSON: \(error)")

@@ -14,5 +14,12 @@ class InfoDemographicsCell: UITableViewCell {
     @IBOutlet weak var Label: UILabel!
     @IBOutlet weak var details: UILabel!
 
+}
 
+class BadgesCell: UITableViewCell {
+    //identifier: badgecell
+    
+    @IBOutlet weak var badge: UILabel!
+    
+    
 }

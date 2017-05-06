@@ -238,7 +238,7 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
             //    cell.callButton.backgroundColor = .white
             //    cell.callButton.setTitle(returnPhoneEmoji(phoneNumber: usersPhone), for: .normal)
            // }
-            cell.callButton.tag = indexPath.row //tag is Int -2,147,483,648 and 2,147,483,647  7,025,409,696
+            cell.callButton.tag = indexPath.row //tag is Int -2,147,483,648 and 2,147,483,647
             cell.callButton.addTarget(self, action: #selector(connected), for: .touchUpInside)
             
             return cell

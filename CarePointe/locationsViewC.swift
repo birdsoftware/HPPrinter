@@ -19,6 +19,9 @@ class locationsViewC: UIViewController , UITableViewDelegate, UITableViewDataSou
         ["Life Care of Paradise valley","Home Visit","02/03/2017"]
     ]
     
+    //API data
+    var restLocations = Array<Dictionary<String,String>>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +32,36 @@ class locationsViewC: UIViewController , UITableViewDelegate, UITableViewDataSou
         //Table ROW Height set to auto layout - row height grows with content
         locationsTable.rowHeight = UITableViewAutomaticDimension
         locationsTable.estimatedRowHeight = 75
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        restLocations = UserDefaults.standard.object(forKey: "RESTLocations") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
+        
+        if restLocations.isEmpty == false {
+        
+            locations.removeAll()
+            
+            for arrayCase in restLocations {
+                
+                let admitDate = convertDateStringToDate(longDate: arrayCase["AdmittanceDate"]!)
+                
+                locations.append([arrayCase["TransferToFacility"]!,arrayCase["TransferFromFacility"]!,admitDate])
+            }
+            
+            //let caseData = restLocations[0]
+            
+            //let admitDate = convertDateStringToDate(longDate: caseData["AdmittanceDate"]!)
+            
+            //locations = [
+            //    [caseData["TransferToFacility"]!,"Home Visit","04/02/2017"],
+            //    ["Life Care of Paradise valley","Home Visit","02/03/2017"]
+            //]
+            
+            locationsTable.reloadData()
+
+        }
     }
     
 
