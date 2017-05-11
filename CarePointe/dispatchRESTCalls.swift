@@ -94,6 +94,8 @@ class DispatchREST {//http://stackoverflow.com/questions/42146274/syncronize-asy
             //print #keys in user defaults
             print(UserDefaults.standard.dictionaryRepresentation().keys.count)
             
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateProfile"), object: nil)
+            
         }
 
     }

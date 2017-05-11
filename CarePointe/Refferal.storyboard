@@ -52,21 +52,27 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGl-G1-jBG" customClass="RoundedButton" customModule="CarePointe" customModuleProvider="target">
-                                                        <rect key="frame" x="239" y="20" width="126" height="30"/>
-                                                        <color key="backgroundColor" red="0.31095686550000001" green="0.56154131890000003" blue="0.001000816934" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <rect key="frame" x="230" y="20" width="135" height="30"/>
+                                                        <color key="backgroundColor" red="0.28279897570610046" green="0.64316004514694214" blue="0.83467704057693481" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="QBh-Hu-Mse"/>
-                                                            <constraint firstAttribute="width" constant="126" id="XXO-yO-agg"/>
+                                                            <constraint firstAttribute="width" constant="135" id="XXO-yO-agg"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                                         <inset key="titleEdgeInsets" minX="-5" minY="0.0" maxX="1" maxY="0.0"/>
-                                                        <inset key="imageEdgeInsets" minX="5" minY="5" maxX="104" maxY="5"/>
+                                                        <inset key="imageEdgeInsets" minX="5" minY="5" maxX="107" maxY="5"/>
                                                         <state key="normal" title="Patient Profile" image="PatientWhite">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="radiusMultiplier">
                                                                 <real key="value" value="0.050000000000000003"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="1"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
@@ -529,7 +535,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2EX-3h-Yo8" customClass="RoundedButton" customModule="CarePointe" customModuleProvider="target">
                                         <rect key="frame" x="265" y="5" width="100" height="40"/>
-                                        <color key="backgroundColor" red="0.2651024461" green="0.59462851289999996" blue="0.77094310519999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.22949105501174927" green="0.55283278226852417" blue="0.74227368831634521" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="tUf-dP-b8p"/>
                                             <constraint firstAttribute="width" constant="100" id="zHo-9X-eMG"/>
@@ -559,6 +565,85 @@
                                     <constraint firstItem="Pta-T4-Ejp" firstAttribute="top" secondItem="syJ-ob-JqJ" secondAttribute="top" constant="5" id="yIx-Uz-gdH"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnm-N4-Wyp" customClass="RoundedButton" customModule="CarePointe" customModuleProvider="target">
+                                <rect key="frame" x="137" y="75" width="100" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="BPJ-Uu-pJu"/>
+                                    <constraint firstAttribute="width" constant="100" id="JJn-Ob-RiZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                <state key="normal" title="Complete">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="radiusMultiplier">
+                                        <real key="value" value="0.050000000000000003"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="acceptButtonTapped:" destination="slJ-6O-l5K" eventType="touchUpInside" id="OsA-cr-0XH"/>
+                                    <action selector="completeButtonTapped:" destination="slJ-6O-l5K" eventType="touchUpInside" id="shz-7Y-Cc4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Z0-kj-TBb" customClass="RoundedButton" customModule="CarePointe" customModuleProvider="target">
+                                <rect key="frame" x="239" y="125" width="50" height="30"/>
+                                <color key="backgroundColor" red="0.229491055" green="0.55283278229999999" blue="0.74227368829999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Cat-hb-MUM"/>
+                                    <constraint firstAttribute="width" constant="50" id="EqE-hd-quU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                <state key="normal" title="Call">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="radiusMultiplier">
+                                        <real key="value" value="0.10000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="callButtonTapped:" destination="slJ-6O-l5K" eventType="touchUpInside" id="o4j-3H-atq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRx-xq-LEn" customClass="RoundedButton" customModule="CarePointe" customModuleProvider="target">
+                                <rect key="frame" x="290" y="125" width="75" height="30"/>
+                                <color key="backgroundColor" red="0.229491055" green="0.55283278229999999" blue="0.74227368829999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="mAe-k8-ReQ"/>
+                                    <constraint firstAttribute="height" constant="30" id="y7m-0Z-4Zz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                <state key="normal" title="Message">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="radiusMultiplier">
+                                        <real key="value" value="0.070000000000000007"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="messageButtonTapped:" destination="slJ-6O-l5K" eventType="touchUpInside" id="RpD-cV-GGN"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rAq-v8-yfU">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                 <subviews>
@@ -585,8 +670,8 @@
                                             <action selector="homeButtonTapped:" destination="slJ-6O-l5K" eventType="touchUpInside" id="ieJ-oI-An6"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referral" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ti4-gF-ViK">
-                                        <rect key="frame" x="158.5" y="47" width="58" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending Referral" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ti4-gF-ViK">
+                                        <rect key="frame" x="127.5" y="47" width="120.5" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="nlq-WJ-bdE"/>
                                         </constraints>
@@ -635,13 +720,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="QRx-xq-LEn" secondAttribute="trailing" constant="10" id="2Hf-6t-0uT"/>
                             <constraint firstItem="syJ-ob-JqJ" firstAttribute="leading" secondItem="ai7-Ng-cLv" secondAttribute="leading" id="4RO-WJ-fk3"/>
                             <constraint firstItem="O7Y-ts-dGc" firstAttribute="leading" secondItem="ai7-Ng-cLv" secondAttribute="leading" id="9Zl-4x-2fd"/>
+                            <constraint firstItem="qnm-N4-Wyp" firstAttribute="centerX" secondItem="ai7-Ng-cLv" secondAttribute="centerX" id="ApQ-Gx-Nll"/>
                             <constraint firstItem="rAq-v8-yfU" firstAttribute="top" secondItem="ai7-Ng-cLv" secondAttribute="top" id="Ooo-gJ-9MZ"/>
+                            <constraint firstItem="QRx-xq-LEn" firstAttribute="top" secondItem="syJ-ob-JqJ" secondAttribute="bottom" constant="5" id="ZfT-EW-jQR"/>
                             <constraint firstAttribute="trailing" secondItem="rAq-v8-yfU" secondAttribute="trailing" id="ZlI-dd-iJf"/>
                             <constraint firstItem="bhu-ce-kyo" firstAttribute="top" secondItem="O7Y-ts-dGc" secondAttribute="bottom" id="aIc-m8-Eew"/>
                             <constraint firstItem="syJ-ob-JqJ" firstAttribute="top" secondItem="rAq-v8-yfU" secondAttribute="bottom" id="fvl-lh-Ou8"/>
                             <constraint firstAttribute="trailing" secondItem="syJ-ob-JqJ" secondAttribute="trailing" id="keQ-Me-1Te"/>
+                            <constraint firstItem="qnm-N4-Wyp" firstAttribute="top" secondItem="rAq-v8-yfU" secondAttribute="bottom" constant="5" id="nB4-Mg-wfy"/>
                             <constraint firstItem="rAq-v8-yfU" firstAttribute="leading" secondItem="ai7-Ng-cLv" secondAttribute="leading" id="nww-hj-Tov"/>
                             <constraint firstAttribute="trailing" secondItem="O7Y-ts-dGc" secondAttribute="trailing" id="pmO-9k-709"/>
                             <constraint firstItem="RHc-Au-Ptp" firstAttribute="width" secondItem="ai7-Ng-cLv" secondAttribute="width" id="qGi-cO-7VF"/>
@@ -658,8 +747,13 @@
                         <outlet property="apptLengthPicker" destination="1hc-wP-Pqg" id="khr-pp-SxV"/>
                         <outlet property="attachDocPicker" destination="cIC-cp-VWW" id="sgp-Hc-mEk"/>
                         <outlet property="attachDocument" destination="zfq-Y5-PEw" id="R24-5F-Xmb"/>
+                        <outlet property="bluePatientInfoTop" destination="Myg-UK-hea" id="mc4-hH-Tfu"/>
+                        <outlet property="bluePatientInfoViewHeight" destination="MoK-R2-RKC" id="efD-LS-xYf"/>
                         <outlet property="buttonView" destination="syJ-ob-JqJ" id="Zgv-n8-ouD"/>
+                        <outlet property="callButton" destination="0Z0-kj-TBb" id="z7L-oF-o6c"/>
                         <outlet property="changeDateTimeButton" destination="gf0-al-aic" id="qEv-nz-x7k"/>
+                        <outlet property="completeButton" destination="qnm-N4-Wyp" id="fP1-D3-yFN"/>
+                        <outlet property="discussButton" destination="2EX-3h-Yo8" id="okr-DK-KmM"/>
                         <outlet property="encounter" destination="2Er-5N-GRz" id="TWW-eR-oQV"/>
                         <outlet property="encounterType" destination="wWp-HH-EuK" id="ohB-nX-gas"/>
                         <outlet property="encounterTypePicker" destination="lA9-7J-xdp" id="qJ4-9T-CzS"/>
@@ -667,6 +761,7 @@
                         <outlet property="homeHealthLabel" destination="bMr-7O-UUE" id="geN-Mb-sBl"/>
                         <outlet property="lengthOfAppointmentLabel" destination="hvo-7w-hUr" id="5Lr-nI-hvd"/>
                         <outlet property="mapButton" destination="T2m-Yj-kkO" id="IjS-Wa-Nqh"/>
+                        <outlet property="messageButton" destination="QRx-xq-LEn" id="Zuw-Vd-1j1"/>
                         <outlet property="patientName" destination="6mb-MW-cEf" id="lUx-bi-5A1"/>
                         <outlet property="placeOfReferral" destination="AXL-vN-4CK" id="6yn-DY-omn"/>
                         <outlet property="placeOfReferralPicker" destination="Om5-FO-7PO" id="DwC-Ki-sY3"/>
@@ -674,6 +769,7 @@
                         <outlet property="provider" destination="BdR-Xq-JYX" id="Web-42-hfV"/>
                         <outlet property="providerID" destination="7cT-LK-QzR" id="YOH-V9-unu"/>
                         <outlet property="purposeOfRefferal" destination="ccm-I3-WFk" id="dfN-MX-4qR"/>
+                        <outlet property="referralLabel" destination="ti4-gF-ViK" id="Shb-sp-B98"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fiu-jO-BK4" userLabel="First Responder" sceneMemberID="firstResponder"/>

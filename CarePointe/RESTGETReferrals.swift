@@ -14,6 +14,10 @@ class GETReferrals {
         
         var referrals = Array<Dictionary<String,String>>()
         
+        //varaibales to filter duplicate referrals
+        let uniqueValues = Set<String>()
+        
+        
         let headers = [
             "authorization":token,
             "cache-control": "no-cache"
@@ -69,7 +73,7 @@ class GETReferrals {
                                         let updatedDateTime = dict["UpdatedDateTime"] as? String ?? ""
                                         let createdByName = dict["CreatedBy_name"] as? String ?? ""
                                         let providerName = dict["provider_name"] as? String ?? ""
-
+                                        let isUrgent = dict["Is_urgent"] as? String ?? ""
                                         
                                         let pid = String(patientID)
                                         let cpid = String(carePlanID)
@@ -77,12 +81,24 @@ class GETReferrals {
                                         let spid = String(serviceProviderID)
                                         let puid = String(provideruserid)
                                         
-                                        //define dictionary literals
-
-                                        referrals.append(["alertid":pid, "Patient_Name":patientName, "Care_Plan_ID":cpid, "Episode_ID":eid,
-                                                          "ServiceProvider_ID":spid, "provideruserid":puid, "StartDate":startDate, "date_hhmm":datehhmm, "book_minutes":bookMinutes, "ServiceCategory":serviceCategory, "Status":status, "Summary":summary, "patient_notes":patientNotes, "book_type":bookType, "book_purpose":bookPurpose, "location_type":locationType, "book_place":bookPlace, "book_address":bookAddress, "dateofcollection":dateofcollection, "Attachment_doc":attachmentDoc, "Is_homeassessment":isHomeassessment, "IsActive":isActive, "CreatedDateTime":createdDateTime, "UpdatedDateTime":updatedDateTime, "CreatedBy_name":createdByName, "provider_name":providerName])
-                                    }
+                                        /* //Uncomment To make referrals unique - remove duplicates
+                                        *  let beforeInsertCount = uniqueValues.count
+                                        *  uniqueValues.insert(cpid) // will do nothing if Care_Plan_ID exists already
+                                        *  let afterInsertCount = uniqueValues.count
+                                        
+                                        *  //define dictionary literals
+                                        * if beforeInsertCount != afterInsertCount {
+                                        */
+                                            referrals.append(["Patient_ID":pid, "Patient_Name":patientName, "Care_Plan_ID":cpid, "Episode_ID":eid,
+                                                          "ServiceProvider_ID":spid, "provideruserid":puid, "StartDate":startDate, "date_hhmm":datehhmm, "book_minutes":bookMinutes, "ServiceCategory":serviceCategory, "Status":status, "Summary":summary, "patient_notes":patientNotes, "book_type":bookType, "book_purpose":bookPurpose, "location_type":locationType, "book_place":bookPlace, "book_address":bookAddress, "dateofcollection":dateofcollection, "Attachment_doc":attachmentDoc, "Is_homeassessment":isHomeassessment, "IsActive":isActive, "CreatedDateTime":createdDateTime, "UpdatedDateTime":updatedDateTime, "CreatedBy_name":createdByName, "provider_name":providerName, "Is_urgent":isUrgent])
+                                        }
+                                    /*}*/
                                     
+                                    //
+                                    //O n^2 solutions :(
+                                    //referrals = referrals.enumerated()
+                                    //    .flatMap { (idx, dict) in !referrals[0..<idx].contains(where: {$0 == dict}) ? dict : nil }
+                                    print("\(uniqueValues)")
                                     UserDefaults.standard.set(referrals, forKey: "RESTAllReferrals")
                                     UserDefaults.standard.synchronize()
                                     
@@ -92,6 +108,9 @@ class GETReferrals {
                                 //No Referrals
                                 //JSON.isEmpty == true
                                 print("finished GET All Referals - No referrals to GET")
+                                //Remove Old Referrals?
+                                //UserDefaults.standard.removeObject(forKey: "RESTAllReferrals")
+                                //UserDefaults.standard.synchronize()
                             }
                         } catch {
                             print("Error deserializing All Referals JSON: \(error)")

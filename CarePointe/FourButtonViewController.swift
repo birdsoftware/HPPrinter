@@ -24,6 +24,7 @@ class FourButtonViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateProfileFromDefaults()
 
         activityView.isHidden = true
         backgroundActivityIndicator.isHidden = true
@@ -39,8 +40,7 @@ class FourButtonViewController: UIViewController {
     
         if isKeyPresentInUserDefaults(key: "RESTGlobalAlerts"){
             let newAlertsCount = UserDefaults.standard.object(forKey: "RESTGlobalAlerts") as? Array<Dictionary<String,String>> ?? []
-            let newAlertCount = newAlertsCount.count
-            alertCount = newAlertCount
+            alertCount = newAlertsCount.count
         }
         
         fakeBadge.clipsToBounds = true
@@ -58,10 +58,16 @@ class FourButtonViewController: UIViewController {
                                                selector:#selector(stopActivityIndicator),
                                                name: NSNotification.Name(rawValue: "stopActivityIndicator"),
                                                object: nil)
+        //Sign In Page - Update profile
+        NotificationCenter.default.addObserver(self,
+                                               selector:#selector(updateProfile),
+                                               name: NSNotification.Name(rawValue: "updateProfile"),
+                                               object: nil)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
         
         updateProfileFromDefaults()
         
@@ -87,8 +93,7 @@ class FourButtonViewController: UIViewController {
             self.performSegue(withIdentifier: "showTermsView", sender: self)
         }
         
-        // Load API data if eSign
-
+        // Load API data if eSign and false = first time log in/new user
             
             let userDidESign = UserDefaults.standard.bool(forKey: "didESign")
             
@@ -96,13 +101,8 @@ class FourButtonViewController: UIViewController {
             {
                 if isKeyPresentInUserDefaults(key: "numberOfAPIDownoads") {
                     //true not new user
+
                 } else {//false = first time log in/new user
-                
-                        //Activity indicator
-                        //activityIndicator()
-                        
-                        //REQUEST API ENDPOINT KEY and Data
-                        //beginAPICalls()
                     
                         //REQUEST API ENDPOINT KEY and Data
                         let beginRest = DispatchREST()
@@ -110,13 +110,10 @@ class FourButtonViewController: UIViewController {
                         
                         let numberOfAPIDownoads = 1
                         UserDefaults.standard.set(numberOfAPIDownoads, forKey: "numberOfAPIDownoads")
-                    
                 }
                 
             }
 
-
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -126,30 +123,11 @@ class FourButtonViewController: UIViewController {
     
     // supporting functions
     
-//    func activityIndicator() {
-//        
-//        activityView.isHidden = false
-//        backgroundActivityIndicator.isHidden = false
-//        
-//        activityView.backgroundColor = UIColor.white
-//        activityView.alpha = 0.8
-//        activityView.layer.cornerRadius = 10
-//        
-//        //Here the spinnier is initialized
-//        let activitySpinView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-//        activitySpinView.frame = CGRect(x: 0, y: 300, width: 60, height: 60)
-//        activitySpinView.startAnimating()
-//        
-//        let textLabel = UILabel(frame: CGRect(x: 60, y: 300, width: 250, height: 50))
-//        textLabel.textColor = UIColor.gray
-//        textLabel.text = "Getting your information ready..."
-//        
-//        activityView.addSubview(activitySpinView)
-//        activityView.addSubview(textLabel)
-//        
-//        view.addSubview(activityView)
-//        
-//    }
+    @objc func updateProfile(){
+        
+        updateProfileFromDefaults()
+        
+    }
     
     @objc func startActivityIndicator(){
         
@@ -186,43 +164,6 @@ class FourButtonViewController: UIViewController {
         self.backgroundActivityIndicator.isHidden = true
         
     }
-    
-//    func beginAPICalls() {
-//        
-//        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-//        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-//        
-//        let downloadToken = DispatchGroup()
-//        downloadToken.enter()
-//        
-//        let getToken = GETToken()
-//        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
-//        
-//        let downloadPatients = DispatchGroup()
-//        downloadPatients.enter()
-//        
-//        // 2 patients  -----------
-//        downloadToken.notify(queue: DispatchQueue.main)  {
-//            
-//            //GET Patients
-//            let token = UserDefaults.standard.string(forKey: "token")
-//            
-//            let callGetPatients = GETPatients()
-//            callGetPatients.getPatients(token: token!, dispachInstance: downloadPatients)
-//            
-//        }// -----------------------
-//        
-//        
-//        downloadPatients.notify(queue:DispatchQueue.main){
-//        
-//            // finished downloadPatients
-//            self.activityView.removeFromSuperview()
-//            self.activityView.isHidden = true
-//            self.backgroundActivityIndicator.isHidden = true
-//            
-//            self.updateProfileFromDefaults()
-//        }
-//    }
     
     
     //
@@ -271,6 +212,12 @@ class FourButtonViewController: UIViewController {
         } else {
             userName.text = "-"
             userTitle.text = "-"
+        }
+        
+        if isKeyPresentInUserDefaults(key: "RESTGlobalAlerts"){
+            let newAlertsCount = UserDefaults.standard.object(forKey: "RESTGlobalAlerts") as? Array<Dictionary<String,String>> ?? []
+            
+            alertCount = newAlertsCount.count
         }
     }
     

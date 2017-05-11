@@ -77,6 +77,7 @@ class GETToken {
                             UserDefaults.standard.set(profileLastName, forKey: "profileLastName")
                             UserDefaults.standard.set(Title, forKey: "title")
                             UserDefaults.standard.set(EmailID1, forKey: "EmailID1")
+                            
                             UserDefaults.standard.set(userProfile, forKey: "userProfile")
                             UserDefaults.standard.synchronize()
                             
@@ -96,30 +97,7 @@ class GETToken {
                 }
                 
                 //DispatchQueue.main.async {
-                    //Update your UI here
-                    //activityIndicator.removeFromSuperview()
-                    
-//                    //Update token
-//                    UserDefaults.standard.set(token, forKey: "token")
-//                    UserDefaults.standard.synchronize()
-//                    
-//                    //GET Patients -> save in defaults:  all patients: forKey: "RESTPatients" & patientID column: forKey: "RESTPatientsPatientIDs"
-//                    let getPatientsInstance = GETPatients()
-//                    getPatientsInstance.getPatients(token: token)
-//                    
-//                    //GET Patient Alerts for each patientID-> defaults forKey: "RESTAlerts"
-//                    let patientIDs = UserDefaults.standard.array(forKey: "RESTPatientsPatientIDs") as? [String] ?? [String]()
-//                    
-//                    print("\n patientID's: \(patientIDs)\n")
-//                    
-//                    let getAlertsInstance = GETAlerts()
-//                    //let allAlerts = [[String]]()
-//                    for patientID in patientIDs {
-//                        getAlertsInstance.getAlerts(token: token, patientid: patientID)
-//                    }
-                    //let allAlerts = UserDefaults.standard.array(forKey: "RESTAlerts") as? [[String]] ?? [[String]]()
-                    //print("\nall alerts: \(allAlerts)\n")
-                    
+                                        
                 //}
                 
             }//else

@@ -49,9 +49,12 @@ class GETCareTeam {
                                         let phone_number = dict["phone_number"] as? String ?? ""
                                         let emailID = dict["emailID"] as? String ?? ""
                                         //let patient_id = dict["patient_id"] as? Int ?? 0
-
+                                        let userID = dict["User_ID"] as? Int ?? 0
+                                        let RoleType = dict["RoleType"] as? String ?? ""
                                         
-                                        careTeams.append(["title":title, "caseteam_name":caseteam_name, "phone_number":phone_number, "emailID":emailID])
+                                        let uid = String(userID)
+                                        
+                                        careTeams.append(["title":title, "caseteam_name":caseteam_name, "phone_number":phone_number, "emailID":emailID,"RoleType":RoleType,"User_ID":uid])
                
                                     }
           

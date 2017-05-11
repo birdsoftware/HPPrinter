@@ -14,13 +14,23 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     // Views
     @IBOutlet weak var buttonView: UIView!
     
+    //constraints
+    @IBOutlet weak var bluePatientInfoViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var bluePatientInfoTop: NSLayoutConstraint!
     
+    
+    //labels
     @IBOutlet weak var patientName: UILabel!
     @IBOutlet weak var appointmentID: UILabel!
+    @IBOutlet weak var referralLabel: UILabel!
     
     //buttons
     @IBOutlet weak var homeHealthButton: UIButton!  //[] "Y" or anything else show checkBox
     @IBOutlet weak var changeDateTimeButton: RoundedButton!
+    @IBOutlet weak var completeButton: RoundedButton!
+    @IBOutlet weak var callButton: RoundedButton!
+    @IBOutlet weak var messageButton: RoundedButton!
+    @IBOutlet weak var discussButton: RoundedButton!
     
     
     @IBOutlet weak var homeHealthLabel: UILabel!
@@ -51,9 +61,10 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     @IBOutlet weak var apptLengthPicker: UIPickerView!
     
     //segue Data from PTVTableViewController
+    var seguePatientID: String!
     var seguePatientNotes: String!
     var seguePatientName: String!
-    var seguePatientCPID: String!
+    var seguePatientCPID: String!//appointmentID
     var seguePatientDate: String!
     var segueHourMin: String!
     var segueBookMinutes: String!
@@ -67,15 +78,27 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     var seguePreAuth: String!
     var segueAttachDoc: String!
     var segueStatus: String!
+    //"Pending" or "Scheduled" or "Complete" from ->"Complete","Rejected/Inactive","Cancelled"||"Scheduled","In Service"||"Pending","Opened"
     
     
     //class data
+    var isDiscuss = true
+    var referrals = Array<Dictionary<String,String>>()
+    
     let imgBox = UIImage(named:"box.png")
     let imgCheckBox = UIImage(named:"checkBox.png")
     var toggleState = 1
     
-    var selectLocationType = ["Pharmacy","Office","Home","Urgent Care","Inpatient Hospital", "OutPatient Hospital", "Emergency Room Hospital", "Ambulatory Surgical Center", "SNF"]
-    var selectEncounterType = ["Consult","Blood Work","BP Check","Ancillary Visit","Dietitian Visit", "DMV Physical", "Education Visit", "Established Patient", "F/up Hospital"]
+    var selectLocationType = ["Pharmacy","Office","Home","Urgent Care","Inpatient Hospital", "OutPatient Hospital", "Emergency Room Hospital",
+                              "Ambulatory Surgical Center", "SNF"]
+    var selectEncounterType = [
+        "Acne","Ancillary visit","Blood work","Blood check","BOTOX","BP check","CCM","Chemical peel","Child physical","Consult","Dermal filler","Dietitian visit",
+        "DMV physical","Education visit","Established patient","Follow up","F/up hospital","F/up post op","F/up wellness visit","Female physical",
+        "Forms","Goitre evaluation","Lab results","Lab visit","Male physical","Medical records","New patient","Nurse visit","Office visit",
+        "Other procedure","Pap","PPD/Tb skin test","Pre op visit","Problems","Procedure","Same day apt","School physical","Test results",
+        "Thyroid evaluation","Vaccination","Walk in","Weight check","Well baby visit","Wellness visit","Work physical","Wound check","Stress test",
+        "Sports physical","Surgery consultation","TCM"
+    ]
     var selectAttachDocument = ["Intake PDF","Vitals Update","Blood Work","Doc 4"]
     
     var lenTimes = ["15 min", "30 min", "45 min", "60 min", "2 hours", "3 hours"]
@@ -97,6 +120,9 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         buttonView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         homeHealthButton.isHidden = true
         homeHealthLabel.isHidden = true
+        completeButton.isHidden = true
+        callButton.isHidden = true
+        messageButton.isHidden = true
         
         displaySeguePTVTableData()
         
@@ -104,6 +130,13 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         // -- based on segueStatus //"Pending" or "Scheduled" or "Complete"
         if segueStatus == "Complete"{
             updateUIForComplete()
+            referralLabel.text = "Completed Referral"
+            bluePatientInfoTop.constant -= 50
+        }
+        if segueStatus == "Scheduled"{
+            completeButton.isHidden = false
+            updateUIForComplete()
+            referralLabel.text = "Scheduled Referral"
         }
 
         
@@ -123,6 +156,52 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     //
     // #MARK: - Supporting Functions
     //
+    func segueToHomeView(){
+        // 4. Present a view controller from a different storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
+        self.present(vc, animated: false, completion: nil)
+    }
+    func segueToConnectView(){
+        let storyboard = UIStoryboard(name: "communication", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "communicationVC") as UIViewController
+        self.present(vc, animated: false, completion: nil)
+    }
+    func segueToPTV(){
+        // 4. Present a view controller from a different storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
+        self.present(vc, animated: false, completion: nil)
+    }
+    func updateStatusToComplete(){
+        //1 find Refferal with this appointmentID (seguePatientCPID) and change status from Scheduled to Complete
+        if isKeyPresentInUserDefaults(key: "RESTAllReferrals"){
+            referrals = UserDefaults.standard.object(forKey: "RESTAllReferrals") as! Array<Dictionary<String, String>>
+            var Iterator = 0
+            for dict in referrals{
+                //print("referral care plan id: \(dict["Care_Plan_ID"]!)")
+                if dict["Care_Plan_ID"] == seguePatientCPID{
+                    //print("Care_Plan_ID is \(seguePatientCPID) iterator is \(Iterator)")
+                    referrals[Iterator].updateValue("Complete", forKey: "Status")
+                    break
+                }
+                Iterator+=1
+            }
+        }
+    }
+    func updateStatusToScheduled(){
+        if isKeyPresentInUserDefaults(key: "RESTAllReferrals"){
+            referrals = UserDefaults.standard.object(forKey: "RESTAllReferrals") as! Array<Dictionary<String, String>>
+            var Iterator = 0
+            for dict in referrals{
+                if dict["Care_Plan_ID"] == seguePatientCPID{
+                    referrals[Iterator].updateValue("Scheduled", forKey: "Status")
+                    break
+                }
+                Iterator+=1
+            }
+        }
+    }
     
     func updateUIForComplete(){ //segueStatus == "Complete"
         
@@ -144,33 +223,28 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         // Submit button
         let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { (action) -> Void in
             // get patientID
-            let patientID = self.returnSelectedPatientID()
+            //let patientID = self.returnSelectedPatientID()
             var userName:String = ""
             
             // get profile user name
-            if self.isKeyPresentInUserDefaults(key: "profileName") {
-                userName = UserDefaults.standard.string(forKey: "profileName")!
-            }
-            if self.isKeyPresentInUserDefaults(key: "profileLastName") {
-                userName += " " + UserDefaults.standard.string(forKey: "profileLastName")!
-            }
+            if self.isKeyPresentInUserDefaults(key: "profileName") { userName = UserDefaults.standard.string(forKey: "profileName")! }
+            if self.isKeyPresentInUserDefaults(key: "profileLastName") { userName += " " + UserDefaults.standard.string(forKey: "profileLastName")! }
             
             // Get 1st TextField's text
-            let declineMessage = "Patient \(patientID) declined by \(userName). " + alert.textFields![0].text! //print(textField)
+            let declineMessage = "Patient \(self.seguePatientName!) declined by \(userName). " + alert.textFields![0].text! //print(textField)
             
-            // 1 MOVE PATIENT FROM NEW TO COMPLETED
-            let completed = 2 //0 new,1 accept,2 completed
-            self.moveAppointmentToSection(SectionNumber: completed)
+            // 1 MOVE PATIENT FROM PENDING TO COMPLETED
+            self.updateStatusToComplete()
+            UserDefaults.standard.set(self.referrals, forKey: "RESTAllReferrals")
+            UserDefaults.standard.synchronize()
             
             // 2 UPDATE PATIENT FEED
             //      times   dates   messageCreator  message     patientID
-            self.insertPatientFeed(messageCreator: userName, message: declineMessage, patientID: patientID, updatedFrom: "mobile", updatedType: "Update")
+            self.insertPatientFeed(messageCreator: userName, message: declineMessage, patientID: self.seguePatientID, updatedFrom: "mobile", updatedType: "Update")
             
             
-            // 3. Instantiate a view controller from Storyboard and present it
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
-            self.present(vc, animated: false, completion: nil)
+            // 3. Instantiate view controller from Storyboard and present it
+            self.segueToPTV()
         })
         
         // Cancel button
@@ -242,24 +316,21 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     //
     
     @IBAction func homeButtonTapped(_ sender: Any) {        // HOME
-        
-        // 4. Present a view controller from a different storyboard
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
-        self.present(vc, animated: false, completion: nil)
-        
+        segueToHomeView()
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {        //BACK
         
-        // 4. Present a view controller from a different storyboard
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
-        self.present(vc, animated: false, completion: nil)
-        
+        segueToPTV()
     }
     
     @IBAction func acceptButtonTapped(_ sender: Any) {      //ACCEPT
+        updateStatusToScheduled()
+        
+        UserDefaults.standard.set(referrals, forKey: "RESTAllReferrals")
+        UserDefaults.standard.synchronize()
+        
+        segueToPTV()
     }
     
     @IBAction func declineButtonTapped(_ sender: Any) {     //DECLINE
@@ -267,9 +338,52 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     }
     
     @IBAction func discussButtonTapped(_ sender: Any) {     //DISCUSS
+        
+        if isDiscuss {
+            bluePatientInfoViewHeight.constant += 50
+            callButton.isHidden = false
+            messageButton.isHidden = false
+            discussButton.backgroundColor = .white
+            discussButton.setTitleColor(.bostonBlue(), for: .normal)
+            discussButton.layer.borderWidth = 1
+            discussButton.layer.borderColor = UIColor(hex: 0x3B8DBD).cgColor //boston blue
+            UIView.animate(withDuration: 0.2, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            bluePatientInfoViewHeight.constant -= 50
+            callButton.isHidden = true
+            messageButton.isHidden = true
+            discussButton.backgroundColor = .bostonBlue()
+            discussButton.setTitleColor(.white, for: .normal)
+            discussButton.layer.borderWidth = 1
+            //discussButton.layer.borderColor = UIColor.white.cgColor
+            UIView.animate(withDuration: 0.2, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+            })
+        }
+        isDiscuss = !isDiscuss
     }
     
+    @IBAction func completeButtonTapped(_ sender: Any) {
+        
+        updateStatusToComplete()
+        
+        UserDefaults.standard.set(referrals, forKey: "RESTAllReferrals")
+        UserDefaults.standard.synchronize()
+        
+        segueToPTV()
+    }
+    
+    
     @IBAction func patientProfileButtonTapped(_ sender: Any) {
+    }
+    
+    @IBAction func callButtonTapped(_ sender: Any) {
+        segueToConnectView()
+    }
+    @IBAction func messageButtonTapped(_ sender: Any) {
+        segueToConnectView()
     }
     
     //change date time length Buttons

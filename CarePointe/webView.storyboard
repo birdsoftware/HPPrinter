@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--webView-->
+        <scene sceneID="nfe-TB-X31">
+            <objects>
+                <viewController storyboardIdentifier="docWebView" title="webView" id="EHo-i6-dNw" customClass="DocWebVC" customModule="CarePointe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pft-n0-tRl"/>
+                        <viewControllerLayoutGuide type="bottom" id="drU-kF-jNe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wp8-BK-ckb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JNz-04-f9t">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CarePonite | Document View" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edQ-Uz-dxA">
+                                        <rect key="frame" x="60" y="23.5" width="265" height="23"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="7GZ-az-ILg"/>
+                                            <constraint firstAttribute="width" constant="265" id="AAx-4W-NBl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3R-vm-MDJ">
+                                        <rect key="frame" x="6" y="26" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="Lgg-XJ-C8e"/>
+                                            <constraint firstAttribute="height" constant="30" id="Zyc-Zi-5Xf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="EHo-i6-dNw" eventType="touchUpInside" id="4Bq-dk-qWd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="0Cd-a2-SVE"/>
+                                    <constraint firstItem="T3R-vm-MDJ" firstAttribute="top" secondItem="JNz-04-f9t" secondAttribute="top" constant="26" id="414-Xz-O1h"/>
+                                    <constraint firstItem="edQ-Uz-dxA" firstAttribute="centerY" secondItem="JNz-04-f9t" secondAttribute="centerY" id="5h8-j1-DJD"/>
+                                    <constraint firstItem="T3R-vm-MDJ" firstAttribute="leading" secondItem="JNz-04-f9t" secondAttribute="leading" constant="6" id="fFN-7t-fhL"/>
+                                    <constraint firstItem="edQ-Uz-dxA" firstAttribute="leading" secondItem="JNz-04-f9t" secondAttribute="leading" constant="60" id="yue-ji-D2B"/>
+                                </constraints>
+                            </view>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tIM-nF-CbZ">
+                                <rect key="frame" x="0.0" y="70" width="375" height="597"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" address="YES"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tIM-nF-CbZ" firstAttribute="top" secondItem="JNz-04-f9t" secondAttribute="bottom" id="2Us-bp-iAO"/>
+                            <constraint firstItem="drU-kF-jNe" firstAttribute="top" secondItem="tIM-nF-CbZ" secondAttribute="bottom" id="5xI-7j-HMx"/>
+                            <constraint firstItem="JNz-04-f9t" firstAttribute="top" secondItem="wp8-BK-ckb" secondAttribute="top" id="VxU-44-GaO"/>
+                            <constraint firstAttribute="trailing" secondItem="JNz-04-f9t" secondAttribute="trailing" id="a8Y-EH-Sq4"/>
+                            <constraint firstAttribute="trailing" secondItem="tIM-nF-CbZ" secondAttribute="trailing" id="ha0-UG-e3S"/>
+                            <constraint firstItem="tIM-nF-CbZ" firstAttribute="leading" secondItem="wp8-BK-ckb" secondAttribute="leading" id="iiR-qj-s4R"/>
+                            <constraint firstItem="JNz-04-f9t" firstAttribute="leading" secondItem="wp8-BK-ckb" secondAttribute="leading" id="wqF-Ex-gcd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="edQ-Uz-dxA" id="tAj-sc-bSH"/>
+                        <outlet property="webView" destination="tIM-nF-CbZ" id="aie-KJ-TCK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z8k-Cd-TEA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="56.799999999999997" y="181.25937031484258"/>
+        </scene>
+    </scenes>
+</document>

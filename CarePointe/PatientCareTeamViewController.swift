@@ -14,9 +14,18 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
     //table
     @IBOutlet weak var patientCareTeamTable: UITableView!
     
+    //buttons
+    @IBOutlet weak var sendMessageButton: RoundedButton!
+    
+    // send message vars
+    var isCheckedTeam = [Bool]()
+    var recipientNameList = [String]()
+    var recipientUserIDList = [String]()
+    
     //API data
     var restCareT = Array<Dictionary<String,String>>()
     var viewStatus = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +35,9 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
         patientCareTeamTable.dataSource = self
         viewStatus = "viewDidLoad"
         getTokenThenCareTeamFromWebServer(showToast: viewStatus)
+        
+        //UI 
+        sendMessageButton.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +48,42 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     //
+    //#MARK - Supporting Functions
+    //
+    func connected(sender: UIButton) {
+        
+        let buttonTag = sender.tag
+        
+        let selectedCTData:Dictionary<String,String> = restCareT[buttonTag]
+        var phoneString = selectedCTData["phone_number"]!
+        phoneString = phoneString.replacingOccurrences(of: "(", with: "")
+        phoneString = phoneString.replacingOccurrences(of: ")", with: "")
+        phoneString = phoneString.replacingOccurrences(of: "-", with: "")
+        
+        open(scheme: "tel://\(phoneString)")//open(scheme: "tel://8556235691")
+    }
+    
+    func callCareTeamMember(member: Int) {
+        open(scheme: "tel://8556235691")//careTeamPhoneNumbers[member])
+    }
+    
+    //Supports CALL
+    func open(scheme: String) {
+        //http://useyourloaf.com/blog/openurl-deprecated-in-ios10/
+        if let url = URL(string: scheme) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:],
+                                          completionHandler: {
+                                            (success) in
+                                            print("Open \(scheme): \(success)")
+                })
+            } else {
+                let success = UIApplication.shared.openURL(url)
+                print("Open \(scheme): \(success)")
+            }
+        }
+    }
+
     func getTokenThenCareTeamFromWebServer(showToast: String) {
     
         let downloadToken = DispatchGroup()
@@ -80,6 +128,9 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
             
             self.restCareT = UserDefaults.standard.object(forKey: "RESTCareTeam") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
             
+            for _ in self.restCareT{
+                self.isCheckedTeam.append(false)
+            }
             
             if(dontShowToast == false){
                 let rCTCount = self.restCareT.count
@@ -130,45 +181,127 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
             cell.patientCTCallButton.addTarget(self, action: #selector(connected), for: .touchUpInside)
         }
         cell.patientCTVideoButton.isEnabled = false
-        cell.patientCTMessageButton.isEnabled = false
+        
+        cell.patientCTMessageButton.isHidden = true
+        //cell.patientCTMessageButton.tag = IndexPath.row
+        //cell.patientCTMessageButton.addTarget(self, action: #selector(autoMessage), for: .touchUpInside)
         
         cell.patientCareTeamName.text = careTeamData["caseteam_name"]
-        cell.patientCareTeamPosition.text = careTeamData["caseteam_name"]
+        cell.patientCareTeamPosition.text = careTeamData["RoleType"]
+        
+        let accessory: UITableViewCellAccessoryType = isCheckedTeam[IndexPath.row] ? .checkmark : .none
+        cell.accessoryType = accessory
+        // cell.selectionStyle = .none if you want to avoid the cell being highlighted on selection then uncomment
+        
         return cell
     }
     
-    func connected(sender: UIButton) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        let buttonTag = sender.tag
-       
-        let selectedCTData:Dictionary<String,String> = restCareT[buttonTag]
-        var phoneString = selectedCTData["phone_number"]!
-        phoneString = phoneString.replacingOccurrences(of: "(", with: "")
-        phoneString = phoneString.replacingOccurrences(of: ")", with: "")
-        phoneString = phoneString.replacingOccurrences(of: "-", with: "")
+        let careTeamData:Dictionary<String,String> = restCareT[indexPath.row]
+        let selectedName = careTeamData["caseteam_name"]
+        let selectedUserID = careTeamData["User_ID"]
         
-        open(scheme: "tel://\(phoneString)")//open(scheme: "tel://8556235691")
-    }
-    
-    func callCareTeamMember(member: Int) {
-        open(scheme: "tel://8556235691")//careTeamPhoneNumbers[member])
-    }
-    
-    //Supports CALL
-    func open(scheme: String) {
-        //http://useyourloaf.com/blog/openurl-deprecated-in-ios10/
-        if let url = URL(string: scheme) {
-            if #available(iOS 10, *) {
-                UIApplication.shared.open(url, options: [:],
-                                          completionHandler: {
-                                            (success) in
-                                            print("Open \(scheme): \(success)")
+        if indexPath.row < isCheckedTeam.count
+        {
+            let boolChecked = isCheckedTeam[indexPath.row]
+            isCheckedTeam[indexPath.row] = !boolChecked
+            
+            if !boolChecked {
+                recipientNameList.append(selectedName!)
+                recipientUserIDList.append(selectedUserID!)
+            } else {
+                recipientNameList = recipientNameList.filter{$0 != selectedName!}
+                recipientUserIDList = recipientUserIDList.filter{$0 != selectedUserID!}
+            }
+            
+            let numberOfTrue = isCheckedTeam.filter{$0}.count
+            
+            if numberOfTrue > 0 {
+                sendMessageButton.isHidden = false
+                sendMessageButton.setTitle("Send Message \(numberOfTrue)", for: .normal)
+                UIView.animate(withDuration: 0.2, animations: { () -> Void in
+                    self.view.layoutIfNeeded()
                 })
             } else {
-                let success = UIApplication.shared.openURL(url)
-                print("Open \(scheme): \(success)")
+                sendMessageButton.isHidden = true
+                UIView.animate(withDuration: 0.2, animations: { () -> Void in
+                    self.view.layoutIfNeeded()
+                })
             }
+            
+            //print("\(recipientNameList)")
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+
+    }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if let cell = tableView.cellForRow(at: indexPath) {
+//            cell.accessoryType = .checkmark
+//        }
+//    }
+//    
+//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        if let cell = tableView.cellForRow(at: indexPath) {
+//            cell.accessoryType = .none
+//        }
+//    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "teamReplyMessage" {
+            //let buttonTag = sender.tag
+            //let selectedRow = ((patientCareTeamTable.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
+            //let selectedCTData:Dictionary<String,String> = restCareT[buttonTag]
+            
+            //let userID = selectedCTData["User_ID"]!
+           // let teamMemberName = selectedCTData["caseteam_name"]!
+            
+            //segue out varaibles
+            var recipientList = ""//teamMemberName//""
+            var userIDs = ""
+            
+            for recipient in recipientNameList{
+                //let userName = user["FirstLastName"]!
+                recipientList += " \(recipient),"
+            }
+            for userID in recipientUserIDList{
+                userIDs += " \(userID),"
+            }
+            
+            let currentTime = returnCurrentDateOrCurrentTime(timeOnly: true)//4:41 PM
+            let todaysDate = returnCurrentDateOrCurrentTime(timeOnly: false)//"2/14/2017"
+            
+            if let toViewController = segue.destination as? /*1 sendTo AMessageViewController*/ newMessageViewController {
+                /*maker sure .segueFromList is a var delaired in sendTo ViewController*/
+                toViewController.isReply = true
+                toViewController.segueFromList = recipientList//segueFromList
+                toViewController.segueDate = todaysDate + " " + currentTime //"3/2/17 11:32 AM"
+                toViewController.segueSubject = ""// + segueSubject
+                toViewController.segueMessage =  ""//"\n>" + segueMessage
+                toViewController.segueUserID = userIDs//""
+                toViewController.segueBACKStoryBoard = "Main"
+                toViewController.segueBACKSBID = "PatientTabBar"
+            }
+            
+        }
+        if segue.identifier == "teleConnectSegue" {
+            
         }
     }
+
+    
+//    func autoMessage(sender: UIButton){
+//        let buttonTag = sender.tag
+//        
+//        let selectedCTData:Dictionary<String,String> = restCareT[buttonTag]
+//        let userID = selectedCTData["User_ID"]!
+//        let teamMemberName = selectedCTData["caseteam_name"]!
+//        
+//    }
+    
     
 }

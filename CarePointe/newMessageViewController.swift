@@ -44,6 +44,9 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
     var segueDate: String!
     var segueSubject: String!
     var segueMessage:String!
+    var segueUserID:String!
+    var segueBACKStoryBoard: String!
+    var segueBACKSBID: String!
     
     // Drop down list resources:
     //  http://www.iosinsight.com/uitextfield-drop-down-list-in-swift/
@@ -356,6 +359,15 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
     //
     
     @IBAction func backButtonTapped(_ sender: Any) {
+        if segueBACKSBID != nil {
+        if segueBACKSBID == "PatientTabBar" {
+            //var segueBACKStoryBoard: String!
+            //var segueBACKSBID: String!
+            // Instantiate a view controller from Storyboard and present it
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: segueBACKSBID) as UIViewController
+            self.present(vc, animated: false, completion: nil)
+            }}
         
         // Instantiate a view controller from Storyboard and present it
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

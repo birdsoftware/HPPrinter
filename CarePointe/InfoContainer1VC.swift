@@ -128,6 +128,11 @@ class InfoContainer1VC: UIViewController, UITableViewDelegate, UITableViewDataSo
         let getBadgeAndCaseData = GETLocations()
         getBadgeAndCaseData.getLocations(token: token, patientID: patientID, dispachInstance: locationsFlag)
         
+        //GET Referral by PatientID
+        let refByPatient = GETPatientRefer()
+        refByPatient.getPatientReferral(token: token, patientID: patientID)
+        
+        //display badge data----------------
         locationsFlag.notify(queue: DispatchQueue.main) {//locations sent back from cloud
          
             self.allBadges.removeAll()

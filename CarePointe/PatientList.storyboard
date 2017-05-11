@@ -35,7 +35,7 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="89" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="818-Ww-N9L">
-                                <rect key="frame" x="0.0" y="135" width="375" height="532"/>
+                                <rect key="frame" x="0.0" y="165" width="375" height="502"/>
                                 <color key="backgroundColor" red="0.92126840350000005" green="0.97659069300000001" blue="0.976051271" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -177,7 +177,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.2651024461" green="0.59462851289999996" blue="0.77094310519999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="818-Ww-N9L" firstAttribute="top" secondItem="gzo-gN-u1K" secondAttribute="bottom" constant="20" id="35E-xu-N7y"/>
+                            <constraint firstItem="818-Ww-N9L" firstAttribute="top" secondItem="gzo-gN-u1K" secondAttribute="bottom" constant="50" id="35E-xu-N7y"/>
                             <constraint firstItem="cxl-Z7-VY0" firstAttribute="top" secondItem="818-Ww-N9L" secondAttribute="bottom" id="5eG-MP-Em1"/>
                             <constraint firstItem="ysT-EO-BoU" firstAttribute="top" secondItem="gzo-gN-u1K" secondAttribute="bottom" id="FrD-zz-Plz"/>
                             <constraint firstItem="ysT-EO-BoU" firstAttribute="trailing" secondItem="aah-uk-r9h" secondAttribute="trailingMargin" id="IN6-QO-6gV"/>

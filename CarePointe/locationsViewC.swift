@@ -50,14 +50,9 @@ class locationsViewC: UIViewController , UITableViewDelegate, UITableViewDataSou
                 locations.append([arrayCase["TransferToFacility"]!,arrayCase["TransferFromFacility"]!,admitDate])
             }
             
-            //let caseData = restLocations[0]
             
             //let admitDate = convertDateStringToDate(longDate: caseData["AdmittanceDate"]!)
-            
-            //locations = [
-            //    [caseData["TransferToFacility"]!,"Home Visit","04/02/2017"],
-            //    ["Life Care of Paradise valley","Home Visit","02/03/2017"]
-            //]
+
             
             locationsTable.reloadData()
 

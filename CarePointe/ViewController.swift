@@ -254,6 +254,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         //check if user is signed in ELSE go to Sign In View
         let isUserSignedIn = UserDefaults.standard.bool(forKey: "isUserSignedIn")
@@ -276,7 +277,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let referrals = UserDefaults.standard.value(forKey: "RESTAllReferrals") as! Array<Dictionary<String,String>>
             
             for referral in referrals {
-//                print("referral.status\(referral["Status"]!)")
+                print("referral\(referral["Care_Plan_ID"]!) \(referral["Status"]!)")
 //                if referral["Status"] == "Complete"{
 //                    print("got here")
                 switch referral["Status"]! //from tbl_care_plan

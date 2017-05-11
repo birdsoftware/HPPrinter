@@ -171,7 +171,7 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 ["DOB", dob],//Data["DOB"]! ],
                 ["Primary Language", Data["PrimaryLanguage"]! ],
                 ["Email", Data["EmailID"]! ],
-                ["Intake Notes", "--Waiting for API update--" ],
+                ["Intake Notes", Data["PatientAddNotes"]! ],
                 ["Home Address", Data["HomeAddress"]! ],
                 ["City", Data["City"]! ],
                 ["Zip", Data["Zip"]! ],

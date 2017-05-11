@@ -222,7 +222,8 @@ class SignInViewController: UIViewController {
                      completion: nil)
     }
     
-    func askUseTouchID(_ msg: String, question: String?) {
+    func askUseTouchID(_ msg: String, question: String?) {// NotificationCenter.default.post(name: NSNotification.Name(rawValue: "startActivityIndicator"), object: nil)
+
         let alert = UIAlertController(title: msg,
                                       message: question,
                                       preferredStyle: .alert)
@@ -267,14 +268,14 @@ class SignInViewController: UIViewController {
         let userEmail = email.text!
         let userPassword = password.text!
         
-        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-        print("savedUserPassword:\(savedUserPassword)")
-        print("savedUserEmail:\(savedUserEmail)")
-        
-        print("remindMeToUseTouchID: \(remindMeToUseTouchID)")
-        print("userEmail: \(userEmail)")
-        print("userPassword: \(userPassword)")
+        //let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        //let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
+//        print("savedUserPassword:\(savedUserPassword)")
+//        print("savedUserEmail:\(savedUserEmail)")
+//        
+//        print("remindMeToUseTouchID: \(remindMeToUseTouchID)")
+//        print("userEmail: \(userEmail)")
+//        print("userPassword: \(userPassword)")
 
         
         if(userEmail.isEmpty || userPassword.isEmpty){
@@ -357,7 +358,8 @@ class SignInViewController: UIViewController {
                                     present(myAlert, animated: true){}
                     } else {
                         //Sign in successfull and we have internet connection
-                        //close sign in page and show dashboard
+                        //close sign in page and show home page
+                        
                         self.dismiss(animated: false, completion: nil)
                         
                     }
@@ -417,25 +419,13 @@ class SignInViewController: UIViewController {
                 //passwords don't match try API
                 let message = "User password does not match. Try again."
                 trySignin(userEmail: userEmail, userPassword: userPassword, failMessage:message)
-//                let userExists = UserDefaults.standard.bool(forKey: "APISignedInSuccess")
-//                if(userExists == false){
-//                    print("passwords don't match userPassword:\(userPassword), savedUserPassword:\(savedUserPassword)")
-//                    simpleAlert(title:"Returning user Sign In failure",
-//                                message:"User password does not match. Try again.",
-//                                buttonTitle:"OK")
-//                }
+
             }
         } else {
             //Username don't match try API
             let message = "User with this Username does not exists. Try again."
             trySignin(userEmail: userEmail, userPassword: userPassword, failMessage:message)
-//            let userExists = UserDefaults.standard.bool(forKey: "APISignedInSuccess")
-//            if(userExists == false){
-//                print("Username don't match userEmail:\(userEmail), savedUserEmail:\(savedUserEmail)")
-//                simpleAlert(title:"Returning user Sign In failure",
-//                            message:"User with this Username does not exists. Try again.",
-//                            buttonTitle:"OK")
-//            }
+
         }
 
         return false
@@ -500,8 +490,8 @@ class SignInViewController: UIViewController {
         if signInActivityView != nil { // Make sure the view exists
             signInActivityView.isHidden = false
         } else { // put back
-            view.addSubview(signInActivityView)
-            signInActivityView.isHidden = false
+            //view.addSubview(signInActivityView) //this does not work crashes on second login attempt
+            //signInActivityView.isHidden = false
         }
 //        backgroundActivityIndicator.isHidden = false
 //        
@@ -527,7 +517,7 @@ class SignInViewController: UIViewController {
     
     func stopActivityIndicator(){
         
-        signInActivityView.removeFromSuperview()
+        //signInActivityView.removeFromSuperview()
         signInActivityView.isHidden = true
         
     }

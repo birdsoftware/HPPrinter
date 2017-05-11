@@ -1,5 +1,5 @@
 //
-//  RESTGETPatients.swift
+//  RESTGETAlerts.swift
 //  CarePointe
 //
 //  Created by Brian Bird on 3/23/17.

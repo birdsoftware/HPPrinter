@@ -272,15 +272,11 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
 //            
 //            return
 //        }
-        
         /*
           *   1. Check if text field is empty, 2. display placeholder text for empty fields, 3. update API with fields is not empty
           *
           */
-        
         // --save first, last name, title & email
-        
-        
         
         displayWhatWasChanged()//show change, close and go to 4 button view if OK tapped
         

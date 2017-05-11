@@ -81,7 +81,6 @@ class FilesContainer3VC: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func getDocsFromDocumentsAPI(token:String) {
         
-        
         let docsFlag = DispatchGroup()
         docsFlag.enter()
         
@@ -100,7 +99,7 @@ class FilesContainer3VC: UIViewController, UITableViewDelegate, UITableViewDataS
                 for dict in self.restDocs {
                     
                     //let fileDate = convertDateStringToDate(longDate: arrayCase["CreatedDateTime"]!) // "FilePath"
-                    //if
+                    //let webDocLoc = "https://carepointe.cloud/episode_document/patient_"+self.patientID+"/episode_"+dict["Episode_ID"]!+"/"+dict["FilePath"]!
                     
                     self.files.append([dict["DocumentName"]!,dict["DocumentCategory"]!])
                 }
@@ -108,6 +107,7 @@ class FilesContainer3VC: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.filesTable.reloadData()
             }
             //-----------------------------
+            //https://carepointe.cloud/episode_document/patient_1848/episode_1821/Monica_170503011511.pdf
         }
 
         

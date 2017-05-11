@@ -15,9 +15,12 @@ class ServicesC1ViewC: UIViewController , UITableViewDelegate, UITableViewDataSo
     @IBOutlet weak var servicesTable: UITableView!
     
     var services = [
-        ["Admin Admin","Home Health", "Completed"],
-        ["Walter Simmons","Home Health", "Pending"]
+        ["1/1/2017","Home Health", "-"],
+        ["-","-", "-"]
     ]
+    
+    //API Data
+    var restServices = Array<Dictionary<String,String>>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +33,33 @@ class ServicesC1ViewC: UIViewController , UITableViewDelegate, UITableViewDataSo
         servicesTable.rowHeight = UITableViewAutomaticDimension
         servicesTable.estimatedRowHeight = 75
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //GET Referral by PatientID - See InfoContainer1VC.swift - func getBageandCaseFromLocationsAPI(token:String)
+        
+        restServices = UserDefaults.standard.object(forKey: "RESTPatientReferral") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
+        
+        if restServices.isEmpty == false {
+            
+            services.removeAll()
+            
+            for dict in restServices {
+                
+                let date = convertDateStringToDate(longDate: dict["StartDate"]!)
+                
+                services.append([date,dict["ServiceCategory"]!,dict["Status"]!])
+            }
+            
+            //let admitDate = convertDateStringToDate(longDate: caseData["AdmittanceDate"]!)
+            
+            servicesTable.reloadData()
+        } else {
+            services.removeAll()
+        }
+    }
+    
     
     //1 return # sections
     func numberOfSections(in tableView: UITableView) -> Int {

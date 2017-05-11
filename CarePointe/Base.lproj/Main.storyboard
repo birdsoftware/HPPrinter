@@ -5963,10 +5963,10 @@ Performance: 13</string>
             </objects>
             <point key="canvasLocation" x="7577" y="-399"/>
         </scene>
-        <!--Appointments-->
+        <!--team-->
         <scene sceneID="GCs-NY-Coz">
             <objects>
-                <viewController title="Appointments" id="O4X-6p-xdQ" customClass="PatientCareTeamViewController" customModule="CarePointe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="careTeamView" title="team" id="O4X-6p-xdQ" customClass="PatientCareTeamViewController" customModule="CarePointe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qBV-BI-BT1"/>
                         <viewControllerLayoutGuide type="bottom" id="sxV-ol-UYt"/>
@@ -5978,7 +5978,7 @@ Performance: 13</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qho-NU-dV3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Arc-Lw-T2Z">
+                                    <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Arc-Lw-T2Z">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -6076,11 +6076,35 @@ Performance: 13</string>
                                     <constraint firstItem="Arc-Lw-T2Z" firstAttribute="leading" secondItem="qho-NU-dV3" secondAttribute="leading" id="k1K-cg-aze"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWH-WY-gII" customClass="RoundedButton" customModule="CarePointe" customModuleProvider="target">
+                                <rect key="frame" x="102.5" y="515" width="170" height="40"/>
+                                <color key="backgroundColor" red="0.2651024461" green="0.59462851289999996" blue="0.77094310519999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="AFg-Bg-AqT"/>
+                                    <constraint firstAttribute="height" constant="40" id="C4b-pG-JU3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                <inset key="titleEdgeInsets" minX="-86" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="5" minY="5" maxX="133" maxY="5"/>
+                                <state key="normal" title="Send Message" image="closed-envelope-circle-white.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="radiusMultiplier">
+                                        <real key="value" value="0.050000000000000003"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="4BI-OQ-ldF" kind="presentation" identifier="teamReplyMessage" animates="NO" id="b2l-zf-5uG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="lWH-WY-gII" firstAttribute="centerX" secondItem="fFP-2K-hCZ" secondAttribute="centerX" id="31M-cG-cIY"/>
                             <constraint firstItem="qho-NU-dV3" firstAttribute="leading" secondItem="fFP-2K-hCZ" secondAttribute="leading" id="6fc-IU-Rg4"/>
                             <constraint firstItem="qho-NU-dV3" firstAttribute="top" secondItem="qBV-BI-BT1" secondAttribute="bottom" id="SEN-Cu-uHJ"/>
+                            <constraint firstItem="sxV-ol-UYt" firstAttribute="top" secondItem="lWH-WY-gII" secondAttribute="bottom" constant="10" id="i6F-Ft-TQV"/>
                             <constraint firstAttribute="trailing" secondItem="qho-NU-dV3" secondAttribute="trailing" id="klD-wy-1Kr"/>
                             <constraint firstAttribute="bottom" secondItem="qho-NU-dV3" secondAttribute="bottom" constant="-102" id="olY-Bk-DJG"/>
                         </constraints>
@@ -6089,11 +6113,20 @@ Performance: 13</string>
                     <size key="freeformSize" width="375" height="565"/>
                     <connections>
                         <outlet property="patientCareTeamTable" destination="Arc-Lw-T2Z" id="9bJ-34-Dm7"/>
+                        <outlet property="sendMessageButton" destination="lWH-WY-gII" id="6es-wf-kZk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vfx-zl-D70" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8300" y="-1209.4452773613195"/>
+        </scene>
+        <!--newMessage-->
+        <scene sceneID="hKX-zS-XwY">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="newMessage" id="4BI-OQ-ldF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ez8-LZ-X2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8889" y="-1343"/>
         </scene>
         <!--files-->
         <scene sceneID="NyQ-e6-Vn6">
@@ -6159,6 +6192,7 @@ Performance: 13</string>
                                         <connections>
                                             <outlet property="details" destination="js5-EH-3mt" id="Nfk-v4-3aZ"/>
                                             <outlet property="label" destination="l1S-t0-jSc" id="3VD-du-W24"/>
+                                            <segue destination="0Qk-9I-a16" kind="presentation" identifier="segeuToDocWebView" animates="NO" id="dwH-hU-3DG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -6195,6 +6229,14 @@ Performance: 13</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d5a-2C-I1m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8300" y="-654"/>
+        </scene>
+        <!--docWebView-->
+        <scene sceneID="CnK-GK-TQ0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="webView" referencedIdentifier="docWebView" id="0Qk-9I-a16" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tce-N6-yuX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9040" y="-823"/>
         </scene>
         <!--EMR Updates-->
         <scene sceneID="ClV-lG-cGY">
@@ -6468,10 +6510,10 @@ Performance: 13</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name       |       Category       |       Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKs-1f-DpA">
-                                <rect key="frame" x="27.5" y="42" width="320" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date    |      Category        |        Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKs-1f-DpA">
+                                <rect key="frame" x="20" y="42" width="335" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="3t1-kE-KkV"/>
+                                    <constraint firstAttribute="width" constant="335" id="3t1-kE-KkV"/>
                                     <constraint firstAttribute="height" constant="21" id="sSh-GB-AwJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
@@ -6499,7 +6541,7 @@ Performance: 13</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNK-J7-NrJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6400.8000000000002" y="644.52773613193403"/>
+            <point key="canvasLocation" x="6401" y="652"/>
         </scene>
         <!--locations-->
         <scene sceneID="8hD-4H-rN6">
@@ -6635,6 +6677,7 @@ Performance: 13</string>
         <image name="care.png" width="1106" height="208"/>
         <image name="care.white.png" width="1056" height="208"/>
         <image name="chat.png" width="64" height="64"/>
+        <image name="closed-envelope-circle-white.png" width="120" height="121"/>
         <image name="closed-envelope-circle.png" width="64" height="64"/>
         <image name="dangerOrange.png" width="64" height="64"/>
         <image name="delete.png" width="64" height="64"/>
@@ -6659,10 +6702,10 @@ Performance: 13</string>
         <image name="x_sign80x680.png" width="80" height="680"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YBB-Tg-L47"/>
         <segue reference="zWG-cM-x3M"/>
-        <segue reference="OQI-Pt-Vnr"/>
-        <segue reference="5z8-i9-OWi"/>
+        <segue reference="nHS-Rj-NYJ"/>
+        <segue reference="YBB-Tg-L47"/>
         <segue reference="s6N-rj-JEd"/>
+        <segue reference="5z8-i9-OWi"/>
     </inferredMetricsTieBreakers>
 </document>

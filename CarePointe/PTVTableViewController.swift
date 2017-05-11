@@ -146,20 +146,22 @@ class PTVTableViewController: UITableViewController {
         
         if(whatAppointmentStatusButtonTapped == "Pending"){//indexPath.section == 0) {
             Data = pendingReferrals[indexPath.row]
+            let referralDate = convertDateStringToDate(longDate: Data["StartDate"]!)
             
             cell.appointmentID?.text = Data["Care_Plan_ID"]
             cell.statusImage?.image = UIImage(named: "orange.circle.png")
             cell.patientName?.text = Data["Patient_Name"]
-            cell.AppointmentDate.text = Data["StartDate"]
+            cell.AppointmentDate.text = referralDate//Data["StartDate"]
             cell.patientNameTopConstraint.constant = 2
         }
         if(whatAppointmentStatusButtonTapped == "Scheduled"){//(indexPath.section == 1) {
             Data = scheduledReferrals[indexPath.row]
+            let referralDate = convertDateStringToDate(longDate: Data["StartDate"]!)
             
             cell.appointmentID?.text = Data["Care_Plan_ID"]
             cell.statusImage?.image = UIImage(named: "green.circle.png")
             cell.patientName?.text = Data["Patient_Name"]
-            cell.AppointmentDate.text = Data["StartDate"]
+            cell.AppointmentDate.text = referralDate//Data["StartDate"]
             cell.patientNameTopConstraint.constant = 2
         }
         if(whatAppointmentStatusButtonTapped == "Complete"){//(indexPath.section == 2) {
@@ -196,13 +198,14 @@ class PTVTableViewController: UITableViewController {
             if whatAppointmentStatusButtonTapped == "Scheduled"{//
                 Data = scheduledReferrals[selectedRow]
             }
-            else {
+            if whatAppointmentStatusButtonTapped == "Complete"{
                 Data = completeReferrals[selectedRow]
             }
             
             
             if let toViewController = segue.destination as? ReferralsVC {
                 
+                        toViewController.seguePatientID = Data["Patient_ID"]
                 /* 1 */ toViewController.seguePatientNotes = Data["patient_notes"]
                 /*   */ toViewController.seguePatientName = Data["Patient_Name"]
                 /*   */ toViewController.seguePatientCPID = Data["Care_Plan_ID"]
@@ -218,8 +221,7 @@ class PTVTableViewController: UITableViewController {
                 /*    */toViewController.segueBookAddress = Data["book_address"]
                 /* 11 */toViewController.seguePreAuth = Data["pre_authorization"]
                 /* 12 */toViewController.segueAttachDoc = Data["Attachment_doc"]
-                
-                toViewController.segueStatus = whatAppointmentStatusButtonTapped //"Pending" or "Scheduled" or "Complete"
+                        toViewController.segueStatus = whatAppointmentStatusButtonTapped //"Pending" or "Scheduled" or "Complete"
                 
             }
             

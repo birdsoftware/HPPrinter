@@ -59,6 +59,7 @@
 		583FC4FF1E80590D00D178C4 /* RESTGETToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */; };
 		584192F21EBD347C00844491 /* stringOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584192F11EBD347C00844491 /* stringOperators.swift */; };
 		584192F41EBD41E300844491 /* RESTGETDocuments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584192F31EBD41E300844491 /* RESTGETDocuments.swift */; };
+		584192F61EBD51B900844491 /* RESTGETPatientRefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584192F51EBD51B900844491 /* RESTGETPatientRefer.swift */; };
 		5843BF151EA7D5A500B1966B /* fa-exclamation-triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 5843BF0F1EA7D5A500B1966B /* fa-exclamation-triangle.png */; };
 		5843BF161EA7D5A500B1966B /* fa-file.png in Resources */ = {isa = PBXBuildFile; fileRef = 5843BF101EA7D5A500B1966B /* fa-file.png */; };
 		5843BF171EA7D5A500B1966B /* fa-phone-square.png in Resources */ = {isa = PBXBuildFile; fileRef = 5843BF111EA7D5A500B1966B /* fa-phone-square.png */; };
@@ -146,6 +147,8 @@
 		58B5C9E71E7B114E002A2785 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B5C9E61E7B114E002A2785 /* MobileCoreServices.framework */; };
 		58B5C9E91E7B1155002A2785 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B5C9E81E7B1155002A2785 /* QuartzCore.framework */; };
 		58B5C9EB1E7B115D002A2785 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B5C9EA1E7B115D002A2785 /* SystemConfiguration.framework */; };
+		58B71A871EC3C5480076395C /* webView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58B71A861EC3C5480076395C /* webView.storyboard */; };
+		58B71A891EC3C6320076395C /* DocWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B71A881EC3C6320076395C /* DocWebVC.swift */; };
 		58B71F111E7C8069000AD088 /* insertNewFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B71F101E7C8069000AD088 /* insertNewFeed.swift */; };
 		58B71F131E7C8CCE000AD088 /* getPatientSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B71F121E7C8CCE000AD088 /* getPatientSelected.swift */; };
 		58B71F151E7CA038000AD088 /* RuthQuinones.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 58B71F141E7CA038000AD088 /* RuthQuinones.jpg */; };
@@ -287,6 +290,7 @@
 		583FC4FE1E80590D00D178C4 /* RESTGETToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETToken.swift; sourceTree = "<group>"; };
 		584192F11EBD347C00844491 /* stringOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stringOperators.swift; sourceTree = "<group>"; };
 		584192F31EBD41E300844491 /* RESTGETDocuments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETDocuments.swift; sourceTree = "<group>"; };
+		584192F51EBD51B900844491 /* RESTGETPatientRefer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETPatientRefer.swift; sourceTree = "<group>"; };
 		5843BF0F1EA7D5A500B1966B /* fa-exclamation-triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fa-exclamation-triangle.png"; path = "../../imageFiles/fa-exclamation-triangle.png"; sourceTree = "<group>"; };
 		5843BF101EA7D5A500B1966B /* fa-file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fa-file.png"; path = "../../imageFiles/fa-file.png"; sourceTree = "<group>"; };
 		5843BF111EA7D5A500B1966B /* fa-phone-square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fa-phone-square.png"; path = "../../imageFiles/fa-phone-square.png"; sourceTree = "<group>"; };
@@ -374,6 +378,8 @@
 		58B5C9E61E7B114E002A2785 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		58B5C9E81E7B1155002A2785 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		58B5C9EA1E7B115D002A2785 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		58B71A861EC3C5480076395C /* webView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = webView.storyboard; sourceTree = "<group>"; };
+		58B71A881EC3C6320076395C /* DocWebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocWebVC.swift; sourceTree = "<group>"; };
 		58B71F101E7C8069000AD088 /* insertNewFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = insertNewFeed.swift; sourceTree = "<group>"; };
 		58B71F121E7C8CCE000AD088 /* getPatientSelected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getPatientSelected.swift; sourceTree = "<group>"; };
 		58B71F141E7CA038000AD088 /* RuthQuinones.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = RuthQuinones.jpg; path = ../../imageFiles/patients/RuthQuinones.jpg; sourceTree = "<group>"; };
@@ -554,6 +560,7 @@
 				586F8BFB1EBBAB2C0090B88C /* RESTGETCareTeam.swift */,
 				586F8BFD1EBBE34E0090B88C /* RESTGETLocations.swift */,
 				584192F31EBD41E300844491 /* RESTGETDocuments.swift */,
+				584192F51EBD51B900844491 /* RESTGETPatientRefer.swift */,
 			);
 			name = "Active App API's";
 			sourceTree = "<group>";
@@ -705,6 +712,7 @@
 				588435CA1EB9345F007F736A /* RefferalAppointmentAlertVC.swift */,
 				587218171EA91269002322B8 /* ConnectListVC.swift */,
 				586CDB1C1EAEB4C700AC4DE6 /* ReferralsVC.swift */,
+				58B71A881EC3C6320076395C /* DocWebVC.swift */,
 				583D5EC21EA151D00024604B /* PatientListCell.swift */,
 				BB57C2D31DFF41DE00731AC4 /* ViewController.swift */,
 				58CEEB4E1E65FBEC00104057 /* messages */,
@@ -937,6 +945,7 @@
 				5843BF1F1EA823E700B1966B /* communication.storyboard */,
 				581DE38F1EAA8851006DB32A /* AlertsGlobal.storyboard */,
 				586CDB161EAE9D1F00AC4DE6 /* Refferal.storyboard */,
+				58B71A861EC3C5480076395C /* webView.storyboard */,
 				BB57C2D81DFF41DE00731AC4 /* Assets.xcassets */,
 				BB57C2DA1DFF41DE00731AC4 /* LaunchScreen.storyboard */,
 				BB57C2DD1DFF41DE00731AC4 /* Info.plist */,
@@ -1121,6 +1130,7 @@
 				58496C191E527FD900DF103A /* box.png in Resources */,
 				58D633591E4A73F600DC3EB9 /* exitandgoback.png in Resources */,
 				5843BF171EA7D5A500B1966B /* fa-phone-square.png in Resources */,
+				58B71A871EC3C5480076395C /* webView.storyboard in Resources */,
 				58B18A571E69FEF0009769A2 /* delete.png in Resources */,
 				58BBF0241E786F2B00384866 /* VideoCameraWhite.png in Resources */,
 				586BFDDA1E3BE28C00DC6770 /* gears.png in Resources */,
@@ -1234,9 +1244,11 @@
 				58E7FC991E8C4CE300F203C6 /* users.swift in Sources */,
 				BB93EA9E1E0349F8000C15D3 /* RegisterViewController.swift in Sources */,
 				5820BE261E96C45D004E0AE4 /* RESTPOSTSignIn.swift in Sources */,
+				584192F61EBD51B900844491 /* RESTGETPatientRefer.swift in Sources */,
 				58EB0DCE1E73614A0009FD57 /* locationsViewC.swift in Sources */,
 				58D6335B1E4A78C400DC3EB9 /* RangeSliderTrackLayer.swift in Sources */,
 				580790411E6777CA0038FC61 /* setUpInBoxData.swift in Sources */,
+				58B71A891EC3C6320076395C /* DocWebVC.swift in Sources */,
 				586BFDE31E3C09AB00DC6770 /* AlertVC.swift in Sources */,
 				58272AF81E4105DE00E779CF /* PatientTabBarController.swift in Sources */,
 				58D633601E4D1FF900DC3EB9 /* PatientCareTeamViewController.swift in Sources */,

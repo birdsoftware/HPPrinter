@@ -152,7 +152,7 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
     
     
     //
-    // MARK: Buttons
+    // #MARK: Buttons
     //
     
     @IBAction func backButtonTapped(_ sender: Any) {
@@ -187,10 +187,8 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
     }
     
     
-    
-    
     //
-    // MARK: UITableViewDataSource
+    // #MARK: UITableViewDataSource
     //
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -246,11 +244,8 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
     }
     
     func connected(sender: UIButton) {
-        
-        //get the tag in this connected function
+
         let buttonTag = sender.tag
-        //call care team member
-        //callCareTeamMember(member: buttonTag)
         
         let selectedUserData:Dictionary<String,String> = selectedUsers[buttonTag] //FirstLastName,phone_number,RoleType,Company
         var phoneString = selectedUserData["phone_number"]!
@@ -313,7 +308,7 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
    
     
     //
-    // # MARK: Support functions
+    // #MARK: Support functions
     //
     
     func returnPhoneEmoji(phoneNumber: String ) -> String{
@@ -349,7 +344,7 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
     
     
 //
-// # MARK: Supports CALL
+// #MARK: Supports CALL
 //
     
     
