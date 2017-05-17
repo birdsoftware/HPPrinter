@@ -14,6 +14,9 @@ class GETPatientRefer {
         
         var patientReferral = Array<Dictionary<String,String>>()
         
+        //varaibales to filter duplicate referrals
+        var uniqueValues = Set<String>()
+        
         let nsurlAlerts = "http://carepointe.cloud:4300/api/referrals/patientId/" + patientID
         
         let headers = [
@@ -47,11 +50,23 @@ class GETPatientRefer {
                                     let Status = dict["Status"] as? String ?? ""
                                     let StartDate = dict["StartDate"] as? String ?? ""
                                     
-                                    patientReferral.append(["ServiceCategory":ServiceCategory, "Status":Status, "StartDate":StartDate])
+                                    let Care_Plan_ID = dict["Care_Plan_ID"] as? Int ?? 0
+                                    let cpid = String(Care_Plan_ID)
+                                    
+                                    //Uncomment To make referrals unique - remove duplicates
+                                    let beforeInsertCount = uniqueValues.count
+                                    uniqueValues.insert(cpid) // will do nothing if Care_Plan_ID exists already
+                                    let afterInsertCount = uniqueValues.count
+                                     
+                                       //define dictionary literals
+                                    if beforeInsertCount != afterInsertCount {
+                                    
+                                        patientReferral.append(["ServiceCategory":ServiceCategory, "Status":Status, "StartDate":StartDate])
+                                    }
                                 }
                                 
                                 //careTeam = careTeams[0]
-                                print("v: \(patientReferral)")
+                                print("patientReferral: \(patientReferral)")
                                 UserDefaults.standard.set(patientReferral, forKey: "RESTPatientReferral")
                                 UserDefaults.standard.synchronize()
                                 print("finished GET patient Referral")

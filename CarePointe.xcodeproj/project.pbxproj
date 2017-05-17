@@ -149,6 +149,15 @@
 		58B5C9EB1E7B115D002A2785 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B5C9EA1E7B115D002A2785 /* SystemConfiguration.framework */; };
 		58B71A871EC3C5480076395C /* webView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58B71A861EC3C5480076395C /* webView.storyboard */; };
 		58B71A891EC3C6320076395C /* DocWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B71A881EC3C6320076395C /* DocWebVC.swift */; };
+		58B71A941EC51D080076395C /* eight.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B71A8B1EC51D080076395C /* eight.png */; };
+		58B71A951EC51D080076395C /* five.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B71A8C1EC51D080076395C /* five.png */; };
+		58B71A961EC51D080076395C /* four.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B71A8D1EC51D080076395C /* four.png */; };
+		58B71A971EC51D080076395C /* nine.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B71A8E1EC51D080076395C /* nine.png */; };
+		58B71A981EC51D080076395C /* one.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B71A8F1EC51D080076395C /* one.png */; };
+		58B71A991EC51D080076395C /* seven.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B71A901EC51D080076395C /* seven.png */; };
+		58B71A9A1EC51D080076395C /* six.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B71A911EC51D080076395C /* six.png */; };
+		58B71A9B1EC51D080076395C /* three.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B71A921EC51D080076395C /* three.png */; };
+		58B71A9C1EC51D080076395C /* two.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B71A931EC51D080076395C /* two.png */; };
 		58B71F111E7C8069000AD088 /* insertNewFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B71F101E7C8069000AD088 /* insertNewFeed.swift */; };
 		58B71F131E7C8CCE000AD088 /* getPatientSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B71F121E7C8CCE000AD088 /* getPatientSelected.swift */; };
 		58B71F151E7CA038000AD088 /* RuthQuinones.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 58B71F141E7CA038000AD088 /* RuthQuinones.jpg */; };
@@ -380,6 +389,15 @@
 		58B5C9EA1E7B115D002A2785 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		58B71A861EC3C5480076395C /* webView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = webView.storyboard; sourceTree = "<group>"; };
 		58B71A881EC3C6320076395C /* DocWebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocWebVC.swift; sourceTree = "<group>"; };
+		58B71A8B1EC51D080076395C /* eight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eight.png; path = ../../imageFiles/numbers/eight.png; sourceTree = "<group>"; };
+		58B71A8C1EC51D080076395C /* five.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = five.png; path = ../../imageFiles/numbers/five.png; sourceTree = "<group>"; };
+		58B71A8D1EC51D080076395C /* four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = four.png; path = ../../imageFiles/numbers/four.png; sourceTree = "<group>"; };
+		58B71A8E1EC51D080076395C /* nine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nine.png; path = ../../imageFiles/numbers/nine.png; sourceTree = "<group>"; };
+		58B71A8F1EC51D080076395C /* one.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = one.png; path = ../../imageFiles/numbers/one.png; sourceTree = "<group>"; };
+		58B71A901EC51D080076395C /* seven.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = seven.png; path = ../../imageFiles/numbers/seven.png; sourceTree = "<group>"; };
+		58B71A911EC51D080076395C /* six.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = six.png; path = ../../imageFiles/numbers/six.png; sourceTree = "<group>"; };
+		58B71A921EC51D080076395C /* three.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = three.png; path = ../../imageFiles/numbers/three.png; sourceTree = "<group>"; };
+		58B71A931EC51D080076395C /* two.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = two.png; path = ../../imageFiles/numbers/two.png; sourceTree = "<group>"; };
 		58B71F101E7C8069000AD088 /* insertNewFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = insertNewFeed.swift; sourceTree = "<group>"; };
 		58B71F121E7C8CCE000AD088 /* getPatientSelected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getPatientSelected.swift; sourceTree = "<group>"; };
 		58B71F141E7CA038000AD088 /* RuthQuinones.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = RuthQuinones.jpg; path = ../../imageFiles/patients/RuthQuinones.jpg; sourceTree = "<group>"; };
@@ -573,6 +591,7 @@
 				5843BF0B1EA7D41900B1966B /* users */,
 				5843BF0E1EA7D58E00B1966B /* updates */,
 				586BFDD91E3BE28C00DC6770 /* gears.png */,
+				58B71A8A1EC51CF20076395C /* Numbers */,
 				5843BF1B1EA80BAA00B1966B /* chat.png */,
 				583646941E08A7BC003C2E60 /* bell.png */,
 				582806601E0991F400421815 /* calendar.png */,
@@ -817,6 +836,22 @@
 				58B5C9DE1E7B1131002A2785 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		58B71A8A1EC51CF20076395C /* Numbers */ = {
+			isa = PBXGroup;
+			children = (
+				58B71A8B1EC51D080076395C /* eight.png */,
+				58B71A8C1EC51D080076395C /* five.png */,
+				58B71A8D1EC51D080076395C /* four.png */,
+				58B71A8E1EC51D080076395C /* nine.png */,
+				58B71A8F1EC51D080076395C /* one.png */,
+				58B71A901EC51D080076395C /* seven.png */,
+				58B71A911EC51D080076395C /* six.png */,
+				58B71A921EC51D080076395C /* three.png */,
+				58B71A931EC51D080076395C /* two.png */,
+			);
+			name = Numbers;
 			sourceTree = "<group>";
 		};
 		58CBC00E1E4D495F001A9698 /* Rx Tab */ = {
@@ -1081,6 +1116,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58B71A981EC51D080076395C /* one.png in Resources */,
 				58D633761E4D34CB00DC3EB9 /* telephone.png in Resources */,
 				58458ABC1E43DD1C005DFEDA /* attention.png in Resources */,
 				586CDB191EAE9E4B00AC4DE6 /* home.png in Resources */,
@@ -1099,9 +1135,11 @@
 				58D633731E4D34CB00DC3EB9 /* bullets.png in Resources */,
 				5843BF201EA823E700B1966B /* communication.storyboard in Resources */,
 				582806631E09AB0C00421815 /* side_menu_bg.jpg in Resources */,
+				58B71A9B1EC51D080076395C /* three.png in Resources */,
 				58CEEB491E65EF8200104057 /* tammie.png in Resources */,
 				586BFDDD1E3BE40C00DC6770 /* calendar2.png in Resources */,
 				586CDB171EAE9D1F00AC4DE6 /* Refferal.storyboard in Resources */,
+				58B71A971EC51D080076395C /* nine.png in Resources */,
 				58D633681E4D26AB00DC3EB9 /* Untitled.png in Resources */,
 				583646951E08A7BC003C2E60 /* bell.png in Resources */,
 				586BFDE01E3BFBCD00DC6770 /* phoneCircle.png in Resources */,
@@ -1125,9 +1163,11 @@
 				58B18A581E69FEF0009769A2 /* reply.png in Resources */,
 				58B18A541E69E4CF009769A2 /* backArrow.png in Resources */,
 				58254B5A1E0855FF00933B60 /* gray.circle.png in Resources */,
+				58B71A9A1EC51D080076395C /* six.png in Resources */,
 				58BBF0231E786F2B00384866 /* closed-envelope-circle-white.png in Resources */,
 				58D633741E4D34CB00DC3EB9 /* doctor.png in Resources */,
 				58496C191E527FD900DF103A /* box.png in Resources */,
+				58B71A961EC51D080076395C /* four.png in Resources */,
 				58D633591E4A73F600DC3EB9 /* exitandgoback.png in Resources */,
 				5843BF171EA7D5A500B1966B /* fa-phone-square.png in Resources */,
 				58B71A871EC3C5480076395C /* webView.storyboard in Resources */,
@@ -1136,6 +1176,7 @@
 				586BFDDA1E3BE28C00DC6770 /* gears.png in Resources */,
 				58CEEB521E663D4200104057 /* paper-clip.png in Resources */,
 				58272AED1E3FE93C00E779CF /* user.png in Resources */,
+				58B71A991EC51D080076395C /* seven.png in Resources */,
 				58CEEB501E65FC4600104057 /* CloseKeyboardButton.png in Resources */,
 				58E65E591EB016290075625F /* placeholder.png in Resources */,
 				581DE3901EAA8851006DB32A /* AlertsGlobal.storyboard in Resources */,
@@ -1150,8 +1191,10 @@
 				5843BF191EA7D5A500B1966B /* fa-list-ul.png in Resources */,
 				582806671E09B5AF00421815 /* jennifer.jpg in Resources */,
 				5845BAEF1EA02F4500EDE935 /* group.png in Resources */,
+				58B71A941EC51D080076395C /* eight.png in Resources */,
 				582806651E09AC4100421815 /* care.white.png in Resources */,
 				58272AFA1E411F8A00E779CF /* green.circle.png in Resources */,
+				58B71A9C1EC51D080076395C /* two.png in Resources */,
 				5843BF151EA7D5A500B1966B /* fa-exclamation-triangle.png in Resources */,
 				581DE3961EAABDC1006DB32A /* AdddUser.jpg in Resources */,
 				58B71F151E7CA038000AD088 /* RuthQuinones.jpg in Resources */,
@@ -1159,6 +1202,7 @@
 				58FDD47A1E60A6CD00F97D86 /* dangerOrange.png in Resources */,
 				BB57C2D91DFF41DE00731AC4 /* Assets.xcassets in Resources */,
 				58B71F1D1E7CA268000AD088 /* BillSummers.jpeg in Resources */,
+				58B71A951EC51D080076395C /* five.png in Resources */,
 				58B71F191E7CA0C3000AD088 /* BarrieThomson.jpeg in Resources */,
 				BB57C2D71DFF41DE00731AC4 /* Main.storyboard in Resources */,
 				58272B021E42495800E779CF /* calendarGreen.png in Resources */,

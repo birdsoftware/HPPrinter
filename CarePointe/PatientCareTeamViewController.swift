@@ -26,6 +26,7 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
     var restCareT = Array<Dictionary<String,String>>()
     var viewStatus = ""
     
+    var callCareLine = "4804942466"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,9 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
         
         let selectedCTData:Dictionary<String,String> = restCareT[buttonTag]
         var phoneString = selectedCTData["phone_number"]!
+        if phoneString == "" {
+            phoneString = callCareLine
+        }
         phoneString = phoneString.replacingOccurrences(of: "(", with: "")
         phoneString = phoneString.replacingOccurrences(of: ")", with: "")
         phoneString = phoneString.replacingOccurrences(of: "-", with: "")
@@ -174,12 +178,15 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
         let careTeamData:Dictionary<String,String> = restCareT[IndexPath.row]
         
         if careTeamData["phone_number"] == "" {
-            cell.patientCTCallButton.isEnabled = false
-        } else {
+            //cell.patientCTCallButton.isEnabled = false
+            let stencil = UIImage(named: "phoneCircle.png")?.withRenderingMode(.alwaysTemplate)
+            cell.patientCTCallButton.setImage(stencil, for: .normal)
+            cell.patientCTCallButton.tintColor = .red // set a color
+        } //else {
             //set tag of the button since we are using it & add target to the buttom
             cell.patientCTCallButton.tag = IndexPath.row //tag is Int -2,147,483,648 and 2,147,483,647
             cell.patientCTCallButton.addTarget(self, action: #selector(connected), for: .touchUpInside)
-        }
+        //}
         cell.patientCTVideoButton.isEnabled = false
         
         cell.patientCTMessageButton.isHidden = true

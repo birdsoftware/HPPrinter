@@ -23,7 +23,7 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var caseInfo = [["Start Date", "-"],//"02/02/2017"],
                    ["Program", "-"],//"Transitional Care"],
-                   ["Disease", "-"],//"Fibromyalgia"],
+                   ["Needs", "-"],//"Fibromyalgia"],
                    ["Acuity","-"],//"High"],
                    ["SNP","-"],//"Caregiver, Supplies, Transportation"],
                    ["Summary","-"],//"Patient came to us from Observation Unit at Chandler Regional Hospital. Patient had a few prior hospitalizations due to falls in the past weeks. Patient suffers from permanent brain damage due to traumatic car accident. Experiences access falls and confusion and needs 24hr monitoring. Lives with Husband and Daughter that act as caregivers."]

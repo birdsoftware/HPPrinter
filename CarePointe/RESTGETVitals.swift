@@ -60,7 +60,7 @@ class GETVitals {
                                 }
                                 
                                 vital = vitals[0]
-                                print("v: \(vital)")
+                                print("vital: \(vital)")
                                 UserDefaults.standard.set(vital, forKey: "RESTVitals")
                                 UserDefaults.standard.synchronize()
                                 print("finished GET Vitals")

@@ -6,13 +6,6 @@
 //  Copyright © 2017 Mogul Pro Media. All rights reserved.
 //
 
-//
-//  RESTPatients.swift
-//  testRestAPI
-//
-//  Created by Brian Bird on 3/21/17.
-//  Copyright © 2017 Brian Bird. All rights reserved.
-//
 
 import Foundation
 

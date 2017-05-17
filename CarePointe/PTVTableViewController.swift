@@ -205,13 +205,39 @@ class PTVTableViewController: UITableViewController {
             
             if let toViewController = segue.destination as? ReferralsVC {
                 
+                
+                /* INPUT: longDate = "hh:mm" ":30" or "12:"
+                 * OUTPUT: "12:30 AM" or "12:00 PM"
+                 * date_format_you_want_in_string from
+                 * http://userguide.icu-project.org/formatparse/datetime
+                 */
+                
+                var stringBookMin = Data["book_minutes"]!
+                
+                if stringBookMin != "" {
+                    
+                    let minutes = Int(stringBookMin)
+                    
+                    var bookMinutesWithUnitLabel = stringBookMin
+                    
+                    if minutes! > 60 {
+                        bookMinutesWithUnitLabel += " hour"
+                    }
+                    if minutes! <= 60 {
+                        bookMinutesWithUnitLabel += " min"
+                    }
+                    stringBookMin = bookMinutesWithUnitLabel
+                }
+                
+                let hourMinuteString = convertStringTimeToString_hh_mm_a(date_hhmm: Data["date_hhmm"]!)//myFormatter.string(from: hourMinute)
+ 
                         toViewController.seguePatientID = Data["Patient_ID"]
                 /* 1 */ toViewController.seguePatientNotes = Data["patient_notes"]
                 /*   */ toViewController.seguePatientName = Data["Patient_Name"]
                 /*   */ toViewController.seguePatientCPID = Data["Care_Plan_ID"]
                 /* 4 */ toViewController.seguePatientDate = Data["StartDate"]
-                /*   */ toViewController.segueHourMin = Data["date_hhmm"]
-                /* 5 */ toViewController.segueBookMinutes = Data["book_minutes"]
+                /*   */ toViewController.segueHourMin = hourMinuteString//Data["date_hhmm"]
+                /* 5 */ toViewController.segueBookMinutes = stringBookMin//Data["book_minutes"]
                 /* 6 */ toViewController.segueProviderName = Data["provider_name"]
                 /*   */ toViewController.segueProviderID = Data["ServiceProvider_ID"]
                 /* 7 */ toViewController.segueEncounterType = Data["book_type"]
@@ -222,6 +248,7 @@ class PTVTableViewController: UITableViewController {
                 /* 11 */toViewController.seguePreAuth = Data["pre_authorization"]
                 /* 12 */toViewController.segueAttachDoc = Data["Attachment_doc"]
                         toViewController.segueStatus = whatAppointmentStatusButtonTapped //"Pending" or "Scheduled" or "Complete"
+                        toViewController.segueIsUrgent = Data["Is_urgent"]
                 
             }
             

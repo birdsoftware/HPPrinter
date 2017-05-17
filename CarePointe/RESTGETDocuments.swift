@@ -43,17 +43,20 @@ class GETDocuments {
                             if(vJSON.isEmpty == false){
                                 for dict in vJSON {
                                     
+                                    let Episode_ID = dict["Episode_ID"] as? Int ?? 0
                                     let fileName = dict["DocumentName"] as? String ?? ""
                                     let category = dict["DocumentCategory"] as? String ?? ""
                                     let FilePath = dict["FilePath"] as? String ?? ""
                                     let CreatedDateTime = dict["CreatedDateTime"] as? String ?? ""
                                     
-                                    documents.append(["DocumentName":fileName, "DocumentCategory":category, "FilePath":FilePath, "CreatedDateTime":CreatedDateTime])
+                                    let eid = String(Episode_ID)
+                                    
+                                    documents.append(["Episode_ID":eid,"DocumentName":fileName, "DocumentCategory":category, "FilePath":FilePath, "CreatedDateTime":CreatedDateTime])
 
                                 }
                                 
                                 //careTeam = careTeams[0]
-                                print("v: \(documents)")
+                                print("documents: \(documents)")
                                 UserDefaults.standard.set(documents, forKey: "RESTDocuments")
                                 UserDefaults.standard.synchronize()
                                 print("finished GET Documents")

@@ -15,7 +15,7 @@ class GETReferrals {
         var referrals = Array<Dictionary<String,String>>()
         
         //varaibales to filter duplicate referrals
-        let uniqueValues = Set<String>()
+        //let uniqueValues = Set<String>()
         
         
         let headers = [
@@ -65,6 +65,7 @@ class GETReferrals {
                                         let locationType = dict["location_type"] as? String ?? ""
                                         let bookPlace = dict["book_place"] as? String ?? ""
                                         let bookAddress = dict["book_address"] as? String ?? ""
+                                        let pre_authorization = dict["pre_authorization"] as? String ?? ""
                                         let dateofcollection = dict["dateofcollection"] as? String ?? ""
                                         let attachmentDoc = dict["Attachment_doc"] as? String ?? ""
                                         let isHomeassessment = dict["Is_homeassessment"] as? String ?? ""
@@ -90,7 +91,9 @@ class GETReferrals {
                                         * if beforeInsertCount != afterInsertCount {
                                         */
                                             referrals.append(["Patient_ID":pid, "Patient_Name":patientName, "Care_Plan_ID":cpid, "Episode_ID":eid,
-                                                          "ServiceProvider_ID":spid, "provideruserid":puid, "StartDate":startDate, "date_hhmm":datehhmm, "book_minutes":bookMinutes, "ServiceCategory":serviceCategory, "Status":status, "Summary":summary, "patient_notes":patientNotes, "book_type":bookType, "book_purpose":bookPurpose, "location_type":locationType, "book_place":bookPlace, "book_address":bookAddress, "dateofcollection":dateofcollection, "Attachment_doc":attachmentDoc, "Is_homeassessment":isHomeassessment, "IsActive":isActive, "CreatedDateTime":createdDateTime, "UpdatedDateTime":updatedDateTime, "CreatedBy_name":createdByName, "provider_name":providerName, "Is_urgent":isUrgent])
+                                                          "ServiceProvider_ID":spid, "provideruserid":puid, "StartDate":startDate, "date_hhmm":datehhmm, "book_minutes":bookMinutes, "ServiceCategory":serviceCategory, "Status":status, "Summary":summary, "patient_notes":patientNotes, "book_type":bookType, "book_purpose":bookPurpose, "location_type":locationType, "book_place":bookPlace, "book_address":bookAddress,
+                                                              "pre_authorization":pre_authorization,
+                                                              "dateofcollection":dateofcollection, "Attachment_doc":attachmentDoc, "Is_homeassessment":isHomeassessment, "IsActive":isActive, "CreatedDateTime":createdDateTime, "UpdatedDateTime":updatedDateTime, "CreatedBy_name":createdByName, "provider_name":providerName, "Is_urgent":isUrgent])
                                         }
                                     /*}*/
                                     
@@ -98,7 +101,7 @@ class GETReferrals {
                                     //O n^2 solutions :(
                                     //referrals = referrals.enumerated()
                                     //    .flatMap { (idx, dict) in !referrals[0..<idx].contains(where: {$0 == dict}) ? dict : nil }
-                                    print("\(uniqueValues)")
+                                    //print("\(uniqueValues)")
                                     UserDefaults.standard.set(referrals, forKey: "RESTAllReferrals")
                                     UserDefaults.standard.synchronize()
                                     

@@ -58,7 +58,7 @@ class GETCareTeam {
                
                                     }
           
-                                    print("v: \(careTeams)")
+                                    print("careTeams: \(careTeams)")
                                     UserDefaults.standard.set(careTeams, forKey: "RESTCareTeam")
                                     UserDefaults.standard.synchronize()
                                     print("finished GET Care Team")

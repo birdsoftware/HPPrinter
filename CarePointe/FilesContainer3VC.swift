@@ -35,8 +35,7 @@ class FilesContainer3VC: UIViewController, UITableViewDelegate, UITableViewDataS
         filesTable.rowHeight = UITableViewAutomaticDimension
         filesTable.estimatedRowHeight = 150
         
-        files = [["file name","-"],
-                  ["file name","-"]
+        files = [["file name","category","episode","filepath","CreatedDateTime"]//self.patientID+"/episode_"+dict["Episode_ID"]!+"/"+dict["FilePath"]!
         ]
         
     }
@@ -83,12 +82,11 @@ class FilesContainer3VC: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let docsFlag = DispatchGroup()
         docsFlag.enter()
-        
+        //let pid = patientID
         let newDocAPI = GETDocuments()
         newDocAPI.getDocs(token: token, patientID: patientID, dispachInstance: docsFlag)
         
         docsFlag.notify(queue: DispatchQueue.main) {//docs sent back from cloud
-        
             //get docs and category and update filesTable-------------------
             self.restDocs = UserDefaults.standard.object(forKey: "RESTDocuments") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
             
@@ -98,48 +96,64 @@ class FilesContainer3VC: UIViewController, UITableViewDelegate, UITableViewDataS
                 
                 for dict in self.restDocs {
                     
-                    //let fileDate = convertDateStringToDate(longDate: arrayCase["CreatedDateTime"]!) // "FilePath"
-                    //let webDocLoc = "https://carepointe.cloud/episode_document/patient_"+self.patientID+"/episode_"+dict["Episode_ID"]!+"/"+dict["FilePath"]!
-                    
-                    self.files.append([dict["DocumentName"]!,dict["DocumentCategory"]!])
+                    self.files.append([dict["DocumentName"]!,dict["DocumentCategory"]!, dict["Episode_ID"]!,dict["FilePath"]!,dict["CreatedDateTime"]!])
                 }
-                
                 self.filesTable.reloadData()
             }
             //-----------------------------
-            //https://carepointe.cloud/episode_document/patient_1848/episode_1821/Monica_170503011511.pdf
         }
-
-        
     }
-    
     
     //
     // #MARK: - Table View
     //
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return files.count
     }
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt IndexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "files") as! filesCell
         
-        cell.label.text = files[IndexPath.row][0]
-        cell.details.text = files[IndexPath.row][1]
-        
+        cell.label.text = files[IndexPath.row][0]   //File Name
+        cell.details.text = files[IndexPath.row][1] //Category
         if(IndexPath.row % 2 == 0){
             cell.backgroundColor = UIColor.polar()  }
         else{
             cell.backgroundColor = UIColor.white  }
-        
         cell.accessoryType = .disclosureIndicator // add arrow > to cell
         
         return cell
     }
     
+    //
+    // #MARK: - Segue
+    //
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "segeuToDocWebView" {
+            
+            let filesIndex = filesTable.indexPathForSelectedRow?.row //<-SEGUE segue majic
+            
+            let DocumentName        = files[filesIndex!][0]
+            let DocumentCategory    = files[filesIndex!][1]
+            let Episode_ID          = files[filesIndex!][2]
+            let FilePath            = files[filesIndex!][3]
+            let CreatedDateTime     = files[filesIndex!][4]
+            let justDate            = convertDateStringToDate(longDate: CreatedDateTime)
+            
+            let webDocLoc = "https://carepointe.cloud/episode_document/patient_"+patientID+"/episode_"+Episode_ID+"/"+FilePath
+            
+            if let toViewController = segue.destination as? DocWebVC {
+                toViewController.segueDocumentFullFilePath = webDocLoc
+                toViewController.segueDocumentName = DocumentName
+                toViewController.segueDocumentCategory = DocumentCategory
+                toViewController.segueDocumentCreationDateTime = justDate
+            }
+        }            //https://carepointe.cloud/episode_document/patient_1848/episode_1821/Monica_170503011511.pdf
+    }
 
+    
+    
 }

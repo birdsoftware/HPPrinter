@@ -2966,7 +2966,6 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 </state>
                                 <connections>
                                     <action selector="backButtonTapped:" destination="gwG-IL-8Pd" eventType="touchUpInside" id="3XX-3b-Lsh"/>
-                                    <action selector="backButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="mYb-hv-bsV"/>
                                     <action selector="cancelChangesButtonTapped:" destination="NcL-RN-a90" eventType="touchUpInside" id="7E1-hf-GNh"/>
                                 </connections>
                             </button>
@@ -3083,7 +3082,6 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="completedPatientButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="NOw-P3-HP9"/>
                                     <action selector="sendButtonTapped:" destination="n1s-gh-Bg8" eventType="touchUpInside" id="tu0-T3-bO6"/>
                                 </connections>
                             </button>
@@ -3178,6 +3176,14 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                 <exit id="jXX-XM-sgU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5957.6000000000004" y="-788.45577211394311"/>
+        </scene>
+        <!--referralVC-->
+        <scene sceneID="I7x-de-bt8">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Refferal" referencedIdentifier="referralVC" id="o1Y-l2-6r5" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z4m-Az-wRr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6678" y="-582"/>
         </scene>
         <!--Case-->
         <scene sceneID="OCg-8B-cjx">
@@ -3352,7 +3358,6 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 <connections>
                                     <action selector="backButtonTapped:" destination="sVx-wz-LNf" eventType="touchUpInside" id="3PN-8G-qNw"/>
                                     <action selector="backButtonTapped:" destination="gwG-IL-8Pd" eventType="touchUpInside" id="DvS-AI-4pP"/>
-                                    <action selector="backButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="ufG-Kt-BWC"/>
                                     <action selector="backButtonTapped:" destination="GAG-l8-o5t" eventType="touchUpInside" id="zZh-i4-6Eg"/>
                                     <action selector="cancelChangesButtonTapped:" destination="NcL-RN-a90" eventType="touchUpInside" id="TNK-Y0-4LX"/>
                                 </connections>
@@ -3515,8 +3520,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="backButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="l25-EA-kDZ"/>
-                                    <action selector="cancelChangesButtonTapped:" destination="NcL-RN-a90" eventType="touchUpInside" id="Wfv-pc-8Yl"/>
+                                    <action selector="backButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="k9V-xq-iAq"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="pom-pe-zEl">
@@ -3571,6 +3575,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         <outlet property="containerView4" destination="7p0-7u-UsF" id="0zX-Kf-vXK"/>
                         <outlet property="segmentControl" destination="pom-pe-zEl" id="iHM-e2-PpR"/>
                         <segue destination="NGQ-Px-5G7" kind="presentation" identifier="newPatientAppointment" animates="NO" id="Gva-bH-0f0"/>
+                        <segue destination="o1Y-l2-6r5" kind="presentation" identifier="patientToReferral" animates="NO" id="fjh-JR-p5h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZJ-MS-VgL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3734,7 +3739,6 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="completedPatientButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="7m1-Cf-3IQ"/>
                                     <action selector="sendAppointmentButtonTapped:" destination="NGQ-Px-5G7" eventType="touchUpInside" id="m4N-n3-lM1"/>
                                 </connections>
                             </button>
@@ -3936,7 +3940,6 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="backButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="1J5-3l-mLJ"/>
                                     <action selector="backButtonTapped:" destination="gwG-IL-8Pd" eventType="touchUpInside" id="4Jg-aP-nmU"/>
                                     <action selector="backButtonTapped:" destination="fmc-kP-nSf" eventType="touchUpInside" id="nka-ou-b77"/>
                                     <action selector="cancelChangesButtonTapped:" destination="NcL-RN-a90" eventType="touchUpInside" id="6eZ-PB-B6h"/>
@@ -4353,7 +4356,6 @@ Performance: 13</string>
                                 </state>
                                 <connections>
                                     <action selector="backButtonTapped:" destination="gwG-IL-8Pd" eventType="touchUpInside" id="BIl-Nj-4j9"/>
-                                    <action selector="backButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="ukz-mr-z1h"/>
                                     <action selector="backButtonTapped:" destination="sVx-wz-LNf" eventType="touchUpInside" id="wiR-Em-Tag"/>
                                     <action selector="cancelChangesButtonTapped:" destination="NcL-RN-a90" eventType="touchUpInside" id="dje-8e-eJd"/>
                                 </connections>
@@ -4606,7 +4608,6 @@ Performance: 13</string>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="completPatientButtonTapped:" destination="uJM-6f-Dbx" eventType="touchUpInside" id="fvy-TG-rjy"/>
-                                    <action selector="completedPatientButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="BFV-FB-tSt"/>
                                     <action selector="sendButtonTapped:" destination="n1s-gh-Bg8" eventType="touchUpInside" id="wjx-Vl-nnS"/>
                                 </connections>
                             </button>
@@ -5841,7 +5842,7 @@ Performance: 13</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cdu-yZ-PAW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7576.8000000000002" y="-1940.7796101949027"/>
+            <point key="canvasLocation" x="7564" y="-1695"/>
         </scene>
         <!--Vitals-->
         <scene sceneID="AAI-dk-byr">
@@ -5934,7 +5935,6 @@ Performance: 13</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="completedPatientButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="lQo-Wj-RYN"/>
                                     <action selector="sendAppointmentButtonTapped:" destination="NGQ-Px-5G7" eventType="touchUpInside" id="BYT-Cg-G4m"/>
                                     <action selector="updateButtonTapped:" destination="FaN-6q-q1S" eventType="touchUpInside" id="pBf-h5-cnx"/>
                                 </connections>
@@ -6140,7 +6140,7 @@ Performance: 13</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="565"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaH-vD-zU6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaH-vD-zU6">
                                 <rect key="frame" x="16" y="10" width="164" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Jdw-Ll-2VS"/>
@@ -6197,7 +6197,7 @@ Performance: 13</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZE-Xl-VoK">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZE-Xl-VoK">
                                 <rect key="frame" x="188" y="10" width="171" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="2Y0-Hk-vBw"/>
@@ -6437,7 +6437,6 @@ Performance: 13</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="completedPatientButtonTapped:" destination="e5T-MW-2sY" eventType="touchUpInside" id="sZJ-tW-Myg"/>
                                     <action selector="sendButtonTapped:" destination="n1s-gh-Bg8" eventType="touchUpInside" id="2Vq-IT-7aF"/>
                                 </connections>
                             </button>

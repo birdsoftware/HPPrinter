@@ -46,7 +46,6 @@ extension UIViewController {
     }
     
     func convertDateStringToDate(longDate: String) -> String{
-        
         /* INPUT: longDate = "2017-01-27T05:00:00.000Z"
          * OUTPUT: "1/26/17"
          * date_format_you_want_in_string from
@@ -66,29 +65,41 @@ extension UIViewController {
             return dateShort
             
         } else {
-            
             return longDate
-            
         }
+    }
+    
+    func convertStringTimeToString_hh_mm_a(date_hhmm: String) -> String{
+        /* INPUT: date_hhmm = "hh:mm" ":30" or "12:"
+         * OUTPUT: "12:30 AM" or "12:00 PM"
+         * date_format_you_want_in_string from
+         * http://userguide.icu-project.org/formatparse/datetime
+         */
+        
+        //date_hhmm ":30"
+        
+        var token = date_hhmm.components(separatedBy: ":")//token[0] "hh" token[1] "mm"
+        
+        let hour = Int(token[0])
+        let minute = Int(token[1])
+        
+        var myTimeComponents = DateComponents()
+        
+        myTimeComponents.hour = hour//""
+        myTimeComponents.minute = minute//"30"
+        myTimeComponents.timeZone = TimeZone(identifier: "America/Los_Angeles")
+        let userCalendar = Calendar.current
+        let hourMinute = userCalendar.date(from: myTimeComponents)!
+        
+        let myFormatter = DateFormatter()
+        myFormatter.timeStyle = .short
+        let hourMinuteString = myFormatter.string(from: hourMinute)
+        
+        return hourMinuteString
     }
     
 }
 
 
 
-//let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short)
 
-////http://stackoverflow.com/questions/39310729/problems-with-cropping-a-uiimage-in-swift
-//extension UIImage {
-//    func crop( rect: CGRect) -> UIImage {
-//        var rect = rect
-//        rect.origin.x*=self.scale
-//        rect.origin.y*=self.scale
-//        rect.size.width*=self.scale
-//        rect.size.height*=self.scale
-//        
-//        let imageRef = self.cgImage!.cropping(to: rect)
-//        let image = UIImage(cgImage: imageRef!, scale: self.scale, orientation: self.imageOrientation)
-//        return image
-//    }
-//}

@@ -367,7 +367,7 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: segueBACKSBID) as UIViewController
             self.present(vc, animated: false, completion: nil)
-            }}
+        }}
         
         // Instantiate a view controller from Storyboard and present it
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

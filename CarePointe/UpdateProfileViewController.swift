@@ -428,7 +428,7 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         let changeMessage = "\n\u{2022} First Name: \(fName) \n" + "\n\u{2022} Last Name: \(lName) \n" + "\n\u{2022} Title: \(title) \n" + "\n\u{2022} Email: \(email) \n"
             + "\n\u{2022} Password \(password) \n"
         
-        let myAlert = UIAlertController(title: "Review Your Information and Save to Web Server", message: changeMessage, preferredStyle: .alert)
+        let myAlert = UIAlertController(title: "Confirm information before saving", message: changeMessage, preferredStyle: .alert)
         
         myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
             

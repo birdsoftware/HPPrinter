@@ -35,7 +35,7 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="89" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="818-Ww-N9L">
-                                <rect key="frame" x="0.0" y="165" width="375" height="502"/>
+                                <rect key="frame" x="0.0" y="137" width="375" height="530"/>
                                 <color key="backgroundColor" red="0.92126840350000005" green="0.97659069300000001" blue="0.976051271" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -114,7 +114,7 @@
                                             <outlet property="org" destination="sfl-5b-ZLM" id="sDA-VP-iGf"/>
                                             <outlet property="patientID" destination="1Ch-ih-jEd" id="a8H-tQ-2da"/>
                                             <outlet property="status" destination="Xt5-VE-jfd" id="bwG-wh-TqZ"/>
-                                            <segue destination="jN9-8R-RIF" kind="presentation" identifier="patientDetail" animates="NO" id="54v-XO-eS0"/>
+                                            <segue destination="jN9-8R-RIF" kind="presentation" identifier="patientDetail" modalTransitionStyle="crossDissolve" id="54v-XO-eS0"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -165,7 +165,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PATIENT ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSB-6M-OVR">
-                                <rect key="frame" x="0.0" y="113" width="98" height="21"/>
+                                <rect key="frame" x="0.0" y="115" width="98" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="RRJ-IX-3iI"/>
                                     <constraint firstAttribute="width" constant="98" id="g1f-ql-Cg1"/>
@@ -177,11 +177,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.2651024461" green="0.59462851289999996" blue="0.77094310519999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="818-Ww-N9L" firstAttribute="top" secondItem="gzo-gN-u1K" secondAttribute="bottom" constant="50" id="35E-xu-N7y"/>
+                            <constraint firstItem="818-Ww-N9L" firstAttribute="top" secondItem="gzo-gN-u1K" secondAttribute="bottom" constant="22" id="35E-xu-N7y"/>
                             <constraint firstItem="cxl-Z7-VY0" firstAttribute="top" secondItem="818-Ww-N9L" secondAttribute="bottom" id="5eG-MP-Em1"/>
                             <constraint firstItem="ysT-EO-BoU" firstAttribute="top" secondItem="gzo-gN-u1K" secondAttribute="bottom" id="FrD-zz-Plz"/>
                             <constraint firstItem="ysT-EO-BoU" firstAttribute="trailing" secondItem="aah-uk-r9h" secondAttribute="trailingMargin" id="IN6-QO-6gV"/>
-                            <constraint firstItem="rSB-6M-OVR" firstAttribute="top" secondItem="WAE-cG-B77" secondAttribute="bottom" constant="43" id="Ic1-so-zrf"/>
                             <constraint firstItem="rSB-6M-OVR" firstAttribute="leading" secondItem="aah-uk-r9h" secondAttribute="leading" id="Ogt-Vn-8OZ"/>
                             <constraint firstItem="818-Ww-N9L" firstAttribute="leading" secondItem="aah-uk-r9h" secondAttribute="leading" id="aTH-gA-lgH"/>
                             <constraint firstItem="gzo-gN-u1K" firstAttribute="top" secondItem="WAE-cG-B77" secondAttribute="bottom" id="bqO-gT-FIi"/>
@@ -192,6 +191,7 @@
                             <constraint firstItem="WAE-cG-B77" firstAttribute="top" secondItem="aah-uk-r9h" secondAttribute="top" id="ncK-Up-3JE"/>
                             <constraint firstAttribute="trailing" secondItem="818-Ww-N9L" secondAttribute="trailing" id="pwD-bA-TUe"/>
                             <constraint firstItem="ysT-EO-BoU" firstAttribute="leading" secondItem="rSB-6M-OVR" secondAttribute="trailing" constant="1" id="qfg-LU-Cqo"/>
+                            <constraint firstItem="rSB-6M-OVR" firstAttribute="top" secondItem="gzo-gN-u1K" secondAttribute="bottom" id="rBw-Tz-ELg"/>
                         </constraints>
                     </view>
                     <connections>

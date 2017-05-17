@@ -45,16 +45,16 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             patientSearchBar.tintColor = .black
         
         
-    }//UserDefaults.standard.set(patientNameID, forKey:"RESTPatientsPatientIDs")
+    }
 
 
     override func viewWillAppear(_ animated: Bool) {
         
-        //let patientData = UserDefaults.standard.object(forKey: "RESTPatientsPatientIDs") as? [[String]] ?? [[String]]()
         // get userData for communication drop down list
-        if isKeyPresentInUserDefaults(key: "RESTPatients"){ //"RESTPatientsPatientIDs"){//""userData"){
-            patientData = UserDefaults.standard.value(forKey: "RESTPatients") as! Array<Dictionary<String, String>>//"userData") as! Array<Dictionary<String, String>>
+        if isKeyPresentInUserDefaults(key: "RESTPatients"){
+            patientData = UserDefaults.standard.value(forKey: "RESTPatients") as! Array<Dictionary<String, String>>
         }
+        
         SearchData = patientData
         patientTable.reloadData()
     }
@@ -134,7 +134,7 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         cell.name.text = Data["patientName"]
         cell.status.text = "Status: " + Data["pstatus"]!
         cell.org.text = "Organization: " + Data["organization"]!
-        cell.caseProgram.text = "Case Program: " + Data["ReferrerOrigin"]! //case program
+        cell.caseProgram.text = "Case Program: " //+ Data["ReferrerOrigin"]! //case program
         
         return cell
     }
@@ -186,7 +186,6 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 ["Secondary Insurance", Data["SecondaryCommercial"]! ]
                 ]
             defaults.set(demographics, forKey: "demographics")
-            
             defaults.synchronize()
  
             }

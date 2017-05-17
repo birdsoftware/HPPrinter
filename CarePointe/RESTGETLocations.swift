@@ -71,7 +71,7 @@ class GETLocations {
                                     }
                                     
                                     //careTeam = careTeams[0]
-                                    print("v: \(locations)")
+                                    print("locations: \(locations)")
                                     UserDefaults.standard.set(locations, forKey: "RESTLocations")
                                     UserDefaults.standard.synchronize()
                                     print("finished GET locationse ")
