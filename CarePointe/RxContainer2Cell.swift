@@ -10,9 +10,11 @@ import UIKit
 
 class RxContainer2Cell: UITableViewCell {
 
-    //Container2ViewController.swift
+    //Container2QuestionsVC.swift
     //identifier = rxcontainer2Cell
+    
     @IBOutlet weak var question: UILabel!
-    @IBOutlet weak var answer: UILabel!
-
+    @IBOutlet weak var note: UITextField!
+    @IBOutlet weak var qSwitch: UISwitch!
+   
 }

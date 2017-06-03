@@ -1,5 +1,5 @@
 //
-//  EMRViewController.swift
+//  CaseViewController.swift
 //  CarePointe
 //
 //  Created by Brian Bird on 2/9/17.
@@ -23,18 +23,20 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var caseInfo = [["Start Date", "-"],//"02/02/2017"],
                    ["Program", "-"],//"Transitional Care"],
-                   ["Needs", "-"],//"Fibromyalgia"],
+                   //"Fibromyalgia"],
                    ["Acuity","-"],//"High"],
                    ["SNP","-"],//"Caregiver, Supplies, Transportation"],
                    ["Summary","-"],//"Patient came to us from Observation Unit at Chandler Regional Hospital. Patient had a few prior hospitalizations due to falls in the past weeks. Patient suffers from permanent brain damage due to traumatic car accident. Experiences access falls and confusion and needs 24hr monitoring. Lives with Husband and Daughter that act as caregivers."]
                    ]
     
     var clinicalData = [["ICD-10's","-"],//"Dependence on Wheelchair"],
-                        ["Symptoms","-"]
+                        ["Symptoms","-"],
+                        ["Disease", "-"],
                         ]
     
     //API data
     var restLocations = Array<Dictionary<String,String>>()
+    var diseases = Array<Dictionary<String,String>>()
 
     
     override func viewDidLoad() {
@@ -68,22 +70,30 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
         
             let caseData = restLocations[0]
             
-            let admitDate = convertDateStringToDate(longDate: caseData["AdmittanceDate"]!)
+            var episodeid = ""
+            episodeid = caseData["Episode_ID"] ?? ""
+            print("episodeid \(episodeid)")
+            
+            
+            let admitDate = convertDateStringToDate(longDate: caseData["CreatedDateTime"]!)//AdmittanceDate
             
             caseInfo = [["Start Date", admitDate],//
                         ["Program", caseData["CarePrograms"]!],//"Transitional Care"],
-                        ["Disease", caseData["Disease"]!],//"Fibromyalgia"],
+                        //"Fibromyalgia"],
                         ["Acuity",caseData["ComplexityLevel"]!],//"High"],
-                        ["SNP", caseData["TransferToFacility"]!],//"Caregiver, Supplies, Transportation"],
+                        ["SNP", caseData["Disease"]!],//"Caregiver, Supplies, Transportation"],
                         ["Summary", caseData["EpisodeSummary"]!],//"Patient came to us from Observation Unit at Chandler Regional Hospital. Patient had a few prior hospitalizations due to falls in the past weeks. Patient suffers from permanent brain damage due to traumatic car accident. Experiences access falls and confusion and needs 24hr monitoring. Lives with Husband and Daughter that act as caregivers."]
             ]
             
             clinicalData = [["ICD-10's", caseData["ICD_9s"]!],//"Dependence on Wheelchair"],
-                                ["Symptoms", caseData["Diagnosis"]!]
+                                ["Symptoms", caseData["Diagnosis"]!],
+                                ["Disease", ""]//caseData["Disease"]!]
             ]
             
             caseTable.reloadData()
             clinicalTable.reloadData()
+            
+            signInThenGetDeseaseData(episode: episodeid)//update table disease_name, complexity
         }
     }
     
@@ -100,9 +110,6 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.present(vc, animated: false, completion: nil)
         
     }
-    
-    
-    
     
     @IBAction func feedsSegmentControllerTapped(_ sender: Any) {
     
@@ -122,6 +129,66 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    //
+    // #MARK: - Functions
+    //
+    func signInThenGetDeseaseData(episode: String)//update table disease_name, complexity
+    {
+        
+        let downloadToken = DispatchGroup()
+        downloadToken.enter()
+        
+        // 0 get token again -----------
+        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
+        
+        let getToken = GETToken()
+        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
+        
+        downloadToken.notify(queue: DispatchQueue.main)  {
+            
+            let token = UserDefaults.standard.string(forKey: "token")!
+
+                    //var dontShowToast = true //if viewDidLoad - don't 2x TOAST
+                    //if(showToast == "viewWillAppear") { dontShowToast = false}
+            
+            //GET DISEASEs---------------------
+            self.getDiseaseFromWebServer(token: token, episode: episode)//update table disease_name, complexity
+            //-------------------------------
+        }
+    }
+    
+    func getDiseaseFromWebServer(token: String, episode: String)//update table disease_name, complexity
+    {
+        
+        let diseaseFlag = DispatchGroup()
+        diseaseFlag.enter()
+        
+        let diseaseLoad = GETDisease()
+        diseaseLoad.getDisease(token: token, episodeID: episode, dispachInstance: diseaseFlag)
+        
+        diseaseFlag.notify(queue: DispatchQueue.main) {//finished downloading disease now do what
+            
+            self.diseases = UserDefaults.standard.object(forKey: "RESTDisease") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
+            
+            var stringDisease = ""
+            var isFirst = true
+            
+            for disease in self.diseases {
+                
+                if (!isFirst) {
+                    stringDisease += " | "
+                } else { isFirst = false }
+                
+                 stringDisease += disease["disease_name"]! + ", Complexity: " + disease["complexity"]!
+            }
+            
+            self.clinicalData[2] = ["Disease", stringDisease]
+            
+            self.clinicalTable.reloadData()
+        }
+        
+    }
     
     //
     // #MARK: - Table View

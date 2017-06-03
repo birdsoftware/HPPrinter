@@ -17,7 +17,16 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     //constraints
     @IBOutlet weak var bluePatientInfoViewHeight: NSLayoutConstraint!
     @IBOutlet weak var bluePatientInfoTop: NSLayoutConstraint!
-    
+    @IBOutlet weak var buttonViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var callButtonTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var messageButtonTopConstraint: NSLayoutConstraint!
+        //picker constraints
+    @IBOutlet weak var changeApptLenHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var changeApptLenTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var encounterTypeHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var encounterTypeTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var referralPlaceHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var referralPlaceTopConstraint: NSLayoutConstraint!
     
     //title labels
     @IBOutlet weak var patientName: UILabel!
@@ -31,6 +40,10 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     @IBOutlet weak var callButton: RoundedButton!
     @IBOutlet weak var messageButton: RoundedButton!
     @IBOutlet weak var discussButton: RoundedButton!
+    @IBOutlet weak var patientProfileButton: RoundedButton!
+    @IBOutlet weak var changeAppointmentLengthButton: RoundedButton!
+    @IBOutlet weak var encounterTypeButton: RoundedButton!
+    @IBOutlet weak var referralPlaceButton: RoundedButton!
     
     //labels
     @IBOutlet weak var homeHealthLabel: UILabel!
@@ -40,8 +53,10 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     @IBOutlet weak var provider: UILabel!
     @IBOutlet weak var providerID: UILabel!
     
+    //Complet? hide image
+    @IBOutlet weak var calendarImage: UIImageView!
+    
     //Complete labels
-    @IBOutlet weak var changeAppointmentLength: UILabel!
     @IBOutlet weak var changeReferralPurpose: UILabel!
     @IBOutlet weak var changePriorAuth: UILabel!
     @IBOutlet weak var appointmentNotesLabel: UILabel!
@@ -103,11 +118,23 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     var segueBookAddress: String!
     var seguePreAuth: String!
     var segueAttachDoc: String!
+        //segueStatus: 1."Pending" or 2."Scheduled" or 3."Complete"
+        //RAW API: "Complete","Rejected/Inactive","Cancelled"||"Scheduled","In Service"||"Pending","Opened"
     var segueStatus: String!
-    //"Pending" or "Scheduled" or "Complete" from ->"Complete","Rejected/Inactive","Cancelled"||"Scheduled","In Service"||"Pending","Opened"
     var segueIsUrgent: String!
     
+    
+    //
+    var dateUpToDate: String!
+    var timeUpToDate: String!
+    
+    //map input
+    var patientAddress = ""
+    
     //class data
+    var isEncounterOpen = true
+    var isReferralPlaceOpen = true
+    var isApptLen = true
     var isDiscuss = true
     var referrals = Array<Dictionary<String,String>>()
     
@@ -150,6 +177,13 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
             userName = UserDefaults.standard.string(forKey: "profileName")!
         }
         
+        //see what you got from PTV
+        print("segueIsUrgent \(segueIsUrgent), seguePatientNotes \(seguePatientNotes), seguePatientName \(seguePatientName), seguePatientCPID \(seguePatientCPID), seguePatientDate \(seguePatientDate), segueHourMin \(segueHourMin), segueBookMinutes \(segueBookMinutes), segueProviderName \(segueProviderName), segueProviderID \(segueProviderID), seguePatientID \(seguePatientID),")
+   
+        
+        dateUpToDate = seguePatientDate
+        timeUpToDate = segueHourMin
+        
         // Picker Delegates
         encounterTypePicker.delegate = self
         encounterTypePicker.dataSource = self
@@ -162,7 +196,8 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
 
         // UI Setup
         buttonView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
-        if segueIsUrgent == "N" {
+        
+        if segueIsUrgent != "Y" {
             homeHealthButton.isHidden = true
             homeHealthLabel.isHidden = true
         }
@@ -174,12 +209,26 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         //display info from PTVTableViewController.swift
         displaySeguePTVTableData()
         
+        
         //Conditional UI Setup
-        // -- based on segueStatus //"Pending" or "Scheduled" or "Complete"
+        if segueStatus == "Pending"{
+            discussButton.setTitle("Discuss \u{21E3}", for: .normal)//down
+            changeAppointmentLengthButton.setTitle("Change Appointment Length \u{21E3}", for: .normal)//down
+            encounterTypeButton.setTitle("Change Encounter Type \u{21E3}", for: .normal)//down
+            referralPlaceButton.setTitle("Change Referral Place \u{21E3}", for: .normal)//down
+
+            //picker constraints
+            changeApptLenHeightConstraint.constant = 40
+            encounterTypeHeightConstraint.constant = 40
+            referralPlaceHeightConstraint.constant = 40
+        }
         if segueStatus == "Complete"{
+            //buttonViewTopConstraint.constant -= 50
+            //bluePatientInfoTop.constant -= 50
+            //callButtonTopConstraint.constant -= 50
+            //messageButtonTopConstraint.constant -= 50
             updateUIForComplete()
             referralLabel.text = "Completed Referral"
-            bluePatientInfoTop.constant -= 50
         }
         if segueStatus == "Scheduled"{
             completeButton.isHidden = false
@@ -200,6 +249,7 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
             appointmentNotesLabel.text = "No appointment notes given."
         }
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -236,19 +286,40 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
                 if dict["Care_Plan_ID"] == seguePatientCPID{
                     //print("Care_Plan_ID is \(seguePatientCPID) iterator is \(Iterator)")
                     referrals[Iterator].updateValue("Complete", forKey: "Status")
+                    
                     break
                 }
                 Iterator+=1
             }
         }
     }
-    func updateStatusToScheduled(){
+    func updateStatusToScheduled(){//& save any changes locally
         if isKeyPresentInUserDefaults(key: "RESTAllReferrals"){
             referrals = UserDefaults.standard.object(forKey: "RESTAllReferrals") as! Array<Dictionary<String, String>>
             var Iterator = 0
             for dict in referrals{
                 if dict["Care_Plan_ID"] == seguePatientCPID{
                     referrals[Iterator].updateValue("Scheduled", forKey: "Status")
+                    
+                    //-SAVE ANY CHANGES LOCALLY
+                    let dateLong = convertDateToLongStringDate(dateString: appointmentDateTime)
+                    
+                    referrals[Iterator].updateValue(dateLong, forKey: "StartDate")//"2017-04-02T04:00:00.000Z" appointmentDateTime
+                    referrals[Iterator].updateValue("30", forKey: "date_hhmm")//":30" appointmentDateTime
+                    
+                    let endIndex = appointmentLength.index(appointmentLength.endIndex, offsetBy: -4)//Remove " min" or "ours"
+                    var truncated = appointmentLength.substring(to: endIndex)
+                    if truncated.contains("h"){
+                        let endIndex = truncated.index(truncated.endIndex, offsetBy: -2)//Remove " h"
+                        truncated = truncated.substring(to: endIndex)
+                    }
+                    
+                    referrals[Iterator].updateValue(truncated, forKey: "book_minutes")//appt len "60" appointmentLength
+                    referrals[Iterator].updateValue(encounterTypeVar, forKey: "book_type")//book_type: "TCM",encounterTypeVar
+                    referrals[Iterator].updateValue(placeOfReferralVar, forKey: "book_place")//book_place: "Home",placeOfReferralVar
+                    referrals[Iterator].updateValue(priorAuthorization, forKey: "pre_authorization")//priorAuthorization
+                    //-
+                    //print("appointmentLength \(appointmentLength) encounterTypeVar \(encounterTypeVar) placeOfReferralVar \(placeOfReferralVar) priorAuthorization \(priorAuthorization)")
                     break
                 }
                 Iterator+=1
@@ -264,9 +335,13 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         attachDocPicker.isHidden = true
         apptLengthPicker.isHidden = true
         changeDateTimeButton.isHidden = true
+        calendarImage.isHidden = true
+        changeAppointmentLengthButton.isHidden = true
+        encounterTypeButton.isHidden = true
+        referralPlaceButton.isHidden = true
         
         //labels to change 
-        changeAppointmentLength.text = "Appointment Length:"
+        //changeAppointmentLength.text = "Appointment Length:"
         changeReferralPurpose.text = "Referral Purpose:"
         changePriorAuth.text = "Prior-Authorization:"
         
@@ -318,8 +393,16 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         //Place of Referral - see picker also
         if segueLocationType != "" { placeOfReferral.text = segueLocationType }
         
+        
+        
         address.text = segueBookAddress
-        if segueBookAddress == "" { mapButton.isHidden = true }
+        if segueBookAddress == "" { mapButton.isHidden = true } else {
+            
+            let searchableAddress = returnNotEmptyAddressString()
+            
+            address.text = "Address:\n\(searchableAddress)"//, \(city), \(state) \(zip)"
+            patientAddress = "\(searchableAddress)"//, \(city), \(state) \(zip)"
+        }
         
         /*if seguePreAuth != "" { */priorAuthorizatin.text = seguePreAuth// }
         
@@ -328,7 +411,45 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
             segueAttachDoc = segueAttachDoc.replacingOccurrences(of: ",", with: " ")
             attachDocument.text = segueAttachDoc
         }
+    }
+    
+    func returnNotEmptyAddressString() -> String {
+        /* INPUT: "Address -1 main street;State -NY;City -Bedminster;Zip -07921;Phone -8886337821;"
+         * ["Address -1 main street",
+         *  "State -NY",
+         *  "City -Bedminster",
+         *  "Zip -07921",
+         *  "Phone -8886337821",
+         *  ""]
+         * For each element in address must contain a "-" and doesnot contain "Phone"
+         * OUTPUT: "1 main street, NY, Bedminster, 07921"
+         */
         
+        if segueBookAddress.contains(";") {
+
+            let bookAddressArray = splitStringToArray(StringIn: segueBookAddress, deliminator: ";")
+            
+            var addr = ""
+            
+            for element in bookAddressArray {
+                if element.contains("-") {
+                    if element.range(of: "Phone") == nil {//does not exist
+                        let index = element.characters.index(of: "-")
+                        var dashStr = element.substring(from: index!) + ", "
+                        dashStr.remove(at: dashStr.startIndex)
+                        addr += dashStr
+                    }
+                }
+            }
+            
+            let endIndex = addr.index(addr.endIndex, offsetBy: -2)
+            let truncated = addr.substring(to: endIndex)
+            return truncated
+            
+        } else {
+            
+            return segueBookAddress
+        }
     }
     
     //
@@ -399,22 +520,22 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
                             "\n\u{2022} 3) Encounter Type: \(encounterTypeVar) \n" +
                             "\n\u{2022} 4) Referral Purpose: \(referralPurpose) \n" +
                             "\n\u{2022} 5) Place of Referral: \(placeOfReferralVar) \n" +
-                            "\n\u{2022} 6) Prior Authorization: \(priorAuthorization) \n" +
-                            "\n\u{2022} 7) Attach Document: \(attachDocumentVar) \n"
+                            "\n\u{2022} 6) Prior Authorization: \(priorAuthorization) \n"// +
+                            //"\n\u{2022} 7) Attach Document: \(attachDocumentVar) \n"
         
         let myAlert = UIAlertController(title: "Confirm information before saving. Cancel to make changes.", message: changeMessage, preferredStyle: .alert)
         
         myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
             
-            //self.saveTextLocally()
+            
             
             //self.saveTextToWebServer()
             
             // Get 1st TextField's text
             let acceptMessage = "Patient \(self.seguePatientName!) accepted by \(self.userName). " + myAlert.textFields![0].text! //print(textField)
             
-            // 1 MOVE PATIENT FROM PENDING TO ACCEPTED
-                    self.updateStatusToScheduled()
+            // 1 MOVE PATIENT FROM PENDING TO ACCEPTED & SAVE ANY UPDATES/CHANGES LOCALLY
+                    self.updateStatusToScheduled()//self.saveTextLocally()
                     UserDefaults.standard.set(self.referrals, forKey: "RESTAllReferrals")
                     UserDefaults.standard.synchronize()
                     self.segueToPTV()
@@ -495,7 +616,6 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
-    
 
     //
     // #MARK: - Buttons
@@ -525,8 +645,37 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     @IBAction func declineButtonTapped(_ sender: Any) {     //DECLINE
         showDeclineAlert()
     }
+    @IBAction func changeAppointmentLengthButtonTapped(_ sender: Any) {
+        
+        togglePickerButton(isOpen: &isApptLen, button: changeAppointmentLengthButton, buttonTitle: "Change Appointment Length", topPickerConstraint: changeApptLenTopConstraint, hightPickerConstraint: changeApptLenHeightConstraint)
+    }
+    @IBAction func encounterTypeButtonTapped(_ sender: Any) {
+        togglePickerButton(isOpen: &isEncounterOpen, button: encounterTypeButton, buttonTitle: "Change Encounter Type", topPickerConstraint: encounterTypeTopConstraint, hightPickerConstraint: encounterTypeHeightConstraint)
+    }
+    @IBAction func referralPlaceButtonTapped(_ sender: Any) {
+        togglePickerButton(isOpen: &isReferralPlaceOpen, button: referralPlaceButton, buttonTitle: "Change Referral Place", topPickerConstraint: referralPlaceTopConstraint, hightPickerConstraint: referralPlaceHeightConstraint)
+    }
+    
+    func togglePickerButton(isOpen: inout Bool, button: RoundedButton, buttonTitle: String, topPickerConstraint: NSLayoutConstraint, hightPickerConstraint: NSLayoutConstraint){
+        if isOpen {
+            button.setTitle(buttonTitle+" \u{21E1}", for: .normal)//up
+            hightPickerConstraint.constant += 120
+            topPickerConstraint.constant += 50
+        } else {
+            button.setTitle(buttonTitle+" \u{21E3}", for: .normal)//down
+            hightPickerConstraint.constant -= 120
+            topPickerConstraint.constant -= 50
+        }
+        isOpen = !isOpen
+    }
     
     @IBAction func discussButtonTapped(_ sender: Any) {     //DISCUSS
+        
+        if isDiscuss {
+            discussButton.setTitle("Discuss \u{21E1}", for: .normal)//up
+        } else {
+            discussButton.setTitle("Discuss \u{21E3}", for: .normal)//down
+        }
         
         if isDiscuss {
             bluePatientInfoViewHeight.constant += 50
@@ -546,7 +695,6 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
             discussButton.backgroundColor = .bostonBlue()
             discussButton.setTitleColor(.white, for: .normal)
             discussButton.layer.borderWidth = 1
-            //discussButton.layer.borderColor = UIColor.white.cgColor
             UIView.animate(withDuration: 0.2, animations: { () -> Void in
                 self.view.layoutIfNeeded()
             })
@@ -595,41 +743,25 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
                 
                 //----- UPDATE UI LABEL BY DATE SELECTED ---------
                self.appointmentDate.text = "Appointment Date: \(strDate) \(strTime)"
+                self.dateUpToDate = strDate
+                self.timeUpToDate = strTime
             }
         }
         //Save new date to user defaults
         //UserDefaults.standard.set(true, forKey: "didUpdateCalendarDate") //need check to display a date if no date selected
         
     }
-    @IBAction func changeApptLengthButtonTapped(_ sender: Any) {
-        
-//        DatePickerDialog().show("Appointment Length", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .time) {
-//            (date) -> Void in
-//            if date != nil {
-//                
-//                //----- UPDATE LABEL BY DATE SELECTED ---------
-//                self.lengthOfAppointmentLabel.text = "Length of Appointment: \(date!)"
-//                
-//            }
-//        }
-        
-    }
+    
     
     
     
     @IBAction func mapDirectionsButtonTapped(_ sender: Any) {
-        let latitude = 37.7
-        let longitude = -122.7
-        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-//            UIApplication.shared.openURL(NSURL(string:
-//                "comgooglemaps://?saddr=&daddr=\(Float(latitude)),\(Float(longitude))&directionsmode=driving")! as URL)
-            open(scheme: "comgooglemaps://?saddr=&daddr=\(Float(latitude)),\(Float(longitude))&directionsmode=driving")
-            
-        } else {
-            NSLog("Can't use comgooglemaps://");
-        }
+        
+        let callMapHere = ReferralsMap()
+        callMapHere.showMap(destAddress: patientAddress, destName: "\(seguePatientName!) Address")
         
     }
+    
     // supports above?
     func open(scheme: String) {
         //http://useyourloaf.com/blog/openurl-deprecated-in-ios10/
@@ -728,8 +860,38 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
 
     
     //
-    //#MARK: - segue
+    //#MARK: - segue?
     //
+    
+    
+    override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+        
+        var arrayPatient:Array<Dictionary<String,String>> = []
+        if isKeyPresentInUserDefaults(key: "RESTPatients"){
+            arrayPatient = UserDefaults.standard.value(forKey: "RESTPatients") as! Array<Dictionary<String, String>>
+        }
+        
+        
+        var demographics = String()
+        let key = "Patient_ID"
+        let value = seguePatientID
+        
+        for dict in arrayPatient {
+            if dict[key] == value {
+                demographics = dict["Patient_ID"]!
+            }
+        }
+        
+        if demographics.isEmpty == true {
+            patientProfileButton.setTitle("Not Available", for: .normal)
+            patientProfileButton.setTitleColor(.red, for: .normal)
+            patientProfileButton.layer.borderColor = UIColor.red.cgColor //boston blue
+            return false
+        } else {
+            return true
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //http://www.codingexplorer.com/segue-uitableviewcell-taps-swift/
         // " 1. click cell drag to view 2. select the “show” segue in the “Selection Segue” section. "
@@ -787,16 +949,32 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
             defaults.set(demographics, forKey: "demographics")
             defaults.synchronize()
             
-            //send these to PatientTabBarController.swift
             if let toViewController = segue.destination as? PatientTabBarController {
                 
+                //send these to PatientTabBarController.swift
                 toViewController.segueStoryBoardName = "Refferal"
-                toViewController.segueStoryBoardID = "referralVC"
+                                                                                    //toViewController.segueStoryBoardID = "referralVC"
+                toViewController.tabBarSeguePatientID =     seguePatientID
+                toViewController.tabBarSeguePatientNotes =  seguePatientNotes
+                toViewController.tabBarSeguePatientName =   seguePatientName
+                toViewController.tabBarSeguePatientCPID =   seguePatientCPID        //appointmentID
+                toViewController.tabBarSeguePatientDate =   dateUpToDate            //seguePatientDate
+                toViewController.tabBarSegueHourMin =       timeUpToDate            //segueHourMin
+                toViewController.tabBarSegueBookMinutes =   lengthOfAppointmentLabel.text! //"15 min" segueBookMinutes
+                toViewController.tabBarSegueProviderName =  provider.text!          //"Admin" segueProviderName
+                toViewController.tabBarSegueProviderID =    providerID.text!        //"148" segueProviderID
+                toViewController.tabBarSegueEncounterType = encounter.text!         //"TCM" segueEncounterType
+                toViewController.tabBarSegueEncounterPurpose = purposeOfRefferal.text!//"purpose" segueEncounterPurpose
+                toViewController.tabBarSegueLocationType =  placeOfReferral.text!   //"pharmacy" segueLocationType
+                toViewController.tabBarSegueBookPlace =     segueBookPlace
+                toViewController.tabBarSegueBookAddress =   segueBookAddress
+                toViewController.tabBarSeguePreAuth =       priorAuthorizatin.text! //"prior-auth" seguePreAuth
+                toViewController.tabBarSegueAttachDoc =     attachDocument.text!    //"did not change" segueAttachDoc
+                toViewController.tabBarSegueStatus =        segueStatus
+                toViewController.tabBarSegueIsUrgent =      segueIsUrgent
                 
             }
-            
         }
-        
     }//prepare(for segue:
     
 

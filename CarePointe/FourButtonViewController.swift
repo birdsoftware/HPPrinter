@@ -17,7 +17,10 @@ class FourButtonViewController: UIViewController {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userTitle: UILabel!
     
-    @IBOutlet weak var fakeBadge: UILabel!
+    @IBOutlet weak var alertBadge: UILabel!
+    @IBOutlet weak var appointmentBadge: UILabel!
+    
+    
     
     var errorMessage = ""
     var alertCount = 3
@@ -37,17 +40,30 @@ class FourButtonViewController: UIViewController {
         if serverSuccess == false {
             isConnectedToAPI.isHidden = false
         }
+        if serverSuccess == true {//NOT TESTED - test when API is down move to viewWillAppear!
+            isConnectedToAPI.isHidden = true
+        }
     
         if isKeyPresentInUserDefaults(key: "RESTGlobalAlerts"){
             let newAlertsCount = UserDefaults.standard.object(forKey: "RESTGlobalAlerts") as? Array<Dictionary<String,String>> ?? []
             alertCount = newAlertsCount.count
         }
-        
-        fakeBadge.clipsToBounds = true
-        fakeBadge.layer.cornerRadius = fakeBadge.font.pointSize * 1.2 / 2
-        fakeBadge.backgroundColor = .red//.bostonBlue()
-        fakeBadge.textColor = .white
-        fakeBadge.text = " \(alertCount) "
+        var numberNewPatients = 0
+        if isKeyPresentInUserDefaults(key: "RESTAllReferrals"){
+            let referrals = UserDefaults.standard.value(forKey: "RESTAllReferrals") as! Array<Dictionary<String,String>>
+            
+            for referral in referrals {
+                switch referral["Status"]! //from tbl_care_plan
+                {
+                    case "Pending", "Opened":
+                    numberNewPatients += 1
+                default:
+                    break
+                }
+            }
+        }
+        createBadgeFrom(UIlabel:alertBadge, text: " \(alertCount) ")
+        createBadgeFrom(UIlabel:appointmentBadge, text: " \(numberNewPatients) ")
         
         NotificationCenter.default.addObserver(self,
                                                selector:#selector(startActivityIndicator),
@@ -227,6 +243,13 @@ class FourButtonViewController: UIViewController {
         alertCount = newAlertCount
     }
     
+    func createBadgeFrom(UIlabel:UILabel, text: String) {
+        UIlabel.clipsToBounds = true
+        UIlabel.layer.cornerRadius = UIlabel.font.pointSize * 1.2 / 2
+        UIlabel.backgroundColor = .red//.bostonBlue()
+        UIlabel.textColor = .white
+        UIlabel.text = text
+    }
     
     //
     // MARK: - Button Actions

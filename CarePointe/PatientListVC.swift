@@ -13,13 +13,24 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //table view
     @IBOutlet weak var patientTable: UITableView!
     
+    //segment control
+    @IBOutlet weak var scopeSegmentControl: UISegmentedControl!
+    
+    //autolayout
+    @IBOutlet weak var segementControlHeight: NSLayoutConstraint!
+    
     //search bar
     @IBOutlet weak var patientSearchBar: UISearchBar!
+    
+    //label
+    @IBOutlet weak var myPatientsLabel: UILabel!
+    
     
     // class vars
     var searchActive : Bool = false
     var patientData:Array<Dictionary<String,String>> = []
     var SearchData:Array<Dictionary<String,String>> = []
+    //var ScopeData:Array<Dictionary<String,String>> = []
     
     var patientIDs = [String]()
     var names = [String]()
@@ -29,24 +40,24 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        scopeSegmentControl.isHidden = true
+        segementControlHeight.constant = 0
+        
         //table view delegate
         patientTable.delegate = self
         patientTable.dataSource = self
         
         //search delegate
         patientSearchBar.delegate = self
+        patientSearchBar.scopeButtonTitles = ["All","Active","Not Active"]
         
         //Table ROW Height set to auto layout (patient name set to grow to 2 lines)
         patientTable.rowHeight = UITableViewAutomaticDimension
         patientTable.estimatedRowHeight = 90
         
         // change the color of cursol and cancel button.
-            patientSearchBar.tintColor = .black
-        
-        
+            //patientSearchBar.tintColor = .white//.black
     }
-
 
     override func viewWillAppear(_ animated: Bool) {
         
@@ -56,11 +67,16 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
         
         SearchData = patientData
+        //ScopeData = SearchData
         patientTable.reloadData()
+        let patientCount = patientData.count//ScopeData.count
+        myPatientsLabel.text = "My Patients (\(patientCount))"
     }
     
-    // Buttons
     
+    //
+    // #MARK: - Button Actions
+    //
     @IBAction func backButtonTapped(_ sender: Any) {
         
         // 4. Present a view controller from a different storyboard
@@ -68,24 +84,78 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
         //vc.navigationController?.pushViewController(vc, animated: false)
         self.present(vc, animated: false, completion: nil)
-        
     }
+    
+//    @IBAction func scopeSegmentTapped(_ sender: Any) {
+//        
+//        var scopePredicate:NSPredicate
+//        
+//        switch scopeSegmentControl.selectedSegmentIndex
+//        {
+//        case 0:
+//            SearchData=patientData
+//            patientTable.reloadData()
+//
+//        case 1:
+//            scopePredicate = NSPredicate(format: "SELF.pstatus MATCHES[cd] %@", "Active")
+//            let arr=(patientData as NSArray).filtered(using: scopePredicate)
+//            if arr.count > 0
+//            {
+//                SearchData=arr as! Array<Dictionary<String,String>>
+//            } else {
+//                SearchData=patientData
+//            }
+//            patientTable.reloadData()
+//
+//        case 2:
+//            scopePredicate = NSPredicate(format: "NOT SELF.pstatus MATCHES[cd] %@", "Active")
+//            let arr=(patientData as NSArray).filtered(using: scopePredicate)
+//            if arr.count > 0
+//            {
+//                SearchData=arr as! Array<Dictionary<String,String>>
+//            } else {
+//                SearchData=patientData
+//            }
+//            patientTable.reloadData()
+//
+//        default:
+//            break;
+//        }
+//
+//        ScopeData = SearchData
+//        let patientCount = ScopeData.count
+//        myPatientsLabel.text = "My Patients (\(patientCount))"
+//    }
+
+    
 
     //
     // #MARK: - Search Functions
     //
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         //print("PLsearch: \(searchText)")
-        let predicate=NSPredicate(format: "SELF.patientName CONTAINS[cd] %@", searchText) // returns .patientName from patientName["patientName"]
-        let arr=(patientData as NSArray).filtered(using: predicate)
+        //let predicate=NSPredicate(format: "SELF.Patient_ID CONTAINS[cd] %@", searchText) // returns .patientName from patientName["patientName"] //"SELF.patientName CONTAINS[cd] %@"
+        //let arr=(patientData as NSArray).filtered(using: predicate)
+        
+        //organization pstatus CarePrograms
+        let patientIdPredicate = NSPredicate(format: "SELF.Patient_ID CONTAINS[cd] %@", searchText)
+        let patientNamePredicate = NSPredicate(format: "SELF.patientName CONTAINS[cd] %@", searchText)
+        let organizationPredicate = NSPredicate(format: "SELF.organization CONTAINS[cd] %@", searchText)
+        let careProgramsPredicate = NSPredicate(format: "SELF.CarePrograms CONTAINS[cd] %@", searchText)
+        
+        let orPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: [patientIdPredicate, patientNamePredicate, organizationPredicate, careProgramsPredicate])
+        
+        let arr=(/*ScopeData*/ patientData as NSArray).filtered(using: orPredicate)
         
         if arr.count > 0
         {
             SearchData=arr as! Array<Dictionary<String,String>>
         } else {
-            SearchData=patientData
+            SearchData=patientData//ScopeData//
         }
         patientTable.reloadData()
+        let patientCount = SearchData.count
+        myPatientsLabel.text = "My Patients (\(patientCount))"
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -100,6 +170,13 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         searchActive = false
         patientSearchBar.text = ""
         patientSearchBar.endEditing(true)
+        
+        SearchData=patientData
+        patientTable.reloadData()
+        //scopeSegmentControl.selectedSegmentIndex = 0
+        
+        let patientCount = patientData.count//ScopeData.count
+        myPatientsLabel.text = "My Patients (\(patientCount))"
     }
     
     
@@ -134,7 +211,7 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         cell.name.text = Data["patientName"]
         cell.status.text = "Status: " + Data["pstatus"]!
         cell.org.text = "Organization: " + Data["organization"]!
-        cell.caseProgram.text = "Case Program: " //+ Data["ReferrerOrigin"]! //case program
+        cell.caseProgram.text = "Case Program: " + Data["CarePrograms"]! //case program
         
         return cell
     }

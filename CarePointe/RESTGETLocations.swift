@@ -48,7 +48,7 @@ class GETLocations {
                                         let TransferToFacility = dict["TransferToFacility"] as? String ?? "" //badge //Case - Locations
                                         let TransferFromFacility = dict["TransferFromFacility"] as? String ?? "" //Case - Locations
                                         let AdmittanceDate = dict["AdmittanceDate"] as? String ?? ""  //Case - Locations
-                                        
+                                        let CreatedDateTime = dict["CreatedDateTime"] as? String ?? ""
                                         //let RoomNo = dict["RoomNo"] as? String ?? ""
                                         //let ReasonForTransfer = dict["ReasonForTransfer"] as? String ?? ""
                                         let CarePrograms = dict["CarePrograms"] as? String ?? "" //badge //program - case
@@ -64,7 +64,7 @@ class GETLocations {
                                         let pid = String(Patient_ID)
                                         
                                         locations.append(["Episode_ID":eid, "Patient_ID":pid, "TransferToFacility":TransferToFacility,
-                                                          "TransferFromFacility":TransferFromFacility, "AdmittanceDate":AdmittanceDate,
+                                                          "TransferFromFacility":TransferFromFacility, "AdmittanceDate":AdmittanceDate, "CreatedDateTime":CreatedDateTime,
                                                           "CarePrograms":CarePrograms, "Disease":Disease, "ICD_9s":ICD_9s, "Diagnosis":Diagnosis,
                                                           "EpisodeSummary":EpisodeSummary, "ComplexityLevel":ComplexityLevel])
                                         

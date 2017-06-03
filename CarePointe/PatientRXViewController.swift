@@ -14,9 +14,11 @@ class PatientRXViewController: UIViewController {
     @IBOutlet weak var medicationSegmentor: UISegmentedControl!
     
     //views
-    @IBOutlet weak var containerView1: UIView!
-    @IBOutlet weak var containerView2: UIView!
-    @IBOutlet weak var containerView3: UIView!
+    @IBOutlet weak var containerView1: UIView!//med list
+    @IBOutlet weak var containerView2: UIView!//questionnaire
+    @IBOutlet weak var containerView3: UIView!//allergies
+    @IBOutlet weak var containerView4: UIView!//rx files
+    
     @IBOutlet var mainView: UIView!
     
     
@@ -41,6 +43,9 @@ class PatientRXViewController: UIViewController {
         bottomHeight = mainView.bounds.size.height-260//setBottumHeightBasedOnDeviceType() //bottumHeigh used in drags
         
         
+        //var attributes = NSDictionary(object: UIFont(name: "System", size: 14.0)!, forKey: NSFontAttributeName as NSCopying)
+        //medicationSegmentor.setTitleTextAttributes(attributes as! [AnyHashable : Any], for: .normal)
+        
         let patientName = UserDefaults.standard.string(forKey: "patientName")
         patientTitle.text = patientName! + "'s Rx"
         
@@ -50,6 +55,7 @@ class PatientRXViewController: UIViewController {
         containerView1.isHidden = false
         containerView2.isHidden = true
         containerView3.isHidden = true
+        containerView4.isHidden = true
         
         let drags = UIPanGestureRecognizer(target: self, action: #selector(drag))
         
@@ -119,16 +125,24 @@ class PatientRXViewController: UIViewController {
             containerView1.isHidden = false
             containerView2.isHidden = true
             containerView3.isHidden = true
+            containerView4.isHidden = true
         case 1:
             //updateMedRecButton.setTitle("+MR", for: .normal)
             containerView1.isHidden = true
             containerView2.isHidden = false
             containerView3.isHidden = true
+            containerView4.isHidden = true
         case 2:
             //updateMedRecButton.setTitle("+A", for: .normal)
             containerView1.isHidden = true
             containerView2.isHidden = true
             containerView3.isHidden = false
+            containerView4.isHidden = true
+        case 3:
+            containerView1.isHidden = true
+            containerView2.isHidden = true
+            containerView3.isHidden = true
+            containerView4.isHidden = false
         default:
             break;
         }

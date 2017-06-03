@@ -23,7 +23,7 @@ class GETPatients {
         
         //var patients = [[String]]()
         var patients = Array<Dictionary<String,String>>()
-        var patientNameID:Array<Dictionary<String,String>> = []
+        //var patientNameID:Array<Dictionary<String,String>> = []
         
         let headers = [
             "authorization": token,
@@ -31,7 +31,7 @@ class GETPatients {
            // "postman-token": "5b46169a-a62b-bd4a-e93f-5056ff0b508a"
         ]
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/patients/userId/0")! as URL,//"http://carepointe.cloud:4300/api/patients/"
+        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/patients/status/active")! as URL,//"http://carepointe.cloud:4300/api/patients/"
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         request.httpMethod = "GET"
@@ -105,14 +105,15 @@ class GETPatients {
                                     let profileImage = patient["profile_image"] as? String ?? ""
                                     let cscUser = patient["csc_user"] as? Int ?? -1 //------
                                     let pharmacyNCPDP = patient["pharmacy_NCPDP"] as? String ?? ""
-                                    let organization = patient["organization"] as? Int ?? -1 //------
+                                    let organization = patient["organization"] as? String ?? "" //AZPC
+                                    let CarePrograms = patient["CarePrograms"] as? String ?? ""
                                     
                                     let pid = String(patientID)
                                     //let tlc = String(timeLineCount)
                                     let cb = String(createdBy)
                                     let up = String(updatedby)
                                     let cu = String(cscUser)
-                                    let org = String(organization)
+                                    //let org = String(organization)
                                     let firstLastName = firstName + " " + lastName
                                     
                                     //define dictionary literals
@@ -130,9 +131,9 @@ class GETPatients {
                                                      //"AdditionalPhysicians":additionalPhysicians, "ReferrerOrigin":referrerOrigin, "InitialDischarge":initialDischarge, "TimeLineCount":tlc, 
                                                      "IsActive":isActive, "pstatus":pstatus, "CreatedBy":cb, "CreatedDateTime":createdDateTime,
                                                      "Updatedby":up, "UpdatedDateTime":updatedDateTime, "careteam":careteam, "profile_image":profileImage, "csc_user":cu,
-                                                     "pharmacy_NCPDP":pharmacyNCPDP, "organization":org])
+                                                     "pharmacy_NCPDP":pharmacyNCPDP, "organization":organization, "CarePrograms":CarePrograms])
                                     
-                                    patientNameID.append(["Patient_ID":pid,"patientName":firstLastName,"CreatedDateTime":createdDateTime, "pstatus":pstatus, "organization":org])
+                                    //patientNameID.append(["Patient_ID":pid,"patientName":firstLastName,"CreatedDateTime":createdDateTime, "pstatus":pstatus, "organization":organization])
 
                                 }
 //                                                            let patientIDColumn =  patients.getColumn(column: 0)
@@ -143,7 +144,7 @@ class GETPatients {
 //                                                            for Iterator in 0..<(patients.count){
 //                                                                patientNameID.append(["\(patientFirstName[Iterator])" + " " + "\(patientLastName[Iterator])", "\(patientIDColumn[Iterator])"])
 //                                                            }
-                                UserDefaults.standard.set(patientNameID, forKey:"RESTPatientsPatientIDs")
+                                //UserDefaults.standard.set(patientNameID, forKey:"RESTPatientsPatientIDs")
                                 UserDefaults.standard.set(patients, forKey: "RESTPatients")
                                 UserDefaults.standard.synchronize()
                                 

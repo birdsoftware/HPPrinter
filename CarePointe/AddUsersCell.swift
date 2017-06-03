@@ -16,6 +16,12 @@ class AddUsersCell: UITableViewCell {
    
 }
 
+class RecipientsCell: UITableViewCell {
+    
+    @IBOutlet weak var name: UILabel!
+    
+}
+
 class AddUsers2Cell: UITableViewCell {
     
     @IBOutlet weak var userImage: UIImageView!

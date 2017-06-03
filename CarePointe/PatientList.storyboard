@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,19 +23,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Search Patients" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzo-gN-u1K">
-                                <rect key="frame" x="0.0" y="70" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="jm7-u3-JrX"/>
                                 </constraints>
-                                <color key="barTintColor" red="0.31095686550000001" green="0.56154131890000003" blue="0.001000816934" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" red="0.26510244607925415" green="0.59462851285934448" blue="0.77094310522079468" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
+                                    <string>All</string>
+                                    <string>Active</string>
+                                    <string>Not Active</string>
                                 </scopeButtonTitles>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="89" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="818-Ww-N9L">
-                                <rect key="frame" x="0.0" y="137" width="375" height="530"/>
+                                <rect key="frame" x="0.0" y="183" width="375" height="484"/>
                                 <color key="backgroundColor" red="0.92126840350000005" green="0.97659069300000001" blue="0.976051271" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -156,7 +158,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME | STATUS | ORG | CP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysT-EO-BoU">
-                                <rect key="frame" x="99" y="115" width="260" height="21"/>
+                                <rect key="frame" x="99" y="161" width="260" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="V4Q-mq-9CW"/>
                                 </constraints>
@@ -165,7 +167,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PATIENT ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSB-6M-OVR">
-                                <rect key="frame" x="0.0" y="115" width="98" height="21"/>
+                                <rect key="frame" x="0.0" y="161" width="98" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="RRJ-IX-3iI"/>
                                     <constraint firstAttribute="width" constant="98" id="g1f-ql-Cg1"/>
@@ -174,29 +176,51 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AUL-So-Mi5">
+                                <rect key="frame" x="-5" y="70" width="385" height="47"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="SOr-Ul-AaM"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="All"/>
+                                    <segment title="Active"/>
+                                    <segment title="Not Active"/>
+                                </segments>
+                                <color key="tintColor" red="0.26510244607925415" green="0.59462851285934448" blue="0.77094310522079468" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="scopeSegmentTapped:" destination="U6i-iS-DwC" eventType="valueChanged" id="0LZ-0v-Ggg"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.2651024461" green="0.59462851289999996" blue="0.77094310519999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="818-Ww-N9L" firstAttribute="top" secondItem="gzo-gN-u1K" secondAttribute="bottom" constant="22" id="35E-xu-N7y"/>
                             <constraint firstItem="cxl-Z7-VY0" firstAttribute="top" secondItem="818-Ww-N9L" secondAttribute="bottom" id="5eG-MP-Em1"/>
+                            <constraint firstItem="gzo-gN-u1K" firstAttribute="top" secondItem="AUL-So-Mi5" secondAttribute="bottom" id="7Lt-rd-7Lg"/>
                             <constraint firstItem="ysT-EO-BoU" firstAttribute="top" secondItem="gzo-gN-u1K" secondAttribute="bottom" id="FrD-zz-Plz"/>
                             <constraint firstItem="ysT-EO-BoU" firstAttribute="trailing" secondItem="aah-uk-r9h" secondAttribute="trailingMargin" id="IN6-QO-6gV"/>
                             <constraint firstItem="rSB-6M-OVR" firstAttribute="leading" secondItem="aah-uk-r9h" secondAttribute="leading" id="Ogt-Vn-8OZ"/>
+                            <constraint firstItem="AUL-So-Mi5" firstAttribute="top" secondItem="WAE-cG-B77" secondAttribute="bottom" id="VEV-Qf-Rde"/>
                             <constraint firstItem="818-Ww-N9L" firstAttribute="leading" secondItem="aah-uk-r9h" secondAttribute="leading" id="aTH-gA-lgH"/>
-                            <constraint firstItem="gzo-gN-u1K" firstAttribute="top" secondItem="WAE-cG-B77" secondAttribute="bottom" id="bqO-gT-FIi"/>
                             <constraint firstAttribute="trailing" secondItem="WAE-cG-B77" secondAttribute="trailing" id="ddg-z4-VU6"/>
                             <constraint firstAttribute="trailing" secondItem="gzo-gN-u1K" secondAttribute="trailing" id="epc-dv-Ihx"/>
                             <constraint firstItem="gzo-gN-u1K" firstAttribute="leading" secondItem="aah-uk-r9h" secondAttribute="leading" id="i8m-xs-vkf"/>
                             <constraint firstItem="WAE-cG-B77" firstAttribute="leading" secondItem="aah-uk-r9h" secondAttribute="leading" id="jP8-YC-CKz"/>
+                            <constraint firstAttribute="trailing" secondItem="AUL-So-Mi5" secondAttribute="trailing" constant="-5" id="lVM-Ax-Zg4"/>
                             <constraint firstItem="WAE-cG-B77" firstAttribute="top" secondItem="aah-uk-r9h" secondAttribute="top" id="ncK-Up-3JE"/>
                             <constraint firstAttribute="trailing" secondItem="818-Ww-N9L" secondAttribute="trailing" id="pwD-bA-TUe"/>
                             <constraint firstItem="ysT-EO-BoU" firstAttribute="leading" secondItem="rSB-6M-OVR" secondAttribute="trailing" constant="1" id="qfg-LU-Cqo"/>
                             <constraint firstItem="rSB-6M-OVR" firstAttribute="top" secondItem="gzo-gN-u1K" secondAttribute="bottom" id="rBw-Tz-ELg"/>
+                            <constraint firstItem="AUL-So-Mi5" firstAttribute="leading" secondItem="aah-uk-r9h" secondAttribute="leading" constant="-5" id="vVn-PS-yyM"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="myPatientsLabel" destination="Tcj-YH-xcN" id="Ghq-pW-Rd5"/>
                         <outlet property="patientSearchBar" destination="gzo-gN-u1K" id="Mum-0l-TUD"/>
                         <outlet property="patientTable" destination="818-Ww-N9L" id="61w-bg-eBw"/>
+                        <outlet property="scopeSegmentControl" destination="AUL-So-Mi5" id="EAN-nH-30s"/>
+                        <outlet property="segementControlHeight" destination="SOr-Ul-AaM" id="Mhd-9H-OeV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NzM-Ft-r1n" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -147,7 +147,28 @@ class SignInViewController: UIViewController {
                             }
                             
                         } else {
-                            self.touchLoginAlert()//self.notifyUser("Authentication Successful", err: "You now have full access")
+                            //self.touchLoginAlert()//self.notifyUser("Authentication Successful", err: "You now have full access")
+                            //Sign In successfull
+                            UserDefaults.standard.set(true, forKey: "isUserSignedIn")
+                            UserDefaults.standard.synchronize()
+                            
+                            //check if we DON'T have internet connection
+                            if Reachability.isConnectedToNetwork() == false {
+                                
+                                let myAlert2 = UIAlertController(title: "Internet connection not found",
+                                                                 message: "Enable internet connection to receive new updates.",
+                                                                 preferredStyle: .alert)
+                                myAlert2.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                                    //go to dashboard
+                                    self.dismiss(animated: false, completion: nil)
+                                }))
+                                
+                                self.present(myAlert2, animated: true){}
+                                
+                            } else {
+                                //go to dashboard
+                                self.dismiss(animated: false, completion: nil)
+                            }
                          }//end else
                     }//DispatchQueue
             })//device can use touch

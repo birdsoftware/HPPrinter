@@ -25,7 +25,7 @@ class PatientUpdateViewController: UIViewController, UIPickerViewDelegate, UIPic
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        patientImage.isHidden = true
         // Delegates
         typePicker.delegate = self
         typePicker.dataSource = self
@@ -40,10 +40,13 @@ class PatientUpdateViewController: UIViewController, UIPickerViewDelegate, UIPic
         messageTextBox.layer.borderWidth = 1.0
         messageTextBox.layer.borderColor = UIColor(hex: 0xD7D7D7).cgColor// Iron
         messageTextBox.layer.cornerRadius = 5
+        
         // Round userImage
-        patientImage.layer.cornerRadius = patientImage.frame.size.width / 2
-        patientImage.clipsToBounds = true
-        updateToSavedImage(Userimage: patientImage)
+        //patientImage.layer.cornerRadius = patientImage.frame.size.width / 2
+        //patientImage.clipsToBounds = true
+        
+        
+        //updateToSavedImage(Userimage: patientImage)
         
         
         //Tap to Dismiss KEYBOARD

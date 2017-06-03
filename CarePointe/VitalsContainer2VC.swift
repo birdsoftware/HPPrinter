@@ -30,7 +30,7 @@ class VitalsContainer2VC: UIViewController, UITableViewDelegate, UITableViewData
         vitalsTable.rowHeight = UITableViewAutomaticDimension
         vitalsTable.estimatedRowHeight = 150
         
-        vitals = [["Height ft/in","-ft -in"],//"5ft 7 in"
+        vitals = [["Height inches","-in"],//"5ft 7 in"
                         ["Weight lbs","-lbs"],//"140 lbs"
                         ["BMI","-"],//27.6
                         ["BMI Status","-"],//moderate
@@ -157,7 +157,7 @@ class VitalsContainer2VC: UIViewController, UITableViewDelegate, UITableViewData
             
             serverSavedVitals.notify(queue: DispatchQueue.main) {//serverSavedVitals now what?
                 
-                print("got here \(height) \(weight) \(bmi) \(bmiStatus) \(bodyTemp) \(bpLocation) \(respRate)")
+                //print("got here \(height) \(weight) \(bmi) \(bmiStatus) \(bodyTemp) \(bpLocation) \(respRate)")
                 self.view.makeToast("Vitals saved to cloud", duration: 1.1, position: .center)
             }
 
@@ -243,7 +243,7 @@ class VitalsContainer2VC: UIViewController, UITableViewDelegate, UITableViewData
             textField.keyboardAppearance = .dark
             textField.keyboardType = .default
             textField.autocorrectionType = .default
-            textField.placeholder = "New Height ft/in"
+            textField.placeholder = "New Height inches"
             textField.clearButtonMode = .whileEditing
             
         }

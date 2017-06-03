@@ -20,25 +20,28 @@ class AMessageViewController: UIViewController {
     // from segue InboxViewController.swift
     var segueFromList: String!
     var segueDate: String!
+    var segueTime: String!
     var segueSubject: String!
     var segueMessage:String!
     var segueSelectedRow: Int!
+    var segueBoxSegmentString: String!
     
     var BoxData:Array<Dictionary<String, String>> = []
-    var boxSegmentString:String!
+    //var boxSegmentString:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Set UI
             //SET box label (Inbox/Sent) and number of messages
-            let boxSegmentString = self.returnStringFromDefaults(fKey:"boxSegment")
+            let boxCount = returnBoxCount(segmentString: segueBoxSegmentString)
+            let boxSegmentString = segueBoxSegmentString + " (\(boxCount))"//self.returnStringFromDefaults(fKey:"boxSegment")
             boxLabelButton.setTitle(boxSegmentString, for: .normal)
         
             //Set Labels
             fromListLabel.text = segueFromList
             dateLabel.text = segueDate
-            subjectLabel.text = segueSubject
+            subjectLabel.text = "Subject: " + segueSubject
             message.text = segueMessage
         
             
@@ -48,19 +51,19 @@ class AMessageViewController: UIViewController {
 
     //#MARK: - helper functions
     
-    func returnStringFromDefaults(fKey: String) -> String{
-        
-        boxSegmentString = UserDefaults.standard.string(forKey: "boxSegment") ?? "key boxSegment not in defaults"
-        let boxCount = returnBoxCount(segmentString: boxSegmentString) //?? "key boxSegment not in defaults"
-        
-        return boxSegmentString + " (\(boxCount))"
-    }
+//    func returnStringFromDefaults(fKey: String) -> String{
+//        
+//        boxSegmentString = UserDefaults.standard.string(forKey: "boxSegment") ?? "key boxSegment not in defaults"
+//        let boxCount = returnBoxCount(segmentString: boxSegmentString) //?? "key boxSegment not in defaults"
+//        
+//        return boxSegmentString + " (\(boxCount))"
+//    }
     
     func returnBoxCount(segmentString: String)->Int{
         var count = 0
         if( segmentString == "Inbox" )
         {
-            BoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
+            BoxData = UserDefaults.standard.value(forKey: "RESTUserInbox") as! Array<Dictionary<String, String>>
             count = BoxData.count
         }
         if( segmentString == "Sent" )
@@ -85,10 +88,10 @@ class AMessageViewController: UIViewController {
             
             
             // Update Defaults
-            if(self.boxSegmentString == "Inbox"){
+            if(self.segueBoxSegmentString == "Inbox"){
                 UserDefaults.standard.set(self.BoxData, forKey: "inBoxData")
             }
-            if(self.boxSegmentString == "Sent"){
+            if(self.segueBoxSegmentString == "Sent"){
                 UserDefaults.standard.set(self.BoxData, forKey: "sentData")
             }
             UserDefaults.standard.synchronize()

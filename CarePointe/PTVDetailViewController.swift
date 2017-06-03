@@ -20,23 +20,41 @@ class PTVDetailViewController: UIViewController {
     @IBOutlet weak var containerView4: UIView!
     
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var backButtonImage: UIImageView!
     
     
-    //Segue from Referrals
-    //var segueStoryBoardName: String! //patientList -> nil, Referrals -> "Refferal"
-    //var segueStoryBoardID: String!
+    //Segue from PatientTabBarController from Referrals
     var storyBoardName: String!
+    var referralsData = [String: String]()
     
     var patientName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //get directly
-        //https://makeapppie.com/2015/02/04/swift-swift-tutorials-passing-data-in-tab-bar-controllers/
+        //get directly https://makeapppie.com/2015/02/04/swift-swift-tutorials-passing-data-in-tab-bar-controllers/
+        
         let tbvc = self.tabBarController as! PatientTabBarController
         storyBoardName = tbvc.segueStoryBoardName
-        //print("<<<<PTVDetailViewController segueStoryBoardName: \(storyBoardName)")
+        referralsData["PatientID"] =    tbvc.tabBarSeguePatientID//"1848"
+        referralsData["PatientNotes"] = tbvc.tabBarSeguePatientNotes
+        referralsData["PatientName"] =  tbvc.tabBarSeguePatientName
+        referralsData["PatientCPID"] =  tbvc.tabBarSeguePatientCPID//"2637"
+        referralsData["PatientDate"] =  tbvc.tabBarSeguePatientDate//"4/1/17"
+        referralsData["HourMin"] =      tbvc.tabBarSegueHourMin//":30"
+        referralsData["BookMinutes"] =  tbvc.tabBarSegueBookMinutes//"60"
+        referralsData["ProviderName"] = tbvc.tabBarSegueProviderName//"Admin Admin"
+        referralsData["ProviderID"] =   tbvc.tabBarSegueProviderID//"148"
+        referralsData["EncounterType"] = tbvc.tabBarSegueEncounterType//"TCM"
+        referralsData["EncounterPurpose"] = tbvc.tabBarSegueEncounterPurpose
+        referralsData["LocationType"] = tbvc.tabBarSegueLocationType
+        referralsData["BookPlace"] = tbvc.tabBarSegueBookPlace
+        referralsData["BookAddress"] = tbvc.tabBarSegueBookAddress
+        referralsData["PreAuth"] = tbvc.tabBarSeguePreAuth
+        referralsData["AttachDoc"] = tbvc.tabBarSegueAttachDoc
+        referralsData["SegueStatus"] = tbvc.tabBarSegueStatus//"Pending"
+        referralsData["IsUrgent"] = tbvc.tabBarSegueIsUrgent//"N"
+        
         backButton.layer.cornerRadius = 5
 
         containerView1.isHidden = false
@@ -46,27 +64,32 @@ class PTVDetailViewController: UIViewController {
         
         // store specific patient Name from defaults i.e. "Ruth Quinonez" etc.
         patientName = UserDefaults.standard.string(forKey: "patientName")!
-        //patientNameLabel.text = patientName + "'s Information"
         
-        // show/hide accept/decline/complete buttons based on status
-        let patientStatus = UserDefaults.standard.string(forKey: "patientStatus")
-        updatePatientView(status: patientStatus!)
-        
-        // Setup sement control font and font size
+        // Setup segment control font and font size
         let attr = NSDictionary(object: UIFont(name: "Futura", size: 15.0)!, forKey: NSFontAttributeName as NSCopying)
         UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject] , for: .normal)
         
-
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if storyBoardName != nil {
+            if storyBoardName! == "Refferal" {
+                backButtonImage.image = UIImage(named: "calendar2.png")
+            }
+        }
+    }
+
     
     
     //
     //#MARK - Supporting functions
     //
 
-    func updatePatientView(status: String){
-        
-    }
+    //func updatePatientView(status: String){
+    //
+    //}
     
     
     //#MARK - Actions
@@ -109,13 +132,9 @@ class PTVDetailViewController: UIViewController {
     @IBAction func backButtonTapped(_ sender: Any) {
         if storyBoardName != nil {
             if storyBoardName! == "Refferal" {
+                
                 self.performSegue(withIdentifier: "patientToReferral", sender: self)
-//            if segueStoryBoardName == "Refferal" {
-            //toViewController.segueStoryBoardID = "Refferal"
-                //let storyboard = UIStoryboard(name: "Refferal", bundle: nil)
-                //let vc = storyboard.instantiateViewController(withIdentifier: "referralVC") as UIViewController
-                //vc.navigationController?.pushViewController(vc, animated: false)
-                //self.present(vc, animated: false, completion: nil)
+
             }
         
         } else {
@@ -229,24 +248,24 @@ class PTVDetailViewController: UIViewController {
         
         if segue.identifier == "patientToReferral" {
             if let toViewController = segue.destination as? ReferralsVC {
-                toViewController.seguePatientID = "will get 1"
-                toViewController.seguePatientNotes = "will get 2"
-                toViewController.seguePatientName = "will get 3"
-                toViewController.seguePatientCPID = "will get 4"//appointmentID
-                toViewController.seguePatientDate = "will get 5"
-                toViewController.segueHourMin = "will get 6"
-                toViewController.segueBookMinutes = "will get 7"
-                toViewController.segueProviderName = "will get 8"
-                toViewController.segueProviderID = "will get 9"
-                toViewController.segueEncounterType = "will get 10"
-                toViewController.segueEncounterPurpose = "will get 11"
-                toViewController.segueLocationType = "will get 12"
-                toViewController.segueBookPlace = "will get 13"
-                toViewController.segueBookAddress = "will get 14"
-                toViewController.seguePreAuth = "will get 15"
-                toViewController.segueAttachDoc = "will get 16"
-                toViewController.segueStatus = "will get 17"
-                toViewController.segueIsUrgent = "N"
+                toViewController.seguePatientID = referralsData["PatientID"]
+                toViewController.seguePatientNotes = referralsData["PatientNotes"]
+                toViewController.seguePatientName = referralsData["PatientName"]
+                toViewController.seguePatientCPID = referralsData["PatientCPID"]//appointmentID
+                toViewController.seguePatientDate = referralsData["PatientDate"]
+                toViewController.segueHourMin = referralsData["HourMin"]
+                toViewController.segueBookMinutes = referralsData["BookMinutes"]
+                toViewController.segueProviderName = referralsData["ProviderName"]
+                toViewController.segueProviderID = referralsData["ProviderID"]
+                toViewController.segueEncounterType = referralsData["EncounterType"]
+                toViewController.segueEncounterPurpose = referralsData["EncounterPurpose"]
+                toViewController.segueLocationType = referralsData["LocationType"]
+                toViewController.segueBookPlace = referralsData["BookPlace"]
+                toViewController.segueBookAddress = referralsData["BookAddress"]
+                toViewController.seguePreAuth = referralsData["PreAuth"]
+                toViewController.segueAttachDoc = referralsData["AttachDoc"]
+                toViewController.segueStatus = referralsData["SegueStatus"]
+                toViewController.segueIsUrgent = referralsData["IsUrgent"]
             }
         }
     }

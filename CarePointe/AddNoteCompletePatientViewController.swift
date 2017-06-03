@@ -10,23 +10,35 @@ import UIKit
 
 class AddNoteCompletePatientViewController: UIViewController {
     
+    //labels
     @IBOutlet weak var patientName: UILabel!
+    @IBOutlet weak var appointmentLabel: UILabel!
+    @IBOutlet weak var patientIDLabel: UILabel!
+    
+    //view
     @IBOutlet weak var messageTextBox: UITextView!
     
-    var patient:String = ""
-    var patientID: String = ""
+    //button
+    @IBOutlet weak var infoButton: UIButton!
+    
+    @IBOutlet weak var blueBoxHeightConstraint: NSLayoutConstraint!
+    
+    var isInfo = true
+    
+    var patient: String!// = ""
+    var patientID: String!// = ""
+    var appointmentID: String!//referral ID is Care_Plan_ID
     var userName: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // show specific patient Name from defaults i.e. "Ruth Quinonez" etc.
-        if isKeyPresentInUserDefaults(key: "patientNameMainDashBoard") {
-            patient = UserDefaults.standard.string(forKey: "patientNameMainDashBoard")!
-            patientName.text = "Patient: " + patient
-        }
-        
-        //patientID = UserDefaults.standard.string(forKey: "patientID")!
+        patientIDLabel.isHidden = true
+        appointmentLabel.isHidden = true
+        appointmentLabel.text = "Appointment ID: \(appointmentID!)"
+        patientIDLabel.text = "Patient ID: \(patientID!)"
+        patientName.text = "Patient: " + patient
+
         
         // get profile user name
         if isKeyPresentInUserDefaults(key: "profileName") {
@@ -37,7 +49,7 @@ class AddNoteCompletePatientViewController: UIViewController {
         }
         
         // get patientID
-        patientID = self.returnSelectedPatientID()
+        //patientID = self.returnSelectedPatientID()
         
         // UI setup
         messageTextBox.layer.borderWidth = 1.0
@@ -58,7 +70,29 @@ class AddNoteCompletePatientViewController: UIViewController {
         view.endEditing(true)
     }
 
-
+    func updateStatusToComplete(){
+        //1 find Refferal with this appointmentID (seguePatientCPID) and change status from Scheduled to Complete
+        
+        var referrals = Array<Dictionary<String, String>>()
+        
+        if isKeyPresentInUserDefaults(key: "RESTAllReferrals"){
+            referrals = UserDefaults.standard.object(forKey: "RESTAllReferrals") as! Array<Dictionary<String, String>>
+            var Iterator = 0
+            for dict in referrals{
+                //print("referral care plan id: \(dict["Care_Plan_ID"]!)")
+                if dict["Care_Plan_ID"] == appointmentID{      //appointmentID
+                    //print("Care_Plan_ID is \(seguePatientCPID) iterator is \(Iterator)")
+                    referrals[Iterator].updateValue("Complete", forKey: "Status")
+                    break
+                }
+                Iterator+=1
+            }
+        }
+        
+        UserDefaults.standard.set(referrals, forKey: "RESTAllReferrals")
+        UserDefaults.standard.synchronize()
+        
+    }
     
 
     //
@@ -68,9 +102,8 @@ class AddNoteCompletePatientViewController: UIViewController {
     @IBAction func completPatientButtonTapped(_ sender: Any) {
         
         // 1 MOVE PATIENT FROM ACCEPTED TO COMPLETED
-            //search for  "filterAppointmentID" from user defaults in appID[1] and move to appID[2] // completed = 2
-            let filterAppointmentID = UserDefaults.standard.string(forKey: "filterAppointmentID")
-            self.moveFromAcceptedToCompletedFor(AppointmentID: filterAppointmentID!)
+        self.updateStatusToComplete()
+        
         
         // 2 UPDATE PATIENT FEED
         //                            times     dates   messageCreator  message     patientID
@@ -100,6 +133,31 @@ class AddNoteCompletePatientViewController: UIViewController {
         })
         
     }
+    
+    @IBAction func infoButtonTapped(_ sender: Any) {
+        
+        if isInfo {
+            patientIDLabel.isHidden = false
+            appointmentLabel.isHidden = false
+            blueBoxHeightConstraint.constant += 50
+            //infoButton.backgroundColor = .white
+            infoButton.setTitleColor(.black, for: .normal)
+            UIView.animate(withDuration: 0.2, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            patientIDLabel.isHidden = true
+            appointmentLabel.isHidden = true
+            blueBoxHeightConstraint.constant -= 50
+            infoButton.setTitleColor(.white, for: .normal)
+            UIView.animate(withDuration: 0.2, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+            })
+        }
+        
+        isInfo = !isInfo
+    }
+    
     
     
 }

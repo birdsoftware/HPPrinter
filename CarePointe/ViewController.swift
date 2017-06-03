@@ -17,21 +17,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //
     
     // buttons
-    @IBOutlet weak var AddTaskButton: UIButton!
+    //@IBOutlet weak var AddTaskButton: UIButton!
     @IBOutlet weak var pendingReferralsButton: UIButton!
     @IBOutlet weak var scheduledEncountersButton: UIButton!
     @IBOutlet weak var CompleteButton: UIButton!
     @IBOutlet weak var dateDisplayButton: UIButton!
     
     
-    //@IBOutlet weak var alertOutsideButton: UIButton!
-    //@IBOutlet weak var messageContactButton: UIButton!
-    //@IBOutlet weak var videoContactButton: UIButton!
-    
-    // views
-    //@IBOutlet weak var communicationButtonsView: UIView!
-    @IBOutlet weak var hamburgerContainerView: UIView!
-    @IBOutlet weak var alertContainerView: UIView!
+    //view
     @IBOutlet var mainView: UIView!
     
     
@@ -53,19 +46,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var hamburger: UIBarButtonItem!
     @IBOutlet weak var rightBarButtonAlert: UIBarButtonItem!
     
-    // constraints
-    @IBOutlet weak var leadingConstraintContainerView: NSLayoutConstraint!
-    @IBOutlet weak var leadingConstraintContainerView2: NSLayoutConstraint!
-    
-    
     //
     // Class Variables
     //
-    
-    var alertOffset: CGFloat = 0
-    var hambuOffset: CGFloat = 0
-    var hamburgerMenuShowing = false
-    var alertTableShowing = false
     
     var w:Int = 0
     var h:Int = 0
@@ -77,12 +60,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //
     // Class Public Data
     //
-    
-    var appID = [[String]]()
-    var appPat = [[String]]()       //Displayed in Table called tasksTableView
-    var appTime = [[String]]()        //Displayed in Table
-    var appDate = [[String]]()
-    var appMessage = [[String]]()   //Displayed in Table
+    var uniqueValues = Set<String>()
+    var appID = [String]()
+    var appointmentID = [String]()
+    var appPat = [String]()       //Displayed in Table called tasksTableView
+    var appTime = [String]()        //Displayed in Table
+    var appDate = [String]()
+    var appMessage = [String]()   //Displayed in Table
+    var addresses = [String]() //for map in table
     
     // Date Picker -> reload table using:
     var filteredAppID:[String] = []
@@ -90,14 +75,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var filteredTime:[String] = []
     var filteredPatient:[String] = []
     var filteredMessage:[String] = []
+    var filterAppointmentID:[String] = []
+    var filterAddresses:[String] = []
     
     var filterActive : Bool = false
     
-    
-    // userData for communication drop down table
-//    var userData:Array<Dictionary<String,String>> = []
-//    var SearchData:Array<Dictionary<String,String>> = []
-//    
 //    // Search Bar (top nav controller title view) ------------------------
 //    lazy var searchBar:UISearchBar = UISearchBar(frame: CGRect(x:0,y:0,width:200,height:200))
 //    var searchActive : Bool = false
@@ -109,11 +91,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //HIDE THINGS FOR NEW UPDATE: HOME screen
         self.rightBarButtonAlert.tintColor = .clear
         self.rightBarButtonAlert.isEnabled = false
-        hamburgerContainerView.isHidden = true
-        alertContainerView.isHidden = true
+
         
-        
-        UXCam.tagUsersName("Brian")
+        if isKeyPresentInUserDefaults(key: "userProfile") {
+            let userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
+            
+            if userProfile.isEmpty == false {
+                //let user = userProfile[0]
+               // let name = user["userName"]!
+                //let title = user["Title"]!
+                //let role = user["RoleType"]!
+        UXCam.tagUsersName("brian")//"\(name), \(title), \(role)")
+            }
+        }
 
         //get screen size for determining the autolayout bounds for the alert and hamburger views
         w  = Int(mainView.bounds.size.width) //print("Screen Width: \(w)")
@@ -171,14 +161,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
             noAppointmentsTodayLabel.isHidden = true
         
-            AddTaskButton.isHidden = true
-            AddTaskButton.layer.cornerRadius = 5
-        
-            //contactsTable.isHidden = true
-            //communicationButtonsView.isHidden = true
-            //messageContactButton.layer.cornerRadius = 5
-            //videoContactButton.layer.cornerRadius = 5
-        
         // HAMBURGER MENU --------------------------------------------------------
             //1. Determine device Type and set alert & hamburger view offsets
             //setHideAndShowOffsetFromDeviceType()
@@ -203,8 +185,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             orangeLine2.layer.addBorder(edge: UIRectEdge.bottom, color: .orange, thickness: 2)
             orangeLine3.layer.addBorder(edge: UIRectEdge.bottom, color: .orange, thickness: 2)
         
-
-        
         // GET DATA FROM DEFAULTS --------------------------------------------------
         if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does this exist? [yes]
             getUpdateAppointmentData()
@@ -213,14 +193,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             setUpAppointmentData()
             //print("setUpAppointmentData there is no key onlyDoOnce")
         }
-        
-        // UPDATE MESSAGES NOT READ COUNT ------------------------------------------
-//        var inboxCount = UserDefaults.standard.integer(forKey: "inboxCount")
-//        if isKeyPresentInUserDefaults(key: "inBoxData"){
-//            let inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
-//            inboxCount = inBoxData.count
-//        }
-//        unreadMessagesLabel.text = String(inboxCount)
         
         
         // RELOAD table based on current date if date not selected from PICKER -----
@@ -238,17 +210,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        }
 //        rightBarButtonAlert.addBadge(number: alertCount)//alertImageNames.count)
         
+        
         // DISPLAY "No Appointments for this Day -----------------------------------
         showAlertIfTasksTableEmpty()
-        
-        // get userData for communication drop down list
-//        if isKeyPresentInUserDefaults(key: "RESTusers"){
-//            userData = UserDefaults.standard.value(forKey: "RESTusers") as! Array<Dictionary<String, String>>
-//            
-//            SearchData = userData//need this to start off tableView with all data and not blank table
-//            print("SearchData: \(SearchData)")
-        //}//else play loading animation
- 
     }
     
 
@@ -277,30 +241,67 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let referrals = UserDefaults.standard.value(forKey: "RESTAllReferrals") as! Array<Dictionary<String,String>>
             
             for referral in referrals {
+                
                 print("referral\(referral["Care_Plan_ID"]!) \(referral["Status"]!)")
-//                if referral["Status"] == "Complete"{
-//                    print("got here")
+
                 switch referral["Status"]! //from tbl_care_plan
                 {
-                case "Complete", "Rejected/Inactive", "Cancelled":
-                    numberCompletePatiets += 1
-                case "Scheduled", "In Service":
-                    numberScheduledPatients += 1
-                case "Pending", "Opened":
-                    numberNewPatients += 1
-                default:
-                    break
+                    case "Complete", "Rejected/Inactive", "Cancelled":
+                        numberCompletePatiets += 1
+                    
+                    case "Scheduled", "In Service":
+                        numberScheduledPatients += 1
+                        let beforeInsertCount = uniqueValues.count
+                        uniqueValues.insert(referral["Care_Plan_ID"]!) // will do nothing if Care_Plan_ID exists already
+                        let afterInsertCount = uniqueValues.count
+                        
+                        if beforeInsertCount != afterInsertCount {
+                            
+                            self.addresses.append(referral["book_address"]!)
+                            self.appointmentID.append(referral["Care_Plan_ID"]!)//referral ID is Care_Plan_ID
+                            self.appDate.append(convertDateStringToDate(longDate: referral["StartDate"]!))//StartDate
+                            self.appPat.append(referral["Patient_Name"]!)//Patient_Name
+                            self.appMessage.append(referral["book_type"]!)//book_type
+                            self.appID.append(referral["Patient_ID"]!)//Patient_ID
+                            var hhmmStr = referral["date_hhmm"]!
+                            
+                            //check to makre sure Data["date_hhmm"]! has ":" if not insert ":"
+                            let charset = CharacterSet(charactersIn: ":")
+                            
+                            if hhmmStr.rangeOfCharacter(from: charset) == nil {
+                                
+                                hhmmStr = ":"+hhmmStr
+                            }
+                            
+                            let hourMinuteString = convertStringTimeToString_hh_mm_a(date_hhmm: hhmmStr)
+                            self.appTime.append(hourMinuteString)//date_hhmm
+                        }
+                    
+                    case "Pending", "Opened":
+                        numberNewPatients += 1
+                    default:
+                        break
                 } //Others:"Not Taken Under Care", "Completed/Archived", "Inactive", "Deseased", "Active"
+                
+            }
+            
+            //update table
+            let date = Date()
+            let formatter = DateFormatter()
+            
+            //formatter.dateFormat = "M/dd/yy" //"2/04/2017"
+            formatter.dateStyle = .short //"2/4/2017"
+            
+            let todaysDate = formatter.string(from: date)
+            
+            // RELOAD table based on current date if date not selected from PICKER -----
+            if (strDate.isEmpty == true) {
+                updateTableByDate(searchText: todaysDate)
+            } else {
+                updateTableByDate(searchText: strDate)
             }
         }
         
-//        if (appPat.isEmpty == false) {
-//            
-//            //"There are appDate objects!"
-//            numberNewPatients = (appPat[0].count)
-//            numberScheduledPatients = (appPat[1].count)
-//            
-//        }
         
         UserDefaults.standard.set(numberScheduledPatients, forKey: "numberScheduledPatients")
         UserDefaults.standard.set(numberNewPatients, forKey: "numberNewPatients")
@@ -358,12 +359,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    
-//    @IBAction func AddTaskButtonTapped(_ sender: Any) {//OLD Add task button
-//        
-//        self.performSegue(withIdentifier: "ShowAddTaskView", sender: self)
-//    }
-    
     @IBAction func dateDisplatButtonTapped(_ sender: Any) {
         showCalendarAlert()
     }
@@ -398,7 +393,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         UserDefaults.standard.set(false, forKey: "isUserSignedIn")
         UserDefaults.standard.synchronize()
         
-        self.performSegue(withIdentifier: "ShowLogInView", sender: self)
+        //self.performSegue(withIdentifier: "ShowLogInView", sender: self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "signinvc") as UIViewController
+        self.present(vc, animated: false, completion: nil)
     }
     
 
@@ -438,7 +436,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
             var integerArray:[Int] = []
         
-            self.filteredDates = self.appDate[1].filter({ (text) -> Bool in
+            self.filteredDates = self.appDate.filter({ (text) -> Bool in
                 let tmp: NSString = text as NSString
                 let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
                 
@@ -454,14 +452,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.filteredPatient.removeAll()
             self.filteredMessage.removeAll()
             self.filteredAppID.removeAll()
+            self.filterAppointmentID.removeAll()
+            self.filterAddresses.removeAll()
             for i in integerArray {
                 if i != NSNotFound {
                     //TEST print("match \(i),\(index)") //testing
                     //add
-                    self.filteredTime.append(self.appTime[1][index-1])
-                    self.filteredPatient.append(self.appPat[1][index-1])
-                    self.filteredMessage.append(self.appMessage[1][index-1])
-                    self.filteredAppID.append(self.appID[1][index-1])
+                    self.filteredTime.append(self.appTime[index-1])
+                    self.filteredPatient.append(self.appPat[index-1])
+                    self.filteredMessage.append(self.appMessage[index-1])
+                    self.filteredAppID.append(self.appID[index-1])
+                    self.filterAppointmentID.append(self.appointmentID[index-1])
+                    self.filterAddresses.append(self.addresses[index-1])
                     if(index < integerArray.count) {
                         index += 1
                     }
@@ -490,38 +492,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     
     func getUpdateAppointmentData(){
-        //Get up to date array
-        //let appSecT = UserDefaults.standard.object(forKey: "appSec")
-        let appIDT = UserDefaults.standard.object(forKey: "appID")
-        let appPatT = UserDefaults.standard.object(forKey: "appPat")
-        let appTimeT = UserDefaults.standard.object(forKey: "appTime")
-        let appDateT = UserDefaults.standard.object(forKey: "appDate")
-        let appMessageT = UserDefaults.standard.object(forKey: "appMessage")
         
-        //check default !nil then update public array from array stored in defaults
-        //if let appSecT = appSecT {
-        //    appSec = appSecT as! [String]
-        //}
-        
-        if let appIDT = appIDT {
-            appID = appIDT as! [[String]]
-        }
-        
-        if let appPatT = appPatT {
-            appPat = appPatT as! [[String]]
-        }
-        //------------------------------ time, date, message needed ViewController in main dash -------//
-        if let appTimeT = appTimeT {
-            appTime = appTimeT as! [[String]]
-        }
-        
-        if let appDateT = appDateT {
-            appDate = appDateT as! [[String]]
-        }
-        
-        if let appMessageT = appMessageT {
-            appMessage = appMessageT as! [[String]]
-        }
+        appID = [""]//Patient_ID
+        appointmentID = [""]
+        appPat = [""]//Patient_Name
+        appTime = [""]//
+        appDate = [""]//
+        appMessage = [""]//book_type like Nurse visit
+        addresses = [""]
         
     }
 
@@ -553,43 +531,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             noAppointmentsTodayLabel.isHidden = true
         }
-    
     }
-    
-    
-    //
-    // #MARK: - Search Functions
-    //
-    
-//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//        searchActive = true
-//        searchBar.showsCancelButton = true
-//        searchBar.placeholder = ""
-//        //if(w < 700) {contactsTable.isHidden = false //TODO: fix for iPad
-//        //}//communicationButtonsView.isHidden = false }
-//    }
-//    
-//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-//        searchActive = false
-//        searchBar.showsCancelButton = false
-//    }
-//    
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        searchActive = false
-//        searchBar.text = ""
-//        searchBar.endEditing(true)
-//        searchBar.showsCancelButton = false
-//        searchBar.placeholder = "Start Communication"
-//        //contactsTable.isHidden = true
-//        //communicationButtonsView.isHidden = true
-//    }
-//    
-//    
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        searchActive = false;
-//        //alertSearchBar.endEditing(true)
-//    }
-    
     
     
     //
@@ -614,17 +556,65 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             if (appDate.isEmpty == false) {
                 //print("There are appDate objects!")
-                return appPat[1].count//patients.count
+                return appPat.count//patients.count
             }
         }
-//        if(tableView == contactsTable) {
-//            print("SearchData.count: \(SearchData.count)")
-//            return SearchData.count
-//            
-//        }
-//        print("0: \(SearchData.count)")
+
         return 0
         
+    }
+    
+    func returnNotEmptyAddressString(adress: String) -> String {
+        /* INPUT: "Address -1 main street;State -NY;City -Bedminster;Zip -07921;Phone -8886337821;"
+         * ["Address -1 main street",
+         *  "State -NY",
+         *  "City -Bedminster",
+         *  "Zip -07921",
+         *  "Phone -8886337821",
+         *  ""]
+         * For each element in address must contain a "-" and doesnot contain "Phone"
+         * OUTPUT: "1 main street, NY, Bedminster, 07921"
+         */
+        
+        let segueBookAddress = adress
+        
+        if segueBookAddress.contains(";") {
+            
+            let bookAddressArray = splitStringToArray(StringIn: segueBookAddress, deliminator: ";")
+            
+            var addr = ""
+            
+            for element in bookAddressArray {
+                if element.contains("-") {
+                    if element.range(of: "Phone") == nil {//does not exist
+                        let index = element.characters.index(of: "-")
+                        var dashStr = element.substring(from: index!) + ", "
+                        dashStr.remove(at: dashStr.startIndex)
+                        addr += dashStr
+                    }
+                }
+            }
+            
+            let endIndex = addr.index(addr.endIndex, offsetBy: -2)
+            let truncated = addr.substring(to: endIndex)
+            return truncated
+            
+        } else {
+            
+            return segueBookAddress
+        }
+    }
+
+    
+    func goToMap(sender: UIButton) {
+        
+        let selectedRow = sender.tag //returns int
+        let selectedAdress = filterAddresses[selectedRow]
+        let searchableAddress = returnNotEmptyAddressString(adress: selectedAdress)
+        let patientAddress = "\(searchableAddress)"//, \(city), \(state) \(zip)"
+        
+        let callMapHere = ReferralsMap()
+        callMapHere.showMap(destAddress: patientAddress, destName: "Patient Address")
     }
     
     //[3] RETURN actual CELL to be displayed
@@ -639,68 +629,52 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.photo.image = UIImage(named: "green.circle.png")//photos[IndexPath.row]
             
             if(filterActive){
-                //var filteredTime:[String] = []
-                //var filteredPatient:[String] = []
-                //var filteredMessage:[String] = []
-                cell.task.text = filteredMessage[IndexPath.row]
-                cell.patient.text = filteredPatient[IndexPath.row]
+
+                cell.patient.text = filteredMessage[IndexPath.row]
+                cell.task.text = filteredPatient[IndexPath.row]
                 cell.time.text = filteredTime[IndexPath.row]
+                cell.mapButton.tag = IndexPath.row
+                
+                if filterAddresses[IndexPath.row] != "" {
+                    cell.mapButton.isHidden = false
+                    cell.mapButton.addTarget(self, action: #selector(goToMap), for: .touchUpInside)
+                } else {
+                    cell.mapButton.isHidden = true
+                }
             }
             else {
             
-                cell.task.text = appMessage[1][IndexPath.row]//appointments[IndexPath.row]
-                cell.patient.text = appPat[1][IndexPath.row]//patients[IndexPath.row]
-                cell.time.text = appTime[1][IndexPath.row]//times[IndexPath.row]
+                cell.patient.text = appMessage[IndexPath.row]//appointments[IndexPath.row]
+                cell.task.text = appPat[IndexPath.row]//patients[IndexPath.row]
+                cell.time.text = appTime[IndexPath.row]//times[IndexPath.row]
                 
             }
             
             cell.accessoryType = .disclosureIndicator // add arrow > to cell
             
             return cell
-            
-//        } else {//contactsTable
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "addcontactcell")! as! addContactCell //see AppointmentCell.swift
-//            
-//            var Data:Dictionary<String,String> = SearchData[IndexPath.row]
-//            
-//            cell.contactImage.image = UIImage(named: "user.png")
-//            cell.contactName.text = Data["FirstLastName"]//"\(Data["FirstName"]!) \(Data["LastName"]!)"//Data["name"]
-//            cell.contactPosition.text = Data["RoleType"] //Data["position"]
-//            
-//            cell.accessoryType = .disclosureIndicator // add arrow > to cell
-//            
-//            return cell
-//        }
-        
-        
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "addNoteCompletePatient" {
+        if segue.identifier == "addNoteCompletePatient" {//AddNoteCompletePatientViewController
             
             let selectedRow = ((tasksTableView.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
-            //let sectionOfSelectedRow = 1 //Accepted Patients
-            let patientName = filteredPatient[selectedRow] //appPat[sectionOfSelectedRow][selectedRow]
-            
-            let filterAppointmentID = filteredAppID[selectedRow]
-            UserDefaults.standard.set(filterAppointmentID, forKey: "filterAppointmentID")
             
             let accepted = 1
-            
-            UserDefaults.standard.set(patientName, forKey: "patientNameMainDashBoard")
-            //UserDefaults.standard.set(selectedRow, forKey: "selectedRowMainDashBoard")
             
             UserDefaults.standard.set(selectedRow, forKey: "selectedRow")
             UserDefaults.standard.set(accepted, forKey: "sectionForSelectedRow")
             
-            //UserDefaults.standard.set(sectionOfSelectedRow, forKey: "sectionOfSelectedRowMainDashBoard")
-            
+            if let toVC = segue.destination as? AddNoteCompletePatientViewController{
+                
+                toVC.patient = filteredPatient[selectedRow]//patient name
+                toVC.patientID = filteredAppID[selectedRow]//Patient_ID from RESTReferral
+                toVC.appointmentID = filterAppointmentID[selectedRow]//referral ID is Care_Plan_ID
+            }
         }
-        
     }
-    
     
     
 }

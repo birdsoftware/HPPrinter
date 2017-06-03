@@ -25,7 +25,7 @@ class InfoContainer1VC: UIViewController, UITableViewDelegate, UITableViewDataSo
     var patientData:Array<Dictionary<String,String>> = []
     var demographics = [[String]]()
     var patientName = ""
-    var patientID = "1982"
+    var patientID = ""
     
     //API data
     var restLocations = Array<Dictionary<String,String>>()
@@ -35,8 +35,12 @@ class InfoContainer1VC: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
         
         //get demographics from API latest local save
+
         demographics = UserDefaults.standard.object(forKey: "demographics")! as? [[String]] ?? [[String]]()//saved from PatientListVC
-        patientID = demographics[0][1]//"UniqueID"
+        
+        if demographics.isEmpty == false {
+            patientID = demographics[0][1]//"UniqueID"
+        }
         
         //getTokenThenBadgeAndCaseFromWebServer()
         

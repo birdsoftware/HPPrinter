@@ -14,6 +14,8 @@ class AppointmentCell: UITableViewCell {
     @IBOutlet var photo: UIImageView!
     @IBOutlet var task: UILabel!
     @IBOutlet var patient: UILabel!
+    @IBOutlet weak var mapButton: RoundedButton!
+    
    
     override func awakeFromNib() {
         super.awakeFromNib()

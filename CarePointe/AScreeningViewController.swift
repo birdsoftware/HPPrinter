@@ -20,7 +20,7 @@ class AScreeningViewController: UIViewController {
         
         // show specific patient Name from defaults i.e. "Ruth Quinonez" etc.
         let patientName = UserDefaults.standard.string(forKey: "patientName")
-        patientNameLabel.text = patientName! + "'s Screenings"
+        patientNameLabel.text = patientName! + "'s Forms"
     }
 
 

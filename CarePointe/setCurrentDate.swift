@@ -45,6 +45,45 @@ extension UIViewController {
         
     }
     
+    func convertDateToLongStringDate(dateString: String) -> String{
+        
+        //INPUT: dateString = "Appointment Date: 4/2/17 12:30 AM"
+        //OUTPUT: 2017-04-02T04:00:00.000Z
+        
+        let startIndex = dateString.index(dateString.startIndex, offsetBy: 18)//Remove "Appointment Date: "
+        let truncatedFront = dateString.substring(from: startIndex)
+        
+        let endIndex = truncatedFront.index(truncatedFront.endIndex, offsetBy: -8)//Remove "12:30 AM"
+        var truncated = truncatedFront.substring(to: endIndex)
+        
+        if truncated.contains(" "){
+            let endIndex = truncated.index(truncated.endIndex, offsetBy: -1)
+            truncated = truncated.substring(to: endIndex)
+        }
+        
+        let dateString = truncated
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d/yy"
+        let date = dateFormatter.date(from:dateString)
+        
+        
+        
+        if date != nil {
+            
+            let formatter = DateFormatter()
+            //formatter.dateStyle = .short
+            formatter.dateFormat = "YYYY-MM-dd"
+            formatter.timeZone = TimeZone(identifier: "America/New_York")
+            let dateShort = formatter.string(from: date!)//2017-04-02
+            
+            return dateShort + "T04:00:00.000Z"
+            
+        } else {
+            return dateString
+        }
+        
+    }
+    
     func convertDateStringToDate(longDate: String) -> String{
         /* INPUT: longDate = "2017-01-27T05:00:00.000Z"
          * OUTPUT: "1/26/17"
@@ -54,12 +93,14 @@ extension UIViewController {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        //dateFormatter.timeZone = TimeZone(identifier: "EDT")!
         let date = dateFormatter.date(from: longDate)
         
         if date != nil {
             
             let formatter = DateFormatter()
             formatter.dateStyle = .short
+            formatter.timeZone = TimeZone(identifier: "America/New_York")
             let dateShort = formatter.string(from: date!)
             
             return dateShort

@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var patientTitleLabel: UILabel!
@@ -22,13 +24,16 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var containerView1: UIView!
     @IBOutlet weak var containerView2: UIView!
     
-    
-    var times = [String]()
-    var dates = [String]()
-    var messageCreator = [String]()
-    var message = [String]()
-    var updatedFrom = [String]()
-    var updatedType = [String]()
+    var restPatientUD = Array<Dictionary<String,String>>()
+    /*
+    var times = [String]()//PatientUpdateDate
+    var dates = [String]()//"0:00 AM"
+    var messageCreator = [String]()//CreatedBy
+    var message = [String]()//PatientUpdateText
+    var updatedFrom = [String]()//updated_from
+    var updatedType = [String]()//update_type
+ */
+    var linkAddress = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,23 +66,28 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         
         //Diable segment .isEnabled = false 
         patientFeedSegmentC.setEnabled(false, forSegmentAt: 1)
+        
+        //getTokenThenPatientUpdatesFromWebServer()
     }
     
     
     //This was added for REWIND segue called from PatientUpDateViewController function sendButtonTapped
     //Have to rewind segue back, get new data and reload table for changes to be seen
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        let feedData = UserDefaults.standard.object(forKey: "feedData") as? [[String]] ?? [[String]]()
-            times = feedData.getColumn(column: 0)
-            dates = feedData.getColumn(column: 1)
-            messageCreator = feedData.getColumn(column: 2)
-            message = feedData.getColumn(column: 3)
-        //patientID 4
-            updatedFrom = feedData.getColumn(column: 5)
-            updatedType = feedData.getColumn(column: 6)
-            
-            patientFeedTableView.reloadData()
+        getTokenThenPatientUpdatesFromWebServer()
+        
+//        let feedData = UserDefaults.standard.object(forKey: "feedData") as? [[String]] ?? [[String]]()
+//            times = feedData.getColumn(column: 0)
+//            dates = feedData.getColumn(column: 1)
+//            messageCreator = feedData.getColumn(column: 2)
+//            message = feedData.getColumn(column: 3)
+//        //patientID 4
+//            updatedFrom = feedData.getColumn(column: 5)
+//            updatedType = feedData.getColumn(column: 6)
+        
+            //patientFeedTableView.reloadData()
     }
     
     
@@ -195,7 +205,64 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
 
         }
     }
+    
+    // web server functions
+    
+    func getTokenThenPatientUpdatesFromWebServer(){
+        
+        let downloadToken = DispatchGroup()
+        downloadToken.enter()
+        
+        // 0 get token again -----------
+        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
+        
+        let getToken = GETToken()
+        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
+        
+        downloadToken.notify(queue: DispatchQueue.main)  {
+            
+            let token = UserDefaults.standard.string(forKey: "token")!
+            
+            //var dontShowToast = true //if viewDidLoad - don't 2x TOAST
+            //if(showToast == "viewWillAppear") { dontShowToast = false}
+            
+            //GET UPDATES---------------------
+            self.getPatientUpdatesFromWebServer(token: token)
+            //-------------------------------
+        }
+    }
 
+    func getPatientUpdatesFromWebServer(token: String){
+        
+        let demographics = UserDefaults.standard.object(forKey: "demographics") as? [[String]] ?? [[String]]()//saved from PatientListVC
+        let patientID = demographics[0][1]//"UniqueID"
+        
+        //print("patientID: \(patientID)")
+        
+        let patientUpdateFlag = DispatchGroup()
+        patientUpdateFlag.enter()
+        
+        let pu = GETPatientUpdates()
+        pu.getPatientUpdates(token: token, patientID: patientID, dispachInstance: patientUpdateFlag)
+        
+        patientUpdateFlag.notify(queue: DispatchQueue.main) {//pu sent back from cloud
+            
+            //print("here><><><><<><><><><")
+            
+            self.restPatientUD = UserDefaults.standard.object(forKey: "RESTPatientUpdates") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
+
+            //print("patientUpdates: \(self.restPatientUD)")
+            
+                let restPatientUDCount = self.restPatientUD.count
+                self.view.makeToast("\(restPatientUDCount) Patient Updates pulled from cloud", duration: 1.1, position: .center)
+            
+            self.patientFeedTableView.reloadData()
+            
+        }
+    }
+    
+    
     
     //
     // #MARK: - UNWIND SEGUE
@@ -210,8 +277,9 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     
     //return number of rows in each section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(message.isEmpty == false){
-            return message.count
+        print("restPatientUD.count \(restPatientUD.count)")
+        if(restPatientUD.isEmpty == false){
+            return restPatientUD.count
         }
         else {
             return 0
@@ -220,13 +288,16 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     
     //return actual CELL to be displayed
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "PatientFeedCell") as! PatientFeedViewCell
         
-        let update = getUpdateTitle(updatedFrom: updatedFrom[indexPath.row], updateType: updatedType[indexPath.row])
+        let updateData:Dictionary<String,String> = restPatientUD[indexPath.row]
+        
+        let update = getUpdateTitle(updatedFrom: updateData["updated_from"]!, updateType: updateData["update_type"]!)
         
         // 1 https://www.ioscreator.com/tutorials/attributed-strings-tutorial-ios8-swift
-        let stringUpdate = update + dates[indexPath.row] + " @ " + times[indexPath.row]  as NSString
-        let stringCreatedBy = "Created by: " + messageCreator[indexPath.row] as NSString
+        /*let stringUpdate = update + updateData["PatientUpdateDate"]! as NSString//dates[indexPath.row] + " @ " + times[indexPath.row]  as NSString
+        let stringCreatedBy = "Created by: " + updateData["CreatedBy"]! as NSString//messageCreator[indexPath.row] as NSString
         let attributedString1 = NSMutableAttributedString(string: stringUpdate as String)
         let attributedString2 = NSMutableAttributedString(string: stringCreatedBy as String)
         
@@ -237,21 +308,91 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         
         // 3
         attributedString1.addAttributes(blackColor, range: stringUpdate.range(of: "Update: "))
-        attributedString1.addAttributes(blueColor, range: stringUpdate.range(of: dates[indexPath.row]))
-        attributedString1.addAttributes(blackColor, range: stringUpdate.range(of: " @ "))
-        attributedString1.addAttributes(blueColor, range: stringUpdate.range(of: times[indexPath.row]))
+        attributedString1.addAttributes(blueColor, range: stringUpdate.range(of: updateData["CreatedBy"]!))
+        //attributedString1.addAttributes(blackColor, range: stringUpdate.range(of: " @ "))
+        //attributedString1.addAttributes(blueColor, range: stringUpdate.range(of: times[indexPath.row]))
         
-        attributedString2.addAttributes(otherColor, range: stringCreatedBy.range(of: messageCreator[indexPath.row]))
+        attributedString2.addAttributes(otherColor, range: stringCreatedBy.range(of: updateData["CreatedBy"]!))
         // 4
-        //attributedLabel.attributedText = attributedString
+        //attributedLabel.attributedText = attributedString*/
         
-        cell.patientUpdateTitle.attributedText = attributedString1//combination.string
-        cell.createdBy.attributedText = attributedString2
-        cell.patientUpdateMessage.text = message[indexPath.row]
+        let shortDate = self.convertDateStringToDate(longDate: updateData["PatientUpdateDate"]!)
         
-        cell.feedImage.image = getUpdateIcon(updatedFrom: updatedFrom[indexPath.row], updateType: updatedType[indexPath.row])
+        cell.patientUpdateTitle.text = update + shortDate                   //.attributedText = attributedString1
+        
+        cell.createdBy.text = "Created by: " + updateData["CreatedBy"]!     //.attributedText = attributedString2
+        
+
+        
+        let messageToCheckLink = updateData["PatientUpdateText"]!
+        
+        
+        //check if message from patientUpdateTest contains a href link
+        if messageToCheckLink.range(of:"<a href=") != nil{
+            
+            cell.patientUpdateMessage.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.onClicLabel(sender:)))
+            cell.patientUpdateMessage.addGestureRecognizer(tap)
+            cell.patientUpdateMessage.text = returnLinkTitleGetLinkAddress(fullString: messageToCheckLink)//"View"
+            cell.patientUpdateMessage.textColor = .blue
+            
+        } else {
+            cell.patientUpdateMessage.text = updateData["PatientUpdateText"]!
+            cell.patientUpdateMessage.textColor = .black
+            
+        }
+        
+          //message[indexPath.row]
+        
+        cell.feedImage.image = getUpdateIcon(updatedFrom: updateData["updated_from"]!, updateType: updateData["update_type"]!)
         
         return cell
+    }
+    
+    func returnLinkTitleGetLinkAddress(fullString: String) -> String{
+        
+        if fullString.contains("=") {
+        
+            let stringArray = splitStringToArray(StringIn: fullString, deliminator: "=")
+            
+            
+            var updateTitle = ""
+            
+            for element in stringArray {
+                if element.hasSuffix("target") {
+                    let endIndex = element.index(element.endIndex, offsetBy: -7)//6 len target
+                    linkAddress = "https://carepointe.cloud/"+element.substring(to: endIndex)
+                    print("\(linkAddress)")
+                }
+                if element.hasSuffix("href"){
+                    let endIndex = element.index(element.endIndex, offsetBy: -7)//<a href
+                    updateTitle = element.substring(to: endIndex)
+                    print("\(updateTitle)")
+                }
+                
+            }
+            return updateTitle
+            
+        } else {
+            return fullString
+        }
+        
+    }
+    
+    // functions for clicking to web link
+    func onClicLabel(sender:UITapGestureRecognizer) {
+        if linkAddress != nil{
+        openUrl(urlString: linkAddress)//"https://carepointe.cloud/episode_document/patient_1848/episode_1821/Monica_170513124300.pdf")
+        }
+    }
+    
+    func openUrl(urlString:String!) {
+        let url = URL(string: urlString)!
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
     }
 //DONT REMOVE 
     //times dates messageCreator message

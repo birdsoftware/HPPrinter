@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //UXCam.start(withKey: "3870e860f178fb7") //bbirdunlv ako //9eb3d8b656c7d44
+        UXCam.start(withKey: "614efd0f4112eb5") //bbirdunlv ako //9eb3d8b656c7d44
         
         //check if we have internet connection
         if Reachability.isConnectedToNetwork() == true

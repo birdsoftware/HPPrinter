@@ -15,7 +15,7 @@ class GETReferrals {
         var referrals = Array<Dictionary<String,String>>()
         
         //varaibales to filter duplicate referrals
-        //let uniqueValues = Set<String>()
+        var uniqueValues = Set<String>()
         
         
         let headers = [
@@ -82,20 +82,20 @@ class GETReferrals {
                                         let spid = String(serviceProviderID)
                                         let puid = String(provideruserid)
                                         
-                                        /* //Uncomment To make referrals unique - remove duplicates
-                                        *  let beforeInsertCount = uniqueValues.count
-                                        *  uniqueValues.insert(cpid) // will do nothing if Care_Plan_ID exists already
-                                        *  let afterInsertCount = uniqueValues.count
+                                         //Uncomment To make referrals unique - remove duplicates
+                                          let beforeInsertCount = uniqueValues.count
+                                          uniqueValues.insert(cpid) // will do nothing if Care_Plan_ID exists already
+                                          let afterInsertCount = uniqueValues.count
                                         
-                                        *  //define dictionary literals
-                                        * if beforeInsertCount != afterInsertCount {
-                                        */
+                                          //define dictionary literals
+                                         if beforeInsertCount != afterInsertCount {
+ 
                                             referrals.append(["Patient_ID":pid, "Patient_Name":patientName, "Care_Plan_ID":cpid, "Episode_ID":eid,
                                                           "ServiceProvider_ID":spid, "provideruserid":puid, "StartDate":startDate, "date_hhmm":datehhmm, "book_minutes":bookMinutes, "ServiceCategory":serviceCategory, "Status":status, "Summary":summary, "patient_notes":patientNotes, "book_type":bookType, "book_purpose":bookPurpose, "location_type":locationType, "book_place":bookPlace, "book_address":bookAddress,
                                                               "pre_authorization":pre_authorization,
                                                               "dateofcollection":dateofcollection, "Attachment_doc":attachmentDoc, "Is_homeassessment":isHomeassessment, "IsActive":isActive, "CreatedDateTime":createdDateTime, "UpdatedDateTime":updatedDateTime, "CreatedBy_name":createdByName, "provider_name":providerName, "Is_urgent":isUrgent])
                                         }
-                                    /*}*/
+                                    }
                                     
                                     //
                                     //O n^2 solutions :(

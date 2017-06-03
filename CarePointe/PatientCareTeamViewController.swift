@@ -107,7 +107,7 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
             var dontShowToast = true //if viewDidLoad - don't 2x TOAST
             if(showToast == "viewWillAppear") { dontShowToast = false}
             
-            //GET VITALS---------------------
+            //GET CARE TEAM---------------------
             self.getCareTeamFromWebServer(token: token, dontShowToast:dontShowToast)
             //-------------------------------
         }

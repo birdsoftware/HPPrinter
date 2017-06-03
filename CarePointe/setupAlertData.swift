@@ -15,7 +15,7 @@ extension UIViewController {
     func setUpAlertDataInDefaults() {
         
         //class data
-        let alertData = [
+        let alertData = [["","",""]]/*[
             ["Ruth Quinones","01/22/17 12:32AM","Careflows update 1 some more descrption text would go here"],
             ["Ruth Quinones","01/23/17 01:56PM","DISPOSITION Patient profile IDT Update some more descrption text would go here"],
             ["Barrie Thomson","01/23/17 03:22PM","Patient profile Update some more descrption text would go here"],
@@ -38,7 +38,7 @@ extension UIViewController {
             ["Jan Andrews","01/30/17 09:43PM","patient Lunch Update some more descrption text would go here"],
             ["Mike Devitt","01/31/17 10:23PM","DISPOSITION Patient profile IDT Update some more descrption text would go here"],
             ["Anita Cintash","02/01/17 09:11PM","musical IDT Update some more descrption text would go here"]
-        ]
+        ]*/
 
         var alertDataCount = 0
         if(alertData.isEmpty == false){

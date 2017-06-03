@@ -12,18 +12,31 @@ class PatientTabBarController: UITabBarController {
     
     //var myOrder = OrderModel()
     
-    //Segue Data Model from Referrals.swift to PTVDetialViewController.swift
-    var segueStoryBoardName: String! //Main?
-    //var segueStoryBoardID: String!
+    //Segue Data Model PTVTableViewController -> Referrals.swift -> here -> (patient portal) PTVDetialViewController.swift
+    var segueStoryBoardName: String! //"Referrals" for BACK button in patient portal to get back to referrals
+    
+    var tabBarSeguePatientID: String!
+    var tabBarSeguePatientNotes: String!
+    var tabBarSeguePatientName: String!
+    var tabBarSeguePatientCPID: String!//appointmentID
+    var tabBarSeguePatientDate: String!
+    var tabBarSegueHourMin: String!
+    var tabBarSegueBookMinutes: String!
+    var tabBarSegueProviderName: String!
+    var tabBarSegueProviderID: String!
+    var tabBarSegueEncounterType: String!
+    var tabBarSegueEncounterPurpose: String!
+    var tabBarSegueLocationType: String!
+    var tabBarSegueBookPlace: String!
+    var tabBarSegueBookAddress: String!
+    var tabBarSeguePreAuth: String!
+    var tabBarSegueAttachDoc: String!
+    var tabBarSegueStatus: String!
+    var tabBarSegueIsUrgent: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //print("<<<<PTVDetailViewController segueStoryBoardName: \(segueStoryBoardName)")
-        
-        //let barViewControllers = self.tabBarController?.viewControllers
-        //let vc = barViewControllers![2] as! PTVDetailViewController
-        //vc.segueStoryBoardName = segueStoryBoardName //shared model
 
         // This will select the 3rd tab bar item to show the patient item
         selectedIndex = 2
@@ -34,14 +47,14 @@ class PatientTabBarController: UITabBarController {
         
         
         //disable last tab bar items
-        if let items = tabBar.items {
-            if items.count > 0 {
-                let itemToDisable = items[items.count - 1]
-                let itemToDisable2 = items[items.count - 2]
-                itemToDisable.isEnabled = false
-                itemToDisable2.isEnabled = false
-            }
-        }
+//        if let items = tabBar.items {
+//            if items.count > 0 {
+//                let itemToDisable = items[items.count - 1]
+//                let itemToDisable2 = items[items.count - 2]
+//                itemToDisable.isEnabled = false
+//                itemToDisable2.isEnabled = false
+//            }
+//        }
        
         
     }
