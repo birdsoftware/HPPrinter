@@ -1617,33 +1617,61 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wxd-xW-4pn">
-                                <rect key="frame" x="0.0" y="20" width="375" height="70"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mph-mN-0OR">
-                                        <rect key="frame" x="15" y="26" width="120" height="30"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backArrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="N6X-YD-6TR">
+                                        <rect key="frame" x="5" y="29" width="30" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="RTt-hb-iqV"/>
+                                            <constraint firstAttribute="height" constant="25" id="Ais-ry-3ug"/>
+                                            <constraint firstAttribute="width" constant="30" id="fW6-cs-LpY"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mph-mN-0OR">
+                                        <rect key="frame" x="15" y="26" width="130" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="130" id="RTt-hb-iqV"/>
                                             <constraint firstAttribute="height" constant="30" id="TRV-nz-RNp"/>
                                         </constraints>
-                                        <inset key="titleEdgeInsets" minX="-33" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="5" maxX="91" maxY="5"/>
-                                        <state key="normal" title="Inbox (5)" image="backArrow.png">
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Inbox (5)">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="backBoxButtonTapped:" destination="S02-Tg-SCf" eventType="touchUpInside" id="lVA-7r-tbh"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k58-XU-pV1">
+                                        <rect key="frame" x="317" y="29.5" width="50" height="22.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="LHC-mz-QlU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                        <color key="textColor" red="0.74202448129999998" green="0.74259525540000004" blue="0.74211281539999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doubleChecked.png" translatesAutoresizingMaskIntoConstraints="NO" id="4GE-oK-sb7">
+                                        <rect key="frame" x="297" y="31" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="lZJ-gf-afF"/>
+                                            <constraint firstAttribute="height" constant="20" id="ztE-s4-7jd"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="N6X-YD-6TR" firstAttribute="leading" secondItem="wxd-xW-4pn" secondAttribute="leading" constant="5" id="1In-C6-6C8"/>
+                                    <constraint firstItem="k58-XU-pV1" firstAttribute="centerY" secondItem="Mph-mN-0OR" secondAttribute="centerY" id="1Rr-E0-BX5"/>
+                                    <constraint firstItem="4GE-oK-sb7" firstAttribute="centerY" secondItem="k58-XU-pV1" secondAttribute="centerY" id="3n8-jn-CME"/>
+                                    <constraint firstItem="k58-XU-pV1" firstAttribute="leading" secondItem="4GE-oK-sb7" secondAttribute="trailing" id="4c2-zp-huM"/>
                                     <constraint firstAttribute="height" constant="70" id="CZs-V0-9JI"/>
                                     <constraint firstItem="Mph-mN-0OR" firstAttribute="leading" secondItem="wxd-xW-4pn" secondAttribute="leading" constant="15" id="GWd-3i-oMZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="k58-XU-pV1" secondAttribute="trailing" constant="8" id="HeS-lC-c3G"/>
                                     <constraint firstItem="Mph-mN-0OR" firstAttribute="top" secondItem="wxd-xW-4pn" secondAttribute="top" constant="26" id="PEU-do-pCH"/>
+                                    <constraint firstItem="N6X-YD-6TR" firstAttribute="centerY" secondItem="Mph-mN-0OR" secondAttribute="centerY" id="ZAe-ys-6kk"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvO-t5-Csv">
-                                <rect key="frame" x="16" y="110" width="54" height="21"/>
+                                <rect key="frame" x="16" y="90" width="54" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="54" id="3k1-4k-TL8"/>
                                     <constraint firstAttribute="height" constant="21" id="UhO-FJ-Ekk"/>
@@ -1653,19 +1681,19 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject: Patient Update" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="giH-C1-I9U">
-                                <rect key="frame" x="16" y="183" width="343" height="25"/>
+                                <rect key="frame" x="16" y="163" width="343" height="25"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dr. Gary Webb" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bO-qL-HO7">
-                                <rect key="frame" x="78" y="108" width="281" height="25"/>
+                                <rect key="frame" x="78" y="88" width="281" height="25"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqx-6T-exp">
-                                <rect key="frame" x="16" y="145.5" width="54" height="22.5"/>
+                                <rect key="frame" x="16" y="125.5" width="54" height="22.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="54" id="9aS-KA-Ayt"/>
                                 </constraints>
@@ -1674,13 +1702,13 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/1/17 11:32 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2R6-Xz-MRh">
-                                <rect key="frame" x="78" y="145" width="281" height="22.5"/>
+                                <rect key="frame" x="78" y="125" width="281" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wM1-So-g61">
-                                <rect key="frame" x="16" y="219" width="343" height="377"/>
+                                <rect key="frame" x="16" y="199" width="343" height="397"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1742,7 +1770,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phj-mU-wxE">
-                                <rect key="frame" x="16" y="138" width="343" height="2"/>
+                                <rect key="frame" x="16" y="118" width="343" height="2"/>
                                 <color key="backgroundColor" red="0.90057069063186646" green="0.90125507116317749" blue="0.9006766676902771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="6Ol-ED-GYK"/>
@@ -1761,10 +1789,10 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                             <constraint firstItem="hqx-6T-exp" firstAttribute="leading" secondItem="eaJ-Y3-xlZ" secondAttribute="leadingMargin" id="Gds-lH-JdX"/>
                             <constraint firstItem="2R6-Xz-MRh" firstAttribute="trailing" secondItem="eaJ-Y3-xlZ" secondAttribute="trailingMargin" id="Gr0-L6-Wvy"/>
                             <constraint firstItem="phj-mU-wxE" firstAttribute="top" secondItem="IvO-t5-Csv" secondAttribute="bottom" constant="7" id="HI4-Jf-O5c"/>
+                            <constraint firstItem="wxd-xW-4pn" firstAttribute="top" secondItem="eaJ-Y3-xlZ" secondAttribute="top" id="Had-vN-rEb"/>
                             <constraint firstItem="IvO-t5-Csv" firstAttribute="top" secondItem="wxd-xW-4pn" secondAttribute="bottom" constant="20" id="Mvi-ag-qZQ"/>
                             <constraint firstItem="CA9-Vs-fxL" firstAttribute="top" secondItem="vtW-V2-csQ" secondAttribute="bottom" constant="21" id="Nfb-Dj-dHL"/>
                             <constraint firstItem="giH-C1-I9U" firstAttribute="trailing" secondItem="eaJ-Y3-xlZ" secondAttribute="trailingMargin" id="PjF-BM-MqX"/>
-                            <constraint firstItem="wxd-xW-4pn" firstAttribute="top" secondItem="Hsd-zW-8h9" secondAttribute="bottom" id="RFY-8u-of0"/>
                             <constraint firstItem="7bO-qL-HO7" firstAttribute="trailing" secondItem="eaJ-Y3-xlZ" secondAttribute="trailingMargin" id="T2H-Sb-vIg"/>
                             <constraint firstItem="phj-mU-wxE" firstAttribute="trailing" secondItem="eaJ-Y3-xlZ" secondAttribute="trailingMargin" id="U4b-Jd-a8d"/>
                             <constraint firstItem="m7w-Xa-qyW" firstAttribute="centerY" secondItem="vtW-V2-csQ" secondAttribute="centerY" id="ULv-N3-KwX"/>
@@ -1787,15 +1815,18 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                     <connections>
                         <outlet property="boxLabelButton" destination="Mph-mN-0OR" id="UB2-5k-TQ2"/>
                         <outlet property="dateLabel" destination="2R6-Xz-MRh" id="zkI-3G-XG6"/>
+                        <outlet property="fromLabel" destination="IvO-t5-Csv" id="CgF-fp-jWj"/>
                         <outlet property="fromListLabel" destination="7bO-qL-HO7" id="LwM-aV-gmC"/>
                         <outlet property="fromToLabel" destination="IvO-t5-Csv" id="YQc-qa-Fcn"/>
                         <outlet property="message" destination="wM1-So-g61" id="HdV-G7-Zfu"/>
                         <outlet property="subjectLabel" destination="giH-C1-I9U" id="hjZ-LH-GBM"/>
+                        <outlet property="wasReadIcon" destination="4GE-oK-sb7" id="5HW-0Q-2a1"/>
+                        <outlet property="wasReadText" destination="k58-XU-pV1" id="uhf-uN-4cS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="50j-re-hzz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2188" y="1003"/>
+            <point key="canvasLocation" x="2188" y="1002.5487256371815"/>
         </scene>
         <!--newMessage-->
         <scene sceneID="58a-V0-ny1">
@@ -2101,10 +2132,10 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0y4-KP-x2i">
-                                <rect key="frame" x="0.0" y="20" width="375" height="70"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqt-7r-VRJ">
-                                        <rect key="frame" x="332" y="18" width="35" height="35"/>
+                                        <rect key="frame" x="332" y="23.5" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="VN5-hJ-rwq"/>
                                             <constraint firstAttribute="height" constant="35" id="g9G-3l-eC7"/>
@@ -2114,17 +2145,8 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                             <segue destination="yNN-IX-n7n" kind="presentation" animates="NO" id="5z8-i9-OWi"/>
                                         </connections>
                                     </button>
-                                    <searchBar contentMode="redraw" placeholder="Search Inbox" showsCancelButton="YES" backgroundImage="searchBackGround.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Dhf-tQ-akE">
-                                        <rect key="frame" x="62" y="19" width="251" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="251" id="rbm-tW-C9Z"/>
-                                        </constraints>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="barTintColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </searchBar>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FkC-UR-aNS">
-                                        <rect key="frame" x="6" y="20" width="46" height="30"/>
+                                        <rect key="frame" x="6" y="26" width="46" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="MRg-QT-9vL"/>
                                             <constraint firstAttribute="width" constant="46" id="Uel-Yv-dzl"/>
@@ -2141,17 +2163,14 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="nqt-7r-VRJ" secondAttribute="trailing" constant="8" id="BeF-wb-W9y"/>
-                                    <constraint firstItem="nqt-7r-VRJ" firstAttribute="centerY" secondItem="0y4-KP-x2i" secondAttribute="centerY" id="NBh-g4-YF8"/>
-                                    <constraint firstItem="FkC-UR-aNS" firstAttribute="centerY" secondItem="0y4-KP-x2i" secondAttribute="centerY" id="P6z-lL-Vgi"/>
+                                    <constraint firstItem="FkC-UR-aNS" firstAttribute="top" secondItem="0y4-KP-x2i" secondAttribute="top" constant="26" id="LEd-82-ajB"/>
                                     <constraint firstAttribute="height" constant="70" id="RhP-6R-0WP"/>
-                                    <constraint firstItem="Dhf-tQ-akE" firstAttribute="centerY" secondItem="0y4-KP-x2i" secondAttribute="centerY" id="dQR-Fa-NjB"/>
+                                    <constraint firstItem="nqt-7r-VRJ" firstAttribute="centerY" secondItem="FkC-UR-aNS" secondAttribute="centerY" id="YKa-5A-1xq"/>
                                     <constraint firstItem="FkC-UR-aNS" firstAttribute="leading" secondItem="0y4-KP-x2i" secondAttribute="leading" constant="6" id="iHC-95-zX5"/>
-                                    <constraint firstItem="Dhf-tQ-akE" firstAttribute="top" secondItem="0y4-KP-x2i" secondAttribute="top" constant="19" id="odK-7a-seo"/>
-                                    <constraint firstItem="Dhf-tQ-akE" firstAttribute="centerX" secondItem="0y4-KP-x2i" secondAttribute="centerX" id="pjq-h4-Pt0"/>
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3Lw-Jf-6v5">
-                                <rect key="frame" x="0.0" y="90" width="375" height="47"/>
+                                <rect key="frame" x="-5" y="115" width="385" height="47"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="8bf-eX-7jh"/>
@@ -2166,7 +2185,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="105" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jOE-nr-Q22">
-                                <rect key="frame" x="0.0" y="135" width="375" height="532"/>
+                                <rect key="frame" x="0.0" y="161" width="375" height="506"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="inboxCell" rowHeight="105" id="kVy-lQ-VdV" customClass="InboxCell" customModule="CarePointe" customModuleProvider="target">
@@ -2272,18 +2291,30 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" placeholder="Search Inbox" showsCancelButton="YES" translucent="NO" backgroundImage="searchBackGround.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Dhf-tQ-akE">
+                                <rect key="frame" x="0.0" y="70" width="375" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="jvt-Bs-5No"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="jOE-nr-Q22" firstAttribute="top" secondItem="3Lw-Jf-6v5" secondAttribute="bottom" id="0R9-AP-ELm"/>
                             <constraint firstAttribute="trailing" secondItem="jOE-nr-Q22" secondAttribute="trailing" id="1pw-dy-RXj"/>
-                            <constraint firstAttribute="trailing" secondItem="3Lw-Jf-6v5" secondAttribute="trailing" id="AzO-H4-JwW"/>
+                            <constraint firstItem="Dhf-tQ-akE" firstAttribute="leading" secondItem="N8n-Rw-Uta" secondAttribute="leading" id="37R-Kj-k61"/>
+                            <constraint firstAttribute="trailing" secondItem="3Lw-Jf-6v5" secondAttribute="trailing" constant="-5" id="AzO-H4-JwW"/>
+                            <constraint firstAttribute="trailing" secondItem="Dhf-tQ-akE" secondAttribute="trailing" id="Crs-Gw-WRa"/>
+                            <constraint firstItem="3Lw-Jf-6v5" firstAttribute="top" secondItem="Dhf-tQ-akE" secondAttribute="bottom" id="ETY-Qa-YEE"/>
                             <constraint firstItem="jOE-nr-Q22" firstAttribute="leading" secondItem="N8n-Rw-Uta" secondAttribute="leading" id="F3t-CA-Nhu"/>
                             <constraint firstItem="Qt3-bS-apa" firstAttribute="top" secondItem="jOE-nr-Q22" secondAttribute="bottom" id="GcP-Xw-OK2"/>
-                            <constraint firstItem="0y4-KP-x2i" firstAttribute="top" secondItem="TfJ-bY-Wf9" secondAttribute="bottom" id="K5j-2W-zKo"/>
                             <constraint firstAttribute="trailing" secondItem="0y4-KP-x2i" secondAttribute="trailing" id="VYs-cI-DPZ"/>
-                            <constraint firstItem="3Lw-Jf-6v5" firstAttribute="leading" secondItem="N8n-Rw-Uta" secondAttribute="leading" id="YIV-yx-sSp"/>
-                            <constraint firstItem="3Lw-Jf-6v5" firstAttribute="top" secondItem="0y4-KP-x2i" secondAttribute="bottom" id="axg-vC-pFT"/>
-                            <constraint firstItem="jOE-nr-Q22" firstAttribute="top" secondItem="0y4-KP-x2i" secondAttribute="bottom" constant="45" id="hO8-aT-mfe"/>
+                            <constraint firstItem="3Lw-Jf-6v5" firstAttribute="leading" secondItem="N8n-Rw-Uta" secondAttribute="leading" constant="-5" id="YIV-yx-sSp"/>
+                            <constraint firstItem="Dhf-tQ-akE" firstAttribute="top" secondItem="0y4-KP-x2i" secondAttribute="bottom" id="gTI-pe-pCz"/>
+                            <constraint firstItem="0y4-KP-x2i" firstAttribute="top" secondItem="N8n-Rw-Uta" secondAttribute="top" id="ggk-46-JZB"/>
                             <constraint firstItem="0y4-KP-x2i" firstAttribute="leading" secondItem="N8n-Rw-Uta" secondAttribute="leading" id="rQ7-Fm-54X"/>
                         </constraints>
                     </view>
@@ -2298,7 +2329,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUy-b8-z35" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="63H-gp-9mK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1279" y="1003"/>
+            <point key="canvasLocation" x="1277.5999999999999" y="1002.5487256371815"/>
         </scene>
         <!--Update Profile-->
         <scene sceneID="pXc-YL-kK4">
@@ -6176,7 +6207,7 @@ Performance: 13</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PW0-ZC-Xnj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6721" y="169"/>
+            <point key="canvasLocation" x="6721" y="143"/>
         </scene>
         <!--Patient Alerts-->
         <scene sceneID="pOu-sg-uUv">
@@ -6317,6 +6348,7 @@ Performance: 13</string>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="sendButtonTapped:" destination="n1s-gh-Bg8" eventType="touchUpInside" id="2Vq-IT-7aF"/>
+                                    <segue destination="hgW-6M-UzD" kind="presentation" identifier="segueToOrderServices" animates="NO" id="EKB-oG-SxH"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Booked Services" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TR4-CT-WRf">
@@ -6420,6 +6452,14 @@ Performance: 13</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNK-J7-NrJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6401" y="652"/>
+        </scene>
+        <!--placeOrder-->
+        <scene sceneID="O5V-P4-FNn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="orderService" referencedIdentifier="placeOrder" id="hgW-6M-UzD" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NUt-YQ-wpd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7023" y="605"/>
         </scene>
         <!--locations-->
         <scene sceneID="8hD-4H-rN6">
@@ -6670,6 +6710,7 @@ Performance: 13</string>
         <image name="closed-envelope-circle.png" width="64" height="64"/>
         <image name="dangerOrange.png" width="64" height="64"/>
         <image name="delete.png" width="64" height="64"/>
+        <image name="doubleChecked.png" width="64" height="64"/>
         <image name="exitandgoback.png" width="170" height="128"/>
         <image name="gears.png" width="64" height="64"/>
         <image name="green.circle.png" width="64" height="64"/>
@@ -6695,10 +6736,10 @@ Performance: 13</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Cte-Zq-RvK"/>
+        <segue reference="YBB-Tg-L47"/>
+        <segue reference="zWG-cM-x3M"/>
         <segue reference="pVS-qM-O77"/>
         <segue reference="5z8-i9-OWi"/>
-        <segue reference="zWG-cM-x3M"/>
-        <segue reference="YBB-Tg-L47"/>
         <segue reference="s6N-rj-JEd"/>
     </inferredMetricsTieBreakers>
 </document>

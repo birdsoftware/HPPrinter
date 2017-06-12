@@ -55,7 +55,7 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
     
     //Segue from A Message Vars
     var isReply = false
-    var segueFromList: String!
+    var segueFromList: Array<Dictionary<String,String>>! //recipientListForTable.append(["name":userName,"User_ID":selectedData["User_ID"]!])
     var segueDate: String!
     var segueSubject: String!
     var segueMessage:String!
@@ -136,9 +136,30 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
                            object: nil)
         
         // New Reply? Do set up?
-        if (isReply == true){//segueFromList.isEmpty == false) {
+        if (isReply == true){// segueFromList.isEmpty == false
 
-            addUsersTextField.text = segueFromList
+            for recipient in segueFromList{
+                recipientListForTable.append(["name":recipient["name"]!,"User_ID":recipient["User_ID"]!])
+                uniqueValues.insert(recipient["name"]!)
+                
+                switch uniqueValues.count {
+                case 1,2:
+                    recipientsTopConstraint.constant += 40
+                case 3:
+                    recipientsTopConstraint.constant += 20
+                default: break
+                }
+            }
+            toLabel.text = "To:(\(uniqueValues.count))"
+            
+            if uniqueValues.count > 0{
+                toLabel.isHidden = false
+            }
+            
+            print(recipientListForTable)//bug [["name": "Gabe Doc", "User_ID": "31"]] should be 351
+            print(segueUserID)
+            
+            //addUsersTextField.text = segueFromList 123//fix this
             subjectTextField.text = segueSubject
             
             messageBox.text = segueMessage
@@ -239,44 +260,6 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         addUsersTextField.text = ""
         
-        //remove crap from addUsersTextField.text ONLY DO if !addUsersTextField.text?.isEmpty
-//        let recipientLine = addUsersTextField.text!
-        //let availableRecipients = AllData["name"]! //"name"
-        
-//        let occurrenciesOfComma = recipientLine.characters.filter { $0 == "," }.count
-//        
-//        if (occurrenciesOfComma > 0) {//bob,...
-//            
-//            var position: Int = 0
-//            let needle: Character = ","
-//            
-//            if let idx = recipientLine.characters.index(of: needle) {
-//                
-//                position = recipientLine.characters.distance(from: recipientLine.startIndex, to: idx)
-//                print("Found \(needle) at position \(position)")
-//                let index = recipientLine.index(recipientLine.startIndex, offsetBy: position)
-//                let posibleRecipient = recipientLine.substring(to: index)
-//                                                //CONTAINS[cd]
-//                let predicate=NSPredicate(format: "SELF.name = %@", posibleRecipient)
-//                let arr=(AllData as NSArray).filtered(using: predicate) // arr only returns AllData["name"] == posibleRecipient
-//                print("posibleRecipient:\(posibleRecipient)")
-//                print("arr:\(arr)")
-//                // Remove what has been typed already
-//             //   let typedSubstring = addUsersTextField.text! //search
-//            //    let selectedName = selectedData["name"]!
-//                
-//                // IF typedSubstring contains Selected, ignore
-//             //   if typedSubstring.range(of:selectedName) != nil {
-//             //       print("\(selectedName) already exists!")
-//             //   }
-//            }
-//            else {
-//                print("Not found")
-//            }
-//            
-//        }
-        
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -331,7 +314,7 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         //Data---------------------
         var messageAPIAtributes = Dictionary<String,String>()
-        var messageDataMissing = false
+        //let messageDataMissing = false
         
         /*let subject*/ messageAPIAtributes["Subject"] = subjectTextField.text!
         /*let message*/ messageAPIAtributes["Msg_desc"] = messageBox.text!
@@ -344,7 +327,7 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
 
             } else {
                 //can't send a message. Your User id not found
-                messageDataMissing = true
+                //messageDataMissing = true
             }
             
         }
@@ -418,11 +401,6 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
                         //not success
                         self.simpleAlert(title: "Error Sending Message", message: "API messaging error occured. Try again later.", buttonTitle: "OK")
                         
-//                        UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
-//                            
-//                            self.view.makeToast("Message Was Not Sent!", duration: 1.1, position: .center)
-//                            
-//                        }, completion: { finished in })
                     }
                 }
             }
@@ -570,9 +548,6 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
                 }
                 toLabel.text = "To:(\(uniqueValues.count))"
                 
-                //if afterInsertCount < 3{
-                //    recipientsTopConstraint.constant += 40
-                //}
                 if afterInsertCount > 0{
                     toLabel.isHidden = false
                 }

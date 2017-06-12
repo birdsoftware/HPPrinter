@@ -227,7 +227,7 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
             
             cell.userName.text = Data["FirstLastName"]!  + returnPhoneEmoji(phoneNumber: usersPhone) + usersPhone
             cell.userPositionCompany.text = "Roll: " + Data["RoleType"]! + " | Company: " + Data["Company"]!
-            cell.callButton.tag = indexPath.row //set tag of the button
+            //cell.callButton.tag = indexPath.row //set tag of the button
             
             //if userHasPhone(phoneString: usersPhone) {
                // cell.callButton.addTarget(self, action: #selector(connected), for: .touchUpInside)
@@ -277,6 +277,7 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
             let phone = selectedData["phone_number"]!
             let roll = selectedData["RoleType"]!
             let co = selectedData["Company"]!
+            let id = selectedData["User_ID"]!
             
             //
             //DO NOT ADD DUPLICATES
@@ -284,7 +285,7 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
             let isDuplicate = arrayContains(array: selectedUsers, key: "FirstLastName", value: userN)
             
             if(isDuplicate == false) {
-                selectedUsers.append(["FirstLastName":userN,"phone_number": phone, "RoleType":roll,"Company":co])
+                selectedUsers.append(["FirstLastName":userN,"phone_number": phone, "RoleType":roll,"Company":co,"User_ID":id])
                 selectedUsereTableView.reloadData()
             }
             
@@ -371,14 +372,16 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
         
         if segue.identifier == "replyMessageSegue" {
             //segue out varaibles
-            var recipientList = ""
+            var recipientList:Array<Dictionary<String,String>> = []// = ""
             for user in selectedUsers{
-                let userName = user["FirstLastName"]!
-                recipientList = recipientList + " \(userName),"
+                //let userName = user["FirstLastName"]!
+                recipientList.append(["name":user["FirstLastName"]!,"User_ID":user["User_ID"]!])// = recipientList + " \(userName),"
             }
             
             let currentTime = returnCurrentDateOrCurrentTime(timeOnly: true)//4:41 PM
             let todaysDate = returnCurrentDateOrCurrentTime(timeOnly: false)//"2/14/2017"
+            
+            //print(recipientList)
             
             if let toViewController = segue.destination as? /*1 sendTo AMessageViewController*/ newMessageViewController {
                 /*maker sure .segueFromList is a var delaired in sendTo ViewController*/

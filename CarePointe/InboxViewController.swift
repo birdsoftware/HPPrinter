@@ -21,64 +21,34 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // class vars
     var searchActive : Bool = false
-    var inBoxData:Array<Dictionary<String,String>> = []
-    var sentBoxData:Array<Dictionary<String,String>> = []
     var SearchData:Array<Dictionary<String,String>> = []
     var selectedSegmentIndexValue:Int = 0
     
     //API data
     var restInbox:Array<Dictionary<String,String>> = []
+    var restSent:Array<Dictionary<String,String>> = []
     var recipients:Array<Dictionary<String,String>> = []
-    var recipientsNameTitle:Array<Dictionary<String,String>> = []
+    var recipientsInboxNameTitle:Array<Dictionary<String,String>> = []
+    var recipientsSentNameTitle:Array<Dictionary<String,String>> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getTokenThenInboxMessagesFromWebServer()
+        getINandSENTMessagesFromWebServer()
         
-        //get messages
-        if isKeyPresentInUserDefaults(key: "RESTUserInbox"){//""userData"){
-            restInbox = UserDefaults.standard.object(forKey: "RESTUserInbox") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
-        }
-        if restInbox.isEmpty == true {
-        restInbox = [["SendBy":"", "Subject":"", "message":"",
-                     "CreatedDate":"", "CreatedTime":"", "IsRead":"", "ID":""]]
-        }
-        //get recipients
-        if isKeyPresentInUserDefaults(key: "RESTInboxUsers"){
-            recipients = UserDefaults.standard.object(forKey: "RESTInboxUsers") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
-        }
+        getLocalMessages(defaultKey: "RESTUserSent", arrayDicts: &restSent)
         
-        //UserDefaults.standard.set("Inbox", forKey: "boxSegment")
-        //UserDefaults.standard.synchronize()
+        getLocalMessages(defaultKey: "RESTUserInbox", arrayDicts: &restInbox)
         
-        let count = restInbox.count
-        inBoxSent.setTitle("Inbox (\(count))", forSegmentAt: 0)
+        getLocalMessageUsers(defaultKey: "RESTInboxUsers", arrayDicts: &recipients)
         
-        let sentBoxData = UserDefaults.standard.value(forKey: "sentData") as! Array<Dictionary<String, String>>
-        let count2 = sentBoxData.count
-        inBoxSent.setTitle("Sent (\(count2))", forSegmentAt: 1)
+        let countIn = restInbox.count
+        inBoxSent.setTitle("Inbox (\(countIn))", forSegmentAt: 0)
         
-//        if isKeyPresentInUserDefaults(key: "inBoxData"){
-//            inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
-//            inBoxSent.setTitle("Inbox (\(inBoxData.count))", forSegmentAt: 0)
-//        } else {
-//            inBoxSent.setTitle("Inbox (\(0))", forSegmentAt: 0)
-//        }
-//        if isKeyPresentInUserDefaults(key: "sentData"){
-//            sentBoxData = UserDefaults.standard.value(forKey: "sentData") as! Array<Dictionary<String, String>>
-//            inBoxSent.setTitle("Sent (\(sentBoxData.count))", forSegmentAt: 1)
-//        } else {
-//            inBoxSent.setTitle("Sent (\(0))", forSegmentAt: 1)
-//        }
-//        
-        SearchData = inBoxData//need this to start off tableView with all data and not blank table
-
-        // Setup UI/UX
-            //round careTeam button
-                //newEmailButton.layer.cornerRadius = 0.5 * newEmailButton.bounds.size.width
-                //newEmailButton.clipsToBounds = true
-                //newEmailButton.imageEdgeInsets = UIEdgeInsetsMake(10,10,10,10)
+        let countSent = restSent.count
+        inBoxSent.setTitle("Sent (\(countSent))", forSegmentAt: 1)
+        
+        SearchData = restInbox          //-start  tableView with local INBOX messages
         
         // Setup sement control font and font size
                 let attr = NSDictionary(object: UIFont(name: "Futura", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
@@ -92,51 +62,43 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         inboxTable.rowHeight = UITableViewAutomaticDimension
         inboxTable.estimatedRowHeight = 90
     }
-
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-//        getTokenThenInboxMessagesFromWebServer()
-//        
-//    }
-    
-    // UI Segment Control
     
     @IBAction func inBoxSentSegmentSelected(_ sender: Any) {
         switch inBoxSent.selectedSegmentIndex
         {
         case 0:
-            //UserDefaults.standard.set("Inbox", forKey: "boxSegment")
-            //UserDefaults.standard.synchronize()
-            
             searchBar.placeholder = "Search Inbox"
             selectedSegmentIndexValue = 0
-            if isKeyPresentInUserDefaults(key: "inBoxData") {
-                inBoxData = UserDefaults.standard.value(forKey: "inBoxData") as! Array<Dictionary<String, String>>
-            }
-            SearchData = inBoxData
+            SearchData = restInbox
             inboxTable.reloadData()
         case 1:
-            //UserDefaults.standard.set("Sent", forKey: "boxSegment")
-            //UserDefaults.standard.synchronize()
             searchBar.placeholder = "Search Sent"
             selectedSegmentIndexValue = 1
-            if isKeyPresentInUserDefaults(key: "sentData"){
-                sentBoxData = UserDefaults.standard.value(forKey: "sentData") as! Array<Dictionary<String, String>>
-            }
-            SearchData = sentBoxData
+            SearchData = restSent
             inboxTable.reloadData()
         default:
             break;
         }
     }
     
-    
-    
     //
     // #MARK: - helper functions
     //
+    func getLocalMessages(defaultKey: String, arrayDicts: inout Array<Dictionary<String,String>>){
+        if isKeyPresentInUserDefaults(key: defaultKey){
+        arrayDicts = UserDefaults.standard.object(forKey: defaultKey) as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
+        }
+        if arrayDicts.isEmpty == true {
+        arrayDicts = [["SendBy":"", "Subject":"", "message":"",
+        "CreatedDate":"", "CreatedTime":"", "IsRead":"", "ID":""]]
+        }
+    }
+    func getLocalMessageUsers(defaultKey: String, arrayDicts: inout Array<Dictionary<String,String>>){
+        if isKeyPresentInUserDefaults(key: defaultKey){
+        arrayDicts = UserDefaults.standard.object(forKey: defaultKey) as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
+        }
+    }
     
     func returnFirstRecipientNamePlusCountOfRemainingRecipients(RecipientLine: String) -> String{
         
@@ -160,14 +122,12 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             let index = str.index(str.startIndex, offsetBy: pos)
             fromString = str.substring(to: index) + ", +\(occurrenciesOfComma) more"
-                //sub.remove(at: sub.startIndex) //remove 1st char
-            
         }
         
         return fromString
     }
 
-    func getTokenThenInboxMessagesFromWebServer(){
+    func getINandSENTMessagesFromWebServer(){
         
         let downloadToken = DispatchGroup()
         downloadToken.enter()
@@ -191,7 +151,6 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func getInboxMessagesFromDocumentsAPI(token:String){
         
-        
         let userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
         if userProfile.isEmpty == false
         {
@@ -202,9 +161,14 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let inboxMessagesFlag = DispatchGroup()
             inboxMessagesFlag.enter()
             
-            let newInboxMessages = GETInboxMessages()
-
-            newInboxMessages.getInboxMessages(token: token, userID: uid, dispachInstance: inboxMessagesFlag)
+            let sentMessagesFlag = DispatchGroup()
+            sentMessagesFlag.enter()
+            
+            //INBOX
+            GETInboxMessages().getInboxMessages(token: token, userID: uid, dispachInstance: inboxMessagesFlag)
+            
+            //SENT
+            GETSentMessages().getSentMessages(token: token, userID: uid, dispachInstance: sentMessagesFlag)
             
             inboxMessagesFlag.notify(queue: DispatchQueue.main) {//inbox sent back from cloud
                 //get docs and category and update filesTable-------------------
@@ -213,35 +177,24 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 if self.restInbox.isEmpty == false {
                     
                     self.inBoxSent.setTitle("Inbox (\(self.restInbox.count))", forSegmentAt: 0)
-                    
-                    
                 }
-                //var Iterator = 0
-                //for message in self.restInbox {
-                //    let from = self.returnNameTitle(userID:message["SendBy"]!)
-                //    let sendBy = from["name"]! + ", " + from["title"]!
-                //    self.restInbox[Iterator].updateValue(sendBy, forKey: "SendBy")
-                    //
-//                    //remove HTML tags
-//                    let str = message["message"]!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-//                    self.restInbox[Iterator].updateValue(str, forKey: "message")
-//                    
-//                    //fix date 2017-05-25T19:14:31.000Z to 5/25/17 19:14 in table
-//
-//                    
-//                    
-               //     Iterator+=1
-               // }
+                
+                self.SearchData = self.restInbox
                 self.inboxTable.reloadData()
-                //-----------------------------
+            }
+            
+            sentMessagesFlag.notify(queue: DispatchQueue.main) {
+                self.restSent = UserDefaults.standard.object(forKey: "RESTUserSent") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
+                
+                if self.restSent.isEmpty == false {
+            
+                    self.inBoxSent.setTitle("Sent (\(self.restSent.count))", forSegmentAt: 1)
+                }
             }
         }
-        
     }
+    
     //To search the array for a particular key/value pair:
-    
-
-    
     func returnNameTitle(userID:String) -> Dictionary<String,String> {
         
         var name = userID//user["FirstLastName"]!
@@ -261,113 +214,92 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let dict = ["name":name,"title":title]
         
         return dict
+    }
+    
+    func deleteMessageInAPI(messageId: String, indexPathRow: Int, deleteInbox: Bool){
+        
+        print("ATTEMPT DELETE MESSAGE ID: \(messageId)")
+        //ViewControllerUtils().showActivityIndicator(uiView: self.view)
+        
+        //set flag
+        let downloadTokenFlag = DispatchGroup()
+        downloadTokenFlag.enter()
+
+        // 0 get token  -----------
+        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
+
+        let getToken = GETToken()
+        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadTokenFlag)
+        
+        downloadTokenFlag.notify(queue: DispatchQueue.main)  {//signin API came back
+
+            let token = UserDefaults.standard.string(forKey: "token")!
+
+            let deleteMessageFlag = DispatchGroup()
+            deleteMessageFlag.enter()
+
+            //Actual API call
+            var messageIds = [Int]()
+            messageIds.append(Int(messageId)!)
+            DeleteMessage().deleteMessage(token: token, messageIds: messageIds, dispachInstance: deleteMessageFlag)
+            
+            deleteMessageFlag.notify(queue: DispatchQueue.main) {//delete successful and API retuned back here
+                
+                //ViewControllerUtils().hideActivityIndicator(uiView: self.view)
+
+                if self.isKeyPresentInUserDefaults(key: "APIdeleteMessageSuccess") {
+                    let isMessageDeleteWithOutError = UserDefaults.standard.object(forKey: "APIdeleteMessageSuccess") as? Bool
+                    if isMessageDeleteWithOutError! {
+                        //success
+                        // ANIMATE  TOAST
+                        UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
+                            
+                            self.view.makeToast("Message Deleted", duration: 1.1, position: .center)
+                            
+                        }, completion: { finished in
+  
+                            if deleteInbox == true {
+                                // Remove entire row from local storage, reload table
+                                self.restInbox.remove(at: (indexPathRow))
+                                self.SearchData = self.restInbox
+                                
+                                self.inboxTable.reloadData()
+                                
+                                self.inBoxSent.setTitle("Inbox (\(self.restInbox.count))", forSegmentAt: 0)
+                                
+                                UserDefaults.standard.set(self.restInbox, forKey: "RESTUserInbox")
+                                UserDefaults.standard.synchronize()
+                                
+                            } else {
+                                self.restSent.remove(at: (indexPathRow))
+                                self.SearchData = self.restSent
+                                
+                                self.inboxTable.reloadData()
+                                
+                                self.inBoxSent.setTitle("Sent (\(self.restSent.count))", forSegmentAt: 1)
+                                
+                                UserDefaults.standard.set(self.restSent, forKey: "RESTUserSent")
+                                UserDefaults.standard.synchronize()
+                            }
+                            
+                        })
+                    } else {
+                        //not success
+                        self.simpleAlert(title: "Error Deleting Message", message: "API messaging error occured. Try again later.", buttonTitle: "OK")
+                    }
+                }
+            }
+        }
         
     }
     
-    func deleteMessageInAPI(messageId: String){
-        
-        print("ATTEMPT DELETE MESSAGE ID: \(messageId)")
-//        ViewControllerUtils().showActivityIndicator(uiView: self.view)
-//        
-//        //Data---------------------
-//
-//        for recipient in restInbox{
-//            recipients.append(Int(recipient["ID"]!)!)
-//        }
-//        //--------------------------
-//        print("Subject:" + "\(messageAPIAtributes["Subject"]!)" + "\n" +
-//            "Msg_desc:" + "\(messageAPIAtributes["Subject"]!)" + "\n" +
-//            "SendBy:" + "\(messageAPIAtributes["SendBy"]!)" + "\n" +
-//            "SendTo:" + "\(recipients)" )
-//        
-//        //set flag
-//        let downloadTokenFlag = DispatchGroup()
-//        downloadTokenFlag.enter()
-//        
-//        // 0 get token  -----------
-//        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-//        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-//        
-//        let getToken = GETToken()
-//        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadTokenFlag)
-//        
-//        downloadTokenFlag.notify(queue: DispatchQueue.main)  {//signin API came back
-//            
-//            let token = UserDefaults.standard.string(forKey: "token")!
-//            
-//            let sendMessageFlag = DispatchGroup()
-//            sendMessageFlag.enter()
-//            
-//            //Actual API call
-//            let passMessageTo = POSTMessage()
-//            passMessageTo.sendMessage(token: token, message: messageAPIAtributes, SendTo: recipients, dispachInstance: sendMessageFlag)
-//            
-//            sendMessageFlag.notify(queue: DispatchQueue.main) {//send message API came back
-//                
-//                ViewControllerUtils().hideActivityIndicator(uiView: self.view)
-//                
-//                if self.isKeyPresentInUserDefaults(key: "APIsendMessageSuccess") {
-//                    let isMessageSentWithOutError = UserDefaults.standard.object(forKey: "APIsendMessageSuccess") as? Bool
-//                    if isMessageSentWithOutError! {
-//                        //success
-//                        // ANIMATE  TOAST
-//                        UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
-//                            
-//                            self.view.makeToast("Message Sent", duration: 1.1, position: .center)
-//                            
-//                        }, completion: { finished in
-//                            
-//                            //Check if selected me
-//                            //                let selectedName = "Jennifer Johnson"
-//                            //
-//                            //                // IF typedSubstring contains Selected, ignore
-//                            //                let typedSubstring = self.addUsersTextField.text! //search
-//                            //                if typedSubstring.range(of:selectedName) != nil {
-//                            //                    //print("\(selectedName) already exists!")
-//                            //
-//                            //                    self.isMe = true
-//                            //
-//                            //                    self.appendNewMessageToInBoxData()
-//                            //                }
-//                            
-//                            // Instantiate a view controller from Storyboard and present it
-//                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                            let vc = storyboard.instantiateViewController(withIdentifier: "messages") as UIViewController
-//                            self.present(vc, animated: false, completion: nil)
-//                            
-//                        })
-//                    } else {
-//                        //not success
-//                        self.simpleAlert(title: "Error Sending Message", message: "API messaging error occured. Try again later.", buttonTitle: "OK")
-//                        
-//                        //                        UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
-//                        //
-//                        //                            self.view.makeToast("Message Was Not Sent!", duration: 1.1, position: .center)
-//                        //
-//                        //                        }, completion: { finished in })
-//                    }
-//                }
-//            }
-//        }
-        
-        
-    }
     
     //
     // MARK: - Button Actions
     //
     
-    
     @IBAction func goBackButtonTapped(_ sender: Any) {
-        //1. palce "@IBAction func unwindToPatientDashboard(segue: UIStoryboardSegue) {}" in view controller you want to unwind too
-        //2. In storyboard connect this view () -> to [exit]: creates "Unwind segue" in this view not view unwind too
-        //   In storyboard click "Unwind segue" set unwind segue identifier: "unwindToMainDB"
-        //                                                           Action: "unwindToMainDashboard:"
-        //3. Trigger unwind segue programmatically (below)
-        //self.performSegue(withIdentifier: "unwindToMainDB", sender: self)
-        
-        //Update 4/20/17 new home screen 
-        // 4. Present a view controller from a different storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
         self.present(vc, animated: false, completion: nil)
@@ -377,24 +309,23 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //
     // #MARK: - Search Functions
     //
-    
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        let namePredicate = NSPredicate(format: "SELF.Patient_ID CONTAINS[cd] %@", searchText)
+//        //TODO: the SendBy -> is Int id# from RESTUserInbox, SendTo -> Int from RESTUserSent
+//        //need to convert this into name and title dictionary using returnNameTitle(userID:Data["SendBy"]!) in viewDidLoad
+//    }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true
-        searchBar.showsCancelButton = true
-        searchBar.placeholder = ""
-        
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchActive = false
-        searchBar.showsCancelButton = false
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false
         searchBar.text = ""
         searchBar.endEditing(true)
-        searchBar.showsCancelButton = false
         
         if(inBoxSent.selectedSegmentIndex == 0){
             searchBar.placeholder = "Search Inbox"
@@ -405,8 +336,7 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-        //alertSearchBar.endEditing(true)
+        searchActive = false
     }
 
     
@@ -415,50 +345,26 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: - Table View
     //
     
-    //[3] RETURN actual CELL to be displayed
-    // SHOW SEGUE ->
-    // " 1. click cell drag to second view. select the “show” segue in the “Selection Segue” section. "
-    //http://www.codingexplorer.com/segue-uitableviewcell-taps-swift/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(restInbox.isEmpty == false){
-            return restInbox.count
-        }
-        else {
-            return 0
-        }
+        
+        return SearchData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         let cell = tableView.dequeueReusableCell(withIdentifier: "inboxCell") as! InboxCell
+        var Data:Dictionary<String,String> = /*restInbox[indexPath.row]*/SearchData[indexPath.row]
         
-        var Data:Dictionary<String,String> = restInbox[indexPath.row]//SearchData[indexPath.row]
+        var from = Dictionary<String,String>()//
         
-//        let fullDateString = Data["CreatedDateTime"]!
-//        var truncated = ""
-//        var date = ""
-//        if fullDateString.isEmpty == false {
-//            date = self.convertDateStringToDate(longDate: fullDateString)
-//            let startIndex = fullDateString.index(fullDateString.startIndex, offsetBy: 11)//Remove "2017-05-25T" 04:00 from "2017-05-25T04:00:00.000Z"
-//            let truncatedFront = fullDateString.substring(from: startIndex)
-//            
-//            let endIndex = truncatedFront.index(truncatedFront.endIndex, offsetBy: -8)//Remove ":00.000Z"
-//            truncated = truncatedFront.substring(to: endIndex)
-//        }
-//        
-        let from = returnNameTitle(userID:Data["SendBy"]!)
-        recipientsNameTitle.append(["name":from["name"]!,"title":from["title"]!])
-        //let sendBy = from["name"]! + " " + from["title"]!
-        
-        //restInbox[indexPath.row].updateValue(sendBy, forKey: "SendBy")
-        
-        //var status = "false"
-        //if Data["IsRead"]! != "" { status = Data["IsRead"]! }
-//        let nameTitle = Data["SendBy"]!//bob smith, nurse
-//        let token = nameTitle.components(separatedBy: ",")//token[0] "bob smith"
-//        
-//        let name = token[0]
-//        let title = token[1]
+        if(inBoxSent.selectedSegmentIndex == 0){
+            from = returnNameTitle(userID:Data["SendBy"]!)
+            recipientsInboxNameTitle.append(["name":from["name"]!,"title":from["title"]!,"User_ID":Data["SendBy"]!]) //need for prepare for segue
+        }
+        if(inBoxSent.selectedSegmentIndex == 1){
+            from = returnNameTitle(userID:Data["SendTo"]!)
+            recipientsSentNameTitle.append(["name":from["name"]!,"title":from["title"]!,"User_ID":Data["SendTo"]!]) //need for prepare for segue
+        }
         
         // Set text from the data model
         if( Data["IsRead"]! == "N"){
@@ -467,6 +373,10 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             cell.inboxStatusImage.image = UIImage(named: "gray.circle.png")
             cell.backgroundColor = UIColor.white
+            if(inBoxSent.selectedSegmentIndex == 1){
+                //READ RECEIPT message was read
+                cell.inboxStatusImage.image = UIImage(named: "doubleChecked.png")
+            }
         }
         cell.inboxFromTitle.text = from["title"]//Data["SendBy"]//title
         //if recipients > 1 show first recipients plus number of remaining recipients
@@ -494,31 +404,18 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
             { //print("Internet Connection Available!")
                 
                 //ATTEMP TO DELETE FROM API
-                let aRecipient = restInbox[indexPath.row]
-                deleteMessageInAPI(messageId: aRecipient["ID"]!)
+                var aRecipient = restInbox[indexPath.row] //get message id from inbox
+                var isInboxDelete = true
                 
-                // Remove entire row from local storage
-                restInbox.remove(at: (indexPath as NSIndexPath).row)
-                
-                
-                // Reset Inbox and Sent Badge Numbers
-                // NOTE SearchData = inBoxData if SEGMENT=0, =sentBoxData if SEG=1
-                if( selectedSegmentIndexValue == 0 )
-                {
-                    //UserDefaults.standard.set(restInbox, forKey: "RESTUserInbox")
-                    inBoxSent.setTitle("Inbox (\(restInbox.count))", forSegmentAt: 0)
-                }
-                if( selectedSegmentIndexValue == 1 )
-                {
-                    //UserDefaults.standard.set(sentBoxData, forKey: "sentData")
-                    inBoxSent.setTitle("Sent (\(sentBoxData.count))", forSegmentAt: 1)
+                if(inBoxSent.selectedSegmentIndex == 1){
+                    
+                    aRecipient = restSent[indexPath.row] //get message id from sent box
+                    isInboxDelete = false
+                    
                 }
                 
-                //UserDefaults.standard.synchronize()
-                
-                
-                inboxTable.reloadData()
-                
+                deleteMessageInAPI(messageId: aRecipient["ID"]!, indexPathRow: indexPath.row, deleteInbox: isInboxDelete)
+  
             } else {
                 self.simpleAlert(title: "Error Deleting Message", message: "No Internet Connection.", buttonTitle: "OK")
             }
@@ -526,46 +423,63 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    //inBoxSent.selectedSegmentIndex segment 0 (Inbox) or 1 (Sent)
-    
+    //
     // MARK: - Navigation
-    
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "aMessageSegue" {
             
             let selectedRow = ((inboxTable.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
             
-            var Data:Dictionary<String,String> = restInbox[selectedRow]
-            let sentBy = recipientsNameTitle[selectedRow]//.append(["name":from["name"]!,"title":from["title"]!])
-            // Mark this message as read
-//                SearchData[selectedRow]["IsRead"] = "true"
-//                if( selectedSegmentIndexValue == 0 )
-//                {
-//                    UserDefaults.standard.set(SearchData, forKey: "inBoxData")
-//                }
-//                if( selectedSegmentIndexValue == 1 )
-//                {
-//                    UserDefaults.standard.set(SearchData, forKey: "sentData")
-//                }
-            //inbox.append(["SendBy":s, "Subject":Subject, "message":message,
-            //              "CreatedDateTime":CreatedDateTime, "IsRead":IsRead])
+            var Data = Dictionary<String,String>()//restInbox[selectedRow]
+            
+            if(inBoxSent.selectedSegmentIndex == 0){
+                
+                Data = restInbox[selectedRow]
+                
+            }
+            if(inBoxSent.selectedSegmentIndex == 1){
+                
+                Data = restSent[selectedRow]
+                
+            }
             
             if let toViewController = segue.destination as? /*1 sendTo AMessageViewController*/ AMessageViewController {
                 /*maker sure .segueFromList is a var delaired in sendTo ViewController*/
-                toViewController.segueFromList = sentBy["name"]//Data["SendBy"]//"Dr. Gary Webb"
+                //Data["SendBy"]//"Dr. Gary Webb"
                 toViewController.segueDate = Data["CreatedDate"]!// + " " + Data["time"]! //"3/2/17 11:32 AM"
                 toViewController.segueTime = Data["CreatedTime"]!
                 toViewController.segueSubject = Data["Subject"]
                 toViewController.segueMessage =  Data["message"]
+                toViewController.segueMessageID = Data["ID"]
+                toViewController.segueIsRead = Data["IsRead"]!
+                
+                print("Data IsRead: \(Data["IsRead"]!)")
+                
                 toViewController.segueSelectedRow = selectedRow
+                
+                var sent = recipientsInboxNameTitle[selectedRow]
+                
                 if(inBoxSent.selectedSegmentIndex == 0){
+                    
                     toViewController.segueBoxSegmentString = "Inbox"
+                    
+                    toViewController.segueBoxCount = restInbox.count
+                    
                 } else {
+                    
+                    sent = recipientsSentNameTitle[selectedRow]
+
                     toViewController.segueBoxSegmentString = "Sent"
+                    
+                    toViewController.segueBoxCount = restSent.count
                 }
+                
+                var dict:Array<Dictionary<String,String>> = []
+                dict.append(["name":sent["name"]!,"User_ID":sent["User_ID"]!])
+                toViewController.segueFromList = dict //"name":userName,"User_ID":selectedData["User_ID"]!])
             }
-            
         }
     }
 

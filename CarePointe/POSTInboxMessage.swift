@@ -41,7 +41,7 @@ class POSTMessage {
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 
-                print("Error when Attempting to PUT/send messageInbox: \(error!)") //The Internet connection appears to be offline. -1009
+                print("Error when Attempting to POST/send messageInbox: \(error!)") //The Internet connection appears to be offline. -1009
                 UserDefaults.standard.set(false, forKey: "APIsendMessageSuccess")
                 UserDefaults.standard.synchronize()
  
@@ -65,12 +65,12 @@ class POSTMessage {
                             UserDefaults.standard.set(true, forKey: "APIsendMessageSuccess")
                             UserDefaults.standard.synchronize()
                             
-                            print("finished PUT messageInbox")
+                            print("finished POST messageInbox")
                         }
                         dispachInstance.leave() // API Responded
                     }
                 } catch {
-                    print("Error deserializing PUT/send messageInbox JSON: \(error)")
+                    print("Error deserializing POST/send messageInbox JSON: \(error)")
                     UserDefaults.standard.set(false, forKey: "APIsendMessageSuccess")
                     UserDefaults.standard.synchronize()
 

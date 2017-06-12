@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Order ServiceVC-->
+        <scene sceneID="xTA-BS-DBd">
+            <objects>
+                <viewController storyboardIdentifier="placeOrder" id="sKW-R3-1rq" customClass="OrderServiceVC" customModule="CarePointe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l2t-6X-SmV"/>
+                        <viewControllerLayoutGuide type="bottom" id="7r4-hQ-9Ip"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZEI-58-MfP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xfO-zu-1sT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CarePonite | Order Service" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWe-kE-VkH">
+                                        <rect key="frame" x="55" y="23.5" width="265" height="23"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="cuD-Fk-muB"/>
+                                            <constraint firstAttribute="width" constant="265" id="uJ8-sW-Ced"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-sh-8gW">
+                                        <rect key="frame" x="6" y="26" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="lGv-qb-Pxg"/>
+                                            <constraint firstAttribute="height" constant="30" id="zQ4-OX-W8Y"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="sKW-R3-1rq" eventType="touchUpInside" id="Xxh-TA-37x"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="6ZO-V8-fjm"/>
+                                    <constraint firstItem="Hz6-sh-8gW" firstAttribute="leading" secondItem="xfO-zu-1sT" secondAttribute="leading" constant="6" id="BdN-36-K6X"/>
+                                    <constraint firstItem="Hz6-sh-8gW" firstAttribute="top" secondItem="xfO-zu-1sT" secondAttribute="top" constant="26" id="OZ7-N9-suY"/>
+                                    <constraint firstItem="fWe-kE-VkH" firstAttribute="centerY" secondItem="xfO-zu-1sT" secondAttribute="centerY" id="g0G-r2-bGz"/>
+                                    <constraint firstItem="fWe-kE-VkH" firstAttribute="centerX" secondItem="xfO-zu-1sT" secondAttribute="centerX" id="xQz-NC-Y3e"/>
+                                </constraints>
+                            </view>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bY0-eF-Rba">
+                                <rect key="frame" x="16" y="133.5" width="343" height="160"/>
+                                <color key="backgroundColor" red="0.92126840350000005" green="0.97659069300000001" blue="0.976051271" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="HO0-Oj-ohd"/>
+                                </constraints>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service Category:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74Q-IN-UGM">
+                                <rect key="frame" x="16" y="100" width="155" height="23.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="155" id="rwR-Rh-ACr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                <color key="textColor" red="0.37479010219999997" green="0.37509790059999998" blue="0.37483772640000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a note" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBg-kl-DUp">
+                                <rect key="frame" x="16" y="323.5" width="250" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="2Gi-pe-6Be"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                <color key="textColor" red="0.37479010219999997" green="0.37509790059999998" blue="0.37483772640000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZa-No-WCi" customClass="RoundedButton" customModule="CarePointe" customModuleProvider="target">
+                                <rect key="frame" x="77" y="612" width="220" height="35"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="PQF-Rp-VwO"/>
+                                    <constraint firstAttribute="width" constant="220" id="YKx-jv-alt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                <state key="normal" title="Send">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="radiusMultiplier">
+                                        <real key="value" value="0.050000000000000003"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="sendButtonTapped:" destination="sKW-R3-1rq" eventType="touchUpInside" id="tTr-wd-82R"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nx1-Nc-dKU">
+                                <rect key="frame" x="16" y="354.5" width="343" height="160"/>
+                                <color key="backgroundColor" red="0.92306857639999995" green="0.97581287880000001" blue="0.97614747290000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="eIs-Qr-MUR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allergic Medicine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fy-ny-zm5">
+                                <rect key="frame" x="181" y="100" width="178" height="23.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="178" id="5KJ-M3-Rgj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CSC: - not found -" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLz-J4-Oc1">
+                                <rect key="frame" x="16" y="551.5" width="343" height="21"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                <color key="textColor" red="0.37479010219999997" green="0.37509790059999998" blue="0.37483772640000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="XLz-J4-Oc1" secondAttribute="trailing" id="39V-zk-ysC"/>
+                            <constraint firstItem="nx1-Nc-dKU" firstAttribute="top" secondItem="RBg-kl-DUp" secondAttribute="bottom" constant="10" id="3xU-g7-vat"/>
+                            <constraint firstItem="XLz-J4-Oc1" firstAttribute="top" secondItem="nx1-Nc-dKU" secondAttribute="bottom" constant="37" id="67b-fQ-9Ei"/>
+                            <constraint firstItem="xfO-zu-1sT" firstAttribute="top" secondItem="ZEI-58-MfP" secondAttribute="top" id="Eev-5G-RbK"/>
+                            <constraint firstItem="bY0-eF-Rba" firstAttribute="leading" secondItem="ZEI-58-MfP" secondAttribute="leadingMargin" id="FMT-TH-bm9"/>
+                            <constraint firstAttribute="trailing" secondItem="xfO-zu-1sT" secondAttribute="trailing" id="I1M-SM-7QT"/>
+                            <constraint firstItem="74Q-IN-UGM" firstAttribute="top" secondItem="xfO-zu-1sT" secondAttribute="bottom" constant="30" id="LC9-Dw-UV6"/>
+                            <constraint firstItem="RBg-kl-DUp" firstAttribute="leading" secondItem="ZEI-58-MfP" secondAttribute="leadingMargin" id="PVK-Wy-F81"/>
+                            <constraint firstItem="6fy-ny-zm5" firstAttribute="leading" secondItem="74Q-IN-UGM" secondAttribute="trailing" constant="10" id="U4z-OK-Bm9"/>
+                            <constraint firstItem="RBg-kl-DUp" firstAttribute="top" secondItem="bY0-eF-Rba" secondAttribute="bottom" constant="30" id="WUZ-b7-frA"/>
+                            <constraint firstItem="7r4-hQ-9Ip" firstAttribute="top" secondItem="PZa-No-WCi" secondAttribute="bottom" constant="20" id="ZZA-1i-cF0"/>
+                            <constraint firstItem="xfO-zu-1sT" firstAttribute="leading" secondItem="ZEI-58-MfP" secondAttribute="leading" id="adN-rd-h1l"/>
+                            <constraint firstItem="74Q-IN-UGM" firstAttribute="leading" secondItem="ZEI-58-MfP" secondAttribute="leadingMargin" id="fna-H8-ctA"/>
+                            <constraint firstItem="nx1-Nc-dKU" firstAttribute="leading" secondItem="ZEI-58-MfP" secondAttribute="leadingMargin" id="hAJ-wa-NpR"/>
+                            <constraint firstItem="PZa-No-WCi" firstAttribute="centerX" secondItem="ZEI-58-MfP" secondAttribute="centerX" id="hAk-bv-n8E"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bY0-eF-Rba" secondAttribute="trailing" id="hrD-gX-gui"/>
+                            <constraint firstItem="nx1-Nc-dKU" firstAttribute="trailing" secondItem="ZEI-58-MfP" secondAttribute="trailingMargin" id="lrS-Qf-Jgc"/>
+                            <constraint firstItem="bY0-eF-Rba" firstAttribute="top" secondItem="74Q-IN-UGM" secondAttribute="bottom" constant="10" id="sTN-b6-I8r"/>
+                            <constraint firstItem="6fy-ny-zm5" firstAttribute="centerY" secondItem="74Q-IN-UGM" secondAttribute="centerY" id="yWg-hb-2eC"/>
+                            <constraint firstItem="XLz-J4-Oc1" firstAttribute="leading" secondItem="ZEI-58-MfP" secondAttribute="leadingMargin" id="ytu-FS-wu1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cscLabel" destination="XLz-J4-Oc1" id="kDk-z5-Lgk"/>
+                        <outlet property="messageView" destination="nx1-Nc-dKU" id="ih9-ji-dbs"/>
+                        <outlet property="selectedLabel" destination="6fy-ny-zm5" id="eP7-d5-JgJ"/>
+                        <outlet property="vendorPicker" destination="bY0-eF-Rba" id="Aq5-5G-WGJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jtp-Ci-Zwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="72.799999999999997" y="103.89805097451276"/>
+        </scene>
+    </scenes>
+</document>

@@ -93,6 +93,12 @@ class PatientUpdateViewController: UIViewController, UIPickerViewDelegate, UIPic
     }
     
     @IBAction func sendButtonTapped(_ sender: Any) {
+        
+        //check internet
+        
+        
+        
+        //TOAST Update Sent
         UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
             
             //if you perform segue here if will perform with animation

@@ -22,6 +22,8 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
     var recipientNameList = [String]()
     var recipientUserIDList = [String]()
     
+    //var recipientList:Array<Dictionary<String,String>> = [] //recipientNameList,recipientUserIDList
+    
     //API data
     var restCareT = Array<Dictionary<String,String>>()
     var viewStatus = ""
@@ -97,8 +99,7 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
         let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
         let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
         
-        let getToken = GETToken()
-        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
+        GETToken().signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
         
         downloadToken.notify(queue: DispatchQueue.main)  {
             
@@ -219,6 +220,7 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
             if !boolChecked {
                 recipientNameList.append(selectedName!)
                 recipientUserIDList.append(selectedUserID!)
+                //recipientList.append(["name":selectedName!,"User_ID":""])
             } else {
                 recipientNameList = recipientNameList.filter{$0 != selectedName!}
                 recipientUserIDList = recipientUserIDList.filter{$0 != selectedUserID!}
@@ -268,12 +270,12 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
            // let teamMemberName = selectedCTData["caseteam_name"]!
             
             //segue out varaibles
-            var recipientList = ""//teamMemberName//""
+            var recipientList:Array<Dictionary<String,String>> = []// = ""//teamMemberName//""
             var userIDs = ""
             
-            for recipient in recipientNameList{
+            for i in 0 ..< recipientNameList.count{
                 //let userName = user["FirstLastName"]!
-                recipientList += " \(recipient),"
+                recipientList.append(["name":recipientNameList[i],"User_ID":recipientUserIDList[i]])
             }
             for userID in recipientUserIDList{
                 userIDs += " \(userID),"
@@ -298,6 +300,7 @@ class PatientCareTeamViewController: UIViewController, UITableViewDelegate, UITa
         if segue.identifier == "teleConnectSegue" {
             
         }
+       
     }
 
     

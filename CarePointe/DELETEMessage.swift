@@ -37,8 +37,8 @@ class DeleteMessage {
             if (error != nil) {
                 
                 print("Error when Attempting to DELETE message: \(error!)") //The Internet connection appears to be offline. -1009
-                //UserDefaults.standard.set(false, forKey: "APIsendMessageSuccess")
-                //UserDefaults.standard.synchronize()
+                UserDefaults.standard.set(false, forKey: "APIdeleteMessageSuccess")
+                UserDefaults.standard.synchronize()
                 
                 dispachInstance.leave() // API Responded
                 
@@ -57,8 +57,8 @@ class DeleteMessage {
                         let type = json["type"] as? Bool{
                         if(type == true){
                             
-                            //UserDefaults.standard.set(true, forKey: "APIsendMessageSuccess")
-                            //UserDefaults.standard.synchronize()
+                            UserDefaults.standard.set(true, forKey: "APIdeleteMessageSuccess")
+                            UserDefaults.standard.synchronize()
                             
                             print("finished DELETE message")
                         }
@@ -66,8 +66,8 @@ class DeleteMessage {
                     }
                 } catch {
                     print("Error deserializing DELETE message JSON: \(error)")
-                    //UserDefaults.standard.set(false, forKey: "APIsendMessageSuccess")
-                    //UserDefaults.standard.synchronize()
+                    UserDefaults.standard.set(false, forKey: "APIdeleteMessageSuccess")
+                    UserDefaults.standard.synchronize()
                     
                     dispachInstance.leave() // API Responded
                 }

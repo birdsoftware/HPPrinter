@@ -250,11 +250,6 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     //
     // #MARK: - Supporting Functions
@@ -705,15 +700,7 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     @IBAction func completeButtonTapped(_ sender: Any) {
         
         showCompleteAlert()
-        
-//        updateStatusToComplete()
-//        
-//        UserDefaults.standard.set(referrals, forKey: "RESTAllReferrals")
-//        UserDefaults.standard.synchronize()
-//        
-//        segueToPTV()
     }
-    
     
     @IBAction func patientProfileButtonTapped(_ sender: Any) {
     }
@@ -749,11 +736,7 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         }
         //Save new date to user defaults
         //UserDefaults.standard.set(true, forKey: "didUpdateCalendarDate") //need check to display a date if no date selected
-        
     }
-    
-    
-    
     
     @IBAction func mapDirectionsButtonTapped(_ sender: Any) {
         

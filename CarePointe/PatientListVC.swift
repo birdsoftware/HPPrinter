@@ -173,7 +173,6 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         SearchData=patientData
         patientTable.reloadData()
-        //scopeSegmentControl.selectedSegmentIndex = 0
         
         let patientCount = patientData.count//ScopeData.count
         myPatientsLabel.text = "My Patients (\(patientCount))"
@@ -181,8 +180,7 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-        //alertSearchBar.endEditing(true)
+        searchActive = false
     }
 
     

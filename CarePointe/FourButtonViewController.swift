@@ -23,7 +23,7 @@ class FourButtonViewController: UIViewController {
     
     
     var errorMessage = ""
-    var alertCount = 3
+    var alertCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,8 +62,11 @@ class FourButtonViewController: UIViewController {
                 }
             }
         }
+
         createBadgeFrom(UIlabel:alertBadge, text: " \(alertCount) ")
+
         createBadgeFrom(UIlabel:appointmentBadge, text: " \(numberNewPatients) ")
+
         
         NotificationCenter.default.addObserver(self,
                                                selector:#selector(startActivityIndicator),
@@ -78,6 +81,16 @@ class FourButtonViewController: UIViewController {
         NotificationCenter.default.addObserver(self,
                                                selector:#selector(updateProfile),
                                                name: NSNotification.Name(rawValue: "updateProfile"),
+                                               object: nil)
+        //updateAlerts
+        NotificationCenter.default.addObserver(self,
+                                               selector:#selector(updateAlerts),
+                                               name: NSNotification.Name(rawValue: "updateAlerts"),
+                                               object: nil)
+        //updateReferrals
+        NotificationCenter.default.addObserver(self,
+                                               selector:#selector(updateReferrals),
+                                               name: NSNotification.Name(rawValue: "updateReferrals"),
                                                object: nil)
         
     }
@@ -131,14 +144,10 @@ class FourButtonViewController: UIViewController {
             }
 
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    // supporting functions
-    
+    //
+    // MARK: - OBJC functions
+    //
     @objc func updateProfile(){
         
         updateProfileFromDefaults()
@@ -173,17 +182,22 @@ class FourButtonViewController: UIViewController {
     @objc func stopActivityIndicator(){
      
         self.updateProfileFromDefaults() //make sure most up to date user name and title is shown in this view
-        self.updateAlertsCount()
-        
         self.activityView.removeFromSuperview()
         self.activityView.isHidden = true
         self.backgroundActivityIndicator.isHidden = true
         
     }
     
+    @objc func updateAlerts(){
+        self.updateAlertsCount()
+    }
+    
+    @objc func updateReferrals(){
+        self.updateReferralsCount()
+    }
     
     //
-    // # MARK: Supporting Functions
+    // MARK:  - Supporting Functions
     //
     
     func open(scheme: String) {
@@ -230,17 +244,34 @@ class FourButtonViewController: UIViewController {
             userTitle.text = "-"
         }
         
-        if isKeyPresentInUserDefaults(key: "RESTGlobalAlerts"){
-            let newAlertsCount = UserDefaults.standard.object(forKey: "RESTGlobalAlerts") as? Array<Dictionary<String,String>> ?? []
-            
-            alertCount = newAlertsCount.count
-        }
     }
     
     func updateAlertsCount(){
-        let newAlertsCount = UserDefaults.standard.object(forKey: "RESTGlobalAlerts") as? Array<Dictionary<String,String>> ?? []
-        let newAlertCount = newAlertsCount.count
-        alertCount = newAlertCount
+        if isKeyPresentInUserDefaults(key: "RESTGlobalAlerts"){
+            let newAlerts = UserDefaults.standard.object(forKey: "RESTGlobalAlerts") as? Array<Dictionary<String,String>> ?? []
+            let newAlertCount = newAlerts.count
+            alertCount = newAlertCount
+            alertBadge.text = " \(alertCount) "
+        }
+    }
+    
+    func updateReferralsCount(){
+        if isKeyPresentInUserDefaults(key: "RESTAllReferrals"){
+            var numberNewPatients = 0
+            let referrals = UserDefaults.standard.value(forKey: "RESTAllReferrals") as! Array<Dictionary<String,String>>
+            
+            for referral in referrals {
+                switch referral["Status"]! //from tbl_care_plan
+                {
+                case "Pending", "Opened":
+                    numberNewPatients += 1
+                default:
+                    break
+                }
+            }
+            appointmentBadge.text = " \(numberNewPatients) "
+            
+        }
     }
     
     func createBadgeFrom(UIlabel:UILabel, text: String) {
@@ -251,10 +282,10 @@ class FourButtonViewController: UIViewController {
         UIlabel.text = text
     }
     
+    
     //
     // MARK: - Button Actions
     //
-    
     
     @IBAction func patientsButtonTapped(_ sender: Any) {
         

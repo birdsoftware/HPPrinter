@@ -10,7 +10,7 @@ import Foundation
 
 class GETReferrals {
     
-    func getAllReferrals(token: String, userID: String){
+    func getAllReferrals(token: String, userID: String, dispatchInstance: DispatchGroup){
         
         var referrals = Array<Dictionary<String,String>>()
         
@@ -35,7 +35,7 @@ class GETReferrals {
                 completionHandler: { (data, response, error) -> Void in
                     if (error != nil) {
                         print("Error when Attempting to GET All Referals:\(error!)")
-                        //dispachInstance.leave() // API Responded
+                        dispatchInstance.leave() // API Responded
                         return
                     } else {
                         
@@ -106,18 +106,19 @@ class GETReferrals {
                                     UserDefaults.standard.synchronize()
                                     
                                     print("finished GET All Referals")
+                                    dispatchInstance.leave() // API Responded
                                     
                                 }
                                 //No Referrals
                                 //JSON.isEmpty == true
-                                print("finished GET All Referals - No referrals to GET")
+                                else { print("finished GET All Referals - No referrals to GET") }
                                 //Remove Old Referrals?
                                 //UserDefaults.standard.removeObject(forKey: "RESTAllReferrals")
                                 //UserDefaults.standard.synchronize()
                             }
                         } catch {
                             print("Error deserializing All Referals JSON: \(error)")
-                            //dispachInstance.leave() // API Responded
+                            dispatchInstance.leave() // API Responded
                         }
                         
                         /* //~~~~~~~~uncomment to run code now before this task completes
