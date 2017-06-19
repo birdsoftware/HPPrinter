@@ -63,6 +63,22 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         background4.backgroundColor = UIColor.white.withAlphaComponent(0.1)
         background3.backgroundColor = UIColor.white.withAlphaComponent(0.1)
         
+        /* TODO: uncomment to get image from URL
+         
+        let getProfileImage = DispatchGroup()
+        getProfileImage.enter()
+        
+        getImage().returnUIImageFromURL(URLString: "https://carepointe.cloud/images/profiles/5nzBHAlJH7ljdBlRzkiWPSJz4hfn3iQ2X10c2edJWIIjjj19pFOyMBlA1pCZW29o.jpg",dispachInstance: getProfileImage)
+        
+        getProfileImage.notify(queue: DispatchQueue.main)  {
+            if let image = self.getSavedImage(named: "profileImage") {
+                // do something with image
+                self.updatePhoto.setImage(image, for: UIControlState.normal)
+            }
+            
+        }
+         */
+        
         containerView1.isHidden = true
         containerView2.isHidden = true
         
@@ -117,8 +133,6 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
          *  titleField.placeholder = "Care Team Case Manager"
          *  emailField.placeholder = "bob@yahoo.com"
          */
-        
-        // Display saved defaults to placeholder text fields
         displayLocallySavedTextInPlaceholders()
     }
     
@@ -132,6 +146,7 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         })
     }
     
+    //Move view up and down with keyboard will show
     @objc func keyboardWillShow(sender: NSNotification){
         if let keyboardSize = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue{
             let keyboardHeight = keyboardSize.height
@@ -142,7 +157,6 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
                         self.view.layoutIfNeeded()
                     })
         }
-
     }
 
 
@@ -226,6 +240,15 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         UIGraphicsEndImageContext()
         
         return newImage
+    }
+    
+    
+    
+    func getSavedImage(named: String) -> UIImage? {
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
+        }
+        return nil
     }
     
     
@@ -361,19 +384,14 @@ class UpdateProfileViewController: UIViewController /*,UITextFieldDelegate*/,UII
         /**/downloadToken.enter()
         
         // 0 get token again -----------
-        /**/let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-        /**/let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-        
-        /**/let getToken = GETToken()
-        /**/getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
         
         downloadToken.notify(queue: DispatchQueue.main)  {
         
             let token = UserDefaults.standard.string(forKey: "token")!
             
             //SAVE local with any changes to web server
-            let updateProfile = PUTUpdateProfile()
-            updateProfile.updateProfile(token: token, userID: uid, firstname: firstName, lastname: lastName, title: title, emailid: email, PhoneNo: phoneNo)
+            PUTUpdateProfile().updateProfile(token: token, userID: uid, firstname: firstName, lastname: lastName, title: title, emailid: email, PhoneNo: phoneNo)
             //-----------------
             
         }

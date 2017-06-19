@@ -10,6 +10,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--PatientTabBar-->
+        <scene sceneID="LKp-Vr-Alm">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="PatientTabBar" id="7lm-XO-Afe" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ne-jU-skr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-443" y="-137"/>
+        </scene>
         <!--Order ServiceVC-->
         <scene sceneID="xTA-BS-DBd">
             <objects>
@@ -158,6 +166,7 @@
                         <outlet property="messageView" destination="nx1-Nc-dKU" id="ih9-ji-dbs"/>
                         <outlet property="selectedLabel" destination="6fy-ny-zm5" id="eP7-d5-JgJ"/>
                         <outlet property="vendorPicker" destination="bY0-eF-Rba" id="Aq5-5G-WGJ"/>
+                        <segue destination="7lm-XO-Afe" kind="presentation" identifier="segueToPatientTabBar" animates="NO" id="kLD-DG-qMp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtp-Ci-Zwk" userLabel="First Responder" sceneMemberID="firstResponder"/>

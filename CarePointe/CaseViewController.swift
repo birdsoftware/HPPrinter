@@ -139,11 +139,7 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
         downloadToken.enter()
         
         // 0 get token again -----------
-        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-        
-        let getToken = GETToken()
-        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
         
         downloadToken.notify(queue: DispatchQueue.main)  {
             

@@ -11,7 +11,10 @@ import Foundation
 
 class GETToken {
 
-    func signInCarepoint(userEmail: String, userPassword: String, dispachInstance: DispatchGroup) {
+    func signInCarepoint(/*userEmail: String, userPassword: String, */dispachInstance: DispatchGroup) {
+        
+        let userEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        let userPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
         
         var userProfile:Array<Dictionary<String,String>> = []
         

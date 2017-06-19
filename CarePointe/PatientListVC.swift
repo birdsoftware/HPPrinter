@@ -65,7 +65,7 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         if isKeyPresentInUserDefaults(key: "RESTPatients"){
             patientData = UserDefaults.standard.value(forKey: "RESTPatients") as! Array<Dictionary<String, String>>
         }
-        
+        patientData.sort { $0["patientName"]! < $1["patientName"]! }//sort arry in place
         SearchData = patientData
         //ScopeData = SearchData
         patientTable.reloadData()

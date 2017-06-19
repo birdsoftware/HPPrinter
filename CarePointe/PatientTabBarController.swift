@@ -33,13 +33,15 @@ class PatientTabBarController: UITabBarController {
     var tabBarSegueAttachDoc: String!
     var tabBarSegueStatus: String!
     var tabBarSegueIsUrgent: String!
+    
+    var segueSelectedIndex: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        // This will select the 3rd tab bar item to show the patient item
-        selectedIndex = 2
+print("segueSelectedIndex: \(segueSelectedIndex)")
+        // This will select the tab bar item to show; 0 Feed, 1 Case, 2 Patient, 3 Rx and 4 Forms
+        if segueSelectedIndex != nil { selectedIndex = segueSelectedIndex } else { selectedIndex = 2 }
         
         // change Tab view controller normal/selected state text color
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for:.selected)

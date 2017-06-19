@@ -10,7 +10,9 @@ import UIKit
 
 class PatientRXViewController: UIViewController {
     
-    @IBOutlet weak var updateMedRecButton: UIButton!
+    
+    @IBOutlet weak var medRecButton: RoundedButton!
+    //@IBOutlet weak var updateMedRecButton: BorderedButton!
     @IBOutlet weak var medicationSegmentor: UISegmentedControl!
     
     //views
@@ -50,8 +52,8 @@ class PatientRXViewController: UIViewController {
         patientTitle.text = patientName! + "'s Rx"
         
         // update UI elements
-        updateMedRecButton.layer.cornerRadius = updateMedRecButton.frame.size.width / 2
-        updateMedRecButton.clipsToBounds = true
+        //updateMedRecButton.layer.cornerRadius = updateMedRecButton.frame.size.width / 2
+        //updateMedRecButton.clipsToBounds = true
         containerView1.isHidden = false
         containerView2.isHidden = true
         containerView3.isHidden = true
@@ -120,25 +122,25 @@ class PatientRXViewController: UIViewController {
         switch medicationSegmentor.selectedSegmentIndex
         {
         case 0:
-            //updateMedRecButton.setTitle("+M", for: .normal)
-            //
+            medRecButton.isHidden = false
             containerView1.isHidden = false
             containerView2.isHidden = true
             containerView3.isHidden = true
             containerView4.isHidden = true
         case 1:
-            //updateMedRecButton.setTitle("+MR", for: .normal)
+            medRecButton.isHidden = true
             containerView1.isHidden = true
             containerView2.isHidden = false
             containerView3.isHidden = true
             containerView4.isHidden = true
         case 2:
-            //updateMedRecButton.setTitle("+A", for: .normal)
+            medRecButton.isHidden = false
             containerView1.isHidden = true
             containerView2.isHidden = true
             containerView3.isHidden = false
             containerView4.isHidden = true
         case 3:
+            medRecButton.isHidden = true
             containerView1.isHidden = true
             containerView2.isHidden = true
             containerView3.isHidden = true

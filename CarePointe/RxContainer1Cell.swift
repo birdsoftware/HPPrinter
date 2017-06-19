@@ -16,5 +16,9 @@ class RxContainer1Cell: UITableViewCell {
     @IBOutlet weak var dosage: UILabel!
     @IBOutlet weak var frequency: UILabel!
     @IBOutlet weak var route: UILabel!
+    @IBOutlet weak var viewRectangle: UIView!
+    @IBOutlet weak var unit: UILabel!
+    @IBOutlet weak var refill: BorderedLabel!
+    
 
 }

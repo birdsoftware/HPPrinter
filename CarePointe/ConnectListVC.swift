@@ -31,9 +31,7 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
     var sendToList:[String] = []
     var recipientCount:Int = 0
     
-    //Class selected users varaibles
-    var selectedUsers:Array<Dictionary<String,String>> = []
-    
+    var selectedUsers:Array<Dictionary<String,String>> = [] //for selectedUsereTableView
     
     
     @IBAction func addUsersTextFieldChanged(_ sender: Any) {
@@ -49,15 +47,21 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
             // "FirstLastName":firstLastName, "Company":company, "User_ID":uid, "RoleType":roleType -> POSITION
             inboxUserList = UserDefaults.standard.value(forKey: "RESTInboxUsers") as! Array<Dictionary<String, String>>//"userData") as!
         }
+        //save selected users state
+        if isKeyPresentInUserDefaults(key: "connectSelectedUsers"){
+            selectedUsers = UserDefaults.standard.value(forKey: "connectSelectedUsers") as! Array<Dictionary<String, String>>
+        }
 
         //Table ROW Height set to auto layout
         selectedUsereTableView.rowHeight = UITableViewAutomaticDimension
-        selectedUsereTableView.estimatedRowHeight = 100//was 88 and is 88 in storyboard
+        selectedUsereTableView.estimatedRowHeight = 100
         
         // UI
         usersTableView.isHidden = true
-        sendMessageButton.isHidden = true
-        videoConferenceButton.isHidden = true
+        if selectedUsers.count == 0{
+            sendMessageButton.isHidden = true
+            videoConferenceButton.isHidden = true
+        }
         
         //delegates
         usersTableView.delegate = self
@@ -226,16 +230,25 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
             let usersPhone = Data["phone_number"]!
             
             cell.userName.text = Data["FirstLastName"]!  + returnPhoneEmoji(phoneNumber: usersPhone) + usersPhone
-            cell.userPositionCompany.text = "Roll: " + Data["RoleType"]! + " | Company: " + Data["Company"]!
-            //cell.callButton.tag = indexPath.row //set tag of the button
             
-            //if userHasPhone(phoneString: usersPhone) {
-               // cell.callButton.addTarget(self, action: #selector(connected), for: .touchUpInside)
-            //} else {
-            //    cell.callButton.setImage(nil, for: .normal)
-            //    cell.callButton.backgroundColor = .white
-            //    cell.callButton.setTitle(returnPhoneEmoji(phoneNumber: usersPhone), for: .normal)
-           // }
+            cell.userPositionCompany.text = "Roll: " + Data["RoleType"]! + " | Company: " + Data["Company"]!
+            
+            let stencil = UIImage(named: "phoneCircle.png")?.withRenderingMode(.alwaysTemplate)
+            cell.callButton.setImage(stencil, for: .normal)
+            cell.callButton.borderWidth = 1
+            
+            if usersPhone == "" {
+                cell.callButton.tintColor = .red // set a color
+                cell.callButton.backgroundColor = .white
+                cell.callButton.borderColor = .red
+                
+            } else {
+                
+                cell.callButton.tintColor = .white // set a color
+                cell.callButton.backgroundColor = .bostonBlue()
+                cell.callButton.borderColor = .bostonBlue()
+            }
+
             cell.callButton.tag = indexPath.row //tag is Int -2,147,483,648 and 2,147,483,647
             cell.callButton.addTarget(self, action: #selector(connected), for: .touchUpInside)
             
@@ -245,16 +258,23 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
     
     func connected(sender: UIButton) {
 
-        let buttonTag = sender.tag
+        let buttonTag = sender.tag//row Int
         
         let selectedUserData:Dictionary<String,String> = selectedUsers[buttonTag] //FirstLastName,phone_number,RoleType,Company
         var phoneString = selectedUserData["phone_number"]!
-        phoneString = phoneString.replacingOccurrences(of: "(", with: "")
-        phoneString = phoneString.replacingOccurrences(of: ")", with: "")
-        phoneString = phoneString.replacingOccurrences(of: "-", with: "")
         
-        open(scheme: "tel://\(phoneString)")
-        //open(scheme: "tel://8556235691")
+        if phoneString.isEmpty == true {
+            
+            open(scheme: "tel://4804942466")
+            
+        } else{
+            
+            phoneString = phoneString.replacingOccurrences(of: "(", with: "")
+            phoneString = phoneString.replacingOccurrences(of: ")", with: "")
+            phoneString = phoneString.replacingOccurrences(of: "-", with: "")
+            
+            open(scheme: "tel://\(phoneString)")
+        }
     }
     
     // MARK: UITableViewDelegate
@@ -286,6 +306,10 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
             
             if(isDuplicate == false) {
                 selectedUsers.append(["FirstLastName":userN,"phone_number": phone, "RoleType":roll,"Company":co,"User_ID":id])
+                
+                UserDefaults.standard.set(selectedUsers, forKey: "connectSelectedUsers")
+                UserDefaults.standard.synchronize()
+                
                 selectedUsereTableView.reloadData()
             }
             
@@ -298,6 +322,10 @@ class ConnectListVC: UIViewController, UITextFieldDelegate, UITableViewDataSourc
             if (editingStyle == UITableViewCellEditingStyle.delete) {
                 //remove from local array
                 selectedUsers.remove(at: (indexPath as NSIndexPath).row)
+                
+                UserDefaults.standard.set(selectedUsers, forKey: "connectSelectedUsers")
+                UserDefaults.standard.synchronize()
+                
                 selectedUsereTableView.reloadData()
             }
         }

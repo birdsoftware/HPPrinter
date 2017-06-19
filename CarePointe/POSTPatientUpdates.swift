@@ -16,13 +16,13 @@ class POSTPatientUpdates {
         
         let headers = [
             "authorization": token,
-            "cache-control": "no-cache"
+            "cache-control": "no-cache" //"Content-Type" : "application/json"
         ]
         
         let parameters = [
             "patientUpdateText": update["patientUpdateText"]!,  //requires String
             "update_type": update["update_type"]!,         //type = ["Routine", "CICA", "Urgent", "IDT"]
-            "updated_from": update["updated_from"]!         //requires Int 337
+            "updated_from": update["updated_from"]!         //requires "mobile app"
             ] as [String : Any]
         
         let postData = try! JSONSerialization.data(withJSONObject: parameters, options: [])

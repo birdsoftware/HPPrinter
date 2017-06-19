@@ -136,6 +136,10 @@
 		588BE2681E706D4800BA78C3 /* ApptContainer3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588BE2671E706D4800BA78C3 /* ApptContainer3VC.swift */; };
 		588BE26A1E706D6A00BA78C3 /* FilesContainer3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588BE2691E706D6A00BA78C3 /* FilesContainer3VC.swift */; };
 		588E875C1E9D6AA000D5CD8A /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588E875B1E9D6AA000D5CD8A /* SimpleAlert.swift */; };
+		588F0CF01EF34B0F00268DC9 /* Medications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588F0CEF1EF34B0F00268DC9 /* Medications.swift */; };
+		588F0CF21EF34F2A00268DC9 /* tbl_medications (1).json in Resources */ = {isa = PBXBuildFile; fileRef = 588F0CF11EF34F2A00268DC9 /* tbl_medications (1).json */; };
+		588F0CF51EF4608900268DC9 /* MedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588F0CF41EF4608900268DC9 /* MedCell.swift */; };
+		588F0CF71EF4777200268DC9 /* GETCurMeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588F0CF61EF4777200268DC9 /* GETCurMeds.swift */; };
 		589AB1C71EB10A87004C821D /* reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 589AB1C61EB10A87004C821D /* reload.png */; };
 		589AB1C91EB12CA9004C821D /* RESTGETGlobalAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589AB1C81EB12CA9004C821D /* RESTGETGlobalAlerts.swift */; };
 		589AB1CB1EB3F792004C821D /* RESTUpdateProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589AB1CA1EB3F792004C821D /* RESTUpdateProfile.swift */; };
@@ -221,9 +225,12 @@
 		58E7FC951E8B0E9000F203C6 /* RESTGETUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E7FC941E8B0E9000F203C6 /* RESTGETUsers.swift */; };
 		58E7FC971E8B19F400F203C6 /* UpdateSavedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E7FC961E8B19F400F203C6 /* UpdateSavedDictionary.swift */; };
 		58E7FC991E8C4CE300F203C6 /* users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E7FC981E8C4CE300F203C6 /* users.swift */; };
+		58EAA1151EF214EB007CA9C8 /* AddEditRxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EAA1141EF214EB007CA9C8 /* AddEditRxVC.swift */; };
 		58EB0DC81E732DC40009FD57 /* caseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB0DC71E732DC40009FD57 /* caseCell.swift */; };
 		58EB0DCC1E734D200009FD57 /* ServicesC1ViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB0DCB1E734D200009FD57 /* ServicesC1ViewC.swift */; };
 		58EB0DCE1E73614A0009FD57 /* locationsViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EB0DCD1E73614A0009FD57 /* locationsViewC.swift */; };
+		58F191E31EF0A51D00C53A2A /* AddEditRx.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58F191E21EF0A51D00C53A2A /* AddEditRx.storyboard */; };
+		58F191E51EF2E96500C53A2A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F191E41EF2E96500C53A2A /* Constants.swift */; };
 		58F4CB931E85D256000C3185 /* dispatchRESTCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F4CB921E85D256000C3185 /* dispatchRESTCalls.swift */; };
 		58F67A051EE0A74700897043 /* POSTInboxMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F67A041EE0A74700897043 /* POSTInboxMessage.swift */; };
 		58FDD4701E5F4CFC00F97D86 /* setupAlertData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FDD46F1E5F4CFC00F97D86 /* setupAlertData.swift */; };
@@ -394,6 +401,10 @@
 		588BE2671E706D4800BA78C3 /* ApptContainer3VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApptContainer3VC.swift; sourceTree = "<group>"; };
 		588BE2691E706D6A00BA78C3 /* FilesContainer3VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesContainer3VC.swift; sourceTree = "<group>"; };
 		588E875B1E9D6AA000D5CD8A /* SimpleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
+		588F0CEF1EF34B0F00268DC9 /* Medications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medications.swift; sourceTree = "<group>"; };
+		588F0CF11EF34F2A00268DC9 /* tbl_medications (1).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "tbl_medications (1).json"; path = "../../tbl_medications (1).json"; sourceTree = "<group>"; };
+		588F0CF41EF4608900268DC9 /* MedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCell.swift; sourceTree = "<group>"; };
+		588F0CF61EF4777200268DC9 /* GETCurMeds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GETCurMeds.swift; sourceTree = "<group>"; };
 		589AB1C61EB10A87004C821D /* reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = reload.png; path = ../../imageFiles/reload.png; sourceTree = "<group>"; };
 		589AB1C81EB12CA9004C821D /* RESTGETGlobalAlerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETGlobalAlerts.swift; sourceTree = "<group>"; };
 		589AB1CA1EB3F792004C821D /* RESTUpdateProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTUpdateProfile.swift; sourceTree = "<group>"; };
@@ -480,9 +491,12 @@
 		58E7FC941E8B0E9000F203C6 /* RESTGETUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETUsers.swift; sourceTree = "<group>"; };
 		58E7FC961E8B19F400F203C6 /* UpdateSavedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSavedDictionary.swift; sourceTree = "<group>"; };
 		58E7FC981E8C4CE300F203C6 /* users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = users.swift; sourceTree = "<group>"; };
+		58EAA1141EF214EB007CA9C8 /* AddEditRxVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditRxVC.swift; sourceTree = "<group>"; };
 		58EB0DC71E732DC40009FD57 /* caseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = caseCell.swift; sourceTree = "<group>"; };
 		58EB0DCB1E734D200009FD57 /* ServicesC1ViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesC1ViewC.swift; sourceTree = "<group>"; };
 		58EB0DCD1E73614A0009FD57 /* locationsViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = locationsViewC.swift; sourceTree = "<group>"; };
+		58F191E21EF0A51D00C53A2A /* AddEditRx.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddEditRx.storyboard; sourceTree = "<group>"; };
+		58F191E41EF2E96500C53A2A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		58F4CB921E85D256000C3185 /* dispatchRESTCalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dispatchRESTCalls.swift; sourceTree = "<group>"; };
 		58F67A041EE0A74700897043 /* POSTInboxMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSTInboxMessage.swift; sourceTree = "<group>"; };
 		58FDD46F1E5F4CFC00F97D86 /* setupAlertData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setupAlertData.swift; sourceTree = "<group>"; };
@@ -613,6 +627,7 @@
 				581B02EC1EBA96C6005337FE /* RESTGETVitals.swift */,
 				581B02EE1EBAE49F005337FE /* RESTPUTVitals.swift */,
 				586F8BFB1EBBAB2C0090B88C /* RESTGETCareTeam.swift */,
+				588F0CF61EF4777200268DC9 /* GETCurMeds.swift */,
 				586F8BFD1EBBE34E0090B88C /* RESTGETLocations.swift */,
 				584192F31EBD41E300844491 /* RESTGETDocuments.swift */,
 				584192F51EBD51B900844491 /* RESTGETPatientRefer.swift */,
@@ -766,9 +781,9 @@
 				589AB1C61EB10A87004C821D /* reload.png */,
 				581DE3951EAABDC1006DB32A /* AdddUser.jpg */,
 				586BFDE11E3C098400DC6770 /* Alert View */,
-				58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */,
 				581DE3971EAAC5D6006DB32A /* TeleConnectVC.swift */,
 				BB32754A1E048AD100699280 /* AppointmentCell.swift */,
+				588F0CF31EF4604100268DC9 /* medications */,
 				5845BAF01EA034BB00EDE935 /* FourButtonViewController.swift */,
 				583D5EC41EA1537C0024604B /* PatientListVC.swift */,
 				588435CA1EB9345F007F736A /* RefferalAppointmentAlertVC.swift */,
@@ -778,6 +793,7 @@
 				58B71A881EC3C6320076395C /* DocWebVC.swift */,
 				586DE1971EE8813700971F13 /* OrderServiceVC.swift */,
 				583D5EC21EA151D00024604B /* PatientListCell.swift */,
+				58A8DC841E562CBE008711D1 /* AddNoteCompletePatientViewController.swift */,
 				BB57C2D31DFF41DE00731AC4 /* ViewController.swift */,
 			);
 			name = "Main Dashboard";
@@ -807,6 +823,16 @@
 				586BFDE41E3C0C4800DC6770 /* AlertCell.swift */,
 			);
 			name = "Alert View";
+			sourceTree = "<group>";
+		};
+		588F0CF31EF4604100268DC9 /* medications */ = {
+			isa = PBXGroup;
+			children = (
+				58EAA1141EF214EB007CA9C8 /* AddEditRxVC.swift */,
+				588F0CEF1EF34B0F00268DC9 /* Medications.swift */,
+				588F0CF41EF4608900268DC9 /* MedCell.swift */,
+			);
+			name = medications;
 			sourceTree = "<group>";
 		};
 		58A8DC861E5666D6008711D1 /* Patient Tab */ = {
@@ -842,6 +868,7 @@
 			isa = PBXGroup;
 			children = (
 				58A8DCD31E57B2BB008711D1 /* setCurrentDate.swift */,
+				58F191E41EF2E96500C53A2A /* Constants.swift */,
 				5866C8021ECE2969009D620D /* getImageFromURL.swift */,
 				584192F11EBD347C00844491 /* stringOperators.swift */,
 				584192EF1EBCDBDF00844491 /* Start App APIs */,
@@ -1040,11 +1067,13 @@
 				583D5EC61EA1572B0024604B /* PatientList.storyboard */,
 				5843BF1F1EA823E700B1966B /* communication.storyboard */,
 				581DE38F1EAA8851006DB32A /* AlertsGlobal.storyboard */,
+				58F191E21EF0A51D00C53A2A /* AddEditRx.storyboard */,
 				586CDB161EAE9D1F00AC4DE6 /* Refferal.storyboard */,
 				58B71A861EC3C5480076395C /* webView.storyboard */,
 				586DE1951EE87AD400971F13 /* orderService.storyboard */,
 				BB57C2D81DFF41DE00731AC4 /* Assets.xcassets */,
 				BB57C2DA1DFF41DE00731AC4 /* LaunchScreen.storyboard */,
+				588F0CF11EF34F2A00268DC9 /* tbl_medications (1).json */,
 				BB57C2DD1DFF41DE00731AC4 /* Info.plist */,
 			);
 			path = CarePointe;
@@ -1197,6 +1226,7 @@
 				58D633731E4D34CB00DC3EB9 /* bullets.png in Resources */,
 				5843BF201EA823E700B1966B /* communication.storyboard in Resources */,
 				582806631E09AB0C00421815 /* side_menu_bg.jpg in Resources */,
+				588F0CF21EF34F2A00268DC9 /* tbl_medications (1).json in Resources */,
 				58B71A9B1EC51D080076395C /* three.png in Resources */,
 				58CEEB491E65EF8200104057 /* tammie.png in Resources */,
 				586BFDDD1E3BE40C00DC6770 /* calendar2.png in Resources */,
@@ -1205,6 +1235,7 @@
 				58D633681E4D26AB00DC3EB9 /* Untitled.png in Resources */,
 				583646951E08A7BC003C2E60 /* bell.png in Resources */,
 				586BFDE01E3BFBCD00DC6770 /* phoneCircle.png in Resources */,
+				58F191E31EF0A51D00C53A2A /* AddEditRx.storyboard in Resources */,
 				58CEEB4B1E65EFB400104057 /* brad.png in Resources */,
 				5807903F1E675FDE0038FC61 /* searchBackGround.jpg in Resources */,
 				58B71F1F1E7CA305000AD088 /* AliceNjavro.jpeg in Resources */,
@@ -1298,6 +1329,7 @@
 			files = (
 				58174CFC1E72253900023003 /* AlertsEventsViewController.swift in Sources */,
 				58D6336C1E4D316A00DC3EB9 /* PatientFeedViewController.swift in Sources */,
+				588F0CF01EF34B0F00268DC9 /* Medications.swift in Sources */,
 				58D6335E1E4B858000DC3EB9 /* Availability.swift in Sources */,
 				586BFDD51E3BC57B00DC6770 /* addCustomBorder.swift in Sources */,
 				588435CB1EB9345F007F736A /* RefferalAppointmentAlertVC.swift in Sources */,
@@ -1386,6 +1418,7 @@
 				BB93EA981E033314000C15D3 /* SignInViewController.swift in Sources */,
 				58FDD4741E5F971600F97D86 /* setUpFeedData.swift in Sources */,
 				58FDD47C1E60B42300F97D86 /* dragableImageView.swift in Sources */,
+				58EAA1151EF214EB007CA9C8 /* AddEditRxVC.swift in Sources */,
 				58458AC21E44EF41005DFEDA /* AvailabilityViewController.swift in Sources */,
 				583124B81ECF6BA200AE78EB /* Container2QuestionsVC.swift in Sources */,
 				BB32754B1E048AD100699280 /* AppointmentCell.swift in Sources */,
@@ -1398,6 +1431,7 @@
 				584192F41EBD41E300844491 /* RESTGETDocuments.swift in Sources */,
 				58B18A521E69DF21009769A2 /* AMessageViewController.swift in Sources */,
 				587FFECF1E64A8C800078EFC /* UIImageFixOrientation.swift in Sources */,
+				58F191E51EF2E96500C53A2A /* Constants.swift in Sources */,
 				58174CEF1E71F62800023003 /* InfoDemographicsCell.swift in Sources */,
 				58BEC4361E6112FD00363FAD /* newMessageViewController.swift in Sources */,
 				58272AF41E40051900E779CF /* PatientCell.swift in Sources */,
@@ -1422,6 +1456,7 @@
 				58CBC0181E4E4007001A9698 /* Container3ViewController.swift in Sources */,
 				5851F6BA1E7A018600229659 /* setUpUserData.swift in Sources */,
 				58EB0DC81E732DC40009FD57 /* caseCell.swift in Sources */,
+				588F0CF71EF4777200268DC9 /* GETCurMeds.swift in Sources */,
 				58272AF61E400C2F00E779CF /* addBadge.swift in Sources */,
 				58CBC0211E4E75D8001A9698 /* AScreeningViewController.swift in Sources */,
 				58246B0B1EEB614600DBAA45 /* POSTPatientUpdates.swift in Sources */,
@@ -1429,6 +1464,7 @@
 				585DA8B71E53AC6900006183 /* Appointments.swift in Sources */,
 				58174CF11E7201A200023003 /* vitalsCell.swift in Sources */,
 				58FDD4721E5F6B7600F97D86 /* getColumnInArray.swift in Sources */,
+				588F0CF51EF4608900268DC9 /* MedCell.swift in Sources */,
 				589AB1C91EB12CA9004C821D /* RESTGETGlobalAlerts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

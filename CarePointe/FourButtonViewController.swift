@@ -23,26 +23,45 @@ class FourButtonViewController: UIViewController {
     
     
     var errorMessage = ""
+    var serverSuccess = true
     var alertCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let signin = DispatchGroup()
+        signin.enter()
+        
+        // 0 signin -----------
+        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
+        
+        POSTSignin().signInUser(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: signin)
+        
+        signin.notify(queue: DispatchQueue.main) {
+         
+            if self.isKeyPresentInUserDefaults(key: "APISignedInSuccess") {
+                self.serverSuccess = UserDefaults.standard.bool(forKey: "APISignedInSuccess")
+            }
+            if self.isKeyPresentInUserDefaults(key: "APISignedInErrorMessage") {
+                self.errorMessage = UserDefaults.standard.string(forKey: "APISignedInErrorMessage")!
+            }
+            if self.serverSuccess == false {
+                self.isConnectedToAPI.isHidden = false
+            }
+            if self.serverSuccess == true {//NOT TESTED - test when API is down move to viewWillAppear!
+                self.isConnectedToAPI.isHidden = true
+            }
+            
+        }
+        
         updateProfileFromDefaults()
 
         activityView.isHidden = true
         backgroundActivityIndicator.isHidden = true
         isConnectedToAPI.isHidden = true
         
-        let serverSuccess = UserDefaults.standard.bool(forKey: "APISignedInSuccess") 
-        if isKeyPresentInUserDefaults(key: "APISignedInErrorMessage") {
-            errorMessage = UserDefaults.standard.string(forKey: "APISignedInErrorMessage")!
-        }
-        if serverSuccess == false {
-            isConnectedToAPI.isHidden = false
-        }
-        if serverSuccess == true {//NOT TESTED - test when API is down move to viewWillAppear!
-            isConnectedToAPI.isHidden = true
-        }
+        
     
         if isKeyPresentInUserDefaults(key: "RESTGlobalAlerts"){
             let newAlertsCount = UserDefaults.standard.object(forKey: "RESTGlobalAlerts") as? Array<Dictionary<String,String>> ?? []
@@ -275,11 +294,16 @@ class FourButtonViewController: UIViewController {
     }
     
     func createBadgeFrom(UIlabel:UILabel, text: String) {
-        UIlabel.clipsToBounds = true
-        UIlabel.layer.cornerRadius = UIlabel.font.pointSize * 1.2 / 2
-        UIlabel.backgroundColor = .red//.bostonBlue()
-        UIlabel.textColor = .white
-        UIlabel.text = text
+        if text == " 0 "{
+            UIlabel.isHidden = true
+        } else {
+            UIlabel.isHidden = false
+            UIlabel.clipsToBounds = true
+            UIlabel.layer.cornerRadius = UIlabel.font.pointSize * 1.2 / 2
+            UIlabel.backgroundColor = .red//.bostonBlue()
+            UIlabel.textColor = .white
+            UIlabel.text = text
+        }
     }
     
     

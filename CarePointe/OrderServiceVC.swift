@@ -56,9 +56,12 @@ class OrderServiceVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         view.endEditing(true)
     }
     func segueToPatientTabBar(){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "PatientTabBar") as UIViewController
-        self.present(vc, animated: false, completion: nil)
+
+        self.performSegue(withIdentifier: "segueToPatientTabBar", sender: self)
+        
+        //let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //let vc = storyboard.instantiateViewController(withIdentifier: "PatientTabBar") as UIViewController
+        //self.present(vc, animated: false, completion: nil)
     }
     func getCSC(){
         
@@ -66,10 +69,7 @@ class OrderServiceVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         downloadToken.enter()
         
         // 0 get token again -----------
-        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-        
-        GETToken().signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
         
         downloadToken.notify(queue: DispatchQueue.main)  {
             
@@ -132,11 +132,7 @@ class OrderServiceVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         downloadTokenFlag.enter()
         
         // 0 get token  -----------
-        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-        
-        let getToken = GETToken()
-        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadTokenFlag)
+        GETToken().signInCarepoint(dispachInstance: downloadTokenFlag)
         
         downloadTokenFlag.notify(queue: DispatchQueue.main)  {//signin API came back
             
@@ -226,14 +222,18 @@ class OrderServiceVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
 
 
-    /*
+    //
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if let pvc = segue.destination as? PatientTabBarController {
+        
+            pvc.segueSelectedIndex = 1 //0 Feed, 1 Case, 2 Patient, 3 Rx and 4 Forms
+            
+        }
+        
     }
-    */
+    
 
 }

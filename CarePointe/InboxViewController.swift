@@ -133,11 +133,7 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         downloadToken.enter()
         
         // 0 get token again -----------
-        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-        
-        let getToken = GETToken()
-        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
         
         downloadToken.notify(queue: DispatchQueue.main)  {
             
@@ -226,11 +222,7 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
         downloadTokenFlag.enter()
 
         // 0 get token  -----------
-        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-
-        let getToken = GETToken()
-        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadTokenFlag)
+        GETToken().signInCarepoint(dispachInstance: downloadTokenFlag)
         
         downloadTokenFlag.notify(queue: DispatchQueue.main)  {//signin API came back
 

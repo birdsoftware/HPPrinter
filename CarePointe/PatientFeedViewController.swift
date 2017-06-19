@@ -214,11 +214,7 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         downloadToken.enter()
         
         // 0 get token again -----------
-        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-        
-        let getToken = GETToken()
-        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
         
         downloadToken.notify(queue: DispatchQueue.main)  {
             
@@ -238,13 +234,12 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         let demographics = UserDefaults.standard.object(forKey: "demographics") as? [[String]] ?? [[String]]()//saved from PatientListVC
         let patientID = demographics[0][1]//"UniqueID"
         
-        //print("patientID: \(patientID)")
+        //print("patientID: \(patientID)") Tested patientID is good
         
         let patientUpdateFlag = DispatchGroup()
         patientUpdateFlag.enter()
         
-        let pu = GETPatientUpdates()
-        pu.getPatientUpdates(token: token, patientID: patientID, dispachInstance: patientUpdateFlag)
+        GETPatientUpdates().getPatientUpdates(token: token, patientID: patientID, dispachInstance: patientUpdateFlag)
         
         patientUpdateFlag.notify(queue: DispatchQueue.main) {//pu sent back from cloud
             
@@ -328,6 +323,9 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         
         
         //check if message from patientUpdateTest contains a href link
+        
+        //"PatientUpdateText": "Med Rec Complete <a target=\"_blank\" href=\"http://carepointe.cloud/episode_document/patient_116940/episode_2670/med_rec_export_2017061822818.pdf\">view</a> <br />This is a urgent update on med rec - comment me in! .....ngjhghjghjg",
+        
         if messageToCheckLink.range(of:"<a href=") != nil{
             
             cell.patientUpdateMessage.isUserInteractionEnabled = true
@@ -350,7 +348,7 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func returnLinkTitleGetLinkAddress(fullString: String) -> String{
-        
+        //.replacingOccurrences(of: " ", with: "")
         if fullString.contains("=") {
         
             let stringArray = splitStringToArray(StringIn: fullString, deliminator: "=")
@@ -381,8 +379,9 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
     
     // functions for clicking to web link
     func onClicLabel(sender:UITapGestureRecognizer) {
-        if linkAddress != nil{
-        openUrl(urlString: linkAddress)//"https://carepointe.cloud/episode_document/patient_1848/episode_1821/Monica_170513124300.pdf")
+        if linkAddress.isEmpty == false{//!= nil{//if let string = string, !string.isEmpty {
+        openUrl(urlString: linkAddress)
+            //"https://carepointe.cloud/episode_document/patient_1848/episode_1821/Monica_170513124300.pdf")
         }
     }
     

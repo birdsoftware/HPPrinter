@@ -50,12 +50,12 @@ class POSTSignin {
                 
             } else {
                 
-                //let httpResponse = response as? HTTPURLResponse
-                //print("\(httpResponse)")
-                //print("Status Code : \(httpResponse!.statusCode)")
-                
-                //let httpData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                //print("Response String :\(httpData)")
+//                let httpResponse = response as? HTTPURLResponse
+//                print("\(httpResponse!)")
+//                print("Status Code : \(httpResponse!.statusCode)")
+//                
+//                let httpData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+//                print("Response String :\(httpData!)")
                 
                 do {//http://roadfiresoftware.com/2016/12/how-to-parse-json-with-swift-3/
                     if let data = data,  //go from a Data? type (optional Data) to a non-optional Data

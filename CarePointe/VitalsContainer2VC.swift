@@ -65,11 +65,7 @@ class VitalsContainer2VC: UIViewController, UITableViewDelegate, UITableViewData
         downloadToken.enter()
         
         // 0 get token again -----------
-        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-        
-        let getToken = GETToken()
-        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
         
         downloadToken.notify(queue: DispatchQueue.main)  {
         
@@ -92,8 +88,7 @@ class VitalsContainer2VC: UIViewController, UITableViewDelegate, UITableViewData
         let vitalsFlag = DispatchGroup()
         vitalsFlag.enter()
         
-        let Gvitals = GETVitals()
-        Gvitals.getVitals(token: token, patientID: patientID, dispachInstance: vitalsFlag)
+        GETVitals().getVitals(token: token, patientID: patientID, dispachInstance: vitalsFlag)
         
         vitalsFlag.notify(queue: DispatchQueue.main) {//vitals sent back from cloud
         
@@ -137,11 +132,7 @@ class VitalsContainer2VC: UIViewController, UITableViewDelegate, UITableViewData
         /**/downloadToken.enter()
         
         // 0 get token again -----------
-        /**/let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-        /**/let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-        
-        /**/let getToken = GETToken()
-        /**/getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadToken)
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
         
         downloadToken.notify(queue: DispatchQueue.main)  { //download token successful now get vitals
             
@@ -152,8 +143,7 @@ class VitalsContainer2VC: UIViewController, UITableViewDelegate, UITableViewData
             /**/let serverSavedVitals = DispatchGroup()
             /**/serverSavedVitals.enter()
             
-            let v = PUTVitals()
-            v.updateVitals(token: token, patientID: patientID, height: height, weight: weight, bmi: bmi, bmiStatus: bmiStatus, bodyTemp: bodyTemp, bpLocation: bpLocation, respRate: respRate, dispachInstance: serverSavedVitals)
+            PUTVitals().updateVitals(token: token, patientID: patientID, height: height, weight: weight, bmi: bmi, bmiStatus: bmiStatus, bodyTemp: bodyTemp, bpLocation: bpLocation, respRate: respRate, dispachInstance: serverSavedVitals)
             
             serverSavedVitals.notify(queue: DispatchQueue.main) {//serverSavedVitals now what?
                 

@@ -17,7 +17,7 @@ class GETPatientUpdates {
         //varaibales to filter duplicate referrals
         //var uniqueValues = Set<String>()
         
-        let nsurlAlerts = "http://carepointe.cloud:4300/api/patientsupdates/userId/1/patientId/" + patientID
+        let nsurlAlerts = "http://carepointe.cloud:4300/api/patientsupdates/patientId/" + patientID
         
         let headers = [
             "authorization": token,

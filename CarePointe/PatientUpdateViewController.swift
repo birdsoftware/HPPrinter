@@ -74,11 +74,67 @@ class PatientUpdateViewController: UIViewController, UIPickerViewDelegate, UIPic
             userName += " " + UserDefaults.standard.string(forKey: "profileLastName")!
         }
         
-        
         self.insertPatientFeed(messageCreator: userName, message: messageTextBox.text, patientID: "", updatedFrom: "mobile", updatedType: chosenType)
-        
     }
     
+    func sendUpdate(){
+        
+        let downloadToken = DispatchGroup()
+        downloadToken.enter()
+        
+        // 0 get token again -----------
+        //let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        //let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
+        
+        GETToken().signInCarepoint(/*userEmail: savedUserEmail, userPassword: savedUserPassword, */dispachInstance: downloadToken)
+        
+        downloadToken.notify(queue: DispatchQueue.main)  {
+            
+            let token = UserDefaults.standard.string(forKey: "token")!
+            let demographics = UserDefaults.standard.object(forKey: "demographics") as? [[String]] ?? [[String]]()//saved from PatientListVC
+            let patientID = demographics[0][1]//"UniqueID"
+            let userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
+            if userProfile.isEmpty == false
+            {
+                let user = userProfile[0]
+                
+                let User_ID = user["User_ID"]!
+            
+                let patientUpdateFlag = DispatchGroup()
+                patientUpdateFlag.enter()
+            
+                POSTPatientUpdates().updatePatientUpdates(token: token, userID: User_ID, patientID: patientID, update: self.dictUpdate(), dispachInstance: patientUpdateFlag)
+                
+                patientUpdateFlag.notify(queue: DispatchQueue.main) {//cloud successfully updated
+                    
+                    //TOAST Update Sent
+                    UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
+                        
+                        //if you perform segue here if will perform with animation
+                        self.view.makeToast("Update Sent", duration: 1.1, position: .center)
+                    }, completion: { finished in
+                        
+                        //Do this... after it finished animating.
+                        
+                        //self.appendNewMessageToDefaults()
+                        
+                        self.performSegue(withIdentifier: "unwindToPatientFeed", sender: self)
+                        
+                        // reload table
+                        
+                    })
+                    
+                }
+            }
+        }
+    }
+    
+    func dictUpdate() -> Dictionary<String, String>{
+        
+        let dict = (["patientUpdateText":messageTextBox.text!,"update_type":chosenType,"updated_from":"mobile app"])
+        return dict
+        
+    }
     
     // Button Actions
     
@@ -94,26 +150,15 @@ class PatientUpdateViewController: UIViewController, UIPickerViewDelegate, UIPic
     
     @IBAction func sendButtonTapped(_ sender: Any) {
         
-        //check internet
-        
-        
-        
-        //TOAST Update Sent
-        UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
+        //ATTEMPT to send
+        if Reachability.isConnectedToNetwork() == true
+        { //print("Internet Connection Available!")
             
-            //if you perform segue here if will perform with animation
-            self.view.makeToast("Update Sent", duration: 1.1, position: .center)
-        }, completion: { finished in
+            sendUpdate()
             
-            //Do this... after it finished animating.
-            
-            self.appendNewMessageToDefaults()
-            
-            self.performSegue(withIdentifier: "unwindToPatientFeed", sender: self)
-            
-            // reload table
-            
-        })
+        } else {
+            self.simpleAlert(title: "Error Sending Update", message: "No Internet Connection.", buttonTitle: "OK")
+        }
     }
 
     

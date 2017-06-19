@@ -29,7 +29,6 @@ class ReferralsMap{
             
             // Use your location
             self.openMapsAppWithDirections(to: location.coordinate, destinationName: destName)//"Apple HQ")
-
         }
         
         

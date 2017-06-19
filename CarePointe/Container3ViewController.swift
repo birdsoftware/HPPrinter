@@ -67,8 +67,10 @@ class Container3ViewController: UIViewController, UITableViewDelegate, UITableVi
         
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             
-            allergyData.remove(at: (indexPath as NSIndexPath).row)
-            allergyTableView.reloadData()
+            //allergyData.remove(at: (indexPath as NSIndexPath).row)
+            //allergyTableView.reloadData()
+            self.allergyData.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 }

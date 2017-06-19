@@ -346,11 +346,7 @@ class newMessageViewController: UIViewController, UITableViewDataSource, UITable
         downloadTokenFlag.enter()
         
         // 0 get token  -----------
-        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-        
-        let getToken = GETToken()
-        getToken.signInCarepoint(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: downloadTokenFlag)
+        GETToken().signInCarepoint(dispachInstance: downloadTokenFlag)
         
         downloadTokenFlag.notify(queue: DispatchQueue.main)  {//signin API came back
             
