@@ -14,7 +14,7 @@ class PatientFeedViewCell: UITableViewCell {
     //identifier = PatientFeedCell
     
     @IBOutlet weak var patientUpdateTitle: UILabel!
-    @IBOutlet weak var patientUpdateMessage: UILabel!
+    @IBOutlet weak var patientUpdateMessage: UITextView!
     @IBOutlet weak var createdBy: UILabel!
     @IBOutlet weak var feedImage: UIImageView!
     

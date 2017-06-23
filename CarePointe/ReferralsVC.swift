@@ -167,6 +167,9 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     var priorAuthorization = String()
     var attachDocumentVar = String()
     
+    //ref send to API
+    var referralSaveToAPI = Dictionary<String,String>()
+    
     var userName = ""
     
     override func viewDidLoad() {
@@ -271,7 +274,58 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
         self.present(vc, animated: false, completion: nil)
     }
+    func updateReferralsAPI(forPatientFeed: String) {
+        let downloadToken = DispatchGroup()
+        downloadToken.enter()
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
+        
+        downloadToken.notify(queue: DispatchQueue.main)  {
+            let isConnectSuccess = UserDefaults.standard.bool(forKey: "APIGETTokenSuccess")
+            if isConnectSuccess == false {
+                //failed alert
+                print("referral save/update api failed")
+                ViewControllerUtils().hideActivityIndicator(uiView: self.view)
+                self.simpleAlert(title: "Referral connection failure", message: "Try again later and check your internet connection.", buttonTitle: "OK")
+            }
+
+            
+            let updateReferral = DispatchGroup()
+            updateReferral.enter()
+            let token = UserDefaults.standard.string(forKey: "token")
+            self.updateAnyChangesToTempMemory()
+
+            //show activity indicator
+            ViewControllerUtils().showActivityIndicator(uiView: self.view)
+            //timer close after 11 seconds ActivityIndicator
+            
+            PUTReferrals().putReferralNow(token: token!, carePlanID: self.seguePatientCPID, referral: self.referralSaveToAPI, dispachInstance: updateReferral)
+            
+            updateReferral.notify(queue: DispatchQueue.main) {
+                //hide
+                print("referral save/update api finished")
+                ViewControllerUtils().hideActivityIndicator(uiView: self.view)
+                
+                let isSaveSuccess = UserDefaults.standard.bool(forKey: "APIPUTReferralsSuccess")
+                if isSaveSuccess == true{
+                    
+                    //IF SUCCESS SAVE ANY UPDATES/CHANGES LOCALLY
+                    UserDefaults.standard.set(self.referrals, forKey: "RESTAllReferrals")
+                    UserDefaults.standard.synchronize()
+                    
+                    //update patient feed here - forPatientFeed
+                    
+                    self.segueToPTV()
+                }
+                if isSaveSuccess == false {
+                    //failed alert
+                    self.simpleAlert(title: "Failed to save changes online", message: "Try again later and check your internet connection.", buttonTitle: "OK")
+                }
+            }
+        }
+    }
     func updateStatusToComplete(){
+        
+        //UPDATE LOCAL
         //1 find Refferal with this appointmentID (seguePatientCPID) and change status from Scheduled to Complete
         if isKeyPresentInUserDefaults(key: "RESTAllReferrals"){
             referrals = UserDefaults.standard.object(forKey: "RESTAllReferrals") as! Array<Dictionary<String, String>>
@@ -282,6 +336,7 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
                     //print("Care_Plan_ID is \(seguePatientCPID) iterator is \(Iterator)")
                     referrals[Iterator].updateValue("Complete", forKey: "Status")
                     
+                    self.referralSaveToAPI = referrals[Iterator]
                     break
                 }
                 Iterator+=1
@@ -311,10 +366,20 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
                     
                     referrals[Iterator].updateValue(truncated, forKey: "book_minutes")//appt len "60" appointmentLength
                     referrals[Iterator].updateValue(encounterTypeVar, forKey: "book_type")//book_type: "TCM",encounterTypeVar
-                    referrals[Iterator].updateValue(placeOfReferralVar, forKey: "book_place")//book_place: "Home",placeOfReferralVar
+                    referrals[Iterator].updateValue(placeOfReferralVar, forKey: "location_type")//book_place: "Home",placeOfReferralVar
                     referrals[Iterator].updateValue(priorAuthorization, forKey: "pre_authorization")//priorAuthorization
                     //-
                     //print("appointmentLength \(appointmentLength) encounterTypeVar \(encounterTypeVar) placeOfReferralVar \(placeOfReferralVar) priorAuthorization \(priorAuthorization)")
+                    self.referralSaveToAPI = ["StartDate":dateLong,
+                                              "date_hhmm":segueHourMin,
+                                              "book_minutes":truncated,
+                                              "Status":"Scheduled",
+                                              "book_type":encounterTypeVar,
+                                              "book_purpose":referralPurpose,
+                                              "book_place":dict["book_place"]!,
+                                              "pre_authorization":self.priorAuthorization,
+                                              "Attachment_doc":dict["Attachment_doc"]!,
+                                              "location_type":self.placeOfReferralVar  ]
                     break
                 }
                 Iterator+=1
@@ -459,24 +524,26 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         
         // Submit button
         let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { (action) -> Void in
-
-
             
             // Get 1st TextField's text
             let declineMessage = "Patient \(self.seguePatientName!) declined by \(self.userName). " + alert.textFields![0].text! //print(textField)
             
             // 1 MOVE PATIENT FROM PENDING TO COMPLETED
+            
             self.updateStatusToComplete()
-            UserDefaults.standard.set(self.referrals, forKey: "RESTAllReferrals")
-            UserDefaults.standard.synchronize()
             
-            // 2 UPDATE PATIENT FEED
-            //      times   dates   messageCreator  message     patientID
-            self.insertPatientFeed(messageCreator: self.userName, message: declineMessage, patientID: self.seguePatientID, updatedFrom: "mobile", updatedType: "Update")
+            self.updateReferralsAPI(forPatientFeed: declineMessage)
             
-            
-            // 3. Instantiate view controller from Storyboard and present it
-            self.segueToPTV()
+//            UserDefaults.standard.set(self.referrals, forKey: "RESTAllReferrals")
+//            UserDefaults.standard.synchronize()
+////
+//            // 2 UPDATE PATIENT FEED
+//            //      times   dates   messageCreator  message     patientID
+//            self.insertPatientFeed(messageCreator: self.userName, message: declineMessage, patientID: self.seguePatientID, updatedFrom: "mobile", updatedType: "Update")
+//            
+//            
+//            // 3. Instantiate view controller from Storyboard and present it
+//            self.segueToPTV()
         })
         
         // Cancel button
@@ -497,18 +564,21 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         present(alert, animated: true, completion: nil)
         
     }
+    func updateAnyChangesToTempMemory(){
+        appointmentDateTime = appointmentDate.text!
+        appointmentLength = lengthOfAppointmentLabel.text! //"15 min"
+        assignedProvider = provider.text! //"Admin"
+        assignedProviderID = providerID.text! //"148"
+        encounterTypeVar = encounter.text!//"TCM"
+        referralPurpose = purposeOfRefferal.text!//"purpose"
+        placeOfReferralVar = placeOfReferral.text!//"pharmacy"
+        priorAuthorization = priorAuthorizatin.text!//"prior-auth"
+        //attachDocumentVar = attachDocument.text!//"did not change"
+    }
 
     func showAcceptAlert() {
         
-        appointmentDateTime = appointmentDate.text!
-         appointmentLength = lengthOfAppointmentLabel.text! //"15 min"
-         assignedProvider = provider.text! //"Admin"
-         assignedProviderID = providerID.text! //"148"
-         encounterTypeVar = encounter.text!//"TCM"
-         referralPurpose = purposeOfRefferal.text!//"purpose"
-         placeOfReferralVar = placeOfReferral.text!//"pharmacy"
-         priorAuthorization = priorAuthorizatin.text!//"prior-auth"
-         attachDocumentVar = attachDocument.text!//"did not change"
+        updateAnyChangesToTempMemory()
         
         let changeMessage = "\n\u{2022} 1) \(appointmentDateTime) \n" +
                             "\n\u{2022} 2) Appointment length: \(appointmentLength) \n" +
@@ -529,23 +599,22 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
             // Get 1st TextField's text
             let acceptMessage = "Patient \(self.seguePatientName!) accepted by \(self.userName). " + myAlert.textFields![0].text! //print(textField)
             
-            // 1 MOVE PATIENT FROM PENDING TO ACCEPTED & SAVE ANY UPDATES/CHANGES LOCALLY
-                    self.updateStatusToScheduled()//self.saveTextLocally()
-                    UserDefaults.standard.set(self.referrals, forKey: "RESTAllReferrals")
-                    UserDefaults.standard.synchronize()
-                    self.segueToPTV()
+            // 1 MOVE PATIENT FROM PENDING TO ACCEPTED
+            self.updateStatusToScheduled()//self.saveTextLocally()
             
-            // 2 UPDATE PATIENT FEED
-            //      times   dates   messageCreator  message     patientID
-            self.insertPatientFeed(messageCreator: self.userName, message: acceptMessage, patientID: self.seguePatientID, updatedFrom: "mobile", updatedType: "Update")
+            self.updateReferralsAPI(forPatientFeed: acceptMessage)
             
-            //Action when OK pressed
-            //self.performSegue(withIdentifier: "showDashboard", sender: self)
-            // 4. Present a view controller from a different storyboard
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
-            //vc.navigationController?.pushViewController(vc, animated: false)
-            self.present(vc, animated: false, completion: nil)
+//            // 2 UPDATE PATIENT FEED
+//            //      times   dates   messageCreator  message     patientID
+//            self.insertPatientFeed(messageCreator: self.userName, message: acceptMessage, patientID: self.seguePatientID, updatedFrom: "mobile", updatedType: "Update")
+//            
+//            //Action when OK pressed
+//            //self.performSegue(withIdentifier: "showDashboard", sender: self)
+//            // 4. Present a view controller from a different storyboard
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
+//            //vc.navigationController?.pushViewController(vc, animated: false)
+//            self.present(vc, animated: false, completion: nil)
         }))
         
         // Add 1 textField and customize it
@@ -559,10 +628,6 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         
         myAlert.addAction(UIAlertAction(title: "Cancel", style: .destructive) { _ in })
         
-        //        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width:40, height:40))
-        //        imageView.contentMode = UIViewContentMode.center
-        //        imageView.image = UIImage(named: "checked.png")
-        //alert.view.addSubview(imageView)
         
         present(myAlert, animated: true){}
         
@@ -583,15 +648,18 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
             
             // 1 MOVE PATIENT FROM SCHEDULED TO COMPLETED
             self.updateStatusToComplete()
-            UserDefaults.standard.set(self.referrals, forKey: "RESTAllReferrals")
-            UserDefaults.standard.synchronize()
             
-            // 2 UPDATE PATIENT FEED
-            //      times   dates   messageCreator  message     patientID
-            self.insertPatientFeed(messageCreator: self.userName, message: declineMessage, patientID: self.seguePatientID, updatedFrom: "mobile", updatedType: "Update")
+            self.updateReferralsAPI(forPatientFeed: declineMessage)
             
-            // 3. Instantiate view controller from Storyboard and present it
-            self.segueToPTV()
+//            UserDefaults.standard.set(self.referrals, forKey: "RESTAllReferrals")
+//            UserDefaults.standard.synchronize()
+//            
+//            // 2 UPDATE PATIENT FEED
+//            //      times   dates   messageCreator  message     patientID
+//            self.insertPatientFeed(messageCreator: self.userName, message: declineMessage, patientID: self.seguePatientID, updatedFrom: "mobile", updatedType: "Update")
+//            
+//            // 3. Instantiate view controller from Storyboard and present it
+//            self.segueToPTV()
         })
         
         // Cancel button
@@ -628,13 +696,6 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     @IBAction func acceptButtonTapped(_ sender: Any) {      //ACCEPT
         
         showAcceptAlert()
-        
-//        updateStatusToScheduled()
-//        
-//        UserDefaults.standard.set(referrals, forKey: "RESTAllReferrals")
-//        UserDefaults.standard.synchronize()
-//        
-//        segueToPTV()
     }
     
     @IBAction func declineButtonTapped(_ sender: Any) {     //DECLINE

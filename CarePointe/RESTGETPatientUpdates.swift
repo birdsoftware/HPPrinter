@@ -50,6 +50,7 @@ class GETPatientUpdates {
                                         let update_type = dict["update_type"] as? String ?? ""
                                         let updated_from = dict["updated_from"] as? String ?? ""
                                         let PatientUpdateText = dict["PatientUpdateText"] as? String ?? ""
+                                        let CreatedByName = dict["CreatedByName"] as? String ?? ""
                                         
                                         let CreatedBy = dict["CreatedBy"] as? Int ?? 0
                                         let cb = String(CreatedBy)
@@ -62,7 +63,7 @@ class GETPatientUpdates {
                                         //if beforeInsertCount != afterInsertCount {
                                         
                                         //Reverse Order using .insert( ,at:0) instead of .append
-                                        patientUpdates.insert(["PatientUpdateDate":PatientUpdateDate, "update_type":update_type, "updated_from":updated_from, "PatientUpdateText":PatientUpdateText, "CreatedBy":cb], at:0)
+                                        patientUpdates.insert(["PatientUpdateDate":PatientUpdateDate, "update_type":update_type, "updated_from":updated_from, "PatientUpdateText":PatientUpdateText, "CreatedBy":cb, "CreatedByName":CreatedByName], at:0)
                                        // }
                                     }
     

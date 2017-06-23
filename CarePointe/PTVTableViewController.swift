@@ -58,7 +58,7 @@ class PTVTableViewController: UITableViewController {
                 
                 switch referral["Status"]! //from tbl_care_plan
                 {
-                case "Complete", "Rejected/Inactive", "Cancelled":
+                case "Complete", "Rejected/Inactive", "Cancelled","No Show":
                     numberCompletePatiets += 1
                     completeReferrals.append(referral)
                     

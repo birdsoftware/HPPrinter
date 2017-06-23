@@ -12,9 +12,8 @@ import UXCam
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
     
-    //
-    // Outlets
-    //
+    //pull to refresh
+    private let refreshControl = UIRefreshControl()
     
     // buttons
     //@IBOutlet weak var AddTaskButton: UIButton!
@@ -27,6 +26,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //view
     @IBOutlet var mainView: UIView!
     
+    @IBOutlet weak var topImage: UIImageView!
     
     // labels
     @IBOutlet weak var pendingPatientsLabel: UILabel!
@@ -80,13 +80,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var filterActive : Bool = false
     
-//    // Search Bar (top nav controller title view) ------------------------
-//    lazy var searchBar:UISearchBar = UISearchBar(frame: CGRect(x:0,y:0,width:200,height:200))
-//    var searchActive : Bool = false
+    var userProfile = Array<Dictionary<String,String>>()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //pull to refresh
+        //let refreshControl = UIRefreshControl()
+        tasksTableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(ViewController.refreshData), for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Referrals ...")
         
         //HIDE THINGS FOR NEW UPDATE: HOME screen
         self.rightBarButtonAlert.tintColor = .clear
@@ -94,7 +99,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         
         if isKeyPresentInUserDefaults(key: "userProfile") {
-            let userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
+            userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
             
             if userProfile.isEmpty == false {
                 //let user = userProfile[0]
@@ -215,7 +220,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         showAlertIfTasksTableEmpty()
     }
     
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -246,7 +250,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
                 switch referral["Status"]! //from tbl_care_plan
                 {
-                    case "Complete", "Rejected/Inactive", "Cancelled":
+                    case "Complete", "Rejected/Inactive", "Cancelled", "No Show":
                         numberCompletePatiets += 1
                     
                     case "Scheduled", "In Service":
@@ -255,7 +259,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         uniqueValues.insert(referral["Care_Plan_ID"]!) // will do nothing if Care_Plan_ID exists already
                         let afterInsertCount = uniqueValues.count
                         
-                        if beforeInsertCount != afterInsertCount {
+                        if beforeInsertCount != afterInsertCount {//dont add duplicates
                             
                             self.addresses.append(referral["book_address"]!)
                             self.appointmentID.append(referral["Care_Plan_ID"]!)//referral ID is Care_Plan_ID
@@ -302,7 +306,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         
-        
         UserDefaults.standard.set(numberScheduledPatients, forKey: "numberScheduledPatients")
         UserDefaults.standard.set(numberNewPatients, forKey: "numberNewPatients")
         UserDefaults.standard.synchronize()
@@ -310,7 +313,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         pendingPatientsLabel.text = "\(numberNewPatients)"
         scheduledAppointLabel.text = "\(numberScheduledPatients)"
         unreadMessagesLabel.text = "\(numberCompletePatiets)"
-        
+        topImage.isHidden = true
     }
     
     
@@ -386,6 +389,73 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        rightBarButtonAlert.updateBadge(number: alertCount)//newNumber) //rightBarButtonAlert: UIBarButtonItem!
 //        
 //    }
+    
+    func refreshData(){
+        
+        let downloadToken = DispatchGroup()
+        downloadToken.enter()
+        
+        let downloadReferrals = DispatchGroup()
+        downloadReferrals.enter()
+        
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
+        
+        downloadToken.notify(queue: DispatchQueue.main)  { //Signin token & user profile Downloaded now what?
+            
+            let token = UserDefaults.standard.string(forKey: "token")
+            
+            if self.userProfile.isEmpty == false
+            {
+                let user = self.userProfile[0]
+                let uid = user["User_ID"]!
+                
+                GETReferrals().getAllReferrals(token: token!, userID: uid, dispatchInstance: downloadReferrals)//"0")//122
+            }
+        }
+        
+        downloadReferrals.notify(queue: DispatchQueue.main) {//got Referrals
+            print("refreshData")
+            self.tasksTableView.reloadData()
+            self.updateNumberNewSchedComplPatientsLabels()
+            self.refreshControl.endRefreshing()
+            
+        }
+        
+    }
+    
+    func updateNumberNewSchedComplPatientsLabels() {
+        
+        if isKeyPresentInUserDefaults(key: "RESTAllReferrals"){
+            let referrals = UserDefaults.standard.value(forKey: "RESTAllReferrals") as! Array<Dictionary<String,String>>
+            
+            var numberNewPatients = 0
+            var numberScheduledPatients = 0
+            var numberCompletePatiets = 0
+            
+            for referral in referrals {
+                switch referral["Status"]! //from tbl_care_plan
+                {
+                case "Complete", "Rejected/Inactive", "Cancelled","No Show":
+                    numberCompletePatiets += 1
+                    
+                case "Scheduled", "In Service":
+                    numberScheduledPatients += 1
+                    
+                case "Pending", "Opened":
+                    numberNewPatients += 1
+                    
+                default:
+                    break
+                } //Others:"Not Taken Under Care", "Completed/Archived", "Inactive", "Deseased", "Active"
+            }
+            
+            pendingPatientsLabel.text = "\(numberNewPatients)"
+            scheduledAppointLabel.text = "\(numberScheduledPatients)"
+            unreadMessagesLabel.text = "\(numberCompletePatiets)"
+        }
+        
+    }
+
     
     // --- LOG OUT AFTER 30 MINUTES ---
     func logOutAfter30Minutes() {
@@ -546,6 +616,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // #MARK: - Table View
     //
     
+    
     //[2] RETURN number of ROWS in each section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -624,7 +695,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //http://www.codingexplorer.com/segue-uitableviewcell-taps-swift/
     func tableView(_ tableView: UITableView, cellForRowAt IndexPath: IndexPath) -> UITableViewCell {
         
-        //if(tableView == tasksTableView){
             let cell = tableView.dequeueReusableCell(withIdentifier: "apptCell")! as! AppointmentCell
             cell.photo.image = UIImage(named: "green.circle.png")//photos[IndexPath.row]
             

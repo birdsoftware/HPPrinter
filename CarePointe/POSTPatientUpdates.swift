@@ -16,6 +16,7 @@ class POSTPatientUpdates {
         
         let headers = [
             "authorization": token,
+            "content-type": "application/json",
             "cache-control": "no-cache" //"Content-Type" : "application/json"
         ]
         

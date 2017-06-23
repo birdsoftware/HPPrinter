@@ -479,7 +479,7 @@ class SignInViewController: UIViewController {
                 self.dismiss(animated: false, completion: nil)
             } else {
                 
-                        self.simpleAlert(title:"Returning user Sign In failure - Try new wifi router",
+                        self.simpleAlert(title:"Returning user Sign In failure",//try new wifi?
                                     message:failMessage,
                                     buttonTitle:"OK")
                 //try connecting to new wifi router

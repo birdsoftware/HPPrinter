@@ -48,7 +48,7 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         
         //Table ROW Height set to auto layout
         patientFeedTableView.rowHeight = UITableViewAutomaticDimension
-        patientFeedTableView.estimatedRowHeight = 150//was 88 and is 88 in storyboard
+        patientFeedTableView.estimatedRowHeight = 100
         
         //round button corner
         leaveAnUpdate.layer.cornerRadius = leaveAnUpdate.frame.size.width / 2
@@ -291,54 +291,44 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         let update = getUpdateTitle(updatedFrom: updateData["updated_from"]!, updateType: updateData["update_type"]!)
         
         // 1 https://www.ioscreator.com/tutorials/attributed-strings-tutorial-ios8-swift
-        /*let stringUpdate = update + updateData["PatientUpdateDate"]! as NSString//dates[indexPath.row] + " @ " + times[indexPath.row]  as NSString
-        let stringCreatedBy = "Created by: " + updateData["CreatedBy"]! as NSString//messageCreator[indexPath.row] as NSString
-        let attributedString1 = NSMutableAttributedString(string: stringUpdate as String)
-        let attributedString2 = NSMutableAttributedString(string: stringCreatedBy as String)
-        
-        // 2
-        let blackColor = [NSForegroundColorAttributeName: UIColor.black, NSBackgroundColorAttributeName: UIColor.white] as [String : Any]
-        let blueColor = [NSForegroundColorAttributeName: UIColor.blue, NSBackgroundColorAttributeName: UIColor.white] as [String : Any]
-        let otherColor = [NSForegroundColorAttributeName: UIColor.candyGreen(), NSBackgroundColorAttributeName: UIColor.white] as [String : Any]
-        
-        // 3
-        attributedString1.addAttributes(blackColor, range: stringUpdate.range(of: "Update: "))
-        attributedString1.addAttributes(blueColor, range: stringUpdate.range(of: updateData["CreatedBy"]!))
-        //attributedString1.addAttributes(blackColor, range: stringUpdate.range(of: " @ "))
-        //attributedString1.addAttributes(blueColor, range: stringUpdate.range(of: times[indexPath.row]))
-        
-        attributedString2.addAttributes(otherColor, range: stringCreatedBy.range(of: updateData["CreatedBy"]!))
-        // 4
-        //attributedLabel.attributedText = attributedString*/
         
         let shortDate = self.convertDateStringToDate(longDate: updateData["PatientUpdateDate"]!)
         
         cell.patientUpdateTitle.text = update + shortDate                   //.attributedText = attributedString1
         
-        cell.createdBy.text = "Created by: " + updateData["CreatedBy"]!     //.attributedText = attributedString2
+        cell.createdBy.text = "Created by: " + updateData["CreatedByName"]!//"CreatedBy"]!     //.attributedText = attributedString2
         
-
-        
-        let messageToCheckLink = updateData["PatientUpdateText"]!
+        //let messageToCheckLink = updateData["PatientUpdateText"]!
         
         
         //check if message from patientUpdateTest contains a href link
         
+        //https://github.com/ThornTechPublic/SwiftTextViewHashtag
+        
         //"PatientUpdateText": "Med Rec Complete <a target=\"_blank\" href=\"http://carepointe.cloud/episode_document/patient_116940/episode_2670/med_rec_export_2017061822818.pdf\">view</a> <br />This is a urgent update on med rec - comment me in! .....ngjhghjghjg",
         
-        if messageToCheckLink.range(of:"<a href=") != nil{
-            
-            cell.patientUpdateMessage.isUserInteractionEnabled = true
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.onClicLabel(sender:)))
-            cell.patientUpdateMessage.addGestureRecognizer(tap)
-            cell.patientUpdateMessage.text = returnLinkTitleGetLinkAddress(fullString: messageToCheckLink)//"View"
-            cell.patientUpdateMessage.textColor = .blue
-            
-        } else {
+        //"referral info/General uploaded <a href=episode_document/patient_1827/episode_1806/Agnes _170330025429.pdf target=_blank>View</a>"
+        
+//        if messageToCheckLink.range(of:"href=") != nil{
+//            
+//            cell.patientUpdateMessage.isUserInteractionEnabled = true
+//            let tap = UITapGestureRecognizer(target: self, action: #selector(self.onClicLabel(sender:)))
+//            cell.patientUpdateMessage.addGestureRecognizer(tap)
+//            cell.patientUpdateMessage.text = returnLinkTitleGetLinkAddress(fullString: messageToCheckLink)//"View"
+//            cell.patientUpdateMessage.textColor = .blue
+//            
+//        }
+//        if messageToCheckLink.range(of:"<a href=") != nil{
+//        
+//        } else {
+        
+        //let str = messageToCheckLink.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
             cell.patientUpdateMessage.text = updateData["PatientUpdateText"]!
-            cell.patientUpdateMessage.textColor = .black
-            
-        }
+        
+        
+//            cell.patientUpdateMessage.textColor = .black
+//            
+//        }
         
           //message[indexPath.row]
         
@@ -347,7 +337,7 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
-    func returnLinkTitleGetLinkAddress(fullString: String) -> String{
+        func returnLinkTitleGetLinkAddress(fullString: String) -> String{
         //.replacingOccurrences(of: " ", with: "")
         if fullString.contains("=") {
         

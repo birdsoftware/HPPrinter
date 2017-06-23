@@ -130,13 +130,13 @@ class PatientUpdateViewController: UIViewController, UIPickerViewDelegate, UIPic
     }
     
     func dictUpdate() -> Dictionary<String, String>{
-        
-        let dict = (["patientUpdateText":messageTextBox.text!,"update_type":chosenType,"updated_from":"mobile app"])
+        //print("messageTextBox.text! .\(messageTextBox.text!).")
+        let dict = (["patientUpdateText":"\(messageTextBox.text!)","update_type":chosenType,"updated_from":"mobile app"])
         return dict
         
     }
     
-    // Button Actions
+    // MARK: - Button Actions
     
     @IBAction func goBackButtonTapped(_ sender: Any) {
         //1. palce "@IBAction func unwind...(segue: UIStoryboardSegue) {}" in view controller you want to unwind too

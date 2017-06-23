@@ -92,13 +92,13 @@ class DispatchREST {//http://stackoverflow.com/questions/42146274/syncronize-asy
             print(UserDefaults.standard.dictionaryRepresentation().keys.count)
             
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateProfile"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateAlerts"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateAlerts"), object: nil)//for alert badge count
             
         }
         
         downloadReferrals.notify(queue: DispatchQueue.main) {//got Referrals
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateReferrals"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateReferrals"), object: nil)//referral count
             
         }
 

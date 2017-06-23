@@ -43,6 +43,9 @@ class GETToken {
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 print("Error when Attempting to GET Token: \(error!)")
+                UserDefaults.standard.set(false, forKey: "APIGETTokenSuccess")
+                UserDefaults.standard.synchronize()
+                dispachInstance.leave()
             } else {
                 //let httpResponse = response as? HTTPURLResponse
                 //print("\(httpResponse)")
@@ -85,9 +88,8 @@ class GETToken {
                             UserDefaults.standard.synchronize()
                             
                         }
-                        //Update token
-                        //UserDefaults.standard.set(token, forKey: "token")
-                        //UserDefaults.standard.synchronize()
+                        UserDefaults.standard.set(true, forKey: "APIGETTokenSuccess")
+                        UserDefaults.standard.synchronize()
                         
                         print("finished GET Token")
                         dispachInstance.leave()
@@ -97,6 +99,9 @@ class GETToken {
                     }
                 } catch {
                     print("Error deserializing JSON: \(error)")
+                    UserDefaults.standard.set(false, forKey: "APIGETTokenSuccess")
+                    UserDefaults.standard.synchronize()
+                    dispachInstance.leave()
                 }
                 
                 //DispatchQueue.main.async {

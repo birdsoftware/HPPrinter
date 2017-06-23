@@ -94,6 +94,55 @@ class AddNoteCompletePatientViewController: UIViewController {
         
     }
     
+    func dictUpdate() -> Dictionary<String, String>{
+        //print("messageTextBox.text! .\(messageTextBox.text!).")
+        let dict = (["patientUpdateText":"\(messageTextBox.text!)","update_type":"Routine","updated_from":"mobile app"])
+        return dict
+        
+    }
+    
+    func sendUpdate(){
+        
+        let downloadToken = DispatchGroup()
+        downloadToken.enter()
+        
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
+        
+        downloadToken.notify(queue: DispatchQueue.main)  {
+            
+            let token = UserDefaults.standard.string(forKey: "token")!
+            //let demographics = UserDefaults.standard.object(forKey: "demographics") as? [[String]] ?? [[String]]()//saved from PatientListVC
+            //let patientID = demographics[0][1]//"UniqueID"
+            let userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
+            if userProfile.isEmpty == false
+            {
+                let user = userProfile[0]
+                
+                let User_ID = user["User_ID"]!
+                
+                let patientUpdateFlag = DispatchGroup()
+                patientUpdateFlag.enter()
+                
+                POSTPatientUpdates().updatePatientUpdates(token: token, userID: User_ID, patientID: self.patientID, update: self.dictUpdate(), dispachInstance: patientUpdateFlag)
+                
+                patientUpdateFlag.notify(queue: DispatchQueue.main) {//cloud successfully updated
+                    
+                    //TOAST Update Sent
+                    UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
+                        
+                        //if you perform segue here if will perform with animation
+                        self.view.makeToast("Patient Complete", duration: 1.1, position: .center)
+                    }, completion: { finished in
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "NavControllerMainDB") as UIViewController //PTV
+                        self.present(vc, animated: true, completion: nil)
+                    })
+                    
+                }
+            }
+        }
+    }
+
 
     //
     //#MARK - Button Actions
@@ -106,31 +155,34 @@ class AddNoteCompletePatientViewController: UIViewController {
         
         
         // 2 UPDATE PATIENT FEED
-        //                            times     dates   messageCreator  message     patientID
-        self.insertPatientFeed(messageCreator: userName, message: messageTextBox.text, patientID: patientID, updatedFrom: "mobile", updatedType: "Update")
         
-        // ANIMATE "Patient Complete" TOAST then unwind segue back to MAIN dashboard
-        UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
-            
-            self.view.makeToast("Patient Complete", duration: 1.1, position: .center)
-            
-        }, completion: { finished in
-            
-            
-                //unwind segue after animating - DID NOT UPDATE LIST VIEW
-                //1. palce "@IBAction func unwind...(segue: UIStoryboardSegue) {}" in view controller you want to unwind too
-                //2. In storyboard connect this view () -> to [exit]
-                //   In storyboard set unwind segue identifier: "unwindToMainDB"
-                //                     Action: "unwind..."
-                //3. Trigger unwind segue programmatically (below)
-                //self.performSegue(withIdentifier: "unwindToMainDB", sender: self)
-            
-            // Instantiate a view controller from Storyboard and present it
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "NavControllerMainDB") as UIViewController //PTV
-            self.present(vc, animated: true, completion: nil)
-            
-        })
+        self.sendUpdate()
+        
+//        //                            times     dates   messageCreator  message     patientID
+//        self.insertPatientFeed(messageCreator: userName, message: messageTextBox.text, patientID: patientID, updatedFrom: "mobile", updatedType: "Update")
+//        
+//        // ANIMATE "Patient Complete" TOAST then unwind segue back to MAIN dashboard
+//        UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
+//            
+//            self.view.makeToast("Patient Complete", duration: 1.1, position: .center)
+//            
+//        }, completion: { finished in
+//            
+//            
+//                //unwind segue after animating - DID NOT UPDATE LIST VIEW
+//                //1. palce "@IBAction func unwind...(segue: UIStoryboardSegue) {}" in view controller you want to unwind too
+//                //2. In storyboard connect this view () -> to [exit]
+//                //   In storyboard set unwind segue identifier: "unwindToMainDB"
+//                //                     Action: "unwind..."
+//                //3. Trigger unwind segue programmatically (below)
+//                //self.performSegue(withIdentifier: "unwindToMainDB", sender: self)
+//            
+//            // Instantiate a view controller from Storyboard and present it
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "NavControllerMainDB") as UIViewController //PTV
+//            self.present(vc, animated: true, completion: nil)
+//            
+//        })
         
     }
     
