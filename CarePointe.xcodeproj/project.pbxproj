@@ -223,6 +223,7 @@
 		58D633781E4D360400DC3EB9 /* PatientFeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D633771E4D360400DC3EB9 /* PatientFeedViewCell.swift */; };
 		58DA42AE1ED6057900810C28 /* RESTGETDisease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DA42AD1ED6057900810C28 /* RESTGETDisease.swift */; };
 		58DA58221EFC5973006C302E /* PUTReferrals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DA58211EFC5973006C302E /* PUTReferrals.swift */; };
+		58DA58241EFDAFFC006C302E /* GETNewQuestionnaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DA58231EFDAFFC006C302E /* GETNewQuestionnaire.swift */; };
 		58E09CF41EE22C7C003E317F /* DELETEMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E09CF31EE22C7C003E317F /* DELETEMessage.swift */; };
 		58E65E591EB016290075625F /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 58E65E581EB016290075625F /* placeholder.png */; };
 		58E7FC951E8B0E9000F203C6 /* RESTGETUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E7FC941E8B0E9000F203C6 /* RESTGETUsers.swift */; };
@@ -491,6 +492,7 @@
 		58D633771E4D360400DC3EB9 /* PatientFeedViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientFeedViewCell.swift; sourceTree = "<group>"; };
 		58DA42AD1ED6057900810C28 /* RESTGETDisease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETDisease.swift; sourceTree = "<group>"; };
 		58DA58211EFC5973006C302E /* PUTReferrals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PUTReferrals.swift; sourceTree = "<group>"; };
+		58DA58231EFDAFFC006C302E /* GETNewQuestionnaire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GETNewQuestionnaire.swift; sourceTree = "<group>"; };
 		58E09CF31EE22C7C003E317F /* DELETEMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DELETEMessage.swift; sourceTree = "<group>"; };
 		58E65E581EB016290075625F /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = ../../imageFiles/placeholder.png; sourceTree = "<group>"; };
 		58E7FC941E8B0E9000F203C6 /* RESTGETUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETUsers.swift; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				58DA58211EFC5973006C302E /* PUTReferrals.swift */,
 				586F8BFB1EBBAB2C0090B88C /* RESTGETCareTeam.swift */,
 				588F0CF61EF4777200268DC9 /* GETCurMeds.swift */,
+				58DA58231EFDAFFC006C302E /* GETNewQuestionnaire.swift */,
 				586F8BFD1EBBE34E0090B88C /* RESTGETLocations.swift */,
 				584192F31EBD41E300844491 /* RESTGETDocuments.swift */,
 				584192F51EBD51B900844491 /* RESTGETPatientRefer.swift */,
@@ -1602,6 +1605,7 @@
 				58272AFC1E4120B900E779CF /* PTVDetailViewController.swift in Sources */,
 				58CBC01B1E4E43DA001A9698 /* PatientScreeningsViewController.swift in Sources */,
 				58496C1C1E52843D00DF103A /* TermsViewController.swift in Sources */,
+				58DA58241EFDAFFC006C302E /* GETNewQuestionnaire.swift in Sources */,
 				58D633621E4D25AE00DC3EB9 /* PatientCareTeamCell.swift in Sources */,
 				583D5EC31EA151D00024604B /* PatientListCell.swift in Sources */,
 				585D4C371EF99BB20049097C /* TokBoxVC.swift in Sources */,

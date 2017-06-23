@@ -397,16 +397,18 @@ class InboxViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 //ATTEMP TO DELETE FROM API
                 var aRecipient = restInbox[indexPath.row] //get message id from inbox
-                var isInboxDelete = true
+                let isInboxDelete = true
                 
                 if(inBoxSent.selectedSegmentIndex == 1){
-                    
-                    aRecipient = restSent[indexPath.row] //get message id from sent box
-                    isInboxDelete = false
-                    
+                    self.simpleAlert(title: "Deleting Sent Message", message: "Delete not available for sent messages yet.", buttonTitle: "OK")
+//                    
+//                    aRecipient = restSent[indexPath.row] //get message id from sent box
+//                    isInboxDelete = false
+//                    
                 }
-                
-                deleteMessageInAPI(messageId: aRecipient["ID"]!, indexPathRow: indexPath.row, deleteInbox: isInboxDelete)
+                if(inBoxSent.selectedSegmentIndex == 0){
+                    deleteMessageInAPI(messageId: aRecipient["ID"]!, indexPathRow: indexPath.row, deleteInbox: isInboxDelete)
+                }
   
             } else {
                 self.simpleAlert(title: "Error Deleting Message", message: "No Internet Connection.", buttonTitle: "OK")

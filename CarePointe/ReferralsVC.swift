@@ -122,7 +122,7 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         //RAW API: "Complete","Rejected/Inactive","Cancelled"||"Scheduled","In Service"||"Pending","Opened"
     var segueStatus: String!
     var segueIsUrgent: String!
-    
+    var token = ""
     
     //
     var dateUpToDate: String!
@@ -288,17 +288,16 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
                 self.simpleAlert(title: "Referral connection failure", message: "Try again later and check your internet connection.", buttonTitle: "OK")
             }
 
-            
             let updateReferral = DispatchGroup()
             updateReferral.enter()
-            let token = UserDefaults.standard.string(forKey: "token")
+            self.token = UserDefaults.standard.string(forKey: "token")!
             self.updateAnyChangesToTempMemory()
 
             //show activity indicator
             ViewControllerUtils().showActivityIndicator(uiView: self.view)
             //timer close after 11 seconds ActivityIndicator
             
-            PUTReferrals().putReferralNow(token: token!, carePlanID: self.seguePatientCPID, referral: self.referralSaveToAPI, dispachInstance: updateReferral)
+            PUTReferrals().putReferralNow(token: self.token, carePlanID: self.seguePatientCPID, referral: self.referralSaveToAPI, dispachInstance: updateReferral)
             
             updateReferral.notify(queue: DispatchQueue.main) {
                 //hide
@@ -312,7 +311,20 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
                     UserDefaults.standard.set(self.referrals, forKey: "RESTAllReferrals")
                     UserDefaults.standard.synchronize()
                     
-                    //update patient feed here - forPatientFeed
+                    // <<<<<<<<<<<<<< UPDATE PATIENT FEED here - forPatientFeed >>>>>>>>>>>>>>>>
+                    let patientUpdateFlag = DispatchGroup(); patientUpdateFlag.enter();
+                    
+                    let userProfile = UserDefaults.standard.object(forKey: "userProfile") as? Array<Dictionary<String,String>> ?? []
+                    if userProfile.isEmpty == false
+                    {
+                        let user = userProfile[0]
+                        let User_ID = user["User_ID"]!
+                        
+                        let dict = (["patientUpdateText":"\(forPatientFeed)","update_type":"Routine","updated_from":"mobile app"])
+                    
+                        POSTPatientUpdates().updatePatientUpdates(token: self.token, userID: User_ID, patientID: self.seguePatientID, update: dict, dispachInstance: patientUpdateFlag)
+                        
+                    }// <<<<<<<<<<<<<<            END OF PATIENT FEED           >>>>>>>>>>>>>>>>
                     
                     self.segueToPTV()
                 }
@@ -644,12 +656,12 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { (action) -> Void in
             
             // Get 1st TextField's text
-            let declineMessage = "Patient \(self.seguePatientName!) completed by \(self.userName). " + alert.textFields![0].text! //print(textField)
+            let completeMessage = "Patient \(self.seguePatientName!) completed by \(self.userName). " + alert.textFields![0].text! //print(textField)
             
             // 1 MOVE PATIENT FROM SCHEDULED TO COMPLETED
             self.updateStatusToComplete()
             
-            self.updateReferralsAPI(forPatientFeed: declineMessage)
+            self.updateReferralsAPI(forPatientFeed: completeMessage)
             
 //            UserDefaults.standard.set(self.referrals, forKey: "RESTAllReferrals")
 //            UserDefaults.standard.synchronize()

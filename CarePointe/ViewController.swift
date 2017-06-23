@@ -313,7 +313,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         pendingPatientsLabel.text = "\(numberNewPatients)"
         scheduledAppointLabel.text = "\(numberScheduledPatients)"
         unreadMessagesLabel.text = "\(numberCompletePatiets)"
-        topImage.isHidden = true
+        
+        if(isUserSignedIn){//FADE OUT
+            
+            UIView.animate(withDuration: 0.3, animations: { /*() -> Void in*/
+                self.topImage.alpha = 0
+            })
+        }
     }
     
     

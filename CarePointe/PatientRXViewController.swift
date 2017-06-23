@@ -123,6 +123,7 @@ class PatientRXViewController: UIViewController {
         {
         case 0:
             medRecButton.isHidden = false
+            medRecButton.setTitle("Add Medication", for: .normal)
             containerView1.isHidden = false
             containerView2.isHidden = true
             containerView3.isHidden = true
@@ -135,6 +136,7 @@ class PatientRXViewController: UIViewController {
             containerView4.isHidden = true
         case 2:
             medRecButton.isHidden = false
+            medRecButton.setTitle("Add Allergy", for: .normal)
             containerView1.isHidden = true
             containerView2.isHidden = true
             containerView3.isHidden = false

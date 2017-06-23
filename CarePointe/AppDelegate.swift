@@ -28,8 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if Reachability.isReturningUser() == true { //is returning user
                 
                 //REQUEST API ENDPOINT KEY and Data
-                let beginRest = DispatchREST()
-                beginRest.beginRestCalls()
+                DispatchREST().beginRestCalls()
                 
             }
         } else {

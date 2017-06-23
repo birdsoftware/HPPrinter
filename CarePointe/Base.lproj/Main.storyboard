@@ -1824,6 +1824,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                     <connections>
                         <outlet property="boxLabelButton" destination="Mph-mN-0OR" id="UB2-5k-TQ2"/>
                         <outlet property="dateLabel" destination="2R6-Xz-MRh" id="zkI-3G-XG6"/>
+                        <outlet property="deleteButton" destination="vtW-V2-csQ" id="b48-NE-UyQ"/>
                         <outlet property="fromLabel" destination="IvO-t5-Csv" id="CgF-fp-jWj"/>
                         <outlet property="fromListLabel" destination="7bO-qL-HO7" id="LwM-aV-gmC"/>
                         <outlet property="fromToLabel" destination="IvO-t5-Csv" id="YQc-qa-Fcn"/>
@@ -4129,14 +4130,14 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7eb-OY-STN" customClass="RoundedButton" customModule="CarePointe" customModuleProvider="target">
-                                        <rect key="frame" x="292" y="3" width="75" height="40"/>
+                                        <rect key="frame" x="237" y="3" width="130" height="40"/>
                                         <color key="backgroundColor" red="0.0014256237773224711" green="0.56144160032272339" blue="0.0012527763610705733" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="Pds-TV-Dm5"/>
+                                            <constraint firstAttribute="width" constant="130" id="Pds-TV-Dm5"/>
                                             <constraint firstAttribute="height" constant="40" id="bb8-RM-CHB"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
-                                        <state key="normal" title="Edit List">
+                                        <state key="normal" title="Add Medication">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -5521,7 +5522,7 @@ Performance: 13</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="411"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WSc-uI-ZlI">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="361"/>
+                                        <rect key="frame" x="0.0" y="45" width="375" height="366"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="rxcontainer2Cell" rowHeight="80" id="3ra-cO-HYz" customClass="RxContainer2Cell" customModule="CarePointe" customModuleProvider="target">
@@ -5570,11 +5571,17 @@ Performance: 13</string>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete questionnaire below and send." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mdq-VG-B5Y">
+                                        <rect key="frame" x="8" y="14" width="281" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6R-lp-Lla" customClass="RoundedButton" customModule="CarePointe" customModuleProvider="target">
-                                        <rect key="frame" x="112" y="368" width="150" height="35"/>
+                                        <rect key="frame" x="297" y="5" width="70" height="35"/>
                                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="Hpy-D8-C2s"/>
+                                            <constraint firstAttribute="width" constant="70" id="Hpy-D8-C2s"/>
                                             <constraint firstAttribute="height" constant="35" id="PDc-rP-UQj"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
@@ -5591,14 +5598,17 @@ Performance: 13</string>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.229491055" green="0.55283278229999999" blue="0.74227368829999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="x6R-lp-Lla" firstAttribute="top" secondItem="WSc-uI-ZlI" secondAttribute="bottom" constant="7" id="7Xw-52-uMd"/>
-                                    <constraint firstItem="WSc-uI-ZlI" firstAttribute="top" secondItem="p2G-Ux-BIh" secondAttribute="top" id="CTh-cr-y7r"/>
-                                    <constraint firstAttribute="bottom" secondItem="WSc-uI-ZlI" secondAttribute="bottom" constant="50" id="OUl-XR-kJU"/>
+                                    <constraint firstItem="WSc-uI-ZlI" firstAttribute="top" secondItem="x6R-lp-Lla" secondAttribute="bottom" constant="5" id="2ax-yE-bC8"/>
+                                    <constraint firstItem="Mdq-VG-B5Y" firstAttribute="centerY" secondItem="x6R-lp-Lla" secondAttribute="centerY" id="8ST-Ps-cVQ"/>
+                                    <constraint firstItem="Mdq-VG-B5Y" firstAttribute="leading" secondItem="p2G-Ux-BIh" secondAttribute="leading" constant="8" id="9Yw-D2-DLJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="WSc-uI-ZlI" secondAttribute="bottom" id="OUl-XR-kJU"/>
+                                    <constraint firstItem="x6R-lp-Lla" firstAttribute="leading" secondItem="Mdq-VG-B5Y" secondAttribute="trailing" constant="8" id="TEY-jz-ypc"/>
                                     <constraint firstItem="WSc-uI-ZlI" firstAttribute="leading" secondItem="p2G-Ux-BIh" secondAttribute="leading" id="Tff-kz-7k7"/>
-                                    <constraint firstItem="x6R-lp-Lla" firstAttribute="centerX" secondItem="p2G-Ux-BIh" secondAttribute="centerX" id="fLc-fa-gqc"/>
                                     <constraint firstAttribute="trailing" secondItem="WSc-uI-ZlI" secondAttribute="trailing" id="sT5-yL-Mag"/>
+                                    <constraint firstItem="x6R-lp-Lla" firstAttribute="top" secondItem="p2G-Ux-BIh" secondAttribute="top" constant="5" id="uDE-bo-OeO"/>
+                                    <constraint firstAttribute="trailing" secondItem="x6R-lp-Lla" secondAttribute="trailing" constant="8" id="uOe-i6-SVk"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -5610,12 +5620,14 @@ Performance: 13</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="completeQuestionnaireLabel" destination="Mdq-VG-B5Y" id="luR-SM-dlU"/>
                         <outlet property="questionTable" destination="WSc-uI-ZlI" id="7OT-fD-k0R"/>
+                        <outlet property="sendEditButton" destination="x6R-lp-Lla" id="yXv-pv-x1O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X9J-1W-Mv0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4305" y="958"/>
+            <point key="canvasLocation" x="4304.8000000000002" y="957.57121439280365"/>
         </scene>
         <!--container 3-->
         <scene sceneID="Nhb-Kc-jyN">
@@ -6874,7 +6886,7 @@ Performance: 13</string>
         <image name="x_sign80x680.png" width="80" height="680"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5z8-i9-OWi"/>
+        <segue reference="yqQ-by-iSd"/>
         <segue reference="nHS-Rj-NYJ"/>
         <segue reference="zWG-cM-x3M"/>
         <segue reference="YBB-Tg-L47"/>

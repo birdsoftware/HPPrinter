@@ -25,6 +25,8 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //label
     @IBOutlet weak var myPatientsLabel: UILabel!
     
+    //pull to refresh
+    private let refreshControl = UIRefreshControl()
     
     // class vars
     var searchActive : Bool = false
@@ -40,6 +42,14 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //pull to refresh
+        //let refreshControl = UIRefreshControl()
+        patientTable.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(PatientListVC.refreshData), for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Patients ...")
+        
         scopeSegmentControl.isHidden = true
         segementControlHeight.constant = 0
         
@@ -127,6 +137,29 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
 //        myPatientsLabel.text = "My Patients (\(patientCount))"
 //    }
 
+    
+    // MARK: - Refresh Function
+    func refreshData(){
+        
+        let downloadToken = DispatchGroup(); downloadToken.enter();
+        
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
+        
+        downloadToken.notify(queue: DispatchQueue.main)  { //Signin token & user profile Downloaded now what?
+            
+            let token = UserDefaults.standard.string(forKey: "token")
+            
+            let downloadPatients = DispatchGroup(); downloadPatients.enter();
+            
+            GETPatients().getPatients(token: token!, dispachInstance: downloadPatients)
+        
+            downloadPatients.notify(queue: DispatchQueue.main) {//got Referrals
+                print("refreshData")
+                self.patientTable.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
+    }
     
 
     //

@@ -12,6 +12,7 @@ class AMessageViewController: UIViewController {
 
     //button
     @IBOutlet weak var boxLabelButton: UIButton!
+    @IBOutlet weak var deleteButton: RoundedButton!
     
     //labels
     @IBOutlet weak var fromToLabel: UILabel!
@@ -38,7 +39,7 @@ class AMessageViewController: UIViewController {
     var segueBoxCount: Int!
     var segueIsRead: String!
     
-    var messageIsInbox = false
+    var messageIsInbox = false// if segueBoxSegmentString == "Inbox" then messageIsInbox = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +68,12 @@ class AMessageViewController: UIViewController {
         if segueBoxSegmentString == "Inbox"{
             messageIsInbox = true
             upDateMessageIsReadIsTrue()//for segueMessageID
+            deleteButton.isEnabled = true
+            deleteButton.isHidden = false
+            
         } else {
+            deleteButton.isEnabled = false
+            deleteButton.isHidden = true
             fromLabel.text = "To: "
             if segueIsRead == "Y"
             {

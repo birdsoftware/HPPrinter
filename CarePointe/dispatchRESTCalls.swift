@@ -14,24 +14,24 @@ class DispatchREST {//http://stackoverflow.com/questions/42146274/syncronize-asy
     
     func beginRestCalls() {
         
-//        let signin = DispatchGroup()
-//        signin.enter()
-//        
-//        // 0 signin -----------
-//        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-//        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-//        
-//        POSTSignin().signInUser(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: signin)
+        let signin = DispatchGroup()
+        signin.enter()
+        
+        // 0 signin ----------- This is here first time launching app (see AppDelegate) will not load Inbox Users, Patient List, Alerts and Referrals. Error reported was Error deserializing Patients(referral etc) JSON: Data did not begin with array
+        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
+        
+        POSTSignin().signInUser(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: signin)
         
         let downloadToken = DispatchGroup()
         downloadToken.enter()
         
         // 1 token -----------
-        //signin.notify(queue: DispatchQueue.main) {
+        signin.notify(queue: DispatchQueue.main) {
             
         GETToken().signInCarepoint(dispachInstance: downloadToken)
         
-        //}// ------------------
+        }// ------------------
         
         let downloadPatients = DispatchGroup()
             downloadPatients.enter()

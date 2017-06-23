@@ -82,10 +82,6 @@ class PatientUpdateViewController: UIViewController, UIPickerViewDelegate, UIPic
         let downloadToken = DispatchGroup()
         downloadToken.enter()
         
-        // 0 get token again -----------
-        //let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
-        //let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
-        
         GETToken().signInCarepoint(/*userEmail: savedUserEmail, userPassword: savedUserPassword, */dispachInstance: downloadToken)
         
         downloadToken.notify(queue: DispatchQueue.main)  {
