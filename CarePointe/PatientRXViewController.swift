@@ -156,7 +156,6 @@ class PatientRXViewController: UIViewController {
     //
     // #MARK: - Buttons
     //
-    
     @IBAction func backButtonTapped(_ sender: Any) {
         
         // 4. Present a view controller from a different storyboard
@@ -166,69 +165,79 @@ class PatientRXViewController: UIViewController {
         self.present(vc, animated: false, completion: nil)
         
     }
-    
-    
-    
-    @IBAction func addRxButtonTapped(_ sender: Any) {
+    @IBAction func AddMedButtonAction(_ sender: Any) {
+        
         switch medicationSegmentor.selectedSegmentIndex
-        {
-        case 0:
-            showAddMedicationAlert()
-        case 1:
-            showAddMedRecAlert()
-        case 2:
-            showAddAllergyAlert()
-        default:
-            break;
-        }
+                {
+                case 0:
+                    //Med List
+                    self.performSegue(withIdentifier: "RxToAddEditRx", sender: self)
+                case 1:
+                    //Questionnaire
+                    break;
+                case 2:
+                    //Allergy
+                    self.performSegue(withIdentifier: "RxToAddEditAllergy", sender: self)
+                default:
+                    break;
+                }
     }
     
     
-    func showAddMedicationAlert() {
-        
-    }
     
-    func showAddMedRecAlert() {
-        let patientName = UserDefaults.standard.string(forKey: "patientName")
-        
-        // show Alert, ask why, get leave a note text, show [Submit] [Cancel] buttons
-        let alert = UIAlertController(title: patientName! + "'s Med Rec",
-                                      message: "Current ",
-                                      preferredStyle: .alert)
-        
-        // Submit button
-        let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { (action) -> Void in
-            // Get 1st TextField's text
-            let textField = alert.textFields![0]
-            
-            print(textField.text!)
-            
-            
-            // Instantiate a view controller from Storyboard and present it
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
-            self.present(vc, animated: false, completion: nil)
-        })
-        
-        // Cancel button
-        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
-        
-        // Add 1 textField and customize it
-        alert.addTextField { (textField: UITextField) in
-            textField.keyboardAppearance = .dark
-            textField.keyboardType = .default
-            textField.autocorrectionType = .default
-            textField.placeholder = "Reason for declining this patient?"
-            textField.clearButtonMode = .whileEditing
-        }
-        
-        // Add action buttons and present the Alert
-        alert.addAction(submitAction)
-        alert.addAction(cancel)
-        present(alert, animated: true, completion: nil)
-    }
     
-    func showAddAllergyAlert() {
-        
-    }
+//    @IBAction func addRxButtonTapped(_ sender: Any) {
+//        switch medicationSegmentor.selectedSegmentIndex
+//        {
+//        case 0:
+//            showAddMedicationAlert()
+//        case 1:
+//            showAddMedRecAlert()
+//        case 2:
+//            showAddAllergyAlert()
+//        default:
+//            break;
+//        }
+//    }
+    
+//    func showAddMedRecAlert() {
+//        let patientName = UserDefaults.standard.string(forKey: "patientName")
+//        
+//        // show Alert, ask why, get leave a note text, show [Submit] [Cancel] buttons
+//        let alert = UIAlertController(title: patientName! + "'s Med Rec",
+//                                      message: "Current ",
+//                                      preferredStyle: .alert)
+//        
+//        // Submit button
+//        let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { (action) -> Void in
+//            // Get 1st TextField's text
+//            let textField = alert.textFields![0]
+//            
+//            print(textField.text!)
+//            
+//            
+//            // Instantiate a view controller from Storyboard and present it
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
+//            self.present(vc, animated: false, completion: nil)
+//        })
+//        
+//        // Cancel button
+//        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+//        
+//        // Add 1 textField and customize it
+//        alert.addTextField { (textField: UITextField) in
+//            textField.keyboardAppearance = .dark
+//            textField.keyboardType = .default
+//            textField.autocorrectionType = .default
+//            textField.placeholder = "Reason for declining this patient?"
+//            textField.clearButtonMode = .whileEditing
+//        }
+//        
+//        // Add action buttons and present the Alert
+//        alert.addAction(submitAction)
+//        alert.addAction(cancel)
+//        present(alert, animated: true, completion: nil)
+//    }
+
 }

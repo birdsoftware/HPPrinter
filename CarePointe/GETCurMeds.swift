@@ -44,7 +44,7 @@ class GETMeds {
                                                             for dict in vJSON {
                                                                 
                                                                 let medId = dict["id"] as? Int ?? 0
-                                                                let med_id = dict["med_id"] as? String ?? ""
+                                                                let med_id = dict["med_id"] as? Int ?? 0
                                                                 let medications = dict["medications"] as? String ?? "" //"Tylenol"
                                                                 let dosage = dict["dosage"] as? String ?? ""
                                                                 let frequency = dict["frequency"] as? String ?? ""
@@ -52,13 +52,19 @@ class GETMeds {
                                                                 let UNITS = dict["UNITS"] as? String ?? ""
                                                                 let REFILLCOUNT = dict["REFILLCOUNT"] as? String ?? ""
                                                                 
-                                                                let id = String(medId)
+                                                                //FOR POST
+                                                                let directions = dict["directions"] as? String ?? ""
+                                                                let NDC = dict["NDC"] as? String ?? ""
                                                                 
-                                                                meds.append(["id":id,"med_id":med_id, "medications":medications, "dosage":dosage, "frequency":frequency,"route":route,"UNITS":UNITS,"REFILLCOUNT":REFILLCOUNT])
+                                                                let id = String(medId)
+                                                                let mid = String(med_id)
+                                                                
+                                                                meds.append(["id":id,"med_id":mid, "medications":medications, "dosage":dosage, "frequency":frequency,"route":route,"UNITS":UNITS,"REFILLCOUNT":REFILLCOUNT,
+                                                                             /*forPOST*/"directions":directions, "NDC":NDC])
                                                                 
                                                             }
                                                             
-                                                            print("Current Medications: \(meds)")
+                                                            //print("Current Medications: \(meds)")
                                                             UserDefaults.standard.set(meds, forKey: "RESTCurrentMedications")
                                                             UserDefaults.standard.synchronize()
                                                             print("finished GET Current Meds")

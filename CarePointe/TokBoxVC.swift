@@ -63,8 +63,44 @@ class TokBoxVC: UIViewController/*, UICollectionViewDataSource*/ {
         // Do any additional setup after loading the view.
         userName.text = UIDevice.current.name
         
-        connectToAnOpenTokSession()
+        getOpenTokSessionId()
+        
+        //connectToAnOpenTokSession()
         //session.connect(withToken: kToken, error: &error)
+    }
+    
+    func getOpenTokSessionId(){
+        
+        let signin = DispatchGroup(); signin.enter()
+        
+        let savedUserEmail = UserDefaults.standard.object(forKey: "email") as? String ?? "-"
+        let savedUserPassword = UserDefaults.standard.object(forKey: "password") as? String ?? "-"
+        
+        POSTSignin().signInUser(userEmail: savedUserEmail, userPassword: savedUserPassword, dispachInstance: signin)
+        
+        signin.notify(queue: DispatchQueue.main) {
+        
+            let getToken = DispatchGroup(); getToken.enter()
+            
+            GETToken().signInCarepoint(dispachInstance: getToken)
+            
+            getToken.notify(queue: DispatchQueue.main) {
+                let token = UserDefaults.standard.string(forKey: "token")
+                
+                let getEvent = DispatchGroup(); getEvent.enter()
+                
+                GETEvents().byRandKey(tokenSignIn: token!, randomKey: "nHm9B", dispachInstance: getEvent)
+                
+                getEvent.notify(queue: DispatchQueue.main) {
+                    let event = UserDefaults.standard.object(forKey: "RESTEventByRandKey") as? Dictionary<String,String> ?? Dictionary<String,String>()
+                    
+                    kSessionId = event["sessionid"]!
+                    kToken = event["token"]!
+                    
+                    self.connectToAnOpenTokSession()
+                }
+            }
+        }
     }
     
     func connectToAnOpenTokSession() {

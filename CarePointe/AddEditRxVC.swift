@@ -101,6 +101,13 @@ class AddEditRxVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     var tableMeds = Array<Dictionary<String,String>>() //all from json
     var searchData = Array<Dictionary<String,String>>()
     
+    //segue Data from Container1ViewController
+    var segueMedication: String!
+    var segueDosage: String!
+    var segueFrequency: String!
+    var segueRoute: String!
+    var segueUnits: String!
+    var segueRefillcount: String!
     
     //
     // MARK: - override functions
@@ -154,16 +161,38 @@ class AddEditRxVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        self.ifEditSegueRefreshValues()
+        
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
                 /*let json:[[String : String]]*/ self.tableMeds = loadJSON(name: "tbl_medications (1)")! //{"drugId":"17012","drugName":"ABIRATERONE"}
                 print(self.tableMeds.count)
                 //self.loadingView.isHidden = true
                 self.loadingView.removeFromSuperview()
+                
             }
         }
     }
     
+    //
+    // MARK: - Support Functions
+    //
+    func ifEditSegueRefreshValues(){
+        
+        if segueMedication != "" {
+            medTableAndQuantButton.constant = 50
+            medSelectionLabel.text = segueMedication
+            
+            quantLabel.text = segueDosage
+            freqLabel.text = segueFrequency
+            routeLabel.text = segueRoute
+            unitLabel.text = segueUnits
+            refilLabel.text = segueRefillcount
+        }
+    }
+    func seguePatientTabBar(){
+        self.performSegue(withIdentifier: "segueToPatientTabBarFromAddMed", sender: self)
+    }
     
     //
     // MARK: - Buttons
@@ -185,6 +214,29 @@ class AddEditRxVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     }
     @IBAction func selectButtonTapped(_ sender: Any) {
         togglePickerButton(isOpen: &isSelectOpen, hightPickerConstraint: selectPickerConstraint)
+    }
+    @IBAction func changeDateButtonAction(_ sender: Any) {
+        
+        //var searchText = "2/14/17"
+        
+        DatePickerDialog().show("Appointment Date", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .date) {
+            (date) -> Void in
+            if date != nil {
+                let dateFormat = DateFormatter()
+                dateFormat.dateStyle = DateFormatter.Style.short // --NO TIME .short
+                let strDate = dateFormat.string(for: date!)!
+                
+                //----- UPDATE UI LABEL BY DATE SELECTED ---------
+                self.dateLabel.text = "Date: \(strDate)"
+            }
+        }
+    }
+    @IBAction func backButtonAction(_ sender: Any) {
+        seguePatientTabBar()
+    }
+    @IBAction func saveButtonAction(_ sender: Any) {
+        //save changes to cloud
+        seguePatientTabBar()
     }
     
     

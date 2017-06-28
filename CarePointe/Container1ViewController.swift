@@ -16,6 +16,7 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
     var medicationData = [
         ["medications":"", "dosage":"", "frequency":"", "route":"", "UNITS":"", "REFILLCOUNT":""]
     ]
+    var selectedRow = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,23 +76,23 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let more = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
-            //self.isEditing = false
-            print("more button tapped")
+            self.selectedRow = indexPath.row
+            self.editMedication()
+            print("Edit button tapped")
         }
         more.backgroundColor = UIColor.orange
     
-        
         let favorite = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
             //self.isEditing = false
             self.medicationData.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            print("favorite button tapped")
+            print("Delete button tapped")
         }
         favorite.backgroundColor = UIColor.red
         
         let share = UITableViewRowAction(style: .normal, title: "Discontinue") { action, index in
             //self.isEditing = false
-            print("share button tapped")
+            print("Discontinue button tapped")
         }
         share.backgroundColor = UIColor.blue
         
@@ -102,6 +103,10 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
     //
     // MARK: - Supporting Functions
     //
+    func editMedication(){
+        //Med List
+        self.performSegue(withIdentifier: "Container1ToAddEditRx", sender: self)
+    }
     func loadCurrentMedsForGivenPatientFromJSON(){
         
         let demographics = UserDefaults.standard.object(forKey: "demographics") as? [[String]] ?? [[String]]()//saved from PatientListVC
@@ -129,6 +134,28 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
                 //print(meds)
             }
             
+        }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     
+        if segue.identifier == "Container1ToAddEditRx" {
+            
+            if let toVC = segue.destination as? AddEditRxVC {
+                
+                //let selectedRow = ((medicationTableView.indexPathForSelectedRow as NSIndexPath?)?.row)! //returns int
+                
+                let data = medicationData[selectedRow]
+                
+                toVC.segueMedication = data["medications"]
+                toVC.segueDosage = data["dosage"]
+                toVC.segueFrequency = data["frequency"]
+                toVC.segueRoute = data["route"]
+                toVC.segueUnits = data["UNITS"]
+                toVC.segueRefillcount = data["REFILLCOUNT"]
+                
+            }
         }
         
     }

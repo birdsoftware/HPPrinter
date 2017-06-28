@@ -604,10 +604,6 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         
         myAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
             
-            
-            
-            //self.saveTextToWebServer()
-            
             // Get 1st TextField's text
             let acceptMessage = "Patient \(self.seguePatientName!) accepted by \(self.userName). " + myAlert.textFields![0].text! //print(textField)
             
@@ -616,17 +612,6 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
             
             self.updateReferralsAPI(forPatientFeed: acceptMessage)
             
-//            // 2 UPDATE PATIENT FEED
-//            //      times   dates   messageCreator  message     patientID
-//            self.insertPatientFeed(messageCreator: self.userName, message: acceptMessage, patientID: self.seguePatientID, updatedFrom: "mobile", updatedType: "Update")
-//            
-//            //Action when OK pressed
-//            //self.performSegue(withIdentifier: "showDashboard", sender: self)
-//            // 4. Present a view controller from a different storyboard
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "fourButtonView") as UIViewController
-//            //vc.navigationController?.pushViewController(vc, animated: false)
-//            self.present(vc, animated: false, completion: nil)
         }))
         
         // Add 1 textField and customize it
@@ -640,9 +625,7 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         
         myAlert.addAction(UIAlertAction(title: "Cancel", style: .destructive) { _ in })
         
-        
         present(myAlert, animated: true){}
-        
     }
     
     func showCompleteAlert() {
@@ -663,15 +646,6 @@ class ReferralsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
             
             self.updateReferralsAPI(forPatientFeed: completeMessage)
             
-//            UserDefaults.standard.set(self.referrals, forKey: "RESTAllReferrals")
-//            UserDefaults.standard.synchronize()
-//            
-//            // 2 UPDATE PATIENT FEED
-//            //      times   dates   messageCreator  message     patientID
-//            self.insertPatientFeed(messageCreator: self.userName, message: declineMessage, patientID: self.seguePatientID, updatedFrom: "mobile", updatedType: "Update")
-//            
-//            // 3. Instantiate view controller from Storyboard and present it
-//            self.segueToPTV()
         })
         
         // Cancel button

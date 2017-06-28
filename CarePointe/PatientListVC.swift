@@ -156,6 +156,8 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             downloadPatients.notify(queue: DispatchQueue.main) {//got Referrals
                 print("refreshData")
                 self.patientTable.reloadData()
+                let patientCount = self.patientData.count//ScopeData.count
+                self.myPatientsLabel.text = "My Patients (\(patientCount))"
                 self.refreshControl.endRefreshing()
             }
         }

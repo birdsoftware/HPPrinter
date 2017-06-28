@@ -32,8 +32,8 @@ class Container2QuestionsVC: UIViewController, UITableViewDelegate, UITableViewD
         "Does Patient or technician have any additional concerns?"
     ]
     
-    var qSwitchBools = ["yes","yes","yes","yes","yes",
-                        "yes","yes","yes","yes","yes"]
+    var qSwitchBools = ["no","no","no","no","no",
+                        "no","no","no","no","no"]
     
     var questionNotes = ["","","","","",
                          "","","","",""]

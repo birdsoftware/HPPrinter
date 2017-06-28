@@ -11,16 +11,10 @@ import UIKit
 class Container3ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //table view
-    
     @IBOutlet weak var allergyTableView: UITableView!
-    
-    var allergyData = [
-        
-        ["41-Barbiturates","fever","Mild","01/18/2013"],
-        ["245-Penicillin","Rash","Low","01/03/2016"],
-        ["412-Shrimp","swelling","Mild","11/01/1995"]
-        
-        ]
+
+    //API Data
+    var allergies = [Dictionary<String,String>]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,31 +22,66 @@ class Container3ViewController: UIViewController, UITableViewDelegate, UITableVi
         // Delegation
         allergyTableView.delegate = self
         allergyTableView.dataSource = self
+        allergyTableView.rowHeight = UITableViewAutomaticDimension
         allergyTableView.estimatedRowHeight = 100
     }
     
-    //1 return # sections
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    //2 return number of rows
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(allergyData.isEmpty == false){
-            return allergyData.count
-        }
-        else{
-            return 0
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                self.loadCurrentAllergiesFromJSON()
+            }
         }
     }
+
     
+    //
+    // MARK: - Supporting Functions
+    //
+    func loadCurrentAllergiesFromJSON(){
+        
+        let downloadToken = DispatchGroup(); downloadToken.enter();
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
+        
+        downloadToken.notify(queue: DispatchQueue.main)  {
+            
+            let token = UserDefaults.standard.string(forKey: "token")!
+            let downloadAllergies = DispatchGroup(); downloadAllergies.enter();
+            
+            let getPatient = UserDefaults.standard.object(forKey: "demographics") as? [[String]] ?? [[String]]()//from PatientListVC
+            let patientID = getPatient[0][1]//"UniqueID"
+            
+            GETAllergies().getCurAllergies(token: token, patientID: patientID, dispachInstance: downloadAllergies)
+            
+            downloadAllergies.notify(queue: DispatchQueue.main) {
+                
+                self.allergies = UserDefaults.standard.object(forKey: "RESTCurrentAllergies") as? [Dictionary<String,String>] ?? [Dictionary<String,String>]()
+                if self.allergies.isEmpty == false {
+                    //print(self.allergies)
+                    self.allergyTableView.reloadData()
+                }
+            }
+        }
+    }
+
+    //
+    // MARK: - Table View
+    //
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return allergies.count
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "rxcontainer3Cell", for: indexPath) as! RxContainer3Cell
         
-        cell.allergy.text = allergyData[indexPath.row][0]
-        cell.reaction.text = allergyData[indexPath.row][1]
-        cell.severity.text = allergyData[indexPath.row][2]
-        cell.dateRecognized.text = allergyData[indexPath.row][3]
+        let allergy = allergies[indexPath.row]
+        
+        cell.allergy.text           =   allergy["allergies"]
+        cell.reaction.text          =   allergy["reaction"]
+        cell.severity.text          =   allergy["serverity"]
+        cell.dateRecognized.text    =   allergy["date_recognized"]
         
         if(indexPath.row % 2 == 0){
             cell.backgroundColor = UIColor.polar()  }
@@ -69,7 +98,7 @@ class Container3ViewController: UIViewController, UITableViewDelegate, UITableVi
             
             //allergyData.remove(at: (indexPath as NSIndexPath).row)
             //allergyTableView.reloadData()
-            self.allergyData.remove(at: indexPath.row)
+            self.allergies.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

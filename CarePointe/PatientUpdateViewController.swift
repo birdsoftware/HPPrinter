@@ -62,20 +62,20 @@ class PatientUpdateViewController: UIViewController, UIPickerViewDelegate, UIPic
     
     //supporting functions
     
-    func appendNewMessageToDefaults(){
-        
-        var userName = ""
-        //if value does not exists don't update placehold text, O.W. display locally saved text
-        // get profile user name
-        if isKeyPresentInUserDefaults(key: "profileName") {
-            userName = UserDefaults.standard.string(forKey: "profileName")!
-        }
-        if isKeyPresentInUserDefaults(key: "profileLastName") {
-            userName += " " + UserDefaults.standard.string(forKey: "profileLastName")!
-        }
-        
-        self.insertPatientFeed(messageCreator: userName, message: messageTextBox.text, patientID: "", updatedFrom: "mobile", updatedType: chosenType)
-    }
+//    func appendNewMessageToDefaults(){
+//        
+//        var userName = ""
+//        //if value does not exists don't update placehold text, O.W. display locally saved text
+//        // get profile user name
+//        if isKeyPresentInUserDefaults(key: "profileName") {
+//            userName = UserDefaults.standard.string(forKey: "profileName")!
+//        }
+//        if isKeyPresentInUserDefaults(key: "profileLastName") {
+//            userName += " " + UserDefaults.standard.string(forKey: "profileLastName")!
+//        }
+//        
+//        self.insertPatientFeed(messageCreator: userName, message: messageTextBox.text, patientID: "", updatedFrom: "mobile", updatedType: chosenType)
+//    }
     
     func sendUpdate(){
         

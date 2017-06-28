@@ -80,7 +80,7 @@ class GETQuestinnaire {
                                                                              "comment6":comment6,"comment7":comment7,"comment8":comment8,"comment9":comment9,"comment10":comment10])
                                                             }
                                                             
-                                                            print("Current questinnaire: \(questinnaireData)")
+                                                            //print("Current questinnaire: \(questinnaireData)")
                                                             UserDefaults.standard.set(questinnaireData, forKey: "RESTCurrentQuestinnaire")
                                                             UserDefaults.standard.synchronize()
                                                             print("finished GET Current Questinnaire")

@@ -191,13 +191,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             orangeLine3.layer.addBorder(edge: UIRectEdge.bottom, color: .orange, thickness: 2)
         
         // GET DATA FROM DEFAULTS --------------------------------------------------
-        if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does this exist? [yes]
-            getUpdateAppointmentData()
-            //print("getUpdateAppointmentData")
-        } else {//[no] does not exist
-            setUpAppointmentData()
-            //print("setUpAppointmentData there is no key onlyDoOnce")
-        }
+//        if isKeyPresentInUserDefaults(key: "onlyDoOnce") { //does this exist? [yes]
+//            getUpdateAppointmentData()
+//            //print("getUpdateAppointmentData")
+//        } else {//[no] does not exist
+//            setUpAppointmentData()
+//            //print("setUpAppointmentData there is no key onlyDoOnce")
+//        }
         
         
         // RELOAD table based on current date if date not selected from PICKER -----
@@ -567,29 +567,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
 
     
-    func getUpdateAppointmentData(){
-        
-        appID = [""]//Patient_ID
-        appointmentID = [""]
-        appPat = [""]//Patient_Name
-        appTime = [""]//
-        appDate = [""]//
-        appMessage = [""]//book_type like Nurse visit
-        addresses = [""]
-        
-    }
-
-    func setUpAppointmentData(){
-        
-        self.setUpPatientDataInDefaults()
-        getUpdateAppointmentData()
-        //get whats in defaults
-        let onlyDoOnceHere = 1//UserDefaults.standard.integer(forKey: "onlyDoOnce")
-        
-        UserDefaults.standard.set(onlyDoOnceHere, forKey: "onlyDoOnce")
-        UserDefaults.standard.synchronize()
-        
-    }
+//    func getUpdateAppointmentData(){
+//        
+//        appID = [""]//Patient_ID
+//        appointmentID = [""]
+//        appPat = [""]//Patient_Name
+//        appTime = [""]//
+//        appDate = [""]//
+//        appMessage = [""]//book_type like Nurse visit
+//        addresses = [""]
+//        
+//    }
+//
+//    func setUpAppointmentData(){
+//        
+//        self.setUpPatientDataInDefaults()
+//        getUpdateAppointmentData()
+//        //get whats in defaults
+//        let onlyDoOnceHere = 1//UserDefaults.standard.integer(forKey: "onlyDoOnce")
+//        
+//        UserDefaults.standard.set(onlyDoOnceHere, forKey: "onlyDoOnce")
+//        UserDefaults.standard.synchronize()
+//        
+//    }
 
     func showAlertIfTasksTableEmpty() {
     
