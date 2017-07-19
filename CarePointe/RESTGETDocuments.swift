@@ -14,7 +14,7 @@ class GETDocuments {
 
         var documents = Array<Dictionary<String,String>>()
         
-        let nsurlAlerts = "http://carepointe.cloud:4300/api/documents/patientId/" + patientID
+        let nsurlAlerts = Constants.Patient.patientDocuments + patientID
         
         let headers = [
             "authorization": token,
@@ -23,7 +23,7 @@ class GETDocuments {
         
         let request = NSMutableURLRequest(url: NSURL(string: nsurlAlerts)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//http://carepointe.cloud:4300/api/documents/patientId/
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

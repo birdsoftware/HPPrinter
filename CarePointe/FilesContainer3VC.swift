@@ -142,7 +142,9 @@ class FilesContainer3VC: UIViewController, UITableViewDelegate, UITableViewDataS
             let CreatedDateTime     = files[filesIndex!][4]
             let justDate            = convertDateStringToDate(longDate: CreatedDateTime)
             
-            let webDocLoc = "https://carepointe.cloud/episode_document/patient_"+patientID+"/episode_"+Episode_ID+"/"+FilePath
+            let urlwithPercentEscapes = FilePath.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+            
+            let webDocLoc = "https://carepointe.cloud/episode_document/patient_"+patientID+"/episode_"+Episode_ID+"/"+urlwithPercentEscapes!//FilePath
             
             if let toViewController = segue.destination as? DocWebVC {
                 toViewController.segueDocumentFullFilePath = webDocLoc

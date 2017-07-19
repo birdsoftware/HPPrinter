@@ -8,9 +8,48 @@
 
 import Foundation
 
+var toggleSB = "sandbox." //switch to empty string for carepointe
+
 struct Constants {
     struct Authentication {
-        static let token = "token"
+        static let signinURL = "http://"+toggleSB+"carepointe.cloud:4300/api/signin" // RESTSignIn.swift
+        static let authToken = "http://"+toggleSB+"carepointe.cloud:4300/api/authenticate" // RESTGETToken.swift
+    }
+    struct Patient {
+        static let patients = "http://"+toggleSB+"carepointe.cloud:4300/api/patients/status/active" // RESTGETPatients.swift
+        static let patient = "http://"+toggleSB+"carepointe.cloud:4300/api/patients/patientId/"
+        //rx
+        static let patientAllergies = "http://"+toggleSB+"carepointe.cloud:4300/api/rx/allergy/patientId/" // GETCurAllergies.swift
+        static let patientCurMeds = "http://"+toggleSB+"carepointe.cloud:4300/api/rx/curmeds/patientId/" // GETCurMeds.swift
+        static let postMedication = "http://"+toggleSB+"carepointe.cloud:4300/api/rx/curmeds" //POSTMedication.swift
+        static let patientQuestionnaire = "http://"+toggleSB+"carepointe.cloud:4300/api/rx/questionnaire/patientId/" // GETNewQuestionnaire.swift
+        
+        static let patientCareTeam = "http://"+toggleSB+"carepointe.cloud:4300/api/caseteam/patientId/" //RESTGETCareTeam.swift
+        static let patientDisease = "http://"+toggleSB+"carepointe.cloud:4300/api/patientdisease/episodeId/" //RESTGETDisease.swift
+        static let patientDocuments = "http://"+toggleSB+"carepointe.cloud:4300/api/documents/patientId/" //RESTGETDocuments.swift
+        static let patientLocation = "http://"+toggleSB+"carepointe.cloud:4300/api/location/patientId/" //RESTGETLocations.swift
+        static let patientReferral = "http://"+toggleSB+"carepointe.cloud:4300/api/referrals/patientId/" //RESTGETPatientRefer.swift
+        static let putReferral = "http://"+toggleSB+"carepointe.cloud:4300/api/referrals/careplanid/" //PUTReferrals.swift
+        static let patientUpdates = "http://"+toggleSB+"carepointe.cloud:4300/api/patientsupdates/patientId/" //RESTGETPatientUpdates.swift
+        static let postPatientUpdate = "http://"+toggleSB+"carepointe.cloud:4300/api/patientsupdates/userId/" //POSTPatientUpdates.swift
+        static let patientVitals = "http://"+toggleSB+"carepointe.cloud:4300/api/patientvitals/patientId/" //RESTGETVitals.swift
+        static let putVitals = "http://"+toggleSB+"carepointe.cloud:4300/api/patientvitals/patientId/" //RESTPUTVitals.swift
+    }
+    struct Message {
+        static let postNewMessage = "http://"+toggleSB+"carepointe.cloud:4300/api/inbox" //POSTInboxMessage.swift
+        static let deleteFromInbox = "http://"+toggleSB+"carepointe.cloud:4300/api/inbox" // DELETEMessage.swift
+        static let fromInbox = "http://"+toggleSB+"carepointe.cloud:4300/api/inbox/userId/" // GETInboxMessages.swift
+        static let fromSent = "http://"+toggleSB+"carepointe.cloud:4300/api/inbox/sent/userId/" // GETSentMessages.swift
+        static let inboxUsersList = "http://"+toggleSB+"carepointe.cloud:4300/api/inbox/users" //RESTGETUsers.swift
+        static let isRead = "http://"+toggleSB+"carepointe.cloud:4300/api/inbox/messageId/" //GETUpdateIsRead.swift
+    }
+    struct User {
+        static let globalAlerts = "http://"+toggleSB+"carepointe.cloud:4300/api/alerts" //RESTGETGlobalAlerts.swift
+        static let allReferrals = "http://"+toggleSB+"carepointe.cloud:4300/api/referrals/userId/" //RESTGETReferrals.swift
+        static let putProfile = "http://"+toggleSB+"carepointe.cloud:4300/api/user/updateProfile/" //
+    }
+    struct Tokbox {
+        static let eventByRandomKey = "http://"+toggleSB+"carepointe.cloud:4300/api/eventtokbox/randomkey/" //EventsRandKey.swift
     }
     
     private init(){}

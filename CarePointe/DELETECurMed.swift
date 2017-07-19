@@ -1,48 +1,43 @@
 //
-//  POSTMedication.swift
+//  DELETECurMed.swift
 //  CarePointe
 //
-//  Created by Brian Bird on 6/26/17.
+//  Created by Brian Bird on 7/13/17.
 //  Copyright © 2017 Mogul Pro Media. All rights reserved.
 //
 
 import Foundation
 
-class POSTMedication {
+class DeleteMed {
     
-    func addMedication(token: String, message:Dictionary<String,String>, patient_id: Int, dispachInstance: DispatchGroup) {
-        
-        let sendBy = Int(message["SendBy"]!)!
+    func aCurrentMed(token: String, medId: String, dispachInstance: DispatchGroup) {
         
         let headers = [
             "authorization":token,
             "content-type": "application/json",
-            "cache-control": "no-cache"
+            //"cache-control": "no-cache"
         ]
-        let parameters = [
-            "Subject": message["Subject"]!,  //requires String
-            "Msg_desc": message["Msg_desc"]!,//requires String
-            "SendBy": sendBy,     //requires Int 337
-            "SendTo": patient_id,     //requires Int 337
-            ] as [String : Any]
+//        let parameters = [
+//            "messageIds": messageIds //requires [Int] [18,...]
+//            ] as [String : Any]
         
-        let postData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        //let postData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
         //print(String(data: postData, encoding: .utf8)!) //{test@test.com, test123456}
         
-        let request = NSMutableURLRequest(url: NSURL(string: Constants.Patient.postMedication)! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/rx/curmeds/medId/"+medId)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)//http://carepointe.cloud:4300/api/rx/curmeds
-        request.httpMethod = "POST"
+                                          timeoutInterval: 10.0)
+        request.httpMethod = "DELETE"
         request.allHTTPHeaderFields = headers
-        request.httpBody = postData as Data
+        //request.httpBody = postData as Data
         
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 
-                print("Error when Attempting to POST/send messageInbox: \(error!)") //The Internet connection appears to be offline. -1009
-                UserDefaults.standard.set(false, forKey: "APIsendMessageSuccess")
+                print("Error when Attempting to DELETE current medication: \(error!)") //The Internet connection appears to be offline. -1009
+                UserDefaults.standard.set(false, forKey: "APIdeleteCurMedSuccess")
                 UserDefaults.standard.synchronize()
                 
                 dispachInstance.leave() // API Responded
@@ -62,16 +57,16 @@ class POSTMedication {
                         let type = json["type"] as? Bool{
                         if(type == true){
                             
-                            UserDefaults.standard.set(true, forKey: "APIsendMessageSuccess")
+                            UserDefaults.standard.set(true, forKey: "APIdeleteCurMedSuccess")
                             UserDefaults.standard.synchronize()
                             
-                            print("finished POST messageInbox")
+                            print("finished DELETE current medication")
                         }
                         dispachInstance.leave() // API Responded
                     }
                 } catch {
-                    print("Error deserializing POST/send messageInbox JSON: \(error)")
-                    UserDefaults.standard.set(false, forKey: "APIsendMessageSuccess")
+                    print("Error deserializing DELETE current medication: \(error)")
+                    UserDefaults.standard.set(false, forKey: "APIdeleteCurMedSuccess")
                     UserDefaults.standard.synchronize()
                     
                     dispachInstance.leave() // API Responded
@@ -83,3 +78,4 @@ class POSTMedication {
         dataTask.resume()
     }
 }
+

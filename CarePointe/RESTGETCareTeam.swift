@@ -15,7 +15,7 @@ class GETCareTeam {
         var careTeams = Array<Dictionary<String,String>>()
 
         
-        let nsurlAlerts = "http://carepointe.cloud:4300/api/caseteam/patientId/" + patientID
+        let nsurlAlerts = Constants.Patient.patientCareTeam + patientID
         
         let headers = [
             "authorization": token,
@@ -24,7 +24,7 @@ class GETCareTeam {
         
         let request = NSMutableURLRequest(url: NSURL(string: nsurlAlerts)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//http://carepointe.cloud:4300/api/caseteam/patientId/
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

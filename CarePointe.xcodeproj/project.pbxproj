@@ -55,6 +55,7 @@
 		583124BE1ECFB53900AE78EB /* RESTGETPatientUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583124BD1ECFB53900AE78EB /* RESTGETPatientUpdates.swift */; };
 		58327A6D1E64DE40006F4FB4 /* setUserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58327A6C1E64DE40006F4FB4 /* setUserImage.swift */; };
 		58327A6F1E64F49F006F4FB4 /* AddUsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58327A6E1E64F49F006F4FB4 /* AddUsersCell.swift */; };
+		58341D231F199A3C0083C0C6 /* Encounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58341D221F199A3C0083C0C6 /* Encounter.swift */; };
 		583646911E0890FC003C2E60 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646901E0890FC003C2E60 /* menu.png */; };
 		583646951E08A7BC003C2E60 /* bell.png in Resources */ = {isa = PBXBuildFile; fileRef = 583646941E08A7BC003C2E60 /* bell.png */; };
 		583646971E08AE2F003C2E60 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583646961E08AE2F003C2E60 /* TasksViewController.swift */; };
@@ -217,6 +218,7 @@
 		58E09CF41EE22C7C003E317F /* DELETEMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E09CF31EE22C7C003E317F /* DELETEMessage.swift */; };
 		58E43D6F1F019FD800F7F9C0 /* Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E43D6E1F019FD800F7F9C0 /* Allergy.swift */; };
 		58E43D721F01C7D100F7F9C0 /* POSTMedication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E43D711F01C7D100F7F9C0 /* POSTMedication.swift */; };
+		58E43D941F17E64200F7F9C0 /* DELETECurMed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E43D931F17E64200F7F9C0 /* DELETECurMed.swift */; };
 		58E65E591EB016290075625F /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 58E65E581EB016290075625F /* placeholder.png */; };
 		58E7FC951E8B0E9000F203C6 /* RESTGETUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E7FC941E8B0E9000F203C6 /* RESTGETUsers.swift */; };
 		58E7FC991E8C4CE300F203C6 /* users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E7FC981E8C4CE300F203C6 /* users.swift */; };
@@ -311,6 +313,7 @@
 		583124BD1ECFB53900AE78EB /* RESTGETPatientUpdates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETPatientUpdates.swift; sourceTree = "<group>"; };
 		58327A6C1E64DE40006F4FB4 /* setUserImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setUserImage.swift; sourceTree = "<group>"; };
 		58327A6E1E64F49F006F4FB4 /* AddUsersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUsersCell.swift; sourceTree = "<group>"; };
+		58341D221F199A3C0083C0C6 /* Encounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encounter.swift; sourceTree = "<group>"; };
 		583646901E0890FC003C2E60 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu.png; path = ../../imageFiles/menu.png; sourceTree = "<group>"; };
 		583646941E08A7BC003C2E60 /* bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bell.png; path = ../../imageFiles/bell.png; sourceTree = "<group>"; };
 		583646961E08AE2F003C2E60 /* TasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
@@ -474,6 +477,7 @@
 		58E09CF31EE22C7C003E317F /* DELETEMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DELETEMessage.swift; sourceTree = "<group>"; };
 		58E43D6E1F019FD800F7F9C0 /* Allergy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Allergy.swift; sourceTree = "<group>"; };
 		58E43D711F01C7D100F7F9C0 /* POSTMedication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSTMedication.swift; sourceTree = "<group>"; };
+		58E43D931F17E64200F7F9C0 /* DELETECurMed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DELETECurMed.swift; sourceTree = "<group>"; };
 		58E65E581EB016290075625F /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = ../../imageFiles/placeholder.png; sourceTree = "<group>"; };
 		58E7FC941E8B0E9000F203C6 /* RESTGETUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTGETUsers.swift; sourceTree = "<group>"; };
 		58E7FC981E8C4CE300F203C6 /* users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = users.swift; sourceTree = "<group>"; };
@@ -607,6 +611,14 @@
 				58272AFD1E412DFE00E779CF /* PatientInformationCell.swift */,
 			);
 			name = Patient;
+			sourceTree = "<group>";
+		};
+		58341D211F199A100083C0C6 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				58341D221F199A3C0083C0C6 /* Encounter.swift */,
+			);
+			name = "Data Model";
 			sourceTree = "<group>";
 		};
 		584192EF1EBCDBDF00844491 /* Start App APIs */ = {
@@ -994,6 +1006,7 @@
 			isa = PBXGroup;
 			children = (
 				588F0CF61EF4777200268DC9 /* GETCurMeds.swift */,
+				58E43D931F17E64200F7F9C0 /* DELETECurMed.swift */,
 				582A972E1EFEF81A0023E9BA /* GETCurAllergies.swift */,
 				58DA58231EFDAFFC006C302E /* GETNewQuestionnaire.swift */,
 				58E43D711F01C7D100F7F9C0 /* POSTMedication.swift */,
@@ -1078,6 +1091,7 @@
 				586BFDDB1E3BE3B500DC6770 /* Main Dashboard */,
 				58272AE91E3FE7EB00E779CF /* User Profile */,
 				586BFDDE1E3BE48500DC6770 /* Sign IN */,
+				58341D211F199A100083C0C6 /* Data Model */,
 				58272AF01E3FFCEF00E779CF /* Patient */,
 				BB57C2D11DFF41DE00731AC4 /* AppDelegate.swift */,
 				586BFDD11E3BB27000DC6770 /* LaunchImage.png */,
@@ -1492,6 +1506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				582A972F1EFEF81A0023E9BA /* GETCurAllergies.swift in Sources */,
+				58341D231F199A3C0083C0C6 /* Encounter.swift in Sources */,
 				58174CFC1E72253900023003 /* AlertsEventsViewController.swift in Sources */,
 				58D6336C1E4D316A00DC3EB9 /* PatientFeedViewController.swift in Sources */,
 				588F0CF01EF34B0F00268DC9 /* Medications.swift in Sources */,
@@ -1563,6 +1578,7 @@
 				58D633601E4D1FF900DC3EB9 /* PatientCareTeamViewController.swift in Sources */,
 				58272B041E424FC400E779CF /* KeyboardLayoutConstraint.swift in Sources */,
 				58CBC0121E4E2066001A9698 /* RxContainer1Cell.swift in Sources */,
+				58E43D941F17E64200F7F9C0 /* DELETECurMed.swift in Sources */,
 				58458ABE1E43EB2E005DFEDA /* defualtsComments.swift in Sources */,
 				58CBC00B1E4D4432001A9698 /* CaseViewController.swift in Sources */,
 				587218181EA91269002322B8 /* ConnectListVC.swift in Sources */,

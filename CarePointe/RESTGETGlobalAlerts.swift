@@ -19,9 +19,9 @@ class GETGlobalAlerts {
             "cache-control": "no-cache"
         ]
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/alerts")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: Constants.User.globalAlerts)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//"http://carepointe.cloud:4300/api/alerts"
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

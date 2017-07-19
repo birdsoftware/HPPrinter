@@ -14,7 +14,7 @@ class GETQuestinnaire {
         //print("got here")
         var questinnaireData = Array<Dictionary<String,String>>()
         
-        let nsurlAlerts = "http://carepointe.cloud:4300/api/rx/questionnaire/patientId/" + patientID
+        let nsurlAlerts = Constants.Patient.patientQuestionnaire + patientID
         
         let headers = [
             "authorization": token,
@@ -23,7 +23,7 @@ class GETQuestinnaire {
         
         let request = NSMutableURLRequest(url: NSURL(string: nsurlAlerts)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//http://carepointe.cloud:4300/api/rx/questionnaire/patientId/
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

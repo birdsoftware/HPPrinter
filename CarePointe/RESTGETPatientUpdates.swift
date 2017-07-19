@@ -17,7 +17,7 @@ class GETPatientUpdates {
         //varaibales to filter duplicate referrals
         //var uniqueValues = Set<String>()
         
-        let nsurlAlerts = "http://carepointe.cloud:4300/api/patientsupdates/patientId/" + patientID
+        let nsurlAlerts = Constants.Patient.patientUpdates + patientID
         
         let headers = [
             "authorization": token,
@@ -26,7 +26,7 @@ class GETPatientUpdates {
         
         let request = NSMutableURLRequest(url: NSURL(string: nsurlAlerts)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//http://carepointe.cloud:4300/api/patientsupdates/patientId/
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

@@ -65,7 +65,7 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject] , for: .normal)
         
         //Diable segment .isEnabled = false 
-        patientFeedSegmentC.setEnabled(false, forSegmentAt: 1)
+        //patientFeedSegmentC.setEnabled(false, forSegmentAt: 1)
         
         //getTokenThenPatientUpdatesFromWebServer()
     }

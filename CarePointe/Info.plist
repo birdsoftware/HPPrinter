@@ -16,6 +16,21 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.1</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>videoFeedBox</string>
+			<key>CFBundleURLName</key>
+			<string>carepointe</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>carepointe</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>31</string>
 	<key>LSRequiresIPhoneOS</key>

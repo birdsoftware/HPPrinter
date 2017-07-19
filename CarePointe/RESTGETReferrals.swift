@@ -23,9 +23,9 @@ class GETReferrals {
             "cache-control": "no-cache"
         ]
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/referrals/userId/"+userID)! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: Constants.User.allReferrals + userID)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//"http://carepointe.cloud:4300/api/referrals/userId/"
         
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers

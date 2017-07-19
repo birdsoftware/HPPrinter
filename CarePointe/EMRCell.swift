@@ -12,6 +12,6 @@ import UIKit
 class EMRUpdateCell: UITableViewCell {
     
     @IBOutlet weak var EMRTitle: UILabel!
-    
+    @IBOutlet weak var date: UILabel!
     
 }

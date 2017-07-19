@@ -83,9 +83,10 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
         more.backgroundColor = UIColor.orange
     
         let favorite = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
-            //self.isEditing = false
-            self.medicationData.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            self.selectedRow = indexPath.row
+            self.removeMedication(indexPath: indexPath)
+            //self.medicationData.remove(at: indexPath.row)
+            //tableView.deleteRows(at: [indexPath], with: .fade)
             print("Delete button tapped")
         }
         favorite.backgroundColor = UIColor.red
@@ -103,10 +104,90 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
     //
     // MARK: - Supporting Functions
     //
+    func removeMedication(indexPath: IndexPath){
+        
+        ViewControllerUtils().showActivityIndicator(uiView: self.view)
+        
+        let data = medicationData[indexPath.row]
+        let medicaitonID = data["id"]!
+        
+        //1. Display alert and get message, save locally, later update Change Log on web app
+        //"Do you want to delete this medication?" [YES] -> "Describe Modifications | Medication Reconciliation" [SAVE]
+        let alert = UIAlertController(title: "Do you want to delete this medication?",
+                                      message: "\(data["medications"]!)",
+                                      preferredStyle: .alert)
+        
+        // Submit button
+        let submitAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
+            
+            // Get 1st TextField's text for Change Log
+            let declineMessage = "Medication \(medicaitonID) deleted by . " + alert.textFields![0].text! //print(textField)
+            
+            // remove medication
+            
+             //2. Call DELETE API [on sucess] -> 3.update UI
+            
+             let downloadToken = DispatchGroup()
+             downloadToken.enter()
+             
+             GETToken().signInCarepoint(dispachInstance: downloadToken)
+             
+             downloadToken.notify(queue: DispatchQueue.main)  {
+             
+                 let token = UserDefaults.standard.string(forKey: "token")!
+                 
+                 let removeAMed = DispatchGroup()
+                 removeAMed.enter()
+                 
+                 DeleteMed().aCurrentMed(token: token, medId: medicaitonID, dispachInstance: removeAMed)
+                 
+                 removeAMed.notify(queue: DispatchQueue.main) {//success
+                    
+                    
+                    
+                    // ANIMATE TOAST
+                    UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
+                        
+                        self.view.makeToast("Medication Deleted", duration: 1.1, position: .center)
+                        
+                    }, completion: { finished in
+                        ViewControllerUtils().hideActivityIndicator(uiView: self.view)
+                        self.view.viewWithTag(1)?.removeFromSuperview()//added a tag so this actualy removes the view see activityIndicator.swift
+                    })
+                 
+                    //3. Update UI
+                    self.medicationData.remove(at: self.selectedRow)
+                    self.medicationTableView.deleteRows(at: [indexPath], with: .fade)
+                 }
+             }
+
+        })
+        
+        // Cancel button
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        
+        // Add 1 textField and customize it
+        alert.addTextField { (textField: UITextField) in
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .default
+            textField.autocorrectionType = .default
+            textField.placeholder = "Describe Modifications | Med Rec"
+            textField.clearButtonMode = .whileEditing
+        }
+        
+        // Add action buttons and present the Alert
+        alert.addAction(submitAction)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+
+        
+        
+    }
     func editMedication(){
         //Med List
         self.performSegue(withIdentifier: "Container1ToAddEditRx", sender: self)
     }
+    
     func loadCurrentMedsForGivenPatientFromJSON(){
         
         let demographics = UserDefaults.standard.object(forKey: "demographics") as? [[String]] ?? [[String]]()//saved from PatientListVC

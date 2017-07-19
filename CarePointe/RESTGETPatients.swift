@@ -31,9 +31,9 @@ class GETPatients {
            // "postman-token": "5b46169a-a62b-bd4a-e93f-5056ff0b508a"
         ]
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/patients/status/active")! as URL,//"http://carepointe.cloud:4300/api/patients/"
+        let request = NSMutableURLRequest(url: NSURL(string: Constants.Patient.patients)! as URL,//"http://carepointe.cloud:4300/api/patients/"
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//http://carepointe.cloud:4300/api/patients/status/active
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

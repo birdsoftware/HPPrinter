@@ -29,9 +29,9 @@ class GETRecipients {
             // "postman-token": "5b46169a-a62b-bd4a-e93f-5056ff0b508a"
         ]
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/inbox/users")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: Constants.Message.inboxUsersList)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//http://carepointe.cloud:4300/api/inbox/users
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

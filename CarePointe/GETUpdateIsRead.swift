@@ -17,9 +17,9 @@ class UserRead {
             "cache-control": "no-cache"
         ]
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/inbox/messageId/"+messageId)! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: Constants.Message.isRead + messageId)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//"http://carepointe.cloud:4300/api/inbox/messageId/"
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

@@ -15,7 +15,7 @@ class GETVitals {
         var vitals = [[String]]()//Array<Dictionary<String,String>>()
         var vital = [String]()//Dictionary<String,String>()
         
-        let nsurlAlerts = "http://carepointe.cloud:4300/api/patientvitals/patientId/" + patientID
+        let nsurlAlerts = Constants.Patient.patientVitals + patientID
         
         let headers = [
             "authorization": token,
@@ -24,7 +24,7 @@ class GETVitals {
         
         let request = NSMutableURLRequest(url: NSURL(string: nsurlAlerts)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//"http://carepointe.cloud:4300/api/patientvitals/patientId/"
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

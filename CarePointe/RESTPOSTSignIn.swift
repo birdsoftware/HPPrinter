@@ -27,9 +27,9 @@ class POSTSignin {
         
         //print(String(data: postData, encoding: .utf8)!) //{test@test.com, test123456}
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/signin")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: Constants.Authentication.signinURL)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//"http://carepointe.cloud:4300/api/signin"
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headers
         request.httpBody = postData as Data

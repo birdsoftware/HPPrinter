@@ -17,6 +17,12 @@ extension UIViewController {
 
     }
  
+//    func stringByAddingPercentEncodingForRFC3986() -> String? {
+//        //let unreserved = "-._~/?"
+//        //let allowed = NSMutableCharacterSet.alphanumeric()
+//        //allowed.addCharacters(in: unreserved)
+//        return string.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
+//    }
     
 }
 

@@ -32,9 +32,9 @@ class PUTVitals {
         
         //print(String(data: postData, encoding: .utf8)!) //{test@test.com, test123456}
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/patientvitals/patientId/"+patientID)! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: Constants.Patient.putVitals + patientID)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//"http://carepointe.cloud:4300/api/patientvitals/patientId/"
         request.httpMethod = "PUT"
         request.allHTTPHeaderFields = headers
         request.httpBody = postData as Data

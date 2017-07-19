@@ -14,7 +14,7 @@ class GETDisease {
         
         var disease = Array<Dictionary<String,String>>()
         
-        let nsurlAlerts = "http://carepointe.cloud:4300/api/patientdisease/episodeId/" + episodeID
+        let nsurlAlerts = Constants.Patient.patientDisease + episodeID
         
         let headers = [
             "authorization": token,
@@ -23,7 +23,7 @@ class GETDisease {
         
         let request = NSMutableURLRequest(url: NSURL(string: nsurlAlerts)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//"http://carepointe.cloud:4300/api/patientdisease/episodeId/"
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

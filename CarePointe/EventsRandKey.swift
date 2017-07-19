@@ -19,7 +19,7 @@ class GETEvents {
         var events = Array<Dictionary<String,String>>()
         var event = Dictionary<String,String>()
         
-        let nsurlAlerts = "http://carepointe.cloud:4300/api/eventtokbox/randomkey/" + randomKey
+        let nsurlAlerts = Constants.Tokbox.eventByRandomKey + randomKey
         
         let headers = [
             "authorization": tokenSignIn,
@@ -28,7 +28,7 @@ class GETEvents {
         
         let request = NSMutableURLRequest(url: NSURL(string: nsurlAlerts)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//"http://carepointe.cloud:4300/api/eventtokbox/randomkey/"
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

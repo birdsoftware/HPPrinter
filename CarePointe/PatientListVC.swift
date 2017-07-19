@@ -154,6 +154,9 @@ class PatientListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             GETPatients().getPatients(token: token!, dispachInstance: downloadPatients)
         
             downloadPatients.notify(queue: DispatchQueue.main) {//got Referrals
+
+                    self.patientData = UserDefaults.standard.value(forKey: "RESTPatients") as! Array<Dictionary<String, String>>
+ 
                 print("refreshData")
                 self.patientTable.reloadData()
                 let patientCount = self.patientData.count//ScopeData.count

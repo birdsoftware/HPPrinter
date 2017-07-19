@@ -12,12 +12,12 @@ class POSTPatientUpdates {
     
     func updatePatientUpdates(token: String, userID: String, patientID: String, update:Dictionary<String,String>, dispachInstance: DispatchGroup){
         
-        let nsurlAlerts = "http://carepointe.cloud:4300/api/patientsupdates/userId/" + userID + "/patientId/" + patientID
+        let nsurlAlerts = Constants.Patient.postPatientUpdate + userID + "/patientId/" + patientID
         
         let headers = [
             "authorization": token,
             "content-type": "application/json",
-            "cache-control": "no-cache" //"Content-Type" : "application/json"
+            "cache-control": "no-cache"
         ]
         
         let parameters = [
@@ -30,7 +30,7 @@ class POSTPatientUpdates {
         
         let request = NSMutableURLRequest(url: NSURL(string: nsurlAlerts)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//"http://carepointe.cloud:4300/api/patientsupdates/userId/"
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headers
         request.httpBody = postData as Data

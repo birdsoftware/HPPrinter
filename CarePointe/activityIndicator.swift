@@ -27,6 +27,7 @@ class ViewControllerUtils {
         container.frame = uiView.frame
         container.center = uiView.center
         container.backgroundColor = UIColorFromHex(rgbValue: 0xffffff, alpha: 0.3)
+        container.tag = 1//added for self.view.viewWithTag(1)?.removeFromSuperview() use when want to remove Activiy Indicator
         
         loadingView.frame = CGRect(x:0,y: 0,width: 80,height: 80)
         loadingView.center = uiView.center

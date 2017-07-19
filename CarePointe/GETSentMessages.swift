@@ -25,7 +25,7 @@ class GETSentMessages {
         var date = ""
         var time = ""
         
-        let nsurlAlerts = "http://carepointe.cloud:4300/api/inbox/sent/userId/" + userID
+        let nsurlAlerts = Constants.Message.fromSent + userID
         
         let headers = [
             "authorization": token,
@@ -34,7 +34,7 @@ class GETSentMessages {
         
         let request = NSMutableURLRequest(url: NSURL(string: nsurlAlerts)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//"http://carepointe.cloud:4300/api/inbox/sent/userId/"
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

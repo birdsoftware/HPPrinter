@@ -33,9 +33,9 @@ class PUTReferrals {
         let postData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
         //print(String(data: postData, encoding: .utf8)!) //{test@test.com, test123456}
-        let request = NSMutableURLRequest(url: NSURL(string: "http://carepointe.cloud:4300/api/referrals/careplanid/"+carePlanID)! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: Constants.Patient.putReferral + carePlanID)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 10.0)//http://carepointe.cloud:4300/api/referrals/careplanid/
         request.httpMethod = "PUT"
         request.allHTTPHeaderFields = headers
         request.httpBody = postData as Data

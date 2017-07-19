@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eRj-E0-29K">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eRj-E0-29K">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -2497,18 +2497,6 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     <action selector="feedsSegmentControllerTapped:" destination="gwG-IL-8Pd" eventType="valueChanged" id="gfx-pR-EzL"/>
                                 </connections>
                             </segmentedControl>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Wg-Tf-Vwn">
-                                <rect key="frame" x="0.0" y="111" width="375" height="507"/>
-                                <connections>
-                                    <segue destination="jWz-Ny-LVl" kind="embed" id="fIt-Yd-S0z"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fiD-aU-6w0">
-                                <rect key="frame" x="0.0" y="111" width="375" height="507"/>
-                                <connections>
-                                    <segue destination="fmC-lO-doP" kind="embed" id="CMS-Rw-t96"/>
-                                </connections>
-                            </containerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gqu-qX-F1S">
                                 <rect key="frame" x="0.0" y="157" width="375" height="461"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2577,6 +2565,18 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Wg-Tf-Vwn">
+                                <rect key="frame" x="0.0" y="111" width="375" height="507"/>
+                                <connections>
+                                    <segue destination="jWz-Ny-LVl" kind="embed" id="fIt-Yd-S0z"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fiD-aU-6w0">
+                                <rect key="frame" x="0.0" y="111" width="375" height="507"/>
+                                <connections>
+                                    <segue destination="fmC-lO-doP" kind="embed" id="CMS-Rw-t96"/>
+                                </connections>
+                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhN-4L-9qN" userLabel="back button">
                                 <rect key="frame" x="16" y="20" width="50" height="40"/>
                                 <color key="backgroundColor" red="0.31095686550000001" green="0.56154131890000003" blue="0.001000816934" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2665,7 +2665,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSS-gX-HPb">
-                                        <rect key="frame" x="6" y="26" width="46" height="30"/>
+                                        <rect key="frame" x="10" y="26" width="46" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Ph6-Zc-OEb"/>
                                             <constraint firstAttribute="width" constant="46" id="tYG-5r-6M7"/>
@@ -2684,7 +2684,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                     <constraint firstItem="RSS-gX-HPb" firstAttribute="top" secondItem="Vrc-kC-kLs" secondAttribute="top" constant="26" id="EnD-5Y-Yyd"/>
                                     <constraint firstAttribute="height" constant="70" id="Pnp-Yc-YJ2"/>
                                     <constraint firstItem="cDg-B1-j8b" firstAttribute="top" secondItem="Vrc-kC-kLs" secondAttribute="top" constant="19" id="R45-4A-Zkf"/>
-                                    <constraint firstItem="RSS-gX-HPb" firstAttribute="leading" secondItem="Vrc-kC-kLs" secondAttribute="leading" constant="6" id="bzU-p5-FVX"/>
+                                    <constraint firstItem="RSS-gX-HPb" firstAttribute="leading" secondItem="Vrc-kC-kLs" secondAttribute="leading" constant="10" id="bzU-p5-FVX"/>
                                     <constraint firstItem="Nh8-J7-ZC0" firstAttribute="top" secondItem="Vrc-kC-kLs" secondAttribute="top" constant="31" id="maY-JO-RY1"/>
                                     <constraint firstItem="Nh8-J7-ZC0" firstAttribute="centerX" secondItem="Vrc-kC-kLs" secondAttribute="centerX" id="poM-cr-gbS"/>
                                     <constraint firstAttribute="trailing" secondItem="cDg-B1-j8b" secondAttribute="trailing" constant="8" id="tUe-jS-qZh"/>
@@ -3037,16 +3037,15 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         <viewControllerLayoutGuide type="bottom" id="FOE-gx-nAc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gGC-ZX-3li">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="507"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fvj-uc-XzN">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A EMR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIi-wf-ukz">
-                                        <rect key="frame" x="8" y="20" width="292" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A EMR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIi-wf-ukz">
+                                        <rect key="frame" x="64" y="31.5" width="311" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="292" id="7Mq-TS-xsB"/>
                                             <constraint firstAttribute="height" constant="21" id="8yg-cJ-k9g"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
@@ -3056,41 +3055,61 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 </subviews>
                                 <color key="backgroundColor" red="0.32969617839999998" green="0.66176503900000005" blue="0.81706231829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="QIi-wf-ukz" firstAttribute="top" secondItem="fvj-uc-XzN" secondAttribute="top" constant="20" id="OJr-Vm-hmp"/>
-                                    <constraint firstItem="QIi-wf-ukz" firstAttribute="leading" secondItem="fvj-uc-XzN" secondAttribute="leading" constant="8" id="UZu-Xh-gFR"/>
-                                    <constraint firstAttribute="height" constant="60" id="svO-Rs-bz7"/>
+                                    <constraint firstAttribute="trailing" secondItem="QIi-wf-ukz" secondAttribute="trailing" id="BOu-eW-die"/>
+                                    <constraint firstAttribute="height" constant="70" id="svO-Rs-bz7"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZpV-CU-PYw">
+                                <rect key="frame" x="10" y="27" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="KzA-j9-s6G"/>
+                                    <constraint firstAttribute="width" constant="46" id="mMD-Jh-jNx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonAction:" destination="biI-VE-lmT" eventType="touchUpInside" id="Ehy-aZ-Ncu"/>
+                                    <action selector="goBackButtonTapped:" destination="n1s-gh-Bg8" eventType="touchUpInside" id="oaD-3H-pLG"/>
+                                    <segue destination="8NJ-xW-4eH" kind="presentation" identifier="fromEMRtoPatientTabBar" animates="NO" id="qSr-SZ-IDa"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rpn-SF-LRZ">
                                 <rect key="frame" x="67" y="269" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HqW-Iv-ObF">
-                                <rect key="frame" x="0.0" y="60" width="375" height="447"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="597"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="QIi-wf-ukz" firstAttribute="centerY" secondItem="ZpV-CU-PYw" secondAttribute="centerY" id="BXF-Fn-AGI"/>
+                            <constraint firstItem="QIi-wf-ukz" firstAttribute="leading" secondItem="ZpV-CU-PYw" secondAttribute="trailing" constant="8" id="NwX-00-Xad"/>
                             <constraint firstItem="HqW-Iv-ObF" firstAttribute="leading" secondItem="gGC-ZX-3li" secondAttribute="leading" id="PAQ-1h-w1H"/>
                             <constraint firstAttribute="trailing" secondItem="fvj-uc-XzN" secondAttribute="trailing" id="T4o-IL-tuJ"/>
                             <constraint firstItem="fvj-uc-XzN" firstAttribute="leading" secondItem="gGC-ZX-3li" secondAttribute="leading" id="UHA-qa-7aV"/>
                             <constraint firstItem="HqW-Iv-ObF" firstAttribute="top" secondItem="fvj-uc-XzN" secondAttribute="bottom" id="WdW-Tq-U4O"/>
+                            <constraint firstItem="ZpV-CU-PYw" firstAttribute="top" secondItem="fvj-uc-XzN" secondAttribute="top" constant="27" id="X2q-MZ-rFP"/>
                             <constraint firstAttribute="trailing" secondItem="HqW-Iv-ObF" secondAttribute="trailing" id="ckH-ar-9HK"/>
                             <constraint firstItem="FOE-gx-nAc" firstAttribute="top" secondItem="HqW-Iv-ObF" secondAttribute="bottom" id="pBf-fV-SHk"/>
                             <constraint firstItem="fvj-uc-XzN" firstAttribute="top" secondItem="gGC-ZX-3li" secondAttribute="top" id="qWo-ZZ-4qc"/>
+                            <constraint firstItem="ZpV-CU-PYw" firstAttribute="leading" secondItem="gGC-ZX-3li" secondAttribute="leading" constant="10" id="tva-px-3qc"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="EMRWebView" destination="HqW-Iv-ObF" id="CXZ-21-mC7"/>
                         <outlet property="activityIndicatorView" destination="Rpn-SF-LRZ" id="LKq-zk-gpp"/>
+                        <outlet property="backButton" destination="ZpV-CU-PYw" id="MUH-Af-cqd"/>
                         <outlet property="patientTitleLabel" destination="QIi-wf-ukz" id="5UJ-yI-zMY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3in-Id-pf9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7457" y="90"/>
+            <point key="canvasLocation" x="8378" y="-470"/>
         </scene>
         <!--Patient-->
         <scene sceneID="mB2-Uu-rD8">
@@ -3220,7 +3239,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         <viewControllerLayoutGuide type="bottom" id="ui5-FN-ESg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zif-Hl-Ssh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sLG-Hk-ihb">
@@ -3302,7 +3321,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EP7-0m-MaV">
-                                <rect key="frame" x="0.0" y="170" width="375" height="497"/>
+                                <rect key="frame" x="0.0" y="170" width="375" height="448"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="screeningscell" rowHeight="60" id="aTJ-Q8-bFW" customClass="ScreeningsCell" customModule="CarePointe" customModuleProvider="target">
@@ -3415,7 +3434,7 @@ successors, and assigns. Neither this Agreement nor any of the rights, interests
                         <viewControllerLayoutGuide type="bottom" id="ggM-o6-XTO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LGY-MT-H8z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Q:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ueb-dJ-PS7">
@@ -5889,6 +5908,14 @@ Performance: 13</string>
             </objects>
             <point key="canvasLocation" x="7790" y="-923"/>
         </scene>
+        <!--PatientTabBar-->
+        <scene sceneID="pwr-wG-N5S">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="PatientTabBar" id="8NJ-xW-4eH" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F4h-jO-J50" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7897" y="-836"/>
+        </scene>
         <!--EMR Updates-->
         <scene sceneID="ClV-lG-cGY">
             <objects>
@@ -5901,54 +5928,75 @@ Performance: 13</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="507"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jEH-vi-z1h">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jEH-vi-z1h">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="507"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="emrupdatecell" id="qlP-vw-yNa" customClass="EMRUpdateCell" customModule="CarePointe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="emrupdatecell" rowHeight="70" id="qlP-vw-yNa" customClass="EMRUpdateCell" customModule="CarePointe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qlP-vw-yNa" id="fku-fC-TX8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMR Data 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1S-O5-YLS">
-                                                    <rect key="frame" x="8" y="11" width="367" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHY_1 | HOME_VISIT | Signed Off ? No" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1S-O5-YLS">
+                                                    <rect key="frame" x="8" y="9" width="367" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11/24/2007 11:15 AM" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qDy-UU-ZcT">
+                                                    <rect key="frame" x="8" y="30.5" width="141.5" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="GhB-Ti-kRb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="m1S-O5-YLS" secondAttribute="trailing" id="34q-X6-ngQ"/>
-                                                <constraint firstAttribute="bottom" secondItem="m1S-O5-YLS" secondAttribute="bottom" constant="11" id="5TQ-es-ufo"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="qDy-UU-ZcT" secondAttribute="bottom" constant="7" id="Nf7-Ud-PMn"/>
+                                                <constraint firstItem="qDy-UU-ZcT" firstAttribute="leading" secondItem="m1S-O5-YLS" secondAttribute="leading" id="TeF-gU-wse"/>
                                                 <constraint firstItem="m1S-O5-YLS" firstAttribute="leading" secondItem="fku-fC-TX8" secondAttribute="leading" constant="8" id="UG0-sC-Stz"/>
-                                                <constraint firstItem="m1S-O5-YLS" firstAttribute="top" secondItem="fku-fC-TX8" secondAttribute="top" constant="11" id="kGV-nm-sa3"/>
+                                                <constraint firstItem="qDy-UU-ZcT" firstAttribute="top" secondItem="m1S-O5-YLS" secondAttribute="bottom" constant="2" id="k3U-9b-udF"/>
+                                                <constraint firstItem="m1S-O5-YLS" firstAttribute="top" secondItem="fku-fC-TX8" secondAttribute="top" constant="9" id="kGV-nm-sa3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="EMRTitle" destination="m1S-O5-YLS" id="G8r-LZ-fpU"/>
-                                            <segue destination="biI-VE-lmT" kind="show" id="c3j-jl-H0w"/>
+                                            <outlet property="date" destination="qDy-UU-ZcT" id="Hm0-lK-VsX"/>
+                                            <segue destination="biI-VE-lmT" kind="presentation" animates="NO" id="c3j-jl-H0w"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Encounters for this patient" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTP-8a-kef">
+                                <rect key="frame" x="79.5" y="244" width="216.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jEH-vi-z1h" firstAttribute="top" secondItem="VDS-fp-9G9" secondAttribute="topMargin" id="CFY-ca-G9u"/>
+                            <constraint firstItem="rTP-8a-kef" firstAttribute="centerX" secondItem="VDS-fp-9G9" secondAttribute="centerX" id="HCr-f9-gRe"/>
                             <constraint firstItem="jEH-vi-z1h" firstAttribute="leading" secondItem="VDS-fp-9G9" secondAttribute="leading" id="Mn4-PR-6xC"/>
                             <constraint firstAttribute="trailing" secondItem="jEH-vi-z1h" secondAttribute="trailing" id="kyK-u9-vzx"/>
+                            <constraint firstItem="rTP-8a-kef" firstAttribute="centerY" secondItem="VDS-fp-9G9" secondAttribute="centerY" id="qjT-5a-PVt"/>
                             <constraint firstItem="jEH-vi-z1h" firstAttribute="bottom" secondItem="VDS-fp-9G9" secondAttribute="bottomMargin" id="uwy-jD-qYw"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emrTable" destination="jEH-vi-z1h" id="3wU-rp-t7T"/>
+                        <outlet property="noEncountersAlertLabel" destination="rTP-8a-kef" id="MDC-Vj-6x3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PW0-ZC-Xnj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7457" y="-529"/>
+            <point key="canvasLocation" x="7456.8000000000002" y="-529.38530734632684"/>
         </scene>
         <!--Patient Alerts-->
         <scene sceneID="pOu-sg-uUv">
@@ -6474,11 +6522,11 @@ Performance: 13</string>
         <image name="x_sign80x680.png" width="80" height="680"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="tUz-HL-2Xx"/>
         <segue reference="1bi-B5-5vK"/>
-        <segue reference="N4B-Lg-DlY"/>
-        <segue reference="5Kb-j3-bJy"/>
         <segue reference="Uev-SA-1Wl"/>
-        <segue reference="Cte-Zq-RvK"/>
+        <segue reference="5Kb-j3-bJy"/>
+        <segue reference="N4B-Lg-DlY"/>
         <segue reference="yqQ-by-iSd"/>
         <segue reference="nHS-Rj-NYJ"/>
     </inferredMetricsTieBreakers>
