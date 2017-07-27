@@ -8,7 +8,7 @@
 
 import Foundation
 
-var toggleSB = "sandbox." //switch to empty string for carepointe
+var toggleSB = "sandbox." //Use to Toggel CP/SB. Empty string "" for carepointe, "sandbox." for sandbox API's
 
 struct Constants {
     struct Authentication {
@@ -18,10 +18,14 @@ struct Constants {
     struct Patient {
         static let patients = "http://"+toggleSB+"carepointe.cloud:4300/api/patients/status/active" // RESTGETPatients.swift
         static let patient = "http://"+toggleSB+"carepointe.cloud:4300/api/patients/patientId/"
-        //rx
+        //rx - allergies
         static let patientAllergies = "http://"+toggleSB+"carepointe.cloud:4300/api/rx/allergy/patientId/" // GETCurAllergies.swift
+        static let deleteAllergy = "http://"+toggleSB+"carepointe.cloud:4300/api/rx/allergy/allergyId/" //  DELETEAllergy.swift
+        //rx - meds
         static let patientCurMeds = "http://"+toggleSB+"carepointe.cloud:4300/api/rx/curmeds/patientId/" // GETCurMeds.swift
         static let postMedication = "http://"+toggleSB+"carepointe.cloud:4300/api/rx/curmeds" //POSTMedication.swift
+        static let deleteMedication = "http://"+toggleSB+"carepointe.cloud:4300/api/rx/curmeds/medId/"
+        //rx - questionnaire
         static let patientQuestionnaire = "http://"+toggleSB+"carepointe.cloud:4300/api/rx/questionnaire/patientId/" // GETNewQuestionnaire.swift
         
         static let patientCareTeam = "http://"+toggleSB+"carepointe.cloud:4300/api/caseteam/patientId/" //RESTGETCareTeam.swift
@@ -34,6 +38,14 @@ struct Constants {
         static let postPatientUpdate = "http://"+toggleSB+"carepointe.cloud:4300/api/patientsupdates/userId/" //POSTPatientUpdates.swift
         static let patientVitals = "http://"+toggleSB+"carepointe.cloud:4300/api/patientvitals/patientId/" //RESTGETVitals.swift
         static let putVitals = "http://"+toggleSB+"carepointe.cloud:4300/api/patientvitals/patientId/" //RESTPUTVitals.swift
+    }
+    struct Case {
+        static let patientCase = "http://"+toggleSB+"carepointe.cloud:4300/api/case/patientId/"
+        static let episodeNotes = "http://"+toggleSB+"carepointe.cloud:4300/api/case/episodeNotes/episodeId/"
+    }
+    struct ED {
+        static let visits = "http://"+toggleSB+"carepointe.cloud:4300/api/er/patientId/"
+        static let visitCount = "http://"+toggleSB+"carepointe.cloud:4300/api/er/visits/patientId/"
     }
     struct Message {
         static let postNewMessage = "http://"+toggleSB+"carepointe.cloud:4300/api/inbox" //POSTInboxMessage.swift

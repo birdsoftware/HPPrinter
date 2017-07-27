@@ -86,3 +86,10 @@ class locationsViewC: UIViewController , UITableViewDelegate, UITableViewDataSou
         return cell
     }
 }
+
+// MARK: - Private Methods
+private extension locationsViewC{
+    
+    
+    
+}

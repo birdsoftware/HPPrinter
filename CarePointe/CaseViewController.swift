@@ -22,11 +22,12 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var clinicalTable: UITableView!
     
     var caseInfo = [["Start Date", "-"],//"02/02/2017"],
+                    ["NTUC","-"],
+                    ["NTUC notes", "-"],
                    ["Program", "-"],//"Transitional Care"],
-                   //"Fibromyalgia"],
                    ["Acuity","-"],//"High"],
                    ["SNP","-"],//"Caregiver, Supplies, Transportation"],
-                   ["Summary","-"],//"Patient came to us from Observation Unit at Chandler Regional Hospital. Patient had a few prior hospitalizations due to falls in the past weeks. Patient suffers from permanent brain damage due to traumatic car accident. Experiences access falls and confusion and needs 24hr monitoring. Lives with Husband and Daughter that act as caregivers."]
+                   ["Summary","-"],//"Patient came to us from Observation Unit..."]
                    ]
     
     var clinicalData = [["ICD-10's","-"],//"Dependence on Wheelchair"],
@@ -37,7 +38,8 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
     //API data
     var restLocations = Array<Dictionary<String,String>>()
     var diseases = Array<Dictionary<String,String>>()
-
+    //var ntuc = Array<Dictionary<String,String>>()
+    //var episodeNotes = Array<Dictionary<String,String>>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,12 +66,12 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         restLocations = UserDefaults.standard.object(forKey: "RESTLocations") as? Array<Dictionary<String,String>> ?? Array<Dictionary<String,String>>()
         
-        if restLocations.isEmpty == false {
-        
-            let caseData = restLocations[0]
+        if (restLocations.isEmpty == false) {
             
+            let caseData = restLocations[0]
             var episodeid = ""
             episodeid = caseData["Episode_ID"] ?? ""
             print("episodeid \(episodeid)")
@@ -77,23 +79,27 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let admitDate = convertDateStringToDate(longDate: caseData["CreatedDateTime"]!)//AdmittanceDate
             
-            caseInfo = [["Start Date", admitDate],//
-                        ["Program", caseData["CarePrograms"]!],//"Transitional Care"],
-                        //"Fibromyalgia"],
-                        ["Acuity",caseData["ComplexityLevel"]!],//"High"],
-                        ["SNP", caseData["Disease"]!],//"Caregiver, Supplies, Transportation"],
-                        ["Summary", caseData["EpisodeSummary"]!],//"Patient came to us from Observation Unit at Chandler Regional Hospital. Patient had a few prior hospitalizations due to falls in the past weeks. Patient suffers from permanent brain damage due to traumatic car accident. Experiences access falls and confusion and needs 24hr monitoring. Lives with Husband and Daughter that act as caregivers."]
-            ]
+            caseInfo[0] = ["Start Date", admitDate]//
+            //            ["NTUC",ntucDict["ntuc"]!],
+            //            ["NTUC notes", "-"],
+            caseInfo[3] = ["Program", caseData["CarePrograms"]!]//"Transitional Care"]
+            caseInfo[4] = ["Acuity",caseData["ComplexityLevel"]!]//"High"],
+            caseInfo[5] = ["SNP", caseData["Disease"]!]//"Caregiver, Supplies, Transportation"],
+            caseInfo[6] = ["Summary", caseData["EpisodeSummary"]!]//"Patient came to us from Observation Unit at Chandler Regional Hospital. Patient had a few prior hospitalizations due to falls in the past weeks. Patient suffers from permanent brain damage due to traumatic car accident. Experiences access falls and confusion and needs 24hr monitoring. Lives with Husband and Daughter that act as caregivers."]
             
-            clinicalData = [["ICD-10's", caseData["ICD_9s"]!],//"Dependence on Wheelchair"],
-                                ["Symptoms", caseData["Diagnosis"]!],
-                                ["Disease", ""]//caseData["Disease"]!]
-            ]
             
-            caseTable.reloadData()
-            clinicalTable.reloadData()
+            clinicalData[0] = ["ICD-10's", caseData["ICD_9s"]!]//"Dependence on Wheelchair"],
+            clinicalData[1] = ["Symptoms", caseData["Diagnosis"]!]
+            
+            //self.clinicalData[2] = ["Disease", stringDisease]
+            //clinicalData = [["ICD-10's", caseData["ICD_9s"]!],//"Dependence on Wheelchair"],
+            //                    ["Symptoms", caseData["Diagnosis"]!],
+            //                    ["Disease", ""]//caseData["Disease"]!]
+            //]
             
             signInThenGetDeseaseData(episode: episodeid)//update table disease_name, complexity
+            caseTable.reloadData()
+            clinicalTable.reloadData()
         }
     }
     
@@ -135,8 +141,7 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
     func signInThenGetDeseaseData(episode: String)//update table disease_name, complexity
     {
         
-        let downloadToken = DispatchGroup()
-        downloadToken.enter()
+        let downloadToken = DispatchGroup(); downloadToken.enter()
         
         // 0 get token again -----------
         GETToken().signInCarepoint(dispachInstance: downloadToken)
@@ -145,12 +150,41 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let token = UserDefaults.standard.string(forKey: "token")!
 
-                    //var dontShowToast = true //if viewDidLoad - don't 2x TOAST
-                    //if(showToast == "viewWillAppear") { dontShowToast = false}
+            //get demographics from API latest local save
+            let demographics = UserDefaults.standard.object(forKey: "demographics")! as? [[String]] ?? [[String]]()//saved from PatientListVC
+            let patientID = demographics[0][1]//"UniqueID"
             
             //GET DISEASEs---------------------
             self.getDiseaseFromWebServer(token: token, episode: episode)//update table disease_name, complexity
-            //-------------------------------
+            
+            //GET ntuc Case--------------------
+            let caseFlag = DispatchGroup(); caseFlag.enter();
+            GETCase().getNTUCString(token: token, patientID: patientID, dispachInstance: caseFlag)
+            
+            caseFlag.notify(queue: DispatchQueue.main) {
+                let ntuc = UserDefaults.standard.ntuc()
+
+                if (ntuc.isEmpty == false) {
+                    let ntucDict = ntuc[0]
+                    self.caseInfo[1] = ["NTUC",ntucDict["ntuc"]!]
+                    
+                    let activeEpisodeID = ntucDict["Episode_ID"]
+                    let episodeNoteFlag = DispatchGroup(); episodeNoteFlag.enter();
+                    GETEpisode().getEpisodeNotes(token: token, episodeID: activeEpisodeID!, dispachInstance: episodeNoteFlag)
+                    
+                    episodeNoteFlag.notify(queue: DispatchQueue.main) {
+                        
+                        let episodeNotes = UserDefaults.standard.episodeNotes()
+                        
+                        if (episodeNotes.isEmpty == false) {
+                            let enDict = episodeNotes[0]
+                            self.caseInfo[2] = ["NTUC notes", enDict["episode_notes"]!]
+                    
+                            self.caseTable.reloadData()
+                        }
+                    }
+                }
+            }
         }
     }
     

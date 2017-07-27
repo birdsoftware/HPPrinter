@@ -75,45 +75,50 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let more = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
+        let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
             self.selectedRow = indexPath.row
             self.editMedication()
             print("Edit button tapped")
         }
-        more.backgroundColor = UIColor.orange
+        edit.backgroundColor = UIColor.orange
     
-        let favorite = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
-            self.selectedRow = indexPath.row
-            self.removeMedication(indexPath: indexPath)
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+            //self.selectedRow = indexPath.row
+            self.removeMedication(indexPath: indexPath, typeString: "Delete")
             //self.medicationData.remove(at: indexPath.row)
             //tableView.deleteRows(at: [indexPath], with: .fade)
             print("Delete button tapped")
         }
-        favorite.backgroundColor = UIColor.red
+        delete.backgroundColor = UIColor.red
         
-        let share = UITableViewRowAction(style: .normal, title: "Discontinue") { action, index in
+        let discontinue = UITableViewRowAction(style: .normal, title: "Discontinue") { action, index in
             //self.isEditing = false
             print("Discontinue button tapped")
+            self.removeMedication(indexPath: indexPath, typeString: "Discontinue")
         }
-        share.backgroundColor = UIColor.blue
+        discontinue.backgroundColor = UIColor.blue
         
-        return [share, favorite, more]
+        return [edit, delete, discontinue]
     }
     
     
     //
     // MARK: - Supporting Functions
     //
-    func removeMedication(indexPath: IndexPath){
+    //hold this reference in your class
+    weak var AddAlertSaveAction: UIAlertAction?
+    
+    func removeMedication(indexPath: IndexPath, typeString: String){
         
         ViewControllerUtils().showActivityIndicator(uiView: self.view)
         
         let data = medicationData[indexPath.row]
         let medicaitonID = data["id"]!
+        //let typeString:String = isDiscontinue ? "Discontinue" : "Delete"
         
         //1. Display alert and get message, save locally, later update Change Log on web app
         //"Do you want to delete this medication?" [YES] -> "Describe Modifications | Medication Reconciliation" [SAVE]
-        let alert = UIAlertController(title: "Do you want to delete this medication?",
+        let alert = UIAlertController(title: typeString+" this medication? Please provide Med Rec below.",
                                       message: "\(data["medications"]!)",
                                       preferredStyle: .alert)
         
@@ -121,14 +126,11 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
         let submitAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
             
             // Get 1st TextField's text for Change Log
-            let declineMessage = "Medication \(medicaitonID) deleted by . " + alert.textFields![0].text! //print(textField)
+            let declineMessage = "Medication \(medicaitonID) "+typeString+" by . " + alert.textFields![0].text! //print(textField)
             
             // remove medication
-            
              //2. Call DELETE API [on sucess] -> 3.update UI
-            
-             let downloadToken = DispatchGroup()
-             downloadToken.enter()
+            let downloadToken = DispatchGroup(); downloadToken.enter()
              
              GETToken().signInCarepoint(dispachInstance: downloadToken)
              
@@ -136,19 +138,16 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
              
                  let token = UserDefaults.standard.string(forKey: "token")!
                  
-                 let removeAMed = DispatchGroup()
-                 removeAMed.enter()
+                let removeAMed = DispatchGroup(); removeAMed.enter()
                  
                  DeleteMed().aCurrentMed(token: token, medId: medicaitonID, dispachInstance: removeAMed)
                  
                  removeAMed.notify(queue: DispatchQueue.main) {//success
                     
-                    
-                    
                     // ANIMATE TOAST
                     UIView.animate(withDuration: 1.1, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
                         
-                        self.view.makeToast("Medication Deleted", duration: 1.1, position: .center)
+                        self.view.makeToast("Medication "+typeString+"d", duration: 1.1, position: .center)
                         
                     }, completion: { finished in
                         ViewControllerUtils().hideActivityIndicator(uiView: self.view)
@@ -156,15 +155,20 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
                     })
                  
                     //3. Update UI
-                    self.medicationData.remove(at: self.selectedRow)
+                    self.medicationData.remove(at: indexPath.row)//self.selectedRow)
                     self.medicationTableView.deleteRows(at: [indexPath], with: .fade)
                  }
              }
-
+            
         })
         
+        
         // Cancel button
-        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
+            
+            ViewControllerUtils().hideActivityIndicator(uiView: self.view)
+            self.view.viewWithTag(1)?.removeFromSuperview()//added a tag so this actualy removes the view see activityIndicator.swift
+        })
         
         // Add 1 textField and customize it
         alert.addTextField { (textField: UITextField) in
@@ -173,15 +177,21 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
             textField.autocorrectionType = .default
             textField.placeholder = "Describe Modifications | Med Rec"
             textField.clearButtonMode = .whileEditing
+            textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
         }
         
         // Add action buttons and present the Alert
         alert.addAction(submitAction)
         alert.addAction(cancel)
+        AddAlertSaveAction = submitAction
+        AddAlertSaveAction?.isEnabled = false
         present(alert, animated: true, completion: nil)
 
         
         
+    }
+    func textChanged(_ sender:UITextField) {
+        AddAlertSaveAction?.isEnabled = !(sender.text?.isEmpty)!//enable submitAction button if text field not empty
     }
     func editMedication(){
         //Med List
@@ -219,6 +229,9 @@ class Container1ViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    //
+    // MARK: - Segue
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      
         if segue.identifier == "Container1ToAddEditRx" {
