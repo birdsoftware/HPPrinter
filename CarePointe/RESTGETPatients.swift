@@ -152,9 +152,6 @@ class GETPatients {
                                 dispachInstance.leave()
                                 
                             }
-                            //No Patients
-                            //JSON.isEmpty == true
-                            print("finished GET All Patients - No Patients to GET")
                         }
                     } catch {
                         print("Error deserializing Patients JSON: \(error)")

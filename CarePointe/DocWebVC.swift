@@ -76,11 +76,13 @@ class DocWebVC: UIViewController, UIWebViewDelegate {
         //web activity indicator: http://stackoverflow.com/questions/38390352/how-to-detect-when-a-uiwebview-has-completely-finished-loading-in-swift
         if webView.isLoading {
             // still loading
+            activityView.isHidden = false
             return
         }
         
         // finish and do something here
-        activityView.removeFromSuperview()
+        //activityView.removeFromSuperview()
+        activityView.isHidden = true
     }
     
     //

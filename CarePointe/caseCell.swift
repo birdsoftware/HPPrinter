@@ -41,3 +41,12 @@ class locationsCell: UITableViewCell {
     
     
 }
+
+class edcell: UITableViewCell {
+    
+    @IBOutlet weak var facility: UILabel!
+    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var chiefComplaint: UILabel!
+    
+    
+}

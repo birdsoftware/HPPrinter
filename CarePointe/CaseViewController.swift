@@ -151,28 +151,28 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
             let token = UserDefaults.standard.string(forKey: "token")!
 
             //get demographics from API latest local save
-            let demographics = UserDefaults.standard.object(forKey: "demographics")! as? [[String]] ?? [[String]]()//saved from PatientListVC
-            let patientID = demographics[0][1]//"UniqueID"
+            //let demographics = UserDefaults.standard.object(forKey: "demographics")! as? [[String]] ?? [[String]]()//saved from PatientListVC
+            //let patientID = demographics[0][1]//"UniqueID"
             
             //GET DISEASEs---------------------
             self.getDiseaseFromWebServer(token: token, episode: episode)//update table disease_name, complexity
             
             //GET ntuc Case--------------------
-            let caseFlag = DispatchGroup(); caseFlag.enter();
-            GETCase().getNTUCString(token: token, patientID: patientID, dispachInstance: caseFlag)
+            //let caseFlag = DispatchGroup(); caseFlag.enter();
+            //GETCase().getNTUCString(token: token, patientID: patientID, dispachInstance: caseFlag)
             
-            caseFlag.notify(queue: DispatchQueue.main) {
+            //caseFlag.notify(queue: DispatchQueue.main) {
                 let ntuc = UserDefaults.standard.ntuc()
 
                 if (ntuc.isEmpty == false) {
                     let ntucDict = ntuc[0]
                     self.caseInfo[1] = ["NTUC",ntucDict["ntuc"]!]
                     
-                    let activeEpisodeID = ntucDict["Episode_ID"]
-                    let episodeNoteFlag = DispatchGroup(); episodeNoteFlag.enter();
-                    GETEpisode().getEpisodeNotes(token: token, episodeID: activeEpisodeID!, dispachInstance: episodeNoteFlag)
+                    //let activeEpisodeID = ntucDict["Episode_ID"]
+                    //let episodeNoteFlag = DispatchGroup(); episodeNoteFlag.enter();
+                    //GETEpisode().getEpisodeNotes(token: token, episodeID: activeEpisodeID!, dispachInstance: episodeNoteFlag)
                     
-                    episodeNoteFlag.notify(queue: DispatchQueue.main) {
+                    //episodeNoteFlag.notify(queue: DispatchQueue.main) {
                         
                         let episodeNotes = UserDefaults.standard.episodeNotes()
                         
@@ -184,8 +184,8 @@ class CaseViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     }
                 }
-            }
-        }
+            //}
+        //}
     }
     
     func getDiseaseFromWebServer(token: String, episode: String)//update table disease_name, complexity

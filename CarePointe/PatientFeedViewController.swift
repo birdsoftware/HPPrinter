@@ -60,7 +60,7 @@ class PatientFeedViewController: UIViewController, UITableViewDelegate, UITableV
         containerView1.isHidden = true
         containerView2.isHidden = true
         
-        // Setup sement control font and font size
+        // Setup segment control font and font size
         let attr = NSDictionary(object: UIFont(name: "Futura", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
         UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject] , for: .normal)
         

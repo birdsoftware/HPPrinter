@@ -51,6 +51,7 @@ class GETED {
                                     
                                     visits.append(["Facility_name":Facility_name, "AdmittanceDate":AdmittanceDate, "ChiefComplaint":ChiefComplaint])
                                 }
+                                print("RESTEDVisits: \(visits)")
                                 
                                 UserDefaults.standard.set(visits, forKey: "RESTEDVisits")
                                 UserDefaults.standard.synchronize()
@@ -58,7 +59,7 @@ class GETED {
                                 dispachInstance.leave() // API Responded
                             }
                             //vitals came back empty?
-                            print("empty")
+                            //print("empty")
                         }
                     } catch {
                         print("Error deserializing RESTEDVisits JSON: \(error)")

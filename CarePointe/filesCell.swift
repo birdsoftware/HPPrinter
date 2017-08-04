@@ -12,6 +12,13 @@ class filesCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var details: UILabel!
-  
 
+}
+
+class formsCell: UITableViewCell {
+    
+    @IBOutlet weak var form: UILabel!
+    @IBOutlet weak var type: UILabel!
+    @IBOutlet weak var date: UILabel!
+    
 }

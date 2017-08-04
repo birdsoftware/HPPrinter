@@ -6,6 +6,7 @@
 //  Copyright © 2017 Mogul Pro Media. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class PTVDetailViewController: UIViewController {
@@ -69,6 +70,9 @@ class PTVDetailViewController: UIViewController {
         let attr = NSDictionary(object: UIFont(name: "Futura", size: 15.0)!, forKey: NSFontAttributeName as NSCopying)
         UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject] , for: .normal)
         
+        //Upload Form and NTUC API data
+        callFormAndNTUCAPIs()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,20 +84,8 @@ class PTVDetailViewController: UIViewController {
             }
         }
     }
-
-    
-    
-    //
-    //#MARK - Supporting functions
-    //
-
-    //func updatePatientView(status: String){
-    //
-    //}
-    
     
     //#MARK - Actions
-    
     @IBAction func segmentControlTapped(_ sender: Any) {
         
         switch segmentControl.selectedSegmentIndex
@@ -124,6 +116,7 @@ class PTVDetailViewController: UIViewController {
         
     }
     
+    // #MARK - functions
     
     //
     // #MARK - buttons
@@ -148,96 +141,9 @@ class PTVDetailViewController: UIViewController {
             
     }
     
-    
-    
-//    @IBAction func declinePatientButtonTapped(_ sender: Any) {
-//        
-//        // Show Alert, ask why, get leave a note text, show [Submit] [Cancel] buttons
-//        let alert = UIAlertController(title: "Decline Patient",
-//                                      message: "Submit decline patient for "+patientName,
-//                                      preferredStyle: .alert)
-//        
-//        // Submit button
-//        let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { (action) -> Void in
-//            // get patientID
-//            let patientID = self.returnSelectedPatientID()
-//            var userName:String = ""
-//            
-//            // get profile user name
-//            if self.isKeyPresentInUserDefaults(key: "profileName") {
-//                userName = UserDefaults.standard.string(forKey: "profileName")!
-//            }
-//            if self.isKeyPresentInUserDefaults(key: "profileLastName") {
-//                userName += " " + UserDefaults.standard.string(forKey: "profileLastName")!
-//            }
-//            
-//            // Get 1st TextField's text
-//            let declineMessage = "Patient \(patientID) declined by \(userName). " + alert.textFields![0].text! //print(textField)
-//            
-//            // 1 MOVE PATIENT FROM NEW TO COMPLETED
-//            let completed = 2 //0 new,1 accept,2 completed
-//            self.moveAppointmentToSection(SectionNumber: completed)
-//            
-//            // 2 UPDATE PATIENT FEED
-//            //      times   dates   messageCreator  message     patientID
-//            self.insertPatientFeed(messageCreator: userName, message: declineMessage, patientID: patientID, updatedFrom: "mobile", updatedType: "Update")
-//            
-//            
-//            // 3. Instantiate a view controller from Storyboard and present it
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
-//            self.present(vc, animated: false, completion: nil)
-//        })
-//        
-//        // Cancel button
-//        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
-//        
-//        // Add 1 textField and customize it
-//        alert.addTextField { (textField: UITextField) in
-//            textField.keyboardAppearance = .dark
-//            textField.keyboardType = .default
-//            textField.autocorrectionType = .default
-//            textField.placeholder = "Reason for declining this patient?"
-//            textField.clearButtonMode = .whileEditing
-//        }
-//        
-//        // Add action buttons and present the Alert
-//        alert.addAction(submitAction)
-//        alert.addAction(cancel)
-//        present(alert, animated: true, completion: nil)
-//    }
-//    
-//    @IBAction func acceptPatientButtonTapped(_ sender: Any) {
-//        
-//        //show segue modally identifier: newPatientAppointment
-//        self.performSegue(withIdentifier: "newPatientAppointment", sender: self)
-//        
-//        
-//        // Instantiate a view controller from Storyboard and present it
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
-//        self.present(vc, animated: false, completion: nil)
-//    }
-//
-    
-    
-//    @IBAction func completedPatientButtonTapped(_ sender: Any) {
-//        
-//        let completed = 2
-//        self.moveAppointmentToSection(SectionNumber: completed)
-//        
-//        // Instantiate a view controller from Storyboard and present it
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "PTV") as UIViewController
-//        self.present(vc, animated: false, completion: nil)
-//        //completedPatientButton.backgroundColor = UIColor.celestialBlue()
-//        
-//    }
-    
     //
     // #MARK: - UNWIND SEGUE
     //
-    
     //https://www.andrewcbancroft.com/2015/12/18/working-with-unwind-segues-programmatically-in-swift/
     @IBAction func unwindToPatientDashboard(segue: UIStoryboardSegue) {}
     
@@ -269,6 +175,54 @@ class PTVDetailViewController: UIViewController {
             }
         }
     }
-    
-    
+}
+
+// MARK: - Private Methods
+private extension PTVDetailViewController {
+    func callFormAndNTUCAPIs() {
+        let downloadToken = DispatchGroup(); downloadToken.enter()
+        
+        // 0 get token again -----------
+        GETToken().signInCarepoint(dispachInstance: downloadToken)
+        
+        downloadToken.notify(queue: DispatchQueue.main)  {
+            
+            let token = UserDefaults.standard.string(forKey: "token")!
+            
+            //get demographics from API latest local save
+            let demographics = UserDefaults.standard.object(forKey: "demographics")! as? [[String]] ?? [[String]]()//saved from PatientListVC
+            let patientID = demographics[0][1]//"UniqueID"
+            
+            //GET NTUC STRING--------------------
+            let caseFlag = DispatchGroup(); caseFlag.enter();
+            GETCase().getNTUCString(token: token, patientID: patientID, dispachInstance: caseFlag)
+            
+            caseFlag.notify(queue: DispatchQueue.main) {
+                let ntuc = UserDefaults.standard.ntuc()
+                let ntucDict = ntuc[0]
+                let activeEpisodeID = ntucDict["Episode_ID"]
+                
+//                //GET FORM
+//                let formFlag = DispatchGroup(); formFlag.enter()
+//                GETForm().getFormByEpisode(token: token, episodeID: activeEpisodeID!, dispachInstance: formFlag)
+//                formFlag.notify(queue: DispatchQueue.main){
+//                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateForms"), object: nil)
+//                }
+                
+                if (ntuc.isEmpty == false) {
+                    
+                    let episodeNoteFlag = DispatchGroup(); episodeNoteFlag.enter();
+                    
+                    //GET NTUC NOTES--------------------
+                    GETEpisode().getEpisodeNotes(token: token, episodeID: activeEpisodeID!, dispachInstance: episodeNoteFlag)
+                    
+                    episodeNoteFlag.notify(queue: DispatchQueue.main) {
+                    }
+                }
+            }
+        }
+        
+    }
+
+
 }

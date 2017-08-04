@@ -57,8 +57,6 @@ class GETDisease {
                                 print("finished GET patient Disease")
                                 dispachInstance.leave() // API Responded
                             }
-                            //patient referral came back empty?
-                            print("patient Disease - empty")
                         }
                     } catch {
                         print("Error deserializing Disease JSON: \(error)")

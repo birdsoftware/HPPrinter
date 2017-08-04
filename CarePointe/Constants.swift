@@ -31,6 +31,7 @@ struct Constants {
         static let patientCareTeam = "http://"+toggleSB+"carepointe.cloud:4300/api/caseteam/patientId/" //RESTGETCareTeam.swift
         static let patientDisease = "http://"+toggleSB+"carepointe.cloud:4300/api/patientdisease/episodeId/" //RESTGETDisease.swift
         static let patientDocuments = "http://"+toggleSB+"carepointe.cloud:4300/api/documents/patientId/" //RESTGETDocuments.swift
+        static let form = "http://"+toggleSB+"carepointe.cloud:4300/api/forms/episodeId/"
         static let patientLocation = "http://"+toggleSB+"carepointe.cloud:4300/api/location/patientId/" //RESTGETLocations.swift
         static let patientReferral = "http://"+toggleSB+"carepointe.cloud:4300/api/referrals/patientId/" //RESTGETPatientRefer.swift
         static let putReferral = "http://"+toggleSB+"carepointe.cloud:4300/api/referrals/careplanid/" //PUTReferrals.swift

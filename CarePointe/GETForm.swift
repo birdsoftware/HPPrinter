@@ -1,20 +1,21 @@
 //
-//  RESTGETDocuments.swift
+//  GETForm.swift
 //  CarePointe
 //
-//  Created by Brian Bird on 5/5/17.
+//  Created by Brian Bird on 8/2/17.
 //  Copyright © 2017 Mogul Pro Media. All rights reserved.
 //
+// NOTE: EpisodeID below is from http://carepointe.cloud:4300/api/case/patientId/117581
 
 import Foundation
 
-class GETDocuments {
+class GETForm {
     
-    func getDocs(token: String, patientID: String, dispachInstance: DispatchGroup){
-
-        var documents = Array<Dictionary<String,String>>()
+    func getFormByEpisode(token: String, episodeID: String, dispachInstance: DispatchGroup){
         
-        let nsurlAlerts = Constants.Patient.patientDocuments + patientID
+        var forms = Array<Dictionary<String,String>>()
+        
+        let nsurlAlerts = Constants.Patient.form + episodeID
         
         let headers = [
             "authorization": token,
@@ -23,7 +24,7 @@ class GETDocuments {
         
         let request = NSMutableURLRequest(url: NSURL(string: nsurlAlerts)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)//http://carepointe.cloud:4300/api/documents/patientId/
+                                          timeoutInterval: 10.0)//http://carepointe.cloud:4300/api/forms/episodeId/
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
@@ -31,7 +32,7 @@ class GETDocuments {
         let dataTask = session.dataTask(with: request as URLRequest,
             completionHandler: { (data, response, error) -> Void in
                 if (error != nil) {
-                    print("GET Documents Error:\n\(String(describing: error))")
+                    print("GET Forms Error:\n\(String(describing: error))")
                     dispachInstance.leave() // API Responded
                     return
                 } else {
@@ -43,28 +44,28 @@ class GETDocuments {
                             if(vJSON.isEmpty == false){
                                 for dict in vJSON {
                                     
-                                    let Episode_ID = dict["Episode_ID"] as? Int ?? 0
-                                    let fileName = dict["DocumentName"] as? String ?? ""
-                                    let category = dict["DocumentCategory"] as? String ?? ""
-                                    let FilePath = dict["FilePath"] as? String ?? ""
-                                    let CreatedDateTime = dict["CreatedDateTime"] as? String ?? ""
+                                    let assessment_name = dict["assessment_name"] as? String ?? ""//Form: "Initial Call - Form"
+                                    let assessment_type = dict["assessment_type"] as? String ?? ""//Type: "Dynamic" or "File"
+                                    let task_date = dict["task_date"] as? String ?? ""//Date:
                                     
-                                    let eid = String(Episode_ID)
-                                    
-                                    documents.append(["Episode_ID":eid,"DocumentName":fileName, "DocumentCategory":category, "FilePath":FilePath, "CreatedDateTime":CreatedDateTime])
-
+                                    forms.append(["assessment_name":assessment_name,"assessment_type":assessment_type, "task_date":task_date])
                                 }
                                 
                                 //careTeam = careTeams[0]
-                                print("documents: \(documents)")
-                                UserDefaults.standard.set(documents, forKey: "RESTDocuments")
+                                print("Forms: \(forms)")
+                                UserDefaults.standard.set(forms, forKey: "RESTForms")
                                 UserDefaults.standard.synchronize()
-                                print("finished GET Documents")
+                                print("finished GET Forms for episodeID: \(episodeID)")
                                 dispachInstance.leave() // API Responded
+                            }
+                            if(vJSON.isEmpty == true) {
+                                UserDefaults.standard.set(forms, forKey: "RESTForms")
+                                UserDefaults.standard.synchronize()
+                                print("finished GET EMPTY Form for episodeID: \(episodeID)")
                             }
                         }
                     } catch {
-                        print("Error deserializing Documents JSON: \(error)")
+                        print("Error deserializing Forms JSON: \(error)")
                         dispachInstance.leave() // API Responded
                     }
                     /* uncomment to run code now before this task completes

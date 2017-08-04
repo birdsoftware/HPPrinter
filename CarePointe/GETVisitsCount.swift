@@ -13,8 +13,7 @@ class GETEDCount {
     func getVisitsCount(token: String, patientID: String, dispachInstance: DispatchGroup){
         
         var visits = Array<Dictionary<String,String>>()
-        
-        let nsurlAlerts = Constants.ED.visitCount + patientID
+        let nsurlAlerts = "http://carepointe.cloud:4300/api/er/visits/patientId/" + patientID
         
         let headers = [
             "authorization": token,
@@ -43,13 +42,13 @@ class GETEDCount {
                                 if(vJSON.isEmpty == false){
                                     for dict in vJSON {
                                         
-                                        let VisitCount = dict["VisitCount"] as? String ?? "" //active episode, IsActive == Y
+                                        let VisitCount = dict["VisitCount"] as? Int ?? 0
                                         let VisitedFrom = dict["VisitedFrom"] as? String ?? ""
                                         let VisitedTo = dict["VisitedTo"] as? String ?? ""
                                         
-                                        //let shortDate = convertDateStringToDate(longDate: AdmittanceDate)
-                                        
-                                        visits.append(["VisitCount":VisitCount, "VisitedFrom":VisitedFrom, "VisitedTo":VisitedTo])
+                                        let vc = String(VisitCount)
+                                                print("--here1--")
+                                        visits.append(["VisitCount":vc, "VisitedFrom":VisitedFrom, "VisitedTo":VisitedTo])
                                     }
                                     
                                     UserDefaults.standard.set(visits, forKey: "RESTEDVisitsCount")
@@ -57,8 +56,14 @@ class GETEDCount {
                                     print("finished GET RESTEDVisitsCount")
                                     dispachInstance.leave() // API Responded
                                 }
-                                //vitals came back empty?
-                                print("empty")
+                                if(vJSON.isEmpty == true){
+                                        //"type": true,
+                                        //"data": []
+                
+                                    print("empty dict RESTEDVisitsCount saved in defaults")
+                                    UserDefaults.standard.set(visits, forKey: "RESTEDVisitsCount")
+                                    UserDefaults.standard.synchronize()
+                                }
                             }
                         } catch {
                             print("Error deserializing RESTEDVisits JSON: \(error)")
